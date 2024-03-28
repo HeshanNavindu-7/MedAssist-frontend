@@ -35,7 +35,7 @@ class SecondPage extends StatelessWidget {
                 const EdgeInsets.symmetric(horizontal: 20, vertical: 10), // Padding
               ),
               child: const Text(
-                'Continue',
+                'SignUP',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 18,
