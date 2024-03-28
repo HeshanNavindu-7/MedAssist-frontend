@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:midassist/screens/signUpPage.dart';
+import 'package:midassist/screens/test.dart';
 
 class SecondPage extends StatelessWidget {
-  const SecondPage({super.key});
+  const SecondPage({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,33 +15,43 @@ class SecondPage extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
-        child: Align(
-          alignment: const Alignment(0, 0.8),
-          child: ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const SecondPage()), // Corrected class name
-              );
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF004080),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10), // Border radius
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center, // Center content vertically
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const Checkout(), // Corrected class name
+                  ),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF004080),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10), // Border radius
+                ),
+                padding:
+                const EdgeInsets.symmetric(horizontal: 20, vertical: 10), // Padding
               ),
-              padding:
-              const EdgeInsets.symmetric(horizontal: 20, vertical: 10), // Padding
-            ), // Change button color here
-
-            child: const Text(
-              'Continue',
+              child: const Text(
+                'Continue',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                ),
+              ), // Updated button text
+            ),
+            const SizedBox(height: 20), // Add some space between the button and the text
+            const Text(
+              'Centered Text',
               style: TextStyle(
-                color: Colors.white,
+                color: Colors.black,
                 fontSize: 18,
               ),
-            ), // Updated button text
-          ),
+            ),
+          ],
         ),
       ),
     );
