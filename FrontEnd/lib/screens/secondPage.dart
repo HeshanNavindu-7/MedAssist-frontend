@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:midassist/screens/signUpPage.dart';
-import 'package:midassist/screens/test.dart';
 
 class SecondPage extends StatelessWidget {
   const SecondPage({Key? key});
@@ -23,7 +22,7 @@ class SecondPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const Checkout(), // Corrected class name
+                    builder: (context) => const SignUp_Page(), // Corrected class name
                   ),
                 );
               },
