@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:midassist/screens/secondPage.dart';
 
 class FirstPage extends StatelessWidget {
+  const FirstPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +21,7 @@ class FirstPage extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => SecondPage()), // Corrected class name
+                    builder: (context) => const SecondPage()), // Corrected class name
               );
             },
             style: ElevatedButton.styleFrom(
