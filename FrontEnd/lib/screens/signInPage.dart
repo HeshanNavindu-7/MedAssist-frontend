@@ -1,60 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:midassist/screens/secondPage.dart';
-import 'package:midassist/screens/signInPage.dart';
 
 import 'home.dart';
 
-class SignUp_Page extends StatefulWidget {
-  const SignUp_Page({super.key});
+class SignInPage extends StatefulWidget {
+  const SignInPage({super.key});
 
   @override
   _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _SignUpPageState extends State<SignUp_Page> {
+class _SignUpPageState extends State<SignInPage> {
+
   TextEditingController usernameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController phoneNumberController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
-  Future<void> signUp() async {
-    String username = usernameController.text;
-    String email = emailController.text;
-    String phoneNumber = phoneNumberController.text;
-    String password = passwordController.text;
-
-    // Your backend endpoint URL
-    String url = 'http://10.0.2.2:8000/add-user/';
-
-    try {
-      final response = await http.post(
-        Uri.parse(url),
-        body: {
-          'username': username,
-          'password': password,
-          'email': email,
-          'phone_number': phoneNumber,
-        },
-      );
-
-      if (response.statusCode == 200) {
-        // Request successful
-        print('Sign up successful');
-        // ignore: use_build_context_synchronously
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const Home()),
-        );
-      } else {
-        // Request failed
-        print('Sign up failed with status: ${response.statusCode}');
-      }
-    } catch (e) {
-      // Error occurred
-      print('Error: $e');
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,13 +21,6 @@ class _SignUpPageState extends State<SignUp_Page> {
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
-          ElevatedButton(
-            onPressed: () {
-              // Navigate back to the previous screen when the button is pressed
-              Navigator.pop(context);
-            },
-            child: const Text('Go Back'),
-          ),
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Column(
@@ -79,7 +31,7 @@ class _SignUpPageState extends State<SignUp_Page> {
                   child: Padding(
                     padding: EdgeInsets.only(left: 30.0),
                     child: Text(
-                      'Sign Up',
+                      'Sign In',
                       style: TextStyle(
                         fontSize: 40,
                         fontWeight: FontWeight.bold,
@@ -112,54 +64,7 @@ class _SignUpPageState extends State<SignUp_Page> {
                     ),
                   ),
                 ),
-                //Email Address
-                Align(
-                  alignment: const Alignment(0, 0.06),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 30.0, vertical: 20.0),
-                    child: TextField(
-                      controller: emailController,
-                      decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.lock),
-                        hintText: 'Email',
-                        border: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          borderSide: BorderSide(
-                            color: Colors.blue, // Border color
-                            width: 2.0, // Border width
-                          ),
-                        ),
-                        filled: true,
-                        fillColor: const Color(0xFF282635).withOpacity(0.5),
-                      ),
-                    ),
-                  ),
-                ),
-                //Phone Number
-                Align(
-                  alignment: const Alignment(0, 0.06),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 30.0, vertical: 20.0),
-                    child: TextField(
-                      controller: phoneNumberController,
-                      decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.lock),
-                        hintText: 'Phone Number',
-                        border: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          borderSide: BorderSide(
-                            color: Colors.blue, // Border color
-                            width: 2.0, // Border width
-                          ),
-                        ),
-                        filled: true,
-                        fillColor: const Color(0xFF282635).withOpacity(0.5),
-                      ),
-                    ),
-                  ),
-                ),
+
                 //Password
                 Align(
                   alignment: const Alignment(0, 0.06),
@@ -208,7 +113,7 @@ class _SignUpPageState extends State<SignUp_Page> {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 30, vertical: 15), // Padding
                   ), // Change button color here
-                  child: const Text('Sign Up '),
+                  child: const Text('Sign In'),
                 ),
               ],
             ),
