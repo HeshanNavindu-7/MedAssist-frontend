@@ -21,7 +21,8 @@ class FirstPage extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const SecondPage()), // Corrected class name
+                    builder: (context) =>
+                        const SecondPage()), // Corrected class name
               );
             },
             style: ElevatedButton.styleFrom(
@@ -29,8 +30,8 @@ class FirstPage extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10), // Border radius
               ),
-              padding:
-              const EdgeInsets.symmetric(horizontal: 20, vertical: 10), // Padding
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 20, vertical: 10), // Padding
             ), // Change button color here
 
             child: const Text(
