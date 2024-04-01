@@ -99,7 +99,7 @@ class _SignUpPageState extends State<SignInPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const SignInPage()), // Corrected class name
+                          builder: (context) => const Home()), // Corrected class name
                     );
                   },
                   //end of the testing code

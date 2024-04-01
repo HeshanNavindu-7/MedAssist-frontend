@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:midassist/screens/signInPage.dart';
 
 import 'home.dart';
 
@@ -193,7 +192,7 @@ class _SignUpPageState extends State<SignUp_Page> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const SignInPage()), // Corrected class name
+                          builder: (context) => const Home()), // Corrected class name
                     );
                   },
                   //end of the testing code
