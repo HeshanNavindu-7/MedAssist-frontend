@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:midassist/screens/secondPage.dart';
 import 'package:midassist/screens/signInPage.dart';
 
 import 'home.dart';
@@ -187,7 +186,7 @@ class _SignUpPageState extends State<SignUp_Page> {
                 const SizedBox(height: 20),
                 ElevatedButton(
                   //uncomment following comment when testing with backend
-                  // onPressed: signUp,
+                  //onPressed: signUp,
 
                   //Only testing purpose (Front end testing)
                   onPressed: () {
