@@ -11,12 +11,13 @@ class SecondPage extends StatelessWidget {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/firstPage.png'),
+            image: AssetImage('assets/s2 (2).png'),
             fit: BoxFit.cover,
           ),
         ),
         child: Align(
-          alignment: const Alignment(0, 0.7), // Aligning to the desired position
+          alignment:
+              const Alignment(0, 0.7), // Aligning to the desired position
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -34,8 +35,8 @@ class SecondPage extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 20, vertical: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 ),
                 child: const Text(
                   'Sign In',
@@ -60,8 +61,8 @@ class SecondPage extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 20, vertical: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 ),
                 child: const Text(
                   'Sign Up',
