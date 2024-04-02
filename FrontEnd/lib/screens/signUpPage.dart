@@ -11,32 +11,40 @@ class SignUp_Page extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUp_Page> {
-  TextEditingController usernameController = TextEditingController();
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
+  TextEditingController ageController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
+  String phoneNumberErrorText = '';
+
   Future<void> signUp() async {
-    String username = usernameController.text;
+    String firstName = firstNameController.text;
+    String lastName = lastNameController.text;
+    String age = ageController.text;
     String email = emailController.text;
     String phoneNumber = phoneNumberController.text;
     String password = passwordController.text;
 
     // Your backend endpoint URL
-    String url = 'http://10.0.2.2:8000/add-user/';
+    String url = 'http://10.0.2.2:8000/sign-up/';
 
     try {
       final response = await http.post(
         Uri.parse(url),
         body: {
-          'username': username,
-          'password': password,
-          'email': email,
-          'phone_number': phoneNumber,
+          'first_name': firstNameController.text,
+          'last_name': lastNameController.text,
+          'age': ageController.text,
+          'email': emailController.text,
+          'contact_number': phoneNumberController.text,
+          'password': passwordController.text,
         },
       );
 
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
         // Request successful
         print('Sign up successful');
         // ignore: use_build_context_synchronously
@@ -86,17 +94,65 @@ class _SignUpPageState extends State<SignUp_Page> {
                     ),
                   ),
                 ),
-                //Username
+                //firstName
                 Align(
                   alignment: const Alignment(0, 0.06),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 30.0, vertical: 20.0),
                     child: TextField(
-                      controller: usernameController,
+                      controller: firstNameController,
                       decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.lock),
-                        hintText: 'Username',
+                        prefixIcon: const Icon(Icons.person),
+                        hintText: 'First Name',
+                        border: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          borderSide: BorderSide(
+                            color: Colors.blue, // Border color
+                            width: 2.0, // Border width
+                          ),
+                        ),
+                        filled: true,
+                        fillColor: const Color(0xFF282635).withOpacity(0.5),
+                      ),
+                    ),
+                  ),
+                ),
+                //last name
+                Align(
+                  alignment: const Alignment(0, 0.06),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 30.0, vertical: 20.0),
+                    child: TextField(
+                      controller: lastNameController,
+                      decoration: InputDecoration(
+                        prefixIcon: const Icon(Icons.person),
+                        hintText: 'Last Name',
+                        border: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          borderSide: BorderSide(
+                            color: Colors.blue, // Border color
+                            width: 2.0, // Border width
+                          ),
+                        ),
+                        filled: true,
+                        fillColor: const Color(0xFF282635).withOpacity(0.5),
+                      ),
+                    ),
+                  ),
+                ),
+                //Age
+                Align(
+                  alignment: const Alignment(0, 0.06),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 30.0, vertical: 20.0),
+                    child: TextField(
+                      controller: ageController,
+                      decoration: InputDecoration(
+                        prefixIcon: const Icon(Icons.calendar_today),
+                        hintText: 'Age',
                         border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                           borderSide: BorderSide(
@@ -119,7 +175,7 @@ class _SignUpPageState extends State<SignUp_Page> {
                     child: TextField(
                       controller: emailController,
                       decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.lock),
+                        prefixIcon: const Icon(Icons.email),
                         hintText: 'Email',
                         border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -143,8 +199,9 @@ class _SignUpPageState extends State<SignUp_Page> {
                     child: TextField(
                       controller: phoneNumberController,
                       decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.lock),
+                        prefixIcon: const Icon(Icons.phone),
                         hintText: 'Phone Number',
+                        errorText: phoneNumberErrorText,
                         border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                           borderSide: BorderSide(
@@ -155,6 +212,18 @@ class _SignUpPageState extends State<SignUp_Page> {
                         filled: true,
                         fillColor: const Color(0xFF282635).withOpacity(0.5),
                       ),
+                      onChanged: (value) {
+                        if (!RegExp(r'^[0-9]*$').hasMatch(value)) {
+                          setState(() {
+                            phoneNumberErrorText =
+                            'Please enter a valid phone number';
+                          });
+                        } else {
+                          setState(() {
+                            phoneNumberErrorText = '';
+                          });
+                        }
+                      },
                     ),
                   ),
                 ),
@@ -185,19 +254,56 @@ class _SignUpPageState extends State<SignUp_Page> {
                 const SizedBox(height: 20),
                 ElevatedButton(
                   //uncomment following comment when testing with backend
-                  //onPressed: signUp,
-
-                  //Only testing purpose (Front end testing)
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const Home()), // Corrected class name
-                    );
+                    if (firstNameController.text.isEmpty ||
+                        lastNameController.text.isEmpty ||
+                        ageController.text.isEmpty ||
+                        emailController.text.isEmpty ||
+                        phoneNumberController.text.isEmpty ||
+                        passwordController.text.isEmpty) {
+                      // Show error message if any required field is empty
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text('Error'),
+                            content: const Text(
+                                'Please fill in all required fields.'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text('OK'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    } else if (phoneNumberErrorText.isNotEmpty) {
+                      // Show error message if phone number is invalid
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text('Error'),
+                            content: Text(phoneNumberErrorText),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text('OK'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    } else {
+                      // All fields are filled and phone number is valid, proceed with sign-up
+                      signUp();
+                    }
                   },
-                  //end of the testing code
-
-
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF004080),
                     shape: RoundedRectangleBorder(

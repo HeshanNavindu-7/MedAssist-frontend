@@ -49,7 +49,7 @@ class _SignUpPageState extends State<SignInPage> {
                     child: TextField(
                       controller: usernameController,
                       decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.lock),
+                        prefixIcon: const Icon(Icons.person),
                         hintText: 'Username',
                         border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
