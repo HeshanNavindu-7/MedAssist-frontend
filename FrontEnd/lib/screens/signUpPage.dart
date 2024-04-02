@@ -18,6 +18,8 @@ class _SignUpPageState extends State<SignUp_Page> {
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
+  String phoneNumberErrorText = '';
+
   Future<void> signUp() async {
     String firstName = firstNameController.text;
     String lastName = lastNameController.text;
@@ -101,7 +103,7 @@ class _SignUpPageState extends State<SignUp_Page> {
                     child: TextField(
                       controller: firstNameController,
                       decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.lock),
+                        prefixIcon: const Icon(Icons.person),
                         hintText: 'First Name',
                         border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -125,7 +127,7 @@ class _SignUpPageState extends State<SignUp_Page> {
                     child: TextField(
                       controller: lastNameController,
                       decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.lock),
+                        prefixIcon: const Icon(Icons.person),
                         hintText: 'Last Name',
                         border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -149,7 +151,7 @@ class _SignUpPageState extends State<SignUp_Page> {
                     child: TextField(
                       controller: ageController,
                       decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.lock),
+                        prefixIcon: const Icon(Icons.calendar_today),
                         hintText: 'Age',
                         border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -173,7 +175,7 @@ class _SignUpPageState extends State<SignUp_Page> {
                     child: TextField(
                       controller: emailController,
                       decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.lock),
+                        prefixIcon: const Icon(Icons.email),
                         hintText: 'Email',
                         border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -197,8 +199,9 @@ class _SignUpPageState extends State<SignUp_Page> {
                     child: TextField(
                       controller: phoneNumberController,
                       decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.lock),
+                        prefixIcon: const Icon(Icons.phone),
                         hintText: 'Phone Number',
+                        errorText: phoneNumberErrorText,
                         border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                           borderSide: BorderSide(
@@ -209,6 +212,18 @@ class _SignUpPageState extends State<SignUp_Page> {
                         filled: true,
                         fillColor: const Color(0xFF282635).withOpacity(0.5),
                       ),
+                      onChanged: (value) {
+                        if (!RegExp(r'^[0-9]*$').hasMatch(value)) {
+                          setState(() {
+                            phoneNumberErrorText =
+                            'Please enter a valid phone number';
+                          });
+                        } else {
+                          setState(() {
+                            phoneNumberErrorText = '';
+                          });
+                        }
+                      },
                     ),
                   ),
                 ),
@@ -240,47 +255,55 @@ class _SignUpPageState extends State<SignUp_Page> {
                 ElevatedButton(
                   //uncomment following comment when testing with backend
                   onPressed: () {
-                      if (firstNameController.text.isEmpty ||
-                          lastNameController.text.isEmpty ||
-                          ageController.text.isEmpty ||
-                          emailController.text.isEmpty ||
-                          phoneNumberController.text.isEmpty ||
-                          passwordController.text.isEmpty) {
-                        // Show error message if any required field is empty
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: const Text('Error'),
-                              content: const Text('Please fill in all required fields.'),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: Text('OK'),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      } else {
-                        // All fields are filled, proceed with sign-up
-                        signUp();
-                      }
-                    },
-
-                  //Only testing purpose (Front end testing)
-                  /*onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const Home()), // Corrected class name
-                    );
-                  },*/
-                  //end of the testing code
-
-
+                    if (firstNameController.text.isEmpty ||
+                        lastNameController.text.isEmpty ||
+                        ageController.text.isEmpty ||
+                        emailController.text.isEmpty ||
+                        phoneNumberController.text.isEmpty ||
+                        passwordController.text.isEmpty) {
+                      // Show error message if any required field is empty
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text('Error'),
+                            content: const Text(
+                                'Please fill in all required fields.'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text('OK'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    } else if (phoneNumberErrorText.isNotEmpty) {
+                      // Show error message if phone number is invalid
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text('Error'),
+                            content: Text(phoneNumberErrorText),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text('OK'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    } else {
+                      // All fields are filled and phone number is valid, proceed with sign-up
+                      signUp();
+                    }
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF004080),
                     shape: RoundedRectangleBorder(
