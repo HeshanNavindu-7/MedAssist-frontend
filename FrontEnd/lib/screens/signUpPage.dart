@@ -216,7 +216,7 @@ class _SignUpPageState extends State<SignUp_Page> {
                         if (!RegExp(r'^[0-9]*$').hasMatch(value)) {
                           setState(() {
                             phoneNumberErrorText =
-                            'Please enter a valid phone number';
+                                'Please enter a valid phone number';
                           });
                         } else {
                           setState(() {
@@ -254,7 +254,7 @@ class _SignUpPageState extends State<SignUp_Page> {
                 const SizedBox(height: 20),
                 ElevatedButton(
                   //uncomment following comment when testing with backend
-                  onPressed: () {
+                  /* onPressed: () {
                     if (firstNameController.text.isEmpty ||
                         lastNameController.text.isEmpty ||
                         ageController.text.isEmpty ||
@@ -303,7 +303,19 @@ class _SignUpPageState extends State<SignUp_Page> {
                       // All fields are filled and phone number is valid, proceed with sign-up
                       signUp();
                     }
+                  },*/
+
+                  //Only testing purpose (Front end testing)
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              const Home()), // Corrected class name
+                    );
                   },
+                  //end of the testing code
+
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF004080),
                     shape: RoundedRectangleBorder(
