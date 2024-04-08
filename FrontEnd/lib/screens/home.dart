@@ -9,7 +9,7 @@ class Home extends StatelessWidget {
       body: Stack(
         children: [
           const Positioned(
-            top: 20,
+            top: 10,
             left: 0,
             right: 0,
             child: Padding(
@@ -38,7 +38,7 @@ class Home extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 100,
+            top: 80,
             left: 10,
             right: 10,
             child: Container(
@@ -65,7 +65,7 @@ class Home extends StatelessWidget {
             ),
           ),
           const Positioned(
-            top: 170,
+            top: 130,
             left: 0,
             right: 0,
             child: Row(
@@ -127,7 +127,7 @@ class Home extends StatelessWidget {
             ),
           ),
           const Positioned(
-            top: 300,
+            top: 230,
             left: 0,
             right: 0,
             child: Column(
@@ -140,7 +140,7 @@ class Home extends StatelessWidget {
             ),
           ),
           const Positioned(
-            top: 490,
+            top: 420,
             left: 30,
             right: 0,
             child: Row(
@@ -167,7 +167,7 @@ class Home extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 550,
+            top: 480,
             left: 25,
             right: 150,
             child: Row(
@@ -235,6 +235,42 @@ class Home extends StatelessWidget {
                       ),
                     ],
                   ),
+                ),
+              ],
+            ),
+          ),
+          const Positioned(
+            bottom: 0,
+            right: 0,
+            child: Image(
+              image: AssetImage('assets/Bottom_rectangle.png'),
+            ),
+          ),
+          const Positioned(
+            top: 5,
+            left: 5,
+            right: 5,
+            child: Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(top: 715, left: 20),
+                  child: Image(image: AssetImage('assets/Home.png')),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 715, left: 40),
+                  child: Image(image: AssetImage('assets/Market.png')),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 715, left: 30),
+                  child: Image(image: AssetImage('assets/Camera.png')),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 715, left: 40),
+                  child: Image(image: AssetImage('assets/GlovaAI.png')),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 715, left: 30),
+                  child: Image(image: AssetImage('assets/Profile.png')),
                 ),
               ],
             ),
