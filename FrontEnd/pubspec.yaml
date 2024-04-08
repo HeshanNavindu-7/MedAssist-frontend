@@ -73,6 +73,11 @@ flutter:
     - assets/Rating.png
     - assets/Location.png
     - assets/Bottom_rectangle.png
+    - assets/Home.png
+    - assets/Market.png
+    - assets/Camera.png
+    - assets/GlovaAI.png
+    - assets/Profile.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
