@@ -13,7 +13,7 @@ class Home extends StatelessWidget {
             left: 0,
             right: 0,
             child: Padding(
-              padding: EdgeInsets.all(15),
+              padding: EdgeInsets.all(15), // Added 'const'
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -24,7 +24,7 @@ class Home extends StatelessWidget {
                         fontSize: 25,
                       ),
                       textAlign: TextAlign.center,
-                    ), //Hello, Hesh code
+                    ),
                   ),
                   SizedBox(
                     width: 150,
@@ -32,7 +32,7 @@ class Home extends StatelessWidget {
                   Image(
                     image: AssetImage('assets/notification.png'),
                     height: 50,
-                  ), //Bell image
+                  ),
                 ],
               ),
             ),
@@ -62,7 +62,7 @@ class Home extends StatelessWidget {
                   ),
                 ),
               ),
-            ), //Search box
+            ),
           ),
           const Positioned(
             top: 170,
@@ -77,7 +77,7 @@ class Home extends StatelessWidget {
                       image: AssetImage('assets/Doctor.png'),
                       height: 100,
                       width: 50,
-                    ), //Doctor image
+                    ),
                     Text(
                       'Doctor',
                       style: TextStyle(fontSize: 12),
@@ -90,7 +90,7 @@ class Home extends StatelessWidget {
                       image: AssetImage('assets/Pharmacy.png'),
                       height: 100,
                       width: 50,
-                    ), //Pharmacy image
+                    ),
                     Text(
                       'Pharmacy',
                       style: TextStyle(fontSize: 12),
@@ -103,7 +103,7 @@ class Home extends StatelessWidget {
                       image: AssetImage('assets/Hospital.png'),
                       height: 100,
                       width: 50,
-                    ), //Hospital image
+                    ),
                     Text(
                       'Hospital',
                       style: TextStyle(fontSize: 12),
@@ -116,7 +116,7 @@ class Home extends StatelessWidget {
                       image: AssetImage('assets/Ambulance.png'),
                       height: 100,
                       width: 50,
-                    ), //Ambulance image
+                    ),
                     Text(
                       'Ambulance',
                       style: TextStyle(fontSize: 12),
@@ -135,6 +135,106 @@ class Home extends StatelessWidget {
                 Image(
                   image: AssetImage('assets/Learn_more.png'),
                   height: 200,
+                ),
+              ],
+            ),
+          ),
+          const Positioned(
+            top: 490,
+            left: 30,
+            right: 0,
+            child: Row(
+              children: [
+                Text(
+                  'Top Doctors',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(
+                  width: 180,
+                ),
+                Text(
+                  'See all',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.normal,
+                    color: Color.fromARGB(255, 24, 184, 149),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Positioned(
+            top: 550,
+            left: 25,
+            right: 150,
+            child: Row(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.black,
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Column(
+                    children: [
+                      Image(
+                        image: AssetImage('assets/Doctor1.png'),
+                        height: 100,
+                        width: 100,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          'Dr. Marcus Holmes',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 5),
+                      Padding(
+                        padding: EdgeInsets.only(top: 0, bottom: 5),
+                        child: Text(
+                          'Cardiologist',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Image(
+                              image: AssetImage('assets/Rating.png'),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Image(
+                              image: AssetImage('assets/Location.png'),
+                            ),
+                          ),
+                          Text(
+                            '800m away',
+                            style: TextStyle(
+                              fontSize: 10,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
