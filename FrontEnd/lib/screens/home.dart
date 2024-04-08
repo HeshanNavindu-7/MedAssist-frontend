@@ -6,9 +6,21 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Column(
-        children: [Text('Home')],
-      ),
+      body: Row(children: [
+        Padding(
+          padding: EdgeInsets.all(50),
+          child: Text(
+            'Hello, Hesh',
+            style: TextStyle(
+              fontSize: 25,
+            ),
+          ),
+        ),
+        Image(
+          image: AssetImage('assets/notification.png'),
+          height: 150,
+        ),
+      ]),
     );
   }
 }
