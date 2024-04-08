@@ -45,7 +45,8 @@ class Home extends StatelessWidget {
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                    color: Color.fromARGB(255, 189, 189, 189).withOpacity(0.5),
+                    color: const Color.fromARGB(255, 189, 189, 189)
+                        .withOpacity(0.5),
                     spreadRadius: 2,
                     blurRadius: 25,
                     offset: const Offset(0, 7),
@@ -55,7 +56,7 @@ class Home extends StatelessWidget {
               child: TextField(
                 decoration: InputDecoration(
                   hintText: 'Search doctor, drugs, articles...',
-                  prefixIcon: Icon(Icons.search),
+                  prefixIcon: const Icon(Icons.search),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
@@ -124,7 +125,20 @@ class Home extends StatelessWidget {
                 ),
               ],
             ),
-          )
+          ),
+          const Positioned(
+            top: 300,
+            left: 0,
+            right: 0,
+            child: Column(
+              children: [
+                Image(
+                  image: AssetImage('assets/Learn_more.png'),
+                  height: 200,
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
