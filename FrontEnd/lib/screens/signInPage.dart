@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 import 'home.dart';
 
@@ -11,7 +10,6 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignInPage> {
-
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
@@ -99,11 +97,11 @@ class _SignUpPageState extends State<SignInPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const Home()), // Corrected class name
+                          builder: (context) =>
+                              const Home()), // Corrected class name
                     );
                   },
                   //end of the testing code
-
 
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF004080),
