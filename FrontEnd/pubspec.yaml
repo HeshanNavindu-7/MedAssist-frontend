@@ -79,7 +79,9 @@ flutter:
     - assets/GlovaAI.png
     - assets/Profile.png
     - assets/SignIn.png
-
+    - assets/RememberMe.png
+    - assets/Loginfb.png
+    - assets/Logingoogle.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
