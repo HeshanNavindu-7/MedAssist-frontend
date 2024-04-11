@@ -75,14 +75,14 @@ class _SignUpPageState extends State<SignUp_Page> {
         child: Stack(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 15),
+              padding: const EdgeInsets.only(top: 30, left: 10),
               child: ElevatedButton(
                 onPressed: () {
                   // Navigate back to the previous screen when the button is pressed
                   Navigator.pop(context);
                 },
                 child: const Padding(
-                  padding: EdgeInsets.only(top: 10),
+                  padding: EdgeInsets.only(top: 4),
                   child: Text('Go Back'),
                 ),
               ),
@@ -97,13 +97,13 @@ class _SignUpPageState extends State<SignUp_Page> {
                       const Align(
                         alignment: Alignment(-1, -0.5),
                         child: Padding(
-                          padding: EdgeInsets.only(top: 70.0),
+                          padding: EdgeInsets.only(top: 70.0, left: 130),
                           child: Text(
                             'Sign Up',
                             style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 30,
                               fontWeight: FontWeight.bold,
-                              color: Color(0xFF423838),
+                              color: Color.fromARGB(255, 0, 0, 0),
                             ),
                           ),
                         ),
@@ -118,7 +118,9 @@ class _SignUpPageState extends State<SignUp_Page> {
                             controller: firstNameController,
                             decoration: InputDecoration(
                                 prefixIcon: const Icon(Icons.person),
-                                hintText: 'First Name',
+                                hintText: 'User Name',
+                                hintStyle: const TextStyle(
+                                    color: Color.fromARGB(255, 212, 207, 207)),
                                 border: const OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(10)),
@@ -135,33 +137,7 @@ class _SignUpPageState extends State<SignUp_Page> {
                           ),
                         ),
                       ),
-                      //last name
-                      Align(
-                        alignment: const Alignment(0, 0.06),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20.0, vertical: 15.0),
-                          child: TextField(
-                            controller: lastNameController,
-                            decoration: InputDecoration(
-                                prefixIcon: const Icon(Icons.person),
-                                hintText: 'Last Name',
-                                border: const OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10)),
-                                  borderSide: BorderSide(
-                                    color: Colors.blue, // Border color
-                                    width: 2.0, // Border width
-                                  ),
-                                ),
-                                filled: true,
-                                fillColor:
-                                    const Color(0xFF282635).withOpacity(0.5),
-                                contentPadding: (const EdgeInsets.symmetric(
-                                    horizontal: 5, vertical: 2.5))),
-                          ),
-                        ),
-                      ),
+
                       //Age
                       Align(
                         alignment: const Alignment(0, 0.06),
@@ -173,6 +149,8 @@ class _SignUpPageState extends State<SignUp_Page> {
                             decoration: InputDecoration(
                                 prefixIcon: const Icon(Icons.calendar_today),
                                 hintText: 'Age',
+                                hintStyle: const TextStyle(
+                                    color: Color.fromARGB(255, 212, 207, 207)),
                                 border: const OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(10)),
@@ -200,6 +178,8 @@ class _SignUpPageState extends State<SignUp_Page> {
                             decoration: InputDecoration(
                                 prefixIcon: const Icon(Icons.email),
                                 hintText: 'Email',
+                                hintStyle: const TextStyle(
+                                    color: Color.fromARGB(255, 212, 207, 207)),
                                 border: const OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(10)),
@@ -227,6 +207,8 @@ class _SignUpPageState extends State<SignUp_Page> {
                             decoration: InputDecoration(
                                 prefixIcon: const Icon(Icons.phone),
                                 hintText: 'Phone Number',
+                                hintStyle: const TextStyle(
+                                    color: Color.fromARGB(255, 212, 207, 207)),
                                 errorText: phoneNumberErrorText,
                                 border: const OutlineInputBorder(
                                   borderRadius:
@@ -267,6 +249,8 @@ class _SignUpPageState extends State<SignUp_Page> {
                             decoration: InputDecoration(
                                 prefixIcon: const Icon(Icons.lock),
                                 hintText: 'Password',
+                                hintStyle: const TextStyle(
+                                    color: Color.fromARGB(255, 212, 207, 207)),
                                 border: const OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(10)),
@@ -283,7 +267,47 @@ class _SignUpPageState extends State<SignUp_Page> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      //Confirm Password
+                      Align(
+                        alignment: const Alignment(0, 0.06),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0, vertical: 15.0),
+                          child: TextField(
+                            controller: passwordController,
+                            decoration: InputDecoration(
+                                prefixIcon: const Icon(Icons.lock),
+                                hintText: ' Confirm Password',
+                                hintStyle: const TextStyle(
+                                    color: Color.fromARGB(255, 212, 207, 207)),
+                                border: const OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
+                                  borderSide: BorderSide(
+                                    color: Colors.blue, // Border color
+                                    width: 2.0, // Border width
+                                  ),
+                                ),
+                                filled: true,
+                                fillColor:
+                                    const Color(0xFF282635).withOpacity(0.5),
+                                contentPadding: (const EdgeInsets.symmetric(
+                                    horizontal: 5, vertical: 2.5))),
+                          ),
+                        ),
+                      ),
+                      const Positioned(
+                        top: 230,
+                        child: Row(
+                          children: [
+                            Image(
+                              image: AssetImage('assets/RememberMe.png'),
+                            ),
+                            SizedBox(width: 5),
+                            Text('Remember Me'),
+                          ],
+                        ),
+                      ),
                       ElevatedButton(
                         //uncomment following comment when testing with backend
                         /* onPressed: () {
@@ -338,6 +362,7 @@ class _SignUpPageState extends State<SignUp_Page> {
                       },*/
 
                         //Only testing purpose (Front end testing)
+
                         onPressed: () {
                           Navigator.push(
                             context,
@@ -357,11 +382,32 @@ class _SignUpPageState extends State<SignUp_Page> {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 30, vertical: 15), // Padding
                         ), // Change button color here
-                        child: const Text('Sign Up '),
+                        child: const Text(
+                          'Sign Up ',
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ],
                   ),
                 ),
+                const Center(
+                    child: Row(children: [
+                  SizedBox(
+                    width: 80,
+                  ),
+                  Text("If you already have an account,"),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Text(
+                    'SignIn',
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 18, 76, 236),
+                      decoration: TextDecoration.underline,
+                      decorationColor: Color.fromARGB(255, 18, 76, 236),
+                    ),
+                  )
+                ])),
               ],
             ),
           ],
