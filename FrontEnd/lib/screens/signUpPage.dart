@@ -12,7 +12,6 @@ class SignUp_Page extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUp_Page> {
   TextEditingController firstNameController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
   TextEditingController ageController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
@@ -21,13 +20,6 @@ class _SignUpPageState extends State<SignUp_Page> {
   String phoneNumberErrorText = '';
 
   Future<void> signUp() async {
-    String firstName = firstNameController.text;
-    String lastName = lastNameController.text;
-    String age = ageController.text;
-    String email = emailController.text;
-    String phoneNumber = phoneNumberController.text;
-    String password = passwordController.text;
-
     // Your backend endpoint URL
     String url = 'http://10.0.2.2:8000/sign-up/';
 
@@ -35,11 +27,10 @@ class _SignUpPageState extends State<SignUp_Page> {
       final response = await http.post(
         Uri.parse(url),
         body: {
-          'first_name': firstNameController.text,
-          'last_name': lastNameController.text,
+          'name': firstNameController.text,
           'age': ageController.text,
           'email': emailController.text,
-          'contact_number': phoneNumberController.text,
+          'phone_number': phoneNumberController.text,
           'password': passwordController.text,
         },
       );
@@ -274,7 +265,6 @@ class _SignUpPageState extends State<SignUp_Page> {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 20.0, vertical: 15.0),
                           child: TextField(
-                            controller: passwordController,
                             decoration: InputDecoration(
                                 prefixIcon: const Icon(Icons.lock),
                                 hintText: ' Confirm Password',
@@ -310,59 +300,57 @@ class _SignUpPageState extends State<SignUp_Page> {
                       ),
                       ElevatedButton(
                         //uncomment following comment when testing with backend
-                        /* onPressed: () {
-                        if (firstNameController.text.isEmpty ||
-                            lastNameController.text.isEmpty ||
-                            ageController.text.isEmpty ||
-                            emailController.text.isEmpty ||
-                            phoneNumberController.text.isEmpty ||
-                            passwordController.text.isEmpty) {
-                          // Show error message if any required field is empty
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: const Text('Error'),
-                                content: const Text(
-                                    'Please fill in all required fields.'),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: Text('OK'),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        } else if (phoneNumberErrorText.isNotEmpty) {
-                          // Show error message if phone number is invalid
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: const Text('Error'),
-                                content: Text(phoneNumberErrorText),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: Text('OK'),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        } else {
-                          // All fields are filled and phone number is valid, proceed with sign-up
-                          signUp();
-                        }
-                      },*/
+                        /*onPressed: () {
+                          if (firstNameController.text.isEmpty ||
+                              ageController.text.isEmpty ||
+                              emailController.text.isEmpty ||
+                              phoneNumberController.text.isEmpty ||
+                              passwordController.text.isEmpty) {
+                            // Show error message if any required field is empty
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: const Text('Error'),
+                                  content: const Text(
+                                      'Please fill in all required fields.'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text('OK'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          } else if (phoneNumberErrorText.isNotEmpty) {
+                            // Show error message if phone number is invalid
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: const Text('Error'),
+                                  content: Text(phoneNumberErrorText),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: const Text('OK'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          } else {
+                            // All fields are filled and phone number is valid, proceed with sign-up
+                            signUp();
+                          }
+                        },*/
 
                         //Only testing purpose (Front end testing)
-
                         onPressed: () {
                           Navigator.push(
                             context,

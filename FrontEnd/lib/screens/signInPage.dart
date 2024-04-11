@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 import 'home.dart';
 
@@ -12,6 +13,37 @@ class SignInPage extends StatefulWidget {
 class _SignUpPageState extends State<SignInPage> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  Future<void> signIn() async {
+    // Your backend endpoint URL
+    String url = 'http://10.0.2.2:8000/sign-in/';
+
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        body: {
+          'email': usernameController.text,
+          'password': passwordController.text,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        // Request successful
+        print('Sign in successful');
+        // ignore: use_build_context_synchronously
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const Home()),
+        );
+      } else {
+        // Request failed
+        print('Sign up failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      // Error occurred
+      print('Error: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -125,7 +157,7 @@ class _SignUpPageState extends State<SignInPage> {
                   const SizedBox(height: 10),
                   ElevatedButton(
                     //uncomment following comment when testing with backend
-                    // onPressed: signUp,
+                    // onPressed: signIn,
 
                     //Only testing purpose (Front end testing)
                     onPressed: () {
