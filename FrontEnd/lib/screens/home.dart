@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:midassist/screens/doctorRecommendation.dart';
+import 'package:midassist/screens/signUpPage.dart';
+
+import 'imageUploder.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -139,28 +143,38 @@ class Home extends StatelessWidget {
               ],
             ),
           ),
-          const Positioned(
+          Positioned(
             top: 420,
             left: 30,
             right: 0,
             child: Row(
               children: [
-                Text(
+                const Text(
                   'Top Doctors',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 180,
                 ),
-                Text(
-                  'See all',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.normal,
-                    color: Color.fromARGB(255, 24, 184, 149),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              const DoctorRecommendation()), // Corrected class name
+                    );
+                  },
+                  child: const Text(
+                    'See all',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.normal,
+                      color: Color.fromARGB(255, 24, 184, 149),
+                    ),
                   ),
                 ),
               ],
@@ -246,29 +260,49 @@ class Home extends StatelessWidget {
               image: AssetImage('assets/Bottom_rectangle.png'),
             ),
           ),
-          const Positioned(
+          Positioned(
             top: 5,
             left: 5,
             right: 5,
             child: Row(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 715, left: 20),
-                  child: Image(image: AssetImage('assets/Home.png')),
+                  padding: const EdgeInsets.only(top: 715, left: 20),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const Home()), // Corrected class name
+                      );
+                    },
+                    child: const Image(image: AssetImage('assets/Home.png')),
+                  ),
                 ),
-                Padding(
+                const Padding(
                   padding: EdgeInsets.only(top: 715, left: 40),
                   child: Image(image: AssetImage('assets/Market.png')),
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 715, left: 30),
-                  child: Image(image: AssetImage('assets/Camera.png')),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                            const Home()), // Corrected class name
+                      );
+                    },
+                    child: const Image(image: AssetImage('assets/Camera.png')),
+                  ),
                 ),
-                Padding(
+                const Padding(
                   padding: EdgeInsets.only(top: 715, left: 40),
                   child: Image(image: AssetImage('assets/GlovaAI.png')),
                 ),
-                Padding(
+                const Padding(
                   padding: EdgeInsets.only(top: 715, left: 30),
                   child: Image(image: AssetImage('assets/Profile.png')),
                 ),
