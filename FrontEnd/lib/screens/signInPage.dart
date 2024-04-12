@@ -189,7 +189,7 @@ class _SignUpPageState extends State<SignInPage> {
                   const SizedBox(
                     height: 20,
                   ),
-                   Center(
+                  Center(
                       child: Row(children: [
                     const SizedBox(
                       width: 80,
@@ -198,23 +198,23 @@ class _SignUpPageState extends State<SignInPage> {
                     const SizedBox(
                       width: 20,
                     ),
-                        GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
+                    GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
                                     const SignUp_Page()), // Corrected class name
-                              );
-                            },
-                            child: const Text(
-                              'SignUp',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 18, 76, 236),
-                                decoration: TextDecoration.underline,
-                                decorationColor: Color.fromARGB(255, 18, 76, 236),
-                              ),
-                            )),
+                          );
+                        },
+                        child: const Text(
+                          'SignUp',
+                          style: TextStyle(
+                            color: Color.fromARGB(255, 18, 76, 236),
+                            decoration: TextDecoration.underline,
+                            decorationColor: Color.fromARGB(255, 18, 76, 236),
+                          ),
+                        )),
                   ])),
                   const Positioned(
                       child: Column(children: [

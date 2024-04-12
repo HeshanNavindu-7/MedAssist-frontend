@@ -84,7 +84,11 @@ flutter:
     - assets/RememberMe.png
     - assets/Loginfb.png
     - assets/Logingoogle.png
-    - assets/Signupback.png
+    - assets/Newback.png
+    - assets/back.png
+    - assets/Dr2.jpg
+    - assets/Dr2rate.png
+    - assets/Dr2location.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
