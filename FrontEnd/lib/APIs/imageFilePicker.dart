@@ -7,7 +7,7 @@ import 'package:http/http.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:mime/mime.dart';
 
-const API_URL = 'http://localhost:4000/api/images';
+const API_URL = 'http://10.0.2.2:8000/upload_image/';
 
 // coverage:ignore-start
 /// Image file picker wrapper class
@@ -18,7 +18,7 @@ class ImageFilePicker {
 
 /// Opens a dialog [imageFilePicker] and creates  MultipartRequest [request].
 /// In the request, a field 'image' is appended with the chosen image and the public URL of the image is returned in case of success.
-Future<String?> openImagePickerDialog(ImageFilePicker imageFilePicker, http.Client client) async {
+Future<Map<String, dynamic>?> openImagePickerDialog(ImageFilePicker imageFilePicker, http.Client client) async {
   FilePickerResult? result = await imageFilePicker.pickImage();
   MultipartRequest request = http.MultipartRequest('POST', Uri.parse(API_URL));
 
@@ -35,12 +35,14 @@ Future<String?> openImagePickerDialog(ImageFilePicker imageFilePicker, http.Clie
 
     // Send request
     final response = await client.send(request);
-
     // Get response of request
     Response responseStream = await http.Response.fromStream(response);
     final responseData = json.decode(responseStream.body);
+    return {
+      'data': responseData,
+      'statusCode': responseStream.statusCode,
+    };
 
-    return responseData['url'];
   } else {
     // User canceled the picker
     return null;

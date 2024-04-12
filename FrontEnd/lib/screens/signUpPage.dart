@@ -42,7 +42,7 @@ class _SignUpPageState extends State<SignUp_Page> {
         // ignore: use_build_context_synchronously
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const Home()),
+          MaterialPageRoute(builder: (context) =>  Home()),
         );
       } else {
         // Request failed
@@ -357,7 +357,7 @@ class _SignUpPageState extends State<SignUp_Page> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    const Home()), // Corrected class name
+                                     Home()), // Corrected class name
                           );
                         },
                         //end of the testing code
