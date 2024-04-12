@@ -89,6 +89,9 @@ flutter:
     - assets/Dr2.jpg
     - assets/Dr2rate.png
     - assets/Dr2location.png
+    - assets/profileback.png
+    - assets/profilegirl.png
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
