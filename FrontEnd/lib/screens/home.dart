@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:midassist/screens/doctorRecommendation.dart';
 import 'package:midassist/screens/profilepage.dart';
-import 'package:midassist/screens/signUpPage.dart';
+import 'package:midassist/APIs/imageFilePicker.dart';
+import 'package:http/http.dart' as http;
+
 
 import 'imageUploder.dart';
 
 class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+  Home({Key? key}) : super(key: key);
+
+  final ImageFilePicker imageFilePicker = ImageFilePicker();
+  final http.Client client = http.Client();
 
   @override
   Widget build(BuildContext context) {
@@ -275,7 +280,7 @@ class Home extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                const Home()), // Corrected class name
+                                Home()), // Corrected class name
                       );
                     },
                     child: const Image(image: AssetImage('assets/Home.png')),
@@ -290,11 +295,12 @@ class Home extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () {
                       Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                const Home()), // Corrected class name
-                      );
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ImageUploder(
+                                imageFilePicker: imageFilePicker,
+                                client: client), // Corrected class name
+                          ));
                     },
                     child: const Image(image: AssetImage('assets/Camera.png')),
                   ),
