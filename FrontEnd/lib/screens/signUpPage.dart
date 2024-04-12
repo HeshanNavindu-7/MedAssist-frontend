@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:midassist/screens/signInPage.dart';
 
 import 'home.dart';
 
@@ -378,23 +379,32 @@ class _SignUpPageState extends State<SignUp_Page> {
                     ],
                   ),
                 ),
-                const Center(
+                Center(
                     child: Row(children: [
-                  SizedBox(
+                  const SizedBox(
                     width: 80,
                   ),
-                  Text("If you already have an account,"),
-                  SizedBox(
+                  const Text("If you already have an account,"),
+                  const SizedBox(
                     width: 5,
                   ),
-                  Text(
-                    'SignIn',
-                    style: TextStyle(
-                      color: Color.fromARGB(255, 18, 76, 236),
-                      decoration: TextDecoration.underline,
-                      decorationColor: Color.fromARGB(255, 18, 76, 236),
-                    ),
-                  )
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const SignInPage()), // Corrected class name
+                        );
+                      },
+                      child: const Text(
+                        'SignIn',
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 18, 76, 236),
+                          decoration: TextDecoration.underline,
+                          decorationColor: Color.fromARGB(255, 18, 76, 236),
+                        ),
+                      )),
                 ])),
               ],
             ),
