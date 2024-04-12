@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:midassist/screens/secondPage.dart';
 
 class DoctorRecommendation extends StatelessWidget {
   const DoctorRecommendation({Key? key});
