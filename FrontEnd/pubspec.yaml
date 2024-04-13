@@ -100,6 +100,11 @@ flutter:
     - assets/Faqs.png
     - assets/Logout.png
     - assets/Payment.png
+    - assets/threedots.png
+    - assets/skin.png
+    - assets/morning.png
+    - assets/Add.png
+    - assets/Send.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
