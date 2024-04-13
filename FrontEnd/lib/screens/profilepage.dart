@@ -47,8 +47,8 @@ class ProfilePage extends StatelessWidget {
                     child: Image(image: AssetImage('assets/Camera.png')),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 715, left: 40),
-                    child: Image(image: AssetImage('assets/GlovaAI.png')),
+                    padding: EdgeInsets.only(top: 715, left: 30),
+                    child: Image(image: AssetImage('assets/Ai.png')),
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: 715, left: 30),
