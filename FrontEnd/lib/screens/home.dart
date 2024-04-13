@@ -315,8 +315,8 @@ class Home extends StatelessWidget {
                     );
                   },
                   child: const Padding(
-                    padding: EdgeInsets.only(top: 715, left: 40),
-                    child: Image(image: AssetImage('assets/GlovaAI.png')),
+                    padding: EdgeInsets.only(top: 715, left: 30),
+                    child: Image(image: AssetImage('assets/Ai.png')),
                   ),
                 ),
                 GestureDetector(

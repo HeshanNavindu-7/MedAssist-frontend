@@ -105,6 +105,7 @@ flutter:
     - assets/morning.png
     - assets/Add.png
     - assets/Send.png
+    - assets/Ai.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
