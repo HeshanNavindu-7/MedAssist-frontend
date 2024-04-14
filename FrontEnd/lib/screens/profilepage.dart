@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:midassist/screens/home.dart';
+import 'package:midassist/screens/medassistai.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key});
@@ -19,9 +21,9 @@ class ProfilePage extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
-        child: const Stack(
+        child: Stack(
           children: [
-            Positioned(
+            const Positioned(
               bottom: 0,
               right: 0,
               child: Image(
@@ -34,41 +36,63 @@ class ProfilePage extends StatelessWidget {
               right: 5,
               child: Row(
                 children: [
-                  Padding(
-                    padding: EdgeInsets.only(top: 715, left: 20),
-                    child: Image(image: AssetImage('assets/Home.png')),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Home(),
+                        ),
+                      );
+                    },
+                    child: const Padding(
+                      padding: EdgeInsets.only(top: 715, left: 20),
+                      child: Image(image: AssetImage('assets/Home.png')),
+                    ),
                   ),
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.only(top: 715, left: 40),
                     child: Image(image: AssetImage('assets/Market.png')),
                   ),
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.only(top: 715, left: 30),
                     child: Image(image: AssetImage('assets/Camera.png')),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 715, left: 10),
-                    child: Image(image: AssetImage('assets/Ai.png')),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MedAssistAi(),
+                        ),
+                      );
+                    },
+                    child: const Padding(
+                      padding: EdgeInsets.only(top: 715, left: 10),
+                      child: Image(image: AssetImage('assets/Ai.png')),
+                    ),
                   ),
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.only(top: 715, left: 30),
                     child: Image(image: AssetImage('assets/Profile.png')),
                   ),
                 ],
               ),
             ),
-            Positioned(
-                top: 80,
-                left: 150,
-                child: Image(image: AssetImage('assets/profilegirl.png'))),
-            Positioned(
-                top: 170,
-                left: 150,
-                child: Text(
-                  'Amelia Reneta',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                )),
-            Positioned(
+            const Positioned(
+              top: 80,
+              left: 150,
+              child: Image(image: AssetImage('assets/profilegirl.png')),
+            ),
+            const Positioned(
+              top: 170,
+              left: 150,
+              child: Text(
+                'Amelia Reneta',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+            const Positioned(
               top: 200,
               left: 50,
               child: Row(
@@ -76,9 +100,9 @@ class ProfilePage extends StatelessWidget {
                   Column(
                     children: [
                       Padding(
-                          padding: EdgeInsets.only(top: 0),
-                          child:
-                              Image(image: AssetImage('assets/Heartbeat.png'))),
+                        padding: EdgeInsets.only(top: 0),
+                        child: Image(image: AssetImage('assets/Heartbeat.png')),
+                      ),
                       Text('Heart Rate\n   215bpm'),
                     ],
                   ),
@@ -88,8 +112,9 @@ class ProfilePage extends StatelessWidget {
                   Column(
                     children: [
                       Padding(
-                          padding: EdgeInsets.only(top: 0),
-                          child: Image(image: AssetImage('assets/Fire.png'))),
+                        padding: EdgeInsets.only(top: 0),
+                        child: Image(image: AssetImage('assets/Fire.png')),
+                      ),
                       Text('Calories\n  756cal'),
                     ],
                   ),
@@ -99,16 +124,16 @@ class ProfilePage extends StatelessWidget {
                   Column(
                     children: [
                       Padding(
-                          padding: EdgeInsets.only(top: 0),
-                          child:
-                              Image(image: AssetImage('assets/Barbell.png'))),
+                        padding: EdgeInsets.only(top: 0),
+                        child: Image(image: AssetImage('assets/Barbell.png')),
+                      ),
                       Text('Weight\n103lbs'),
                     ],
                   ),
                 ],
               ),
             ),
-            Positioned(
+            const Positioned(
               top: 320,
               child: Column(
                 children: [
@@ -238,8 +263,9 @@ class ProfilePage extends StatelessWidget {
                       Text(
                         'Logout',
                         style: TextStyle(
-                            color: Color.fromARGB(255, 251, 0, 0),
-                            fontWeight: FontWeight.bold),
+                          color: Color.fromARGB(255, 251, 0, 0),
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       SizedBox(
                         width: 165,

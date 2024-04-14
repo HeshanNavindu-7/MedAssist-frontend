@@ -1,33 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:midassist/screens/home.dart';
+import 'package:midassist/screens/medassistai.dart';
+import 'package:midassist/screens/profilepage.dart';
 
 class DoctorRecommendation extends StatelessWidget {
-  const DoctorRecommendation({Key? key});
+  const DoctorRecommendation({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          const Positioned(
+          Positioned(
             top: 10,
             left: 0,
             right: 0,
             child: Padding(
-              padding: EdgeInsets.only(top: 20, right: 180), // Added 'const'
+              padding: const EdgeInsets.only(
+                  top: 20, left: 25, right: 85), // Adjusted padding
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Expanded(
-                    child: Image(
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Home(),
+                        ),
+                      );
+                    },
+                    child: const Image(
                       image: AssetImage('assets/back.png'),
                       height: 50,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 50,
                   ),
-                  Text(
+                  const Text(
                     'Doctors',
                     style: TextStyle(
                       fontSize: 25,
@@ -57,21 +68,12 @@ class DoctorRecommendation extends StatelessWidget {
               child: TextField(
                 decoration: InputDecoration(
                   hintText: 'Search for doctors...',
-                  prefixIcon: const Icon(Icons.search),
+                  prefixIcon: Icon(Icons.search), // Removed 'const'
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
                 ),
               ),
-            ),
-          ),
-          const Positioned(
-            top: 130,
-            left: 0,
-            right: 0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [],
             ),
           ),
           Positioned(
@@ -233,44 +235,64 @@ class DoctorRecommendation extends StatelessWidget {
             child: Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 715, left: 20),
+                  padding: const EdgeInsets.only(
+                      top: 715, left: 20), // Adjusted padding
                   child: GestureDetector(
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                const DoctorRecommendation()), // Corrected class name
+                        MaterialPageRoute(builder: (context) => Home()),
                       );
                     },
                     child: const Image(image: AssetImage('assets/Home.png')),
                   ),
                 ),
                 const Padding(
-                  padding: EdgeInsets.only(top: 715, left: 40),
+                  padding:
+                      EdgeInsets.only(top: 715, left: 40), // Adjusted padding
                   child: Image(image: AssetImage('assets/Market.png')),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 715, left: 30),
+                  padding: const EdgeInsets.only(
+                      top: 715, left: 30), // Adjusted padding
                   child: GestureDetector(
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                const DoctorRecommendation()), // Corrected class name
+                            builder: (context) => const DoctorRecommendation()),
                       );
                     },
                     child: const Image(image: AssetImage('assets/Camera.png')),
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(top: 715, left: 15),
-                  child: Image(image: AssetImage('assets/Ai.png')),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      top: 715, left: 15), // Adjusted padding
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const MedAssistAi()),
+                      );
+                    },
+                    child: const Image(image: AssetImage('assets/Ai.png')),
+                  ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(top: 715, left: 30),
-                  child: Image(image: AssetImage('assets/Profile.png')),
+                Padding(
+                  padding:
+                      EdgeInsets.only(top: 715, left: 30), // Adjusted padding
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ProfilePage()),
+                      );
+                    },
+                    child: const Image(image: AssetImage('assets/Profile.png')),
+                  ),
                 ),
               ],
             ),
