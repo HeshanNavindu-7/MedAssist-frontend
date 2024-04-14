@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:midassist/screens/doctorRecommendation.dart';
+import 'package:midassist/screens/profilepage.dart';
 import 'package:midassist/APIs/imageFilePicker.dart';
+import 'package:midassist/screens/medassistai.dart';
 import 'package:http/http.dart' as http;
 
 import 'imageUploder.dart';
@@ -289,7 +291,7 @@ class Home extends StatelessWidget {
                   child: Image(image: AssetImage('assets/Market.png')),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 715, left: 30),
+                  padding: const EdgeInsets.only(top: 715, left: 30),
                   child: GestureDetector(
                     onTap: () {
                       Navigator.push(
@@ -303,13 +305,33 @@ class Home extends StatelessWidget {
                     child: const Image(image: AssetImage('assets/Camera.png')),
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(top: 715, left: 40),
-                  child: Image(image: AssetImage('assets/GlovaAI.png')),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              MedAssistAi()), // Corrected class name
+                    );
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.only(top: 715, left: 30),
+                    child: Image(image: AssetImage('assets/Ai.png')),
+                  ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(top: 715, left: 30),
-                  child: Image(image: AssetImage('assets/Profile.png')),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              ProfilePage()), // Corrected class name
+                    );
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.only(top: 715, left: 30),
+                    child: Image(image: AssetImage('assets/Profile.png')),
+                  ),
                 ),
               ],
             ),

@@ -89,6 +89,24 @@ flutter:
     - assets/Dr2.jpg
     - assets/Dr2rate.png
     - assets/Dr2location.png
+    - assets/profileback.png
+    - assets/profilegirl.png
+    - assets/Heartbeat.png
+    - assets/Fire.png
+    - assets/Barbell.png
+    - assets/Heart.png
+    - assets/Arrow.png
+    - assets/Appointments.png
+    - assets/Faqs.png
+    - assets/Logout.png
+    - assets/Payment.png
+    - assets/threedots.png
+    - assets/skin.png
+    - assets/morning.png
+    - assets/Add.png
+    - assets/Send.png
+    - assets/Ai.png
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
