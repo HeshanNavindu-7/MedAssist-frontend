@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:midassist/screens/home.dart';
+import 'package:midassist/screens/profilepage.dart';
 
 class MedAssistAi extends StatelessWidget {
   const MedAssistAi({Key? key});
