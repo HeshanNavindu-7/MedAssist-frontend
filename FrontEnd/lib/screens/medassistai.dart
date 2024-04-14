@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:midassist/screens/home.dart';
 
 class MedAssistAi extends StatelessWidget {
   const MedAssistAi({Key? key});
@@ -8,30 +9,40 @@ class MedAssistAi extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          const Positioned(
+          Positioned(
             top: 25,
             child: Row(
               children: [
-                Padding(
-                  padding: EdgeInsets.only(top: 30, left: 20),
-                  child: Image(
-                    image: AssetImage('assets/back.png'),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Home(),
+                      ),
+                    );
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.only(top: 30, left: 20),
+                    child: Image(
+                      image: AssetImage('assets/back.png'),
+                    ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 70,
                 ),
-                Padding(
+                const Padding(
                   padding: EdgeInsets.only(top: 30),
                   child: Text(
                     'MedAssist AI',
                     style: TextStyle(fontSize: 20),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 100,
                 ),
-                Padding(
+                const Padding(
                   padding: EdgeInsets.only(top: 25),
                   child: Image(image: AssetImage('assets/threedots.png')),
                 )
@@ -101,11 +112,12 @@ class MedAssistAi extends StatelessWidget {
             ),
           ),
           const Positioned(
-              bottom: 30,
-              left: 300,
-              child: Image(
-                image: AssetImage('assets/Send.png'),
-              ))
+            bottom: 30,
+            left: 300,
+            child: Image(
+              image: AssetImage('assets/Send.png'),
+            ),
+          )
         ],
       ),
     );

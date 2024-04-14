@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:midassist/screens/home.dart';
 
 class DoctorRecommendation extends StatelessWidget {
   const DoctorRecommendation({Key? key});
@@ -264,8 +265,8 @@ class DoctorRecommendation extends StatelessWidget {
                   ),
                 ),
                 const Padding(
-                  padding: EdgeInsets.only(top: 715, left: 40),
-                  child: Image(image: AssetImage('assets/GlovaAI.png')),
+                  padding: EdgeInsets.only(top: 715, left: 15),
+                  child: Image(image: AssetImage('assets/Ai.png')),
                 ),
                 const Padding(
                   padding: EdgeInsets.only(top: 715, left: 30),
