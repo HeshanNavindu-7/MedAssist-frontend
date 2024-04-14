@@ -47,7 +47,7 @@ class ProfilePage extends StatelessWidget {
                     child: Image(image: AssetImage('assets/Camera.png')),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 715, left: 30),
+                    padding: EdgeInsets.only(top: 715, left: 10),
                     child: Image(image: AssetImage('assets/Ai.png')),
                   ),
                   Padding(
