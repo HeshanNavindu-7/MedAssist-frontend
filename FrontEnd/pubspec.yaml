@@ -106,6 +106,14 @@ flutter:
     - assets/Add.png
     - assets/Send.png
     - assets/Ai.png
+    - assets/smalldoc.png
+    - assets/patient.png
+    - assets/years.png
+    - assets/star.png
+    - assets/message.png
+    - assets/call.png
+    - assets/video.png
+    - assets/appointment.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
