@@ -1,32 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:midassist/screens/aboutdoctor.dart';
+import 'package:midassist/screens/home.dart';
+import 'package:midassist/screens/medassistai.dart';
+import 'package:midassist/screens/profilepage.dart';
 
 class DoctorRecommendation extends StatelessWidget {
-  const DoctorRecommendation({Key? key});
+  const DoctorRecommendation({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          const Positioned(
+          Positioned(
             top: 10,
             left: 0,
             right: 0,
             child: Padding(
-              padding: EdgeInsets.only(top: 20, right: 180), // Added 'const'
+              padding: const EdgeInsets.only(
+                  top: 20, left: 25, right: 85), // Adjusted padding
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Expanded(
-                    child: Image(
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Home(),
+                        ),
+                      );
+                    },
+                    child: const Image(
                       image: AssetImage('assets/back.png'),
                       height: 50,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 50,
                   ),
-                  Text(
+                  const Text(
                     'Doctors',
                     style: TextStyle(
                       fontSize: 25,
@@ -56,21 +69,12 @@ class DoctorRecommendation extends StatelessWidget {
               child: TextField(
                 decoration: InputDecoration(
                   hintText: 'Search for doctors...',
-                  prefixIcon: const Icon(Icons.search),
+                  prefixIcon: const Icon(Icons.search), // Removed 'const'
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
                 ),
               ),
-            ),
-          ),
-          const Positioned(
-            top: 130,
-            left: 0,
-            right: 0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [],
             ),
           ),
           Positioned(
@@ -87,14 +91,24 @@ class DoctorRecommendation extends StatelessWidget {
                     ),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: const Column(
+                  child: Column(
                     children: [
-                      Image(
-                        image: AssetImage('assets/Doctor1.png'),
-                        height: 100,
-                        width: 100,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const AboutDoctor(),
+                            ),
+                          );
+                        },
+                        child: const Image(
+                          image: AssetImage('assets/Doctor1.png'),
+                          height: 100,
+                          width: 100,
+                        ),
                       ),
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
                           'Dr. Marcus Holmes',
@@ -104,8 +118,8 @@ class DoctorRecommendation extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(height: 5),
-                      Padding(
+                      const SizedBox(height: 5),
+                      const Padding(
                         padding: EdgeInsets.only(top: 0, bottom: 5),
                         child: Text(
                           'Cardiologist',
@@ -115,7 +129,7 @@ class DoctorRecommendation extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Row(
+                      const Row(
                         children: [
                           Padding(
                             padding: EdgeInsets.all(8.0),
@@ -232,44 +246,64 @@ class DoctorRecommendation extends StatelessWidget {
             child: Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 715, left: 20),
+                  padding: const EdgeInsets.only(
+                      top: 715, left: 20), // Adjusted padding
                   child: GestureDetector(
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                const DoctorRecommendation()), // Corrected class name
+                        MaterialPageRoute(builder: (context) => Home()),
                       );
                     },
                     child: const Image(image: AssetImage('assets/Home.png')),
                   ),
                 ),
                 const Padding(
-                  padding: EdgeInsets.only(top: 715, left: 40),
+                  padding:
+                      EdgeInsets.only(top: 715, left: 40), // Adjusted padding
                   child: Image(image: AssetImage('assets/Market.png')),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 715, left: 30),
+                  padding: const EdgeInsets.only(
+                      top: 715, left: 30), // Adjusted padding
                   child: GestureDetector(
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                const DoctorRecommendation()), // Corrected class name
+                            builder: (context) => const DoctorRecommendation()),
                       );
                     },
                     child: const Image(image: AssetImage('assets/Camera.png')),
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(top: 715, left: 40),
-                  child: Image(image: AssetImage('assets/GlovaAI.png')),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      top: 715, left: 15), // Adjusted padding
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const MedAssistAi()),
+                      );
+                    },
+                    child: const Image(image: AssetImage('assets/Ai.png')),
+                  ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(top: 715, left: 30),
-                  child: Image(image: AssetImage('assets/Profile.png')),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      top: 715, left: 30), // Adjusted padding
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ProfilePage()),
+                      );
+                    },
+                    child: const Image(image: AssetImage('assets/Profile.png')),
+                  ),
                 ),
               ],
             ),
