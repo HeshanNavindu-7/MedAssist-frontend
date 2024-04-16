@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:midassist/screens/appointments.dart';
 import 'package:midassist/screens/home.dart';
 import 'package:midassist/screens/medassistai.dart';
 import 'package:midassist/screens/profilepage.dart';
@@ -101,7 +102,7 @@ class AboutDoctor extends StatelessWidget {
               ),
             ),
             const Positioned(
-              top: 200,
+              top: 220,
               left: 50,
               child: Row(
                 children: [
@@ -111,7 +112,7 @@ class AboutDoctor extends StatelessWidget {
                         padding: EdgeInsets.only(top: 0),
                         child: Image(image: AssetImage('assets/patient.png')),
                       ),
-                      Text(' 1000+\nPatients'),
+                      Text(' 10000+\nPatients'),
                     ],
                   ),
                   SizedBox(
@@ -246,12 +247,22 @@ class AboutDoctor extends StatelessWidget {
                 ],
               ),
             ),
-            const Positioned(
+            Positioned(
               top: 615,
-              child: Padding(
-                padding: EdgeInsets.only(top: 10, left: 20),
-                child: Image(
-                  image: AssetImage('assets/appointment.png'),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Appoinments(),
+                    ),
+                  );
+                },
+                child: const Padding(
+                  padding: EdgeInsets.only(top: 10, left: 20),
+                  child: Image(
+                    image: AssetImage('assets/appointment.png'),
+                  ),
                 ),
               ),
             ),
