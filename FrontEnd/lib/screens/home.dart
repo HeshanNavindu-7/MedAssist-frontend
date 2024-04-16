@@ -3,6 +3,8 @@ import 'package:midassist/screens/doctorRecommendation.dart';
 import 'package:midassist/screens/profilepage.dart';
 import 'package:midassist/APIs/imageFilePicker.dart';
 import 'package:midassist/screens/medassistai.dart';
+// import 'package:midassist/screens/aboutdoctor.dart';
+
 import 'package:http/http.dart' as http;
 
 import 'imageUploder.dart';
@@ -38,10 +40,10 @@ class Home extends StatelessWidget {
                   ),
                   SizedBox(
                     width: 150,
-                  ),
-                  Image(
-                    image: AssetImage('assets/notification.png'),
-                    height: 50,
+                    child: Image(
+                      image: AssetImage('assets/notification.png'),
+                      height: 50,
+                    ),
                   ),
                 ],
               ),
@@ -171,7 +173,7 @@ class Home extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              const DoctorRecommendation()), // Corrected class name
+                          const DoctorRecommendation()), // Corrected class name
                     );
                   },
                   child: const Text(
@@ -200,14 +202,24 @@ class Home extends StatelessWidget {
                     ),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: const Column(
+                  child: Column(
                     children: [
-                      Image(
-                        image: AssetImage('assets/Doctor1.png'),
-                        height: 100,
-                        width: 100,
-                      ),
-                      Padding(
+                      // GestureDetector(
+                      //   onTap: () {
+                      //     Navigator.push(
+                      //       context,
+                      //       MaterialPageRoute(
+                      //         builder: (context) => const AboutDoctor(),
+                      //       ),
+                      //     );
+                      //   },
+                      //   child: const Image(
+                      //     image: AssetImage('assets/Doctor1.png'),
+                      //     height: 100,
+                      //     width: 100,
+                      //   ),
+                      // ),
+                      const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
                           'Dr. Marcus Holmes',
@@ -217,8 +229,8 @@ class Home extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(height: 5),
-                      Padding(
+                      const SizedBox(height: 5),
+                      const Padding(
                         padding: EdgeInsets.only(top: 0, bottom: 5),
                         child: Text(
                           'Cardiologist',
@@ -228,7 +240,7 @@ class Home extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Row(
+                      const Row(
                         children: [
                           Padding(
                             padding: EdgeInsets.all(8.0),
@@ -311,7 +323,7 @@ class Home extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              MedAssistAi()), // Corrected class name
+                          const MedAssistAi()), // Corrected class name
                     );
                   },
                   child: const Padding(
@@ -325,7 +337,7 @@ class Home extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              ProfilePage()), // Corrected class name
+                          const ProfilePage()), // Corrected class name
                     );
                   },
                   child: const Padding(

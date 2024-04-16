@@ -51,8 +51,8 @@ class _ImageUploderState extends State<ImageUploder> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("Flutter Image Upload Demo"),
+        backgroundColor: const Color.fromARGB(255, 173, 216, 230),
+        title: const Text("Upload Your Image"),
       ),
       body: Center(
         child: Column(
