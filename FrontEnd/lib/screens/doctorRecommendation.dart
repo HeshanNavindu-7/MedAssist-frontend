@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:midassist/screens/aboutdoctor.dart';
 import 'package:midassist/screens/home.dart';
 import 'package:midassist/screens/medassistai.dart';
 import 'package:midassist/screens/profilepage.dart';
@@ -68,7 +69,7 @@ class DoctorRecommendation extends StatelessWidget {
               child: TextField(
                 decoration: InputDecoration(
                   hintText: 'Search for doctors...',
-                  prefixIcon: Icon(Icons.search), // Removed 'const'
+                  prefixIcon: const Icon(Icons.search), // Removed 'const'
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
@@ -90,14 +91,24 @@ class DoctorRecommendation extends StatelessWidget {
                     ),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: const Column(
+                  child: Column(
                     children: [
-                      Image(
-                        image: AssetImage('assets/Doctor1.png'),
-                        height: 100,
-                        width: 100,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const AboutDoctor(),
+                            ),
+                          );
+                        },
+                        child: const Image(
+                          image: AssetImage('assets/Doctor1.png'),
+                          height: 100,
+                          width: 100,
+                        ),
                       ),
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
                           'Dr. Marcus Holmes',
@@ -107,8 +118,8 @@ class DoctorRecommendation extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(height: 5),
-                      Padding(
+                      const SizedBox(height: 5),
+                      const Padding(
                         padding: EdgeInsets.only(top: 0, bottom: 5),
                         child: Text(
                           'Cardiologist',
@@ -118,7 +129,7 @@ class DoctorRecommendation extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Row(
+                      const Row(
                         children: [
                           Padding(
                             padding: EdgeInsets.all(8.0),
@@ -281,8 +292,8 @@ class DoctorRecommendation extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding:
-                      EdgeInsets.only(top: 715, left: 30), // Adjusted padding
+                  padding: const EdgeInsets.only(
+                      top: 715, left: 30), // Adjusted padding
                   child: GestureDetector(
                     onTap: () {
                       Navigator.push(
