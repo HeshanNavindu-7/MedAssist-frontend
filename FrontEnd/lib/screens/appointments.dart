@@ -128,7 +128,7 @@ class Appoinments extends StatelessWidget {
               ),
             ),
             const Positioned(
-                top: 80,
+                top: 70,
                 child: Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Row(
@@ -142,7 +142,7 @@ class Appoinments extends StatelessWidget {
                   ),
                 )),
             const Positioned(
-                top: 120,
+                top: 100,
                 left: 15,
                 child: Row(
                   children: [
@@ -167,7 +167,7 @@ class Appoinments extends StatelessWidget {
                   ],
                 )),
             const Positioned(
-                top: 230,
+                top: 195,
                 child: Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text(
@@ -176,7 +176,7 @@ class Appoinments extends StatelessWidget {
                   ),
                 )),
             const Positioned(
-                top: 260,
+                top: 220,
                 left: 30,
                 child: Row(
                   children: [
@@ -198,14 +198,114 @@ class Appoinments extends StatelessWidget {
                   ],
                 )),
             const Positioned(
-                top: 310,
+                top: 265,
                 child: Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text(
                     'Patient Details',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                ))
+                )),
+            const Positioned(
+                top: 285,
+                child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text('Full Name'),
+                )),
+
+            Positioned(
+              top: 315,
+              left: 10,
+              right: 10,
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText: 'Enter your full name',
+                  hintStyle:
+                      TextStyle(color: Color.fromARGB(255, 173, 170, 170)),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                ),
+              ),
+            ),
+
+            const Positioned(
+                top: 370,
+                child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text('Age'),
+                )),
+
+            Positioned(
+              top: 400,
+              left: 10,
+              right: 10,
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText: 'Enter your age',
+                  hintStyle:
+                      TextStyle(color: Color.fromARGB(255, 173, 170, 170)),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                ),
+              ),
+            ),
+
+            const Positioned(
+                top: 460,
+                child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text('Gender'),
+                )),
+
+            const Positioned(
+              top: 485,
+              left: 75,
+              child: Row(
+                children: [
+                  Image(
+                    image: AssetImage('assets/male.png'),
+                  ),
+                  SizedBox(
+                    width: 40,
+                  ),
+                  Image(
+                    image: AssetImage('assets/female.png'),
+                  ),
+                ],
+              ),
+            ),
+
+            const Positioned(
+                top: 515,
+                child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text('Problem'),
+                )),
+
+            Positioned(
+              top: 545,
+              left: 10,
+              right: 10,
+              child: TextField(
+                decoration: InputDecoration(
+                  hintText: 'Write your problem in detail',
+                  hintStyle: const TextStyle(
+                      color: Color.fromARGB(255, 173, 170, 170)),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                ),
+              ),
+            ),
+            const Positioned(
+              top: 620,
+              left: 15,
+              child: Image(
+                image: AssetImage('assets/appointment.png'),
+              ),
+            )
           ],
         ),
       ),
