@@ -114,6 +114,15 @@ flutter:
     - assets/call.png
     - assets/video.png
     - assets/appointment.png
+    - assets/downarrow.png
+    - assets/day1.png
+    - assets/day2.png
+    - assets/day3.png
+    - assets/day4.png
+    - assets/appoinmentback.png
+    - assets/9am.png
+    - assets/930am.png
+    - assets/10am.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
