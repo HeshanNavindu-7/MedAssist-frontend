@@ -229,48 +229,6 @@ class _SignUpPageState extends State<SignUp_Page> {
                               }),
                         ),
                       ),
-                      // Align(
-                      //   alignment: const Alignment(0, 0.06),
-                      //   child: Padding(
-                      //     padding: const EdgeInsets.symmetric(
-                      //         horizontal: 20.0, vertical: 15.0),
-                      //     child: TextField(
-                      //       controller: phoneNumberController,
-                      //       decoration: InputDecoration(
-                      //           prefixIcon: const Icon(Icons.phone),
-                      //           hintText: 'Phone Number',
-                      //           hintStyle: const TextStyle(
-                      //               color: Color.fromARGB(255, 212, 207, 207)),
-                      //           errorText: phoneNumberErrorText,
-                      //           border: const OutlineInputBorder(
-                      //             borderRadius:
-                      //                 BorderRadius.all(Radius.circular(10)),
-                      //             borderSide: BorderSide(
-                      //               color: Colors.blue, // Border color
-                      //               width: 2.0, // Border width
-                      //             ),
-                      //           ),
-                      //           filled: true,
-                      //           fillColor:
-                      //               const Color(0xFF282635).withOpacity(0.5),
-                      //           contentPadding: (const EdgeInsets.symmetric(
-                      //               horizontal: 5, vertical: 2.5))),
-                      //       onChanged: (value) {
-                      //         if (!RegExp(r'^[0-9]*$').hasMatch(value)) {
-                      //           setState(() {
-                      //             phoneNumberErrorText =
-                      //                 'Please enter a valid phone number';
-                      //           });
-                      //         } else {
-                      //           setState(() {
-                      //             phoneNumberErrorText = '';
-                      //           });
-                      //         }
-                      //       },
-                      //     ),
-                      //   ),
-                      // ),
-                      //Password
                       Align(
                         alignment: const Alignment(0, 0.06),
                         child: Padding(
@@ -341,7 +299,7 @@ class _SignUpPageState extends State<SignUp_Page> {
                       ),
                       ElevatedButton(
                         //uncomment following comment when testing with backend
-                        /*onPressed: () {
+                        onPressed: () {
                           if (firstNameController.text.isEmpty ||
                               ageController.text.isEmpty ||
                               emailController.text.isEmpty ||
@@ -389,17 +347,17 @@ class _SignUpPageState extends State<SignUp_Page> {
                             // All fields are filled and phone number is valid, proceed with sign-up
                             signUp();
                           }
-                        },*/
+                        },
 
                         //Only testing purpose (Front end testing)
-                        onPressed: () {
+                       /* onPressed: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
                                     Home()), // Corrected class name
                           );
-                        },
+                        },*/
                         //end of the testing code
 
                         style: ElevatedButton.styleFrom(

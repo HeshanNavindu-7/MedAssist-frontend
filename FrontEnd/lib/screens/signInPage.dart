@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:midassist/screens/signUpPage.dart';
@@ -30,11 +32,14 @@ class _SignUpPageState extends State<SignInPage> {
 
       if (response.statusCode == 200) {
         // Request successful
+        final responseData = jsonDecode(response.body);
+        final userId = responseData['user_id'];
+        print(userId);
         print('Sign in successful');
         // ignore: use_build_context_synchronously
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) =>  Home()),
+          MaterialPageRoute(builder: (context) => Home()),
         );
       } else {
         // Request failed
@@ -161,7 +166,7 @@ class _SignUpPageState extends State<SignInPage> {
                     // onPressed: signIn,
 
                     //Only testing purpose (Front end testing)
-                    onPressed: () {
+                     onPressed: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -175,7 +180,7 @@ class _SignUpPageState extends State<SignInPage> {
                       backgroundColor: const Color(0xFF004080),
                       shape: RoundedRectangleBorder(
                         borderRadius:
-                        BorderRadius.circular(10), // Border radius
+                            BorderRadius.circular(10), // Border radius
                       ),
                       padding: const EdgeInsets.symmetric(
                           horizontal: 30, vertical: 15), // Padding
@@ -183,7 +188,7 @@ class _SignUpPageState extends State<SignInPage> {
                     child: const Text(
                       'Sign In',
                       style:
-                      TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+                          TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
                     ),
                   ),
                   const SizedBox(
@@ -191,43 +196,43 @@ class _SignUpPageState extends State<SignInPage> {
                   ),
                   Center(
                       child: Row(children: [
-                        const SizedBox(
-                          width: 80,
-                        ),
-                        const Text("Don't have an account?"),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
+                    const SizedBox(
+                      width: 80,
+                    ),
+                    const Text("Don't have an account?"),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
                                     const SignUp_Page()), // Corrected class name
-                              );
-                            },
-                            child: const Text(
-                              'SignUp',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 18, 76, 236),
-                                decoration: TextDecoration.underline,
-                                decorationColor: Color.fromARGB(255, 18, 76, 236),
-                              ),
-                            )),
-                      ])),
+                          );
+                        },
+                        child: const Text(
+                          'SignUp',
+                          style: TextStyle(
+                            color: Color.fromARGB(255, 18, 76, 236),
+                            decoration: TextDecoration.underline,
+                            decorationColor: Color.fromARGB(255, 18, 76, 236),
+                          ),
+                        )),
+                  ])),
                   const Positioned(
                       child: Column(children: [
-                        Text('or'),
-                        Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Image(image: AssetImage('assets/Loginfb.png')),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(10.0),
-                          child: Image(image: AssetImage('assets/Logingoogle.png')),
-                        ),
-                      ]))
+                    Text('or'),
+                    Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Image(image: AssetImage('assets/Loginfb.png')),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Image(image: AssetImage('assets/Logingoogle.png')),
+                    ),
+                  ]))
                 ],
               ),
             ),
