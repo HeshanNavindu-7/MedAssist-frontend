@@ -6,6 +6,7 @@ import 'package:midassist/screens/appointments.dart';
 import 'package:midassist/screens/home.dart';
 import 'package:midassist/screens/medassistai.dart';
 import 'package:midassist/screens/profilepage.dart';
+import 'package:midassist/screens/reviewdoctor.dart';
 
 class AboutDoctor extends StatelessWidget {
   const AboutDoctor({Key? key});
@@ -99,6 +100,24 @@ class AboutDoctor extends StatelessWidget {
               child: Text(
                 'Dr. Marcus Holmes',
                 style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+            Positioned(
+              top: 190,
+              left: 152,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Review(),
+                    ),
+                  );
+                },
+                child: const Text(
+                  'Review this doctor',
+                  style: TextStyle(color: Color.fromARGB(255, 14, 99, 236)),
+                ),
               ),
             ),
             const Positioned(

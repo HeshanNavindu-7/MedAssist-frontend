@@ -15,6 +15,7 @@ class Appoinments extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        //Background
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/appoinmentback.png'),
@@ -23,7 +24,7 @@ class Appoinments extends StatelessWidget {
         ),
         child: Stack(
           children: [
-            //Background with navigation bar
+            //Navigation bar
             const Positioned(
               bottom: 0,
               right: 0,
@@ -95,7 +96,7 @@ class Appoinments extends StatelessWidget {
               top: 10,
               right: 100,
               child: Padding(
-                padding: const EdgeInsets.only(top: 20), // Adjusted padding
+                padding: const EdgeInsets.only(top: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -128,6 +129,7 @@ class Appoinments extends StatelessWidget {
               ),
             ),
             const Positioned(
+                //Date
                 top: 70,
                 child: Padding(
                   padding: EdgeInsets.all(8.0),
@@ -142,6 +144,7 @@ class Appoinments extends StatelessWidget {
                   ),
                 )),
             const Positioned(
+                //days images
                 top: 100,
                 left: 15,
                 child: Row(
@@ -167,6 +170,7 @@ class Appoinments extends StatelessWidget {
                   ],
                 )),
             const Positioned(
+                //available time
                 top: 195,
                 child: Padding(
                   padding: EdgeInsets.all(8.0),
@@ -198,6 +202,7 @@ class Appoinments extends StatelessWidget {
                   ],
                 )),
             const Positioned(
+                //patient details
                 top: 265,
                 child: Padding(
                   padding: EdgeInsets.all(8.0),
@@ -207,6 +212,7 @@ class Appoinments extends StatelessWidget {
                   ),
                 )),
             const Positioned(
+                //full name
                 top: 285,
                 child: Padding(
                   padding: EdgeInsets.all(8.0),
@@ -230,6 +236,7 @@ class Appoinments extends StatelessWidget {
             ),
 
             const Positioned(
+                //age
                 top: 370,
                 child: Padding(
                   padding: EdgeInsets.all(8.0),
@@ -253,6 +260,7 @@ class Appoinments extends StatelessWidget {
             ),
 
             const Positioned(
+                //gender
                 top: 460,
                 child: Padding(
                   padding: EdgeInsets.all(8.0),
@@ -278,6 +286,7 @@ class Appoinments extends StatelessWidget {
             ),
 
             const Positioned(
+                //problem
                 top: 515,
                 child: Padding(
                   padding: EdgeInsets.all(8.0),
@@ -300,6 +309,7 @@ class Appoinments extends StatelessWidget {
               ),
             ),
             const Positioned(
+              //book appoinment
               top: 620,
               left: 15,
               child: Image(
