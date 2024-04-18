@@ -173,7 +173,7 @@ class Home extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              const DoctorRecommendation()), // Corrected class name
+                          const DoctorRecommendation()), // Corrected class name
                     );
                   },
                   child: const Text(
@@ -323,7 +323,7 @@ class Home extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              const MedAssistAi()), // Corrected class name
+                          const MedAssistAi()), // Corrected class name
                     );
                   },
                   child: const Padding(
@@ -337,7 +337,7 @@ class Home extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              const ProfilePage()), // Corrected class name
+                          const ProfilePage()), // Corrected class name
                     );
                   },
                   child: const Padding(
