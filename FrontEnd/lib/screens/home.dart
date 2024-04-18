@@ -3,7 +3,7 @@ import 'package:midassist/screens/doctorRecommendation.dart';
 import 'package:midassist/screens/profilepage.dart';
 import 'package:midassist/APIs/imageFilePicker.dart';
 import 'package:midassist/screens/medassistai.dart';
-// import 'package:midassist/screens/aboutdoctor.dart';
+import 'package:midassist/screens/aboutdoctor.dart';
 
 import 'package:http/http.dart' as http;
 
@@ -204,21 +204,21 @@ class Home extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      // GestureDetector(
-                      //   onTap: () {
-                      //     Navigator.push(
-                      //       context,
-                      //       MaterialPageRoute(
-                      //         builder: (context) => const AboutDoctor(),
-                      //       ),
-                      //     );
-                      //   },
-                      //   child: const Image(
-                      //     image: AssetImage('assets/Doctor1.png'),
-                      //     height: 100,
-                      //     width: 100,
-                      //   ),
-                      // ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const AboutDoctor(),
+                            ),
+                          );
+                        },
+                        child: const Image(
+                          image: AssetImage('assets/Doctor1.png'),
+                          height: 100,
+                          width: 100,
+                        ),
+                      ),
                       const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
