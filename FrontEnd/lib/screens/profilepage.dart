@@ -7,6 +7,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:midassist/screens/home.dart';
 import 'package:midassist/screens/medassistai.dart';
+import 'package:midassist/screens/signUpPage.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key});
@@ -133,12 +134,12 @@ class ProfilePage extends StatelessWidget {
                 ],
               ),
             ),
-            const Positioned(
+            Positioned(
               top: 320,
               child: Column(
                 children: [
                   //Mysaved part
-                  Row(
+                  const Row(
                     children: [
                       SizedBox(
                         width: 50,
@@ -161,11 +162,11 @@ class ProfilePage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 25,
                   ),
                   //Appointment part
-                  Row(
+                  const Row(
                     children: [
                       SizedBox(
                         width: 50,
@@ -189,11 +190,11 @@ class ProfilePage extends StatelessWidget {
                     ],
                   ),
 
-                  SizedBox(
+                  const SizedBox(
                     height: 25,
                   ),
                   //Payment method
-                  Row(
+                  const Row(
                     children: [
                       SizedBox(
                         width: 50,
@@ -217,11 +218,11 @@ class ProfilePage extends StatelessWidget {
                     ],
                   ),
 
-                  SizedBox(
+                  const SizedBox(
                     height: 25,
                   ),
                   //FAQs
-                  Row(
+                  const Row(
                     children: [
                       SizedBox(
                         width: 50,
@@ -245,33 +246,47 @@ class ProfilePage extends StatelessWidget {
                     ],
                   ),
 
-                  SizedBox(
+                  const SizedBox(
                     height: 25,
                   ),
                   //LogOut
                   Row(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 50,
                       ),
-                      Image(
-                        image: AssetImage('assets/Logout.png'),
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Text(
-                        'Logout',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 251, 0, 0),
-                          fontWeight: FontWeight.bold,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const SignUp_Page()), // Corrected class name
+                          );
+                        },
+                        child: const Row(
+                          children: [
+                            Image(
+                              image: AssetImage('assets/Logout.png'),
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Text(
+                              'Logout',
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 251, 0, 0),
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 165,
+                            ),
+                            Image(
+                              image: AssetImage('assets/Arrow.png'),
+                            ),
+                          ],
                         ),
-                      ),
-                      SizedBox(
-                        width: 165,
-                      ),
-                      Image(
-                        image: AssetImage('assets/Arrow.png'),
                       ),
                     ],
                   ),
