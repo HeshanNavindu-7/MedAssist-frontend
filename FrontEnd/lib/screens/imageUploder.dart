@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:midassist/APIs/imageFilePicker.dart';
 import 'package:http/http.dart' as http;
@@ -17,13 +19,46 @@ class ImageUploder extends StatefulWidget {
   State<ImageUploder> createState() => _ImageUploderState();
 }
 
+
 class _ImageUploderState extends State<ImageUploder> {
   String? imageURL;
+  String? userId; // Add userId variable
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchUserId(); // Fetch user ID when the widget is initialized
+  }
+
+  Future<void> _fetchUserId() async {
+    final response = await http.get(Uri.parse('http://10.0.2.2:8000/users/'));
+
+    if (response.statusCode == 200) {
+      // Parse the response JSON
+      final Map<String, dynamic> data = jsonDecode(response.body);
+      setState(() {
+        userId = data['id'];
+        print(userId);// Assuming 'id' is the key for user ID in your response
+      });
+    } else {
+      // Handle error
+      print('Failed to fetch user ID: ${response.statusCode}');
+    }
+  }
 
   /// Called when the image is pressed.
   /// It invokes `openImagePickerDialog`, which opens a dialog to select an image and makes the request to upload the image.
   void _onImagePressed() async {
-    Map<String, dynamic>? response = await openImagePickerDialog(widget.imageFilePicker, widget.client);
+
+    if(userId == null) {
+      print('User ID is not available');
+      return;
+    }
+    Map<String, dynamic>? response = await openImagePickerDialog(
+      widget.imageFilePicker,
+      widget.client,
+      userId, // Pass user ID to the image upload function
+    );
 
     if (response != null) {
       int? statusCode = response['statusCode'];

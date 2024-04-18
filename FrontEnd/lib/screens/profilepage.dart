@@ -1,16 +1,54 @@
-import 'dart:ui';
+import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:midassist/screens/home.dart';
 import 'package:midassist/screens/medassistai.dart';
 import 'package:midassist/screens/signUpPage.dart';
+import 'package:http/http.dart' as http;
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key});
+
+  Future<void> _handleLogout(BuildContext context) async {
+    // Your backend logout URL
+    const String logoutUrl = 'http://10.0.2.2:8000/log-out/';
+
+    try {
+      // Make POST request to logout URL
+      final response = await http.post(Uri.parse(logoutUrl));
+
+      // Check if request was successful
+      if (response.statusCode == 200) {
+        // Parse the response message
+        final responseData = jsonDecode(response.body);
+        final message = responseData['success'];
+
+        // Show the response message
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(message),
+        ));
+
+        // Navigate back to the sign-up page
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const SignUp_Page(),
+          ),
+        );
+      } else {
+        // Show error message if request fails
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text('Failed to logout. Please try again.'),
+        ));
+      }
+    } catch (e) {
+      print(e);
+      // Show error message if an exception occurs
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('An error occurred: $e'),
+      ));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -257,12 +295,7 @@ class ProfilePage extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const SignUp_Page()), // Corrected class name
-                          );
+                          _handleLogout(context);
                         },
                         child: const Row(
                           children: [

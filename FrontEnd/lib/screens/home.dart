@@ -1,19 +1,49 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:midassist/screens/doctorRecommendation.dart';
 import 'package:midassist/screens/profilepage.dart';
 import 'package:midassist/APIs/imageFilePicker.dart';
 import 'package:midassist/screens/medassistai.dart';
 import 'package:midassist/screens/aboutdoctor.dart';
+import 'package:midassist/screens/test.dart';
+import 'package:midassist/screens/imageUploder.dart';
 
-import 'package:http/http.dart' as http;
-
-import 'imageUploder.dart';
-
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   Home({Key? key}) : super(key: key);
+
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  String? userName;
 
   final ImageFilePicker imageFilePicker = ImageFilePicker();
   final http.Client client = http.Client();
+
+  @override
+  void initState() {
+    super.initState();
+    // Fetch user details when the widget is initialized
+    _fetchUserDetails();
+  }
+
+  Future<void> _fetchUserDetails() async {
+    final response = await http.get(Uri.parse('http://10.0.2.2:8000/users/'));
+
+    if (response.statusCode == 200) {
+      // Parse the response JSON
+      final Map<String, dynamic> data = jsonDecode(response.body);
+      setState(() {
+        userName = data['name'];
+      });
+    } else {
+      // Handle error
+      print('Failed to fetch user details: ${response.statusCode}');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +55,7 @@ class Home extends StatelessWidget {
       child: Scaffold(
         body: Stack(
           children: [
-            const Positioned(
+            Positioned(
               top: 10,
               left: 0,
               right: 0,
@@ -36,14 +66,14 @@ class Home extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        'Hello, Hesh',
-                        style: TextStyle(
+                        'Hello, ${userName ?? 'Guest'}',
+                        style: const TextStyle(
                           fontSize: 25,
                         ),
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 150,
                       child: Image(
                         image: AssetImage('assets/notification.png'),
@@ -303,9 +333,20 @@ class Home extends StatelessWidget {
                       child: const Image(image: AssetImage('assets/Home.png')),
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 715, left: 40),
-                    child: Image(image: AssetImage('assets/Market.png')),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 715, left: 40),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  Test()), // Corrected class name
+                        );
+                      },
+                      child:
+                          const Image(image: AssetImage('assets/Market.png')),
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 715, left: 30),
