@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:midassist/screens/aboutdoctor.dart';
 import 'package:midassist/screens/home.dart';
 import 'package:midassist/screens/medassistai.dart';
 import 'package:midassist/screens/profilepage.dart';
@@ -274,7 +275,24 @@ class Review extends StatelessWidget {
                   left: 115,
                   child: Image(
                     image: AssetImage('assets/saveandsubmit.png'),
-                  ))
+                  )),
+              Positioned(
+                top: 35,
+                left: 15,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AboutDoctor(),
+                      ),
+                    );
+                  },
+                  child: Image(
+                    image: AssetImage('assets/back.png'),
+                  ),
+                ),
+              ),
             ])));
   }
 }

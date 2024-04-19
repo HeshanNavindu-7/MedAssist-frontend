@@ -361,6 +361,23 @@ class ProfilePageState extends State<ProfilePage> {
                 ],
               ),
             ),
+            Positioned(
+              top: 35,
+              left: 15,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Home(),
+                    ),
+                  );
+                },
+                child: const Image(
+                  image: AssetImage('assets/back.png'),
+                ),
+              ),
+            ),
           ],
         ),
       ),
