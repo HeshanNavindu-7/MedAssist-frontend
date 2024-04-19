@@ -7,6 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:midassist/screens/home.dart';
 import 'package:midassist/screens/medassistai.dart';
 import 'package:midassist/screens/profilepage.dart';
+import 'package:midassist/screens/aboutdoctor.dart';
 
 class Appoinments extends StatelessWidget {
   const Appoinments({Key? key});
@@ -105,7 +106,7 @@ class Appoinments extends StatelessWidget {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => Home(),
+                            builder: (context) => AboutDoctor(),
                           ),
                         );
                       },
