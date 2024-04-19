@@ -1,13 +1,41 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:midassist/screens/home.dart';
-import 'package:midassist/screens/medassistai.dart';
-import 'package:midassist/screens/signUpPage.dart';
 import 'package:http/http.dart' as http;
 
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({Key? key});
+import '../APIs/userDetails.dart';
+import 'home.dart';
+import 'medassistai.dart';
+import 'signUpPage.dart';
+
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({Key? key}) : super(key: key);
+
+  @override
+  ProfilePageState createState() => ProfilePageState();
+}
+
+class ProfilePageState extends State<ProfilePage> {
+  String? userName;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchUserDetails();
+  }
+
+  Future<void> _fetchUserDetails() async {
+    try {
+      final Map<String, dynamic> data =
+          await UserDataManager.fetchUserDetails();
+      setState(() {
+        userName = data['name'];
+      });
+    } catch (e) {
+      // Handle error
+      print('Error: $e');
+    }
+  }
 
   Future<void> _handleLogout(BuildContext context) async {
     // Your backend logout URL
@@ -123,12 +151,19 @@ class ProfilePage extends StatelessWidget {
               left: 150,
               child: Image(image: AssetImage('assets/profilegirl.png')),
             ),
-            const Positioned(
+            Positioned(
               top: 170,
-              left: 150,
-              child: Text(
-                'Amelia Reneta',
-                style: TextStyle(fontWeight: FontWeight.bold),
+              left: 0, // Set left to 0
+              right: 0, // Set right to 0
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    userName ?? '',
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ],
               ),
             ),
             const Positioned(
