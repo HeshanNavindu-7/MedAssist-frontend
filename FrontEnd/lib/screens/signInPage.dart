@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:midassist/screens/signUpPage.dart';
@@ -30,11 +32,14 @@ class _SignUpPageState extends State<SignInPage> {
 
       if (response.statusCode == 200) {
         // Request successful
+        final responseData = jsonDecode(response.body);
+        final userId = responseData['user_id'];
+        print(userId);
         print('Sign in successful');
         // ignore: use_build_context_synchronously
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) =>  Home()),
+          MaterialPageRoute(builder: (context) => Home()),
         );
       } else {
         // Request failed
@@ -161,12 +166,12 @@ class _SignUpPageState extends State<SignInPage> {
                     // onPressed: signIn,
 
                     //Only testing purpose (Front end testing)
-                    onPressed: () {
+                     onPressed: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                               Home()), // Corrected class name
+                                Home()), // Corrected class name
                       );
                     },
                     //end of the testing code

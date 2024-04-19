@@ -42,7 +42,7 @@ class _SignUpPageState extends State<SignUp_Page> {
         // ignore: use_build_context_synchronously
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) =>  Home()),
+          MaterialPageRoute(builder: (context) => Home()),
         );
       } else {
         // Request failed
@@ -66,19 +66,19 @@ class _SignUpPageState extends State<SignUp_Page> {
         )),
         child: Stack(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 30, left: 10),
-              child: ElevatedButton(
-                onPressed: () {
-                  // Navigate back to the previous screen when the button is pressed
-                  Navigator.pop(context);
-                },
-                child: const Padding(
-                  padding: EdgeInsets.only(top: 4),
-                  child: Text('Go Back'),
-                ),
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.only(top: 30, left: 10),
+            //   child: ElevatedButton(
+            //     onPressed: () {
+            //       // Navigate back to the previous screen when the button is pressed
+            //       Navigator.pop(context);
+            //     },
+            //     child: const Padding(
+            //       padding: EdgeInsets.only(top: 4),
+            //       child: Text('Go Back'),
+            //     ),
+            //   ),
+            // ),
             Column(
               children: [
                 Padding(
@@ -89,7 +89,7 @@ class _SignUpPageState extends State<SignUp_Page> {
                       const Align(
                         alignment: Alignment(-1, -0.5),
                         child: Padding(
-                          padding: EdgeInsets.only(top: 70.0, left: 130),
+                          padding: EdgeInsets.only(top: 50.0, left: 130),
                           child: Text(
                             'Sign Up',
                             style: TextStyle(
@@ -195,42 +195,40 @@ class _SignUpPageState extends State<SignUp_Page> {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 20.0, vertical: 15.0),
                           child: TextField(
-                            controller: phoneNumberController,
-                            decoration: InputDecoration(
-                                prefixIcon: const Icon(Icons.phone),
-                                hintText: 'Phone Number',
-                                hintStyle: const TextStyle(
-                                    color: Color.fromARGB(255, 212, 207, 207)),
-                                errorText: phoneNumberErrorText,
-                                border: const OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10)),
-                                  borderSide: BorderSide(
-                                    color: Colors.blue, // Border color
-                                    width: 2.0, // Border width
+                              controller: phoneNumberController,
+                              decoration: InputDecoration(
+                                  prefixIcon: const Icon(Icons.phone),
+                                  hintText: 'Phone Number',
+                                  hintStyle: const TextStyle(
+                                      color:
+                                          Color.fromARGB(255, 212, 207, 207)),
+                                  border: const OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+                                    borderSide: BorderSide(
+                                      color: Colors.blue, // Border color
+                                      width: 2.0, // Border width
+                                    ),
                                   ),
-                                ),
-                                filled: true,
-                                fillColor:
-                                    const Color(0xFF282635).withOpacity(0.5),
-                                contentPadding: (const EdgeInsets.symmetric(
-                                    horizontal: 5, vertical: 2.5))),
-                            onChanged: (value) {
-                              if (!RegExp(r'^[0-9]*$').hasMatch(value)) {
-                                setState(() {
-                                  phoneNumberErrorText =
-                                      'Please enter a valid phone number';
-                                });
-                              } else {
-                                setState(() {
-                                  phoneNumberErrorText = '';
-                                });
-                              }
-                            },
-                          ),
+                                  filled: true,
+                                  fillColor:
+                                      const Color(0xFF282635).withOpacity(0.5),
+                                  contentPadding: (const EdgeInsets.symmetric(
+                                      horizontal: 5, vertical: 2.5))),
+                              onChanged: (value) {
+                                if (!RegExp(r'^[0-9]*$').hasMatch(value)) {
+                                  setState(() {
+                                    phoneNumberErrorText =
+                                        'Please enter a valid phone number';
+                                  });
+                                } else {
+                                  setState(() {
+                                    phoneNumberErrorText = '';
+                                  });
+                                }
+                              }),
                         ),
                       ),
-                      //Password
                       Align(
                         alignment: const Alignment(0, 0.06),
                         child: Padding(
@@ -301,7 +299,7 @@ class _SignUpPageState extends State<SignUp_Page> {
                       ),
                       ElevatedButton(
                         //uncomment following comment when testing with backend
-                        /*onPressed: () {
+                        onPressed: () {
                           if (firstNameController.text.isEmpty ||
                               ageController.text.isEmpty ||
                               emailController.text.isEmpty ||
@@ -349,17 +347,17 @@ class _SignUpPageState extends State<SignUp_Page> {
                             // All fields are filled and phone number is valid, proceed with sign-up
                             signUp();
                           }
-                        },*/
+                        },
 
                         //Only testing purpose (Front end testing)
-                        onPressed: () {
+                       /* onPressed: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                     Home()), // Corrected class name
+                                    Home()), // Corrected class name
                           );
-                        },
+                        },*/
                         //end of the testing code
 
                         style: ElevatedButton.styleFrom(
