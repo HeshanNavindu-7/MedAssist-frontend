@@ -18,7 +18,7 @@ class ImageFilePicker {
 
 /// Opens a dialog [imageFilePicker] and creates  MultipartRequest [request].
 /// In the request, a field 'image' is appended with the chosen image and the public URL of the image is returned in case of success.
-Future<Map<String, dynamic>?> openImagePickerDialog(ImageFilePicker imageFilePicker, http.Client client) async {
+Future<Map<String, dynamic>?> openImagePickerDialog(ImageFilePicker imageFilePicker, http.Client client,String? userId) async {
   FilePickerResult? result = await imageFilePicker.pickImage();
   MultipartRequest request = http.MultipartRequest('POST', Uri.parse(API_URL));
 
@@ -32,6 +32,8 @@ Future<Map<String, dynamic>?> openImagePickerDialog(ImageFilePicker imageFilePic
     final httpImage =
     http.MultipartFile.fromBytes('image', bytes, contentType: MediaType.parse(lookupMimeType(file.path)!), filename: platformFile.name);
     request.files.add(httpImage);
+    // Append user ID to the request
+    request.fields['user_id'] = userId ?? '';
 
     // Send request
     final response = await client.send(request);

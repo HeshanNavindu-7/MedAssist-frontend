@@ -52,7 +52,7 @@ class SecondPage extends StatelessWidget {
             ),
             Align(
               alignment:
-                  const Alignment(0, 0.7), // Aligning to the desired position
+              const Alignment(0, 0.7), // Aligning to the desired position
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

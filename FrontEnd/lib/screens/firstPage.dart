@@ -22,7 +22,7 @@ class FirstPage extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                        const SecondPage()), // Corrected class name
+                    const SecondPage()), // Corrected class name
               );
             },
             style: ElevatedButton.styleFrom(
