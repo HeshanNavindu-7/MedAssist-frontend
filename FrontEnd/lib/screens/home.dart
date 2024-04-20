@@ -10,6 +10,7 @@ import 'package:midassist/screens/medassistai.dart';
 import 'package:midassist/screens/aboutdoctor.dart';
 import 'package:midassist/screens/imageUploder.dart';
 import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
+import 'package:midassist/screens/test.dart';
 
 import '../APIs/doctorDetails.dart';
 import '../APIs/userDetails.dart';
@@ -225,7 +226,7 @@ class _HomeState extends State<Home> {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                const DoctorRecommendation()), // Corrected class name
+                                Test()), // Corrected class name
                       );
                     },
                     child: const Text(
