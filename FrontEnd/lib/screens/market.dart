@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:midassist/screens/aboutdoctor.dart';
 import 'package:midassist/screens/home.dart';
-import 'package:midassist/screens/medassistai.dart';
-import 'package:midassist/screens/profilepage.dart';
-import 'package:midassist/screens/doctorRecommendation.dart';
+import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
 
 class Market extends StatelessWidget {
   const Market({Key? key}) : super(key: key);
@@ -150,91 +148,13 @@ class Market extends StatelessWidget {
               ],
             ),
           ),
+          //Navigation Bar
           const Positioned(
             bottom: 0,
+            left: 0,
             right: 0,
-            child: Image(
-              image: AssetImage('assets/Bottom_rectangle.png'),
-            ),
-          ),
-          Positioned(
-            top: 5,
-            left: 5,
-            right: 5,
-            child: Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                      top: 715, left: 20), // Adjusted padding
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Home()),
-                      );
-                    },
-                    child: const Image(image: AssetImage('assets/Home.png')),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 715, left: 40),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                Market()), // Corrected class name
-                      );
-                    },
-                    child: const Image(image: AssetImage('assets/Market.png')),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      top: 715, left: 30), // Adjusted padding
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const DoctorRecommendation()),
-                      );
-                    },
-                    child: const Image(image: AssetImage('assets/Camera.png')),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      top: 715, left: 15), // Adjusted padding
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const MedAssistAi()),
-                      );
-                    },
-                    child: const Image(image: AssetImage('assets/Ai.png')),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      top: 715, left: 30), // Adjusted padding
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const ProfilePage()),
-                      );
-                    },
-                    child: const Image(image: AssetImage('assets/Profile.png')),
-                  ),
-                ),
-              ],
-            ),
-          ),
+            child: CustomBottomNavigationBar(),
+          )
         ],
       ),
     );
