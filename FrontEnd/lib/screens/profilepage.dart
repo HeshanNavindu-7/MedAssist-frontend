@@ -1,6 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+
+import 'package:midassist/screens/home.dart';
+import 'package:midassist/screens/medassistai.dart';
+import 'package:midassist/screens/market.dart';
+import 'package:midassist/screens/signUpPage.dart';
+
 import 'package:http/http.dart' as http;
 
 import '../APIs/userDetails.dart';
@@ -117,9 +123,20 @@ class ProfilePageState extends State<ProfilePage> {
                       child: Image(image: AssetImage('assets/Home.png')),
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 715, left: 40),
-                    child: Image(image: AssetImage('assets/Market.png')),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 715, left: 40),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  Market()), // Corrected class name
+                        );
+                      },
+                      child:
+                          const Image(image: AssetImage('assets/Market.png')),
+                    ),
                   ),
                   const Padding(
                     padding: EdgeInsets.only(top: 715, left: 30),
