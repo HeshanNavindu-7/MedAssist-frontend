@@ -19,10 +19,9 @@ class ImageUploder extends StatefulWidget {
   State<ImageUploder> createState() => _ImageUploderState();
 }
 
-
 class _ImageUploderState extends State<ImageUploder> {
   String? imageURL;
-  String? userId; // Add userId variable
+  int? userId; // Add userId variable
 
   @override
   void initState() {
@@ -38,7 +37,7 @@ class _ImageUploderState extends State<ImageUploder> {
       final Map<String, dynamic> data = jsonDecode(response.body);
       setState(() {
         userId = data['id'];
-        print(userId);// Assuming 'id' is the key for user ID in your response
+        print(userId);
       });
     } else {
       // Handle error
@@ -49,8 +48,7 @@ class _ImageUploderState extends State<ImageUploder> {
   /// Called when the image is pressed.
   /// It invokes `openImagePickerDialog`, which opens a dialog to select an image and makes the request to upload the image.
   void _onImagePressed() async {
-
-    if(userId == null) {
+    if (userId == null) {
       print('User ID is not available');
       return;
     }

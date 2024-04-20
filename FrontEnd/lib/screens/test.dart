@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import '../APIs/userDetails.dart';
+
 class Test extends StatefulWidget {
   Test({Key? key}) : super(key: key);
 
@@ -19,25 +21,20 @@ class _TestState extends State<Test> {
   @override
   void initState() {
     super.initState();
-    // Fetch user details when the widget is initialized
     _fetchUserDetails();
   }
 
   Future<void> _fetchUserDetails() async {
-    final response =
-    await http.get(Uri.parse('http://10.0.2.2:8000/users/'));
-
-    if (response.statusCode == 200) {
-      // Parse the response JSON
-      final Map<String, dynamic> data = jsonDecode(response.body);
+    try {
+      final Map<String, dynamic> data = await UserDataManager.fetchUserDetails();
       setState(() {
         userEmail = data['email'];
         userName = data['name'];
         userAge = data['age'];
       });
-    } else {
+    } catch (e) {
       // Handle error
-      print('Failed to fetch user details: ${response.statusCode}');
+      print('Error: $e');
     }
   }
 
