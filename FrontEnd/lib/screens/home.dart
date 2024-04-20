@@ -10,6 +10,8 @@ import 'package:midassist/screens/medassistai.dart';
 import 'package:midassist/screens/aboutdoctor.dart';
 import 'package:midassist/screens/imageUploder.dart';
 
+import '../APIs/userDetails.dart';
+
 class Home extends StatefulWidget {
   Home({Key? key}) : super(key: key);
 
@@ -26,22 +28,18 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    // Fetch user details when the widget is initialized
     _fetchUserDetails();
   }
 
   Future<void> _fetchUserDetails() async {
-    final response = await http.get(Uri.parse('http://10.0.2.2:8000/users/'));
-
-    if (response.statusCode == 200) {
-      // Parse the response JSON
-      final Map<String, dynamic> data = jsonDecode(response.body);
+    try {
+      final Map<String, dynamic> data = await UserDataManager.fetchUserDetails();
       setState(() {
         userName = data['name'];
       });
-    } else {
+    } catch (e) {
       // Handle error
-      print('Failed to fetch user details: ${response.statusCode}');
+      print('Error: $e');
     }
   }
 
