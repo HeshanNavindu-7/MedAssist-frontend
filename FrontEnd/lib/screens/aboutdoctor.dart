@@ -7,6 +7,7 @@ import 'package:midassist/screens/home.dart';
 import 'package:midassist/screens/medassistai.dart';
 import 'package:midassist/screens/profilepage.dart';
 import 'package:midassist/screens/reviewdoctor.dart';
+import 'package:midassist/screens/market.dart';
 
 class AboutDoctor extends StatelessWidget {
   const AboutDoctor({Key? key});
@@ -50,9 +51,20 @@ class AboutDoctor extends StatelessWidget {
                       child: Image(image: AssetImage('assets/Home.png')),
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 715, left: 40),
-                    child: Image(image: AssetImage('assets/Market.png')),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 715, left: 40),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  Market()), // Corrected class name
+                        );
+                      },
+                      child:
+                          const Image(image: AssetImage('assets/Market.png')),
+                    ),
                   ),
                   const Padding(
                     padding: EdgeInsets.only(top: 715, left: 30),
