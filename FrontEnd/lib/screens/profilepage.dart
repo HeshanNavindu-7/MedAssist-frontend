@@ -1,6 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+
+import 'package:midassist/screens/home.dart';
+import 'package:midassist/screens/signUpPage.dart';
+
+import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
+
 import 'package:http/http.dart' as http;
 
 import '../APIs/userDetails.dart';
@@ -90,61 +96,12 @@ class ProfilePageState extends State<ProfilePage> {
         ),
         child: Stack(
           children: [
+            //Navigation Bar
             const Positioned(
               bottom: 0,
+              left: 0,
               right: 0,
-              child: Image(
-                image: AssetImage('assets/Bottom_rectangle.png'),
-              ),
-            ),
-            Positioned(
-              top: 5,
-              left: 5,
-              right: 5,
-              child: Row(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Home(),
-                        ),
-                      );
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.only(top: 715, left: 20),
-                      child: Image(image: AssetImage('assets/Home.png')),
-                    ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 715, left: 40),
-                    child: Image(image: AssetImage('assets/Market.png')),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 715, left: 30),
-                    child: Image(image: AssetImage('assets/Camera.png')),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => MedAssistAi(),
-                        ),
-                      );
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.only(top: 715, left: 10),
-                      child: Image(image: AssetImage('assets/Ai.png')),
-                    ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 715, left: 30),
-                    child: Image(image: AssetImage('assets/Profile.png')),
-                  ),
-                ],
-              ),
+              child: CustomBottomNavigationBar(),
             ),
             const Positioned(
               top: 80,

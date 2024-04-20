@@ -3,12 +3,13 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:midassist/screens/doctorRecommendation.dart';
+import 'package:midassist/screens/market.dart';
 import 'package:midassist/screens/profilepage.dart';
 import 'package:midassist/APIs/imageFilePicker.dart';
 import 'package:midassist/screens/medassistai.dart';
 import 'package:midassist/screens/aboutdoctor.dart';
-import 'package:midassist/screens/test.dart';
 import 'package:midassist/screens/imageUploder.dart';
+import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
 
 import '../APIs/doctorDetails.dart';
 import '../APIs/userDetails.dart';
@@ -357,7 +358,7 @@ class _HomeState extends State<Home> {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  Test()), // Corrected class name
+                                  Market()), // Corrected class name
                         );
                       },
                       child:
