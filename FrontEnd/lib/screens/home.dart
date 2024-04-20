@@ -10,7 +10,9 @@ import 'package:midassist/screens/medassistai.dart';
 import 'package:midassist/screens/aboutdoctor.dart';
 import 'package:midassist/screens/imageUploder.dart';
 import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
+import 'package:midassist/screens/test.dart';
 
+import '../APIs/doctorDetails.dart';
 import '../APIs/userDetails.dart';
 
 class Home extends StatefulWidget {
@@ -22,6 +24,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   String? userName;
+  String? doctorName;
 
   final ImageFilePicker imageFilePicker = ImageFilePicker();
   final http.Client client = http.Client();
@@ -30,6 +33,7 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     _fetchUserDetails();
+    _fetchDoctorDetails();
   }
 
   Future<void> _fetchUserDetails() async {
@@ -39,10 +43,25 @@ class _HomeState extends State<Home> {
         userName = data['name'];
       });
     } catch (e) {
-      // Handle error
       print('Error: $e');
     }
   }
+
+  Future<void> _fetchDoctorDetails() async {
+    try {
+      final List<dynamic> data = await DoctorDataManager.fetchDoctorDetails();
+      // Handle the list of doctors here
+      // For example, you can extract the name of the first doctor:
+      if (data.isNotEmpty) {
+        setState(() {
+          doctorName = data[0]['name'];
+        });
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -207,7 +226,7 @@ class _HomeState extends State<Home> {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                const DoctorRecommendation()), // Corrected class name
+                                Test()), // Corrected class name
                       );
                     },
                     child: const Text(
@@ -253,11 +272,11 @@ class _HomeState extends State<Home> {
                             width: 100,
                           ),
                         ),
-                        const Padding(
+                        Padding(
                           padding: EdgeInsets.all(8.0),
                           child: Text(
-                            'Dr. Marcus Holmes',
-                            style: TextStyle(
+                            '$doctorName',
+                            style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                             ),
