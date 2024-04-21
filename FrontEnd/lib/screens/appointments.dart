@@ -67,8 +67,8 @@ class Appoinments extends StatelessWidget {
                 ),
               ),
             ),
+            //Date
             const Positioned(
-                //Date
                 top: 70,
                 child: Padding(
                   padding: EdgeInsets.all(8.0),
@@ -173,9 +173,8 @@ class Appoinments extends StatelessWidget {
                 ),
               ),
             ),
-
+            //Age
             const Positioned(
-                //age
                 top: 370,
                 child: Padding(
                   padding: EdgeInsets.all(8.0),

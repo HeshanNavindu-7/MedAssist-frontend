@@ -13,10 +13,11 @@ class Market extends StatelessWidget {
         children: [
           Positioned(
             top: 25,
-            left: 10, // Adjusted padding
+            left: 10,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                //back bitton
                 GestureDetector(
                   onTap: () {
                     Navigator.pushReplacement(
@@ -34,6 +35,7 @@ class Market extends StatelessWidget {
                 const SizedBox(
                   width: 100,
                 ),
+                //market text
                 const Text(
                   'Market',
                   style: TextStyle(
@@ -44,6 +46,7 @@ class Market extends StatelessWidget {
               ],
             ),
           ),
+          //search bar
           Positioned(
             top: 80,
             left: 10,
@@ -71,6 +74,7 @@ class Market extends StatelessWidget {
               ),
             ),
           ),
+          //product
           Positioned(
             top: 180,
             left: 25,

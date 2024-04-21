@@ -16,11 +16,11 @@ class DoctorRecommendation extends StatelessWidget {
             left: 0,
             right: 0,
             child: Padding(
-              padding: const EdgeInsets.only(
-                  top: 20, left: 25, right: 85), // Adjusted padding
+              padding: const EdgeInsets.only(top: 20, left: 25, right: 85),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  //back button
                   GestureDetector(
                     onTap: () {
                       Navigator.pushReplacement(
@@ -38,6 +38,7 @@ class DoctorRecommendation extends StatelessWidget {
                   const SizedBox(
                     width: 50,
                   ),
+                  //doctors
                   const Text(
                     'Doctors',
                     style: TextStyle(
@@ -49,6 +50,7 @@ class DoctorRecommendation extends StatelessWidget {
               ),
             ),
           ),
+          //search box
           Positioned(
             top: 80,
             left: 10,
@@ -68,7 +70,7 @@ class DoctorRecommendation extends StatelessWidget {
               child: TextField(
                 decoration: InputDecoration(
                   hintText: 'Search for doctors...',
-                  prefixIcon: const Icon(Icons.search), // Removed 'const'
+                  prefixIcon: const Icon(Icons.search),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
@@ -76,6 +78,7 @@ class DoctorRecommendation extends StatelessWidget {
               ),
             ),
           ),
+          //doctor 1
           Positioned(
             top: 180,
             left: 25,
@@ -159,6 +162,7 @@ class DoctorRecommendation extends StatelessWidget {
               ],
             ),
           ),
+          //doctor 2
           Positioned(
             top: 180,
             left: 205,
