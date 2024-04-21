@@ -29,6 +29,7 @@ class AboutDoctor extends StatelessWidget {
               right: 0,
               child: CustomBottomNavigationBar(),
             ),
+            //Doctor photo
             const Positioned(
               top: 50,
               left: 150,
@@ -42,6 +43,7 @@ class AboutDoctor extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
+            //Doctor Review
             Positioned(
               top: 190,
               left: 152,
@@ -60,6 +62,7 @@ class AboutDoctor extends StatelessWidget {
                 ),
               ),
             ),
+            //Three Icons
             const Positioned(
               top: 220,
               left: 50,
@@ -101,6 +104,7 @@ class AboutDoctor extends StatelessWidget {
                 ],
               ),
             ),
+            //About Doctor
             const Positioned(
               top: 290,
               child: Padding(
@@ -122,6 +126,7 @@ class AboutDoctor extends StatelessWidget {
                     'Dr. Marcus Holmes is a top specialist at London Bridge \nHospital at London. He has achieved several awards and \nrecognition for his contribution in his own field.'),
               ),
             ),
+            //Working Time
             const Positioned(
               top: 380,
               child: Padding(
@@ -142,6 +147,7 @@ class AboutDoctor extends StatelessWidget {
                 child: Text('Mon - Sat (08:30 AM - 09:00 PM)'),
               ),
             ),
+            //Communication
             const Positioned(
               top: 425,
               child: Padding(
@@ -206,6 +212,7 @@ class AboutDoctor extends StatelessWidget {
                 ],
               ),
             ),
+            //Book appointment
             Positioned(
               top: 615,
               child: GestureDetector(
@@ -225,6 +232,7 @@ class AboutDoctor extends StatelessWidget {
                 ),
               ),
             ),
+            //Back button
             Positioned(
               top: 35,
               left: 15,

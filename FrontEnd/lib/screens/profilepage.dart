@@ -88,6 +88,7 @@ class ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        //wallpaper
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/profileback.png'),
@@ -103,6 +104,7 @@ class ProfilePageState extends State<ProfilePage> {
               right: 0,
               child: CustomBottomNavigationBar(),
             ),
+            //girl photo and name
             const Positioned(
               top: 80,
               left: 150,
@@ -110,8 +112,8 @@ class ProfilePageState extends State<ProfilePage> {
             ),
             Positioned(
               top: 170,
-              left: 0, // Set left to 0
-              right: 0, // Set right to 0
+              left: 0,
+              right: 0,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -123,6 +125,7 @@ class ProfilePageState extends State<ProfilePage> {
                 ],
               ),
             ),
+            //icons
             const Positioned(
               top: 200,
               left: 50,
@@ -318,6 +321,7 @@ class ProfilePageState extends State<ProfilePage> {
                 ],
               ),
             ),
+            //back button
             Positioned(
               top: 35,
               left: 15,

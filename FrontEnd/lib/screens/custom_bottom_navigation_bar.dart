@@ -11,16 +11,17 @@ class CustomBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      //adjestments
       decoration: const BoxDecoration(
         image: DecorationImage(
           image: AssetImage('assets/Bottom_rectangle.png'),
-          fit: BoxFit.fill, // Adjust as needed
+          fit: BoxFit.fill,
         ),
       ),
       child: Row(
-        mainAxisAlignment:
-            MainAxisAlignment.spaceAround, // Adjust alignment as needed
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
+          //Home
           GestureDetector(
             onTap: () {
               Navigator.push(
@@ -30,6 +31,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
             },
             child: const Image(image: AssetImage('assets/Home.png')),
           ),
+          //market
           GestureDetector(
             onTap: () {
               Navigator.push(
@@ -39,6 +41,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
             },
             child: const Image(image: AssetImage('assets/Market.png')),
           ),
+          //camera
           GestureDetector(
             onTap: () {
               Navigator.push(
@@ -50,6 +53,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
             },
             child: const Image(image: AssetImage('assets/Camera.png')),
           ),
+          //ai
           GestureDetector(
             onTap: () {
               Navigator.push(
@@ -59,6 +63,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
             },
             child: const Image(image: AssetImage('assets/Ai.png')),
           ),
+          //profile
           GestureDetector(
             onTap: () {
               Navigator.push(
