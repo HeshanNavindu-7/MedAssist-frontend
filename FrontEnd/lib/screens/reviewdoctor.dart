@@ -30,6 +30,7 @@ class Review extends StatelessWidget {
                 right: 0,
                 child: CustomBottomNavigationBar(),
               ),
+              //small doc image
               const Positioned(
                 top: 30,
                 left: 150,
@@ -43,6 +44,7 @@ class Review extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
+              //text 1
               const Positioned(
                   top: 160,
                   child: Padding(
@@ -52,6 +54,7 @@ class Review extends StatelessWidget {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   )),
+              //review stars
               const Positioned(
                   top: 190,
                   left: 85,
@@ -86,6 +89,7 @@ class Review extends StatelessWidget {
                       )
                     ],
                   )),
+              //title
               const Positioned(
                   top: 210,
                   child: Padding(
@@ -110,7 +114,7 @@ class Review extends StatelessWidget {
                   ),
                 ),
               ),
-
+              //tell more
               const Positioned(
                   top: 300,
                   child: Padding(
@@ -119,7 +123,7 @@ class Review extends StatelessWidget {
                         'Tell us more about your visit',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ))),
-
+              //how's the visit
               Positioned(
                 top: 330,
                 left: 10,
@@ -135,7 +139,7 @@ class Review extends StatelessWidget {
                   ),
                 ),
               ),
-
+              //medassist?
               const Positioned(
                   top: 390,
                   child: Padding(
@@ -161,7 +165,7 @@ class Review extends StatelessWidget {
                   ],
                 ),
               ),
-
+              //email
               const Positioned(
                   top: 455,
                   child: Padding(
@@ -186,6 +190,7 @@ class Review extends StatelessWidget {
                   ),
                 ),
               ),
+              //bottom text
               const Positioned(
                   top: 555,
                   left: 60,
@@ -193,6 +198,7 @@ class Review extends StatelessWidget {
                     '(Your email is for confirm your review, will NOT appear on the review)',
                     style: TextStyle(fontSize: 10),
                   )),
+              //tick
               const Positioned(
                   top: 575,
                   left: 10,
@@ -208,12 +214,14 @@ class Review extends StatelessWidget {
                       ),
                     )
                   ])),
+              //save and submit
               const Positioned(
                   top: 630,
                   left: 115,
                   child: Image(
                     image: AssetImage('assets/saveandsubmit.png'),
                   )),
+              //back button
               Positioned(
                 top: 35,
                 left: 15,

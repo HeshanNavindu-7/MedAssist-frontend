@@ -13,6 +13,7 @@ class MedAssistAi extends StatelessWidget {
             top: 25,
             child: Row(
               children: [
+                //back button
                 GestureDetector(
                   onTap: () {
                     Navigator.pushReplacement(
@@ -32,6 +33,7 @@ class MedAssistAi extends StatelessWidget {
                 const SizedBox(
                   width: 70,
                 ),
+                //medassist ai
                 const Padding(
                   padding: EdgeInsets.only(top: 30),
                   child: Text(
@@ -54,10 +56,12 @@ class MedAssistAi extends StatelessWidget {
             left: 70,
             child: Column(
               children: [
+                //skin image
                 Image(image: AssetImage('assets/skin.png')),
                 Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text(
+                    //text
                     "We've analyzed your unique skin profile \nusing advanced AI algorithms and facial \nrecognition technology. Based on our \nassessment, we're thrilled to present your \npersonalized skincare routine tailored \njust for you!",
                     textAlign: TextAlign.center,
                   ),
@@ -93,11 +97,13 @@ class MedAssistAi extends StatelessWidget {
               image: AssetImage('assets/Bottom_rectangle.png'),
             ),
           ),
+          //add image
           const Positioned(
             bottom: 25,
             left: 20,
             child: Image(image: AssetImage('assets/Add.png')),
           ),
+          //chat box
           Positioned(
             bottom: 10,
             left: 70,
@@ -111,6 +117,7 @@ class MedAssistAi extends StatelessWidget {
               ),
             ),
           ),
+          //send image
           const Positioned(
             bottom: 30,
             left: 300,
