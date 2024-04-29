@@ -12,6 +12,7 @@ class Test extends StatefulWidget {
 }
 
 class _TestState extends State<Test> {
+  String? userName;
   String? doctorName;
 
   @override
@@ -23,11 +24,17 @@ class _TestState extends State<Test> {
   Future<void> _fetchDoctorDetails() async {
     try {
       final List<dynamic> data = await DoctorDataManager.fetchDoctorDetails();
-      // Handle the list of doctors here
-      // For example, you can extract the name of the first doctor:
+
       if (data.isNotEmpty) {
         setState(() {
-          doctorName = data[0]['name'];
+          // Extract all doctor names from the data list
+          List<String> doctorNames = [];
+          for (var doctor in data) {
+            String name = doctor['name'] ?? 'Unknown'; // Fetch doctor name
+            doctorNames.add(name);
+          }
+          // Set the doctorNames list to the state
+          doctorNames = doctorNames;
         });
       }
     } catch (e) {
@@ -96,14 +103,13 @@ class _TestState extends State<Test> {
             child: const Image(
               image: AssetImage('assets/Doctor1.png'),
               height: 100,
-              width: 100,
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.all(8.0),
+          Padding(
+            padding: EdgeInsets.all(2.0),
             child: Text(
-              'Dr. Marcus Holmes',
-              style: TextStyle(
+              '$doctorName',
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
