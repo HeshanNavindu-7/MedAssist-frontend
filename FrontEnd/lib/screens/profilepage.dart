@@ -98,7 +98,7 @@ class ProfilePageState extends State<ProfilePage> {
         child: Stack(
           children: [
             //Navigation Bar
-            const Positioned(
+            Positioned(
               bottom: 0,
               left: 0,
               right: 0,

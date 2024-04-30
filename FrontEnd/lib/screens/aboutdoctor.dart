@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:midassist/screens/appointments.dart';
 import 'package:midassist/screens/home.dart';
 import 'package:midassist/screens/reviewdoctor.dart';
-import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
+
+import 'custom_bottom_navigation_bar.dart';
 
 class AboutDoctor extends StatelessWidget {
   const AboutDoctor({Key? key});
@@ -23,7 +24,7 @@ class AboutDoctor extends StatelessWidget {
         child: Stack(
           children: [
             //Navigation Bar
-            const Positioned(
+            Positioned(
               bottom: 0,
               left: 0,
               right: 0,
