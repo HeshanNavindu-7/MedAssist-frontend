@@ -38,7 +38,8 @@ class _HomeState extends State<Home> {
 
   Future<void> _fetchUserDetails() async {
     try {
-      final Map<String, dynamic> data = await UserDataManager.fetchUserDetails();
+      final Map<String, dynamic> data =
+          await UserDataManager.fetchUserDetails();
       setState(() {
         userName = data['name'];
       });
@@ -61,7 +62,6 @@ class _HomeState extends State<Home> {
       print('Error: $e');
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -359,7 +359,7 @@ class _HomeState extends State<Home> {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  Market()), // Corrected class name
+                                  Test()), // Corrected class name
                         );
                       },
                       child:
