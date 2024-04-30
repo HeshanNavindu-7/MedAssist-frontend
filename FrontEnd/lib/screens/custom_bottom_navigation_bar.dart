@@ -4,9 +4,22 @@ import 'package:midassist/screens/market.dart';
 import 'package:midassist/screens/profilepage.dart';
 import 'package:midassist/screens/medassistai.dart';
 import 'package:midassist/screens/home.dart';
+import 'package:http/http.dart' as http;
+import 'package:midassist/APIs/imageFilePicker.dart';
+import 'package:midassist/screens/imageUploder.dart';
 
-class CustomBottomNavigationBar extends StatelessWidget {
-  const CustomBottomNavigationBar({Key? key}) : super(key: key);
+class CustomBottomNavigationBar extends StatefulWidget {
+
+  CustomBottomNavigationBar({super.key});
+
+  @override
+  _CustomBottomNavigationBar createState() => _CustomBottomNavigationBar();
+}
+
+
+class _CustomBottomNavigationBar extends State<CustomBottomNavigationBar> {
+  final ImageFilePicker imageFilePicker = ImageFilePicker();
+  final http.Client client = http.Client();
 
   @override
   Widget build(BuildContext context) {
@@ -45,13 +58,15 @@ class CustomBottomNavigationBar extends StatelessWidget {
           GestureDetector(
             onTap: () {
               Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const DoctorRecommendation(),
-                ),
-              );
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ImageUploder(
+                        imageFilePicker: imageFilePicker,
+                        client: client), // Corrected class name
+                  ));
             },
-            child: const Image(image: AssetImage('assets/Camera.png')),
+            child:
+            const Image(image: AssetImage('assets/Camera.png')),
           ),
           //ai
           GestureDetector(
