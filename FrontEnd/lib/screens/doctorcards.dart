@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import '../APIs/doctorDetails.dart';
 import 'aboutdoctor.dart';
 
-class Test extends StatefulWidget {
-  const Test({super.key});
+class DoctorCard extends StatefulWidget {
+  const DoctorCard({super.key});
 
   @override
-  _TestState createState() => _TestState();
+  _DoctorCardState createState() => _DoctorCardState();
 }
 
-class _TestState extends State<Test> {
+class _DoctorCardState extends State<DoctorCard> {
   List<dynamic>? doctorData;
 
   @override
