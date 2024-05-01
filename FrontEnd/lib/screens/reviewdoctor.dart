@@ -234,7 +234,7 @@ class Review extends StatelessWidget {
                       ),
                     );
                   },
-                  child: Image(
+                  child: const Image(
                     image: AssetImage('assets/back.png'),
                   ),
                 ),
