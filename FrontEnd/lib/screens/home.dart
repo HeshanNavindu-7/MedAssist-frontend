@@ -5,7 +5,7 @@ import 'package:midassist/APIs/imageFilePicker.dart';
 import 'package:midassist/screens/medassistai.dart';
 import 'package:midassist/screens/aboutdoctor.dart';
 import 'package:midassist/screens/imageUploder.dart';
-import 'package:midassist/screens/test.dart';
+import 'package:midassist/screens/doctorcards.dart';
 
 import '../APIs/doctorDetails.dart';
 import '../APIs/userDetails.dart';
@@ -222,7 +222,7 @@ class _HomeState extends State<Home> {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                            DoctorRecommendation()), // Corrected class name
+                                DoctorRecommendation()), // Corrected class name
                       );
                     },
                     child: const Text(
@@ -355,7 +355,7 @@ class _HomeState extends State<Home> {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  Test()), // Corrected class name
+                                  DoctorCard()), // Corrected class name
                         );
                       },
                       child:

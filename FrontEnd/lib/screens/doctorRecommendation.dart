@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:midassist/screens/home.dart';
 import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
-import 'package:midassist/screens/test.dart'; // Import your Test widget
+import 'package:midassist/screens/doctorcards.dart'; // Import your Test widget
 
 class DoctorRecommendation extends StatefulWidget {
   const DoctorRecommendation({Key? key}) : super(key: key);
@@ -90,7 +90,7 @@ class _DoctorRecommendationState extends State<DoctorRecommendation> {
             left: 25,
             right: 25,
             bottom: 80,
-            child: Test(), // Replace static doctors with dynamic cards
+            child: DoctorCard(), // Replace static doctors with dynamic cards
           ),
           //Navigation Bar
           Positioned(
