@@ -24,7 +24,7 @@ class Appoinments extends StatelessWidget {
         child: Stack(
           children: [
             //Navigation bar
-            const Positioned(
+            Positioned(
               bottom: 0,
               left: 0,
               right: 0,

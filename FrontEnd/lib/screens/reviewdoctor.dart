@@ -24,7 +24,7 @@ class Review extends StatelessWidget {
             ),
             child: Stack(children: [
               //Navigation bar
-              const Positioned(
+              Positioned(
                 bottom: 0,
                 left: 0,
                 right: 0,
@@ -234,7 +234,7 @@ class Review extends StatelessWidget {
                       ),
                     );
                   },
-                  child: Image(
+                  child: const Image(
                     image: AssetImage('assets/back.png'),
                   ),
                 ),

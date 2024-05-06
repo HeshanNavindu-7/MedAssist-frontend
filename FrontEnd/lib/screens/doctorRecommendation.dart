@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:midassist/screens/aboutdoctor.dart';
 import 'package:midassist/screens/home.dart';
 import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
+import 'package:midassist/screens/doctorcards.dart'; // Import your Test widget
 
-class DoctorRecommendation extends StatelessWidget {
+class DoctorRecommendation extends StatefulWidget {
   const DoctorRecommendation({Key? key}) : super(key: key);
+
+  @override
+  _DoctorRecommendationState createState() => _DoctorRecommendationState();
+}
+
+class _DoctorRecommendationState extends State<DoctorRecommendation> {
 
   @override
   Widget build(BuildContext context) {
@@ -78,165 +84,16 @@ class DoctorRecommendation extends StatelessWidget {
               ),
             ),
           ),
-          //doctor 1
-          Positioned(
+          // Dynamic Doctor Cards
+          const Positioned(
             top: 180,
             left: 25,
-            right: 150,
-            child: Row(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.black,
-                      width: 1,
-                    ),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Column(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const AboutDoctor(),
-                            ),
-                          );
-                        },
-                        child: const Image(
-                          image: AssetImage('assets/Doctor1.png'),
-                          height: 100,
-                          width: 100,
-                        ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          'Dr. Marcus Holmes',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 5),
-                      const Padding(
-                        padding: EdgeInsets.only(top: 0, bottom: 5),
-                        child: Text(
-                          'Cardiologist',
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                      ),
-                      const Row(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Image(
-                              image: AssetImage('assets/Rating.png'),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Image(
-                              image: AssetImage('assets/Location.png'),
-                            ),
-                          ),
-                          Text(
-                            '800m away',
-                            style: TextStyle(
-                              fontSize: 10,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          //doctor 2
-          Positioned(
-            top: 180,
-            left: 205,
-            child: Row(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.black,
-                      width: 1,
-                    ),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Column(
-                    children: [
-                      Image(
-                        image: AssetImage('assets/Dr2.jpg'),
-                        height: 100,
-                        width: 100,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          'Dr. Bellamy Robert',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 5),
-                      Padding(
-                        padding: EdgeInsets.only(top: 0, bottom: 5),
-                        child: Text(
-                          'Viralogist',
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Image(
-                              image: AssetImage('assets/Dr2rate.png'),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Image(
-                              image: AssetImage('assets/Location.png'),
-                            ),
-                          ),
-                          Text(
-                            '500m away',
-                            style: TextStyle(
-                              fontSize: 10,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+            right: 25,
+            bottom: 80,
+            child: DoctorCard(), // Replace static doctors with dynamic cards
           ),
           //Navigation Bar
-          const Positioned(
+          Positioned(
             bottom: 0,
             left: 0,
             right: 0,

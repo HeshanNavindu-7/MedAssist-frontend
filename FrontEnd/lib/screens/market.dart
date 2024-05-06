@@ -153,7 +153,7 @@ class Market extends StatelessWidget {
             ),
           ),
           //Navigation Bar
-          const Positioned(
+          Positioned(
             bottom: 0,
             left: 0,
             right: 0,
