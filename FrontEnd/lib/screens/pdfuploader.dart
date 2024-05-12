@@ -4,6 +4,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart';
 import 'dart:convert';
+
 class PdfUploader extends StatefulWidget {
   const PdfUploader({Key? key});
 
@@ -58,6 +59,11 @@ class _PdfUploader extends State<PdfUploader> {
           );
           request.fields['user'] = userId != null ? userId.toString() : '';
 
+          // Print the request details
+          print('Request URL: ${request.url}');
+          print('Request Headers: ${request.headers}');
+          print('Request Body: ${request.fields}');
+
           var response = await request.send();
 
           if (response.statusCode == 201) {
@@ -73,7 +79,6 @@ class _PdfUploader extends State<PdfUploader> {
       print('Error uploading PDF: $e');
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
