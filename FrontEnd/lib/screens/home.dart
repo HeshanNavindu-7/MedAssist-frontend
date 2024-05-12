@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:midassist/screens/pdfuploader.dart';
-import 'package:midassist/screens/profilepage.dart';
 import 'package:midassist/APIs/imageFilePicker.dart';
-import 'package:midassist/screens/medassistai.dart';
 import 'package:midassist/screens/aboutdoctor.dart';
-import 'package:midassist/screens/imageUploder.dart';
-import 'package:midassist/screens/doctorcards.dart';
+import 'custom_bottom_navigation_bar.dart';
 
 import '../APIs/doctorDetails.dart';
 import '../APIs/userDetails.dart';
@@ -321,94 +317,11 @@ class _HomeState extends State<Home> {
                 ],
               ),
             ),
-            const Positioned(
-              bottom: 0,
-              right: 0,
-              child: Image(
-                image: AssetImage('assets/Bottom_rectangle.png'),
-              ),
-            ),
             Positioned(
-              top: 5,
-              left: 5,
-              right: 5,
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 715, left: 20),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  Home()), // Corrected class name
-                        );
-                      },
-                      child: const Image(image: AssetImage('assets/Home.png')),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 715, left: 40),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  PdfUploader()), // Corrected class name
-                        );
-                      },
-                      child:
-                          const Image(image: AssetImage('assets/Market.png')),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 715, left: 30),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ImageUploder(
-                                  imageFilePicker: imageFilePicker,
-                                  client: client), // Corrected class name
-                            ));
-                      },
-                      child:
-                          const Image(image: AssetImage('assets/Camera.png')),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                const MedAssistAi()), // Corrected class name
-                      );
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.only(top: 715, left: 30),
-                      child: Image(image: AssetImage('assets/Ai.png')),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                const ProfilePage()), // Corrected class name
-                      );
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.only(top: 715, left: 30),
-                      child: Image(image: AssetImage('assets/Profile.png')),
-                    ),
-                  ),
-                ],
-              ),
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: CustomBottomNavigationBar(),
             ),
           ],
         ),
