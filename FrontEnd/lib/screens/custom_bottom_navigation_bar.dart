@@ -9,13 +9,11 @@ import 'package:midassist/APIs/imageFilePicker.dart';
 import 'package:midassist/screens/imageUploder.dart';
 
 class CustomBottomNavigationBar extends StatefulWidget {
-
   CustomBottomNavigationBar({super.key});
 
   @override
   _CustomBottomNavigationBar createState() => _CustomBottomNavigationBar();
 }
-
 
 class _CustomBottomNavigationBar extends State<CustomBottomNavigationBar> {
   final ImageFilePicker imageFilePicker = ImageFilePicker();
@@ -65,8 +63,7 @@ class _CustomBottomNavigationBar extends State<CustomBottomNavigationBar> {
                         client: client), // Corrected class name
                   ));
             },
-            child:
-            const Image(image: AssetImage('assets/Camera.png')),
+            child: const Image(image: AssetImage('assets/Camera.png')),
           ),
           //ai
           GestureDetector(

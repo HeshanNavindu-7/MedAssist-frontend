@@ -25,7 +25,7 @@ class Review extends StatelessWidget {
             child: Stack(children: [
               //Navigation bar
               Positioned(
-                bottom: 0,
+                top: 728,
                 left: 0,
                 right: 0,
                 child: CustomBottomNavigationBar(),

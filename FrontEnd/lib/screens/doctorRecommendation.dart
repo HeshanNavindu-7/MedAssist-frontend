@@ -11,7 +11,6 @@ class DoctorRecommendation extends StatefulWidget {
 }
 
 class _DoctorRecommendationState extends State<DoctorRecommendation> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,7 +93,7 @@ class _DoctorRecommendationState extends State<DoctorRecommendation> {
           ),
           //Navigation Bar
           Positioned(
-            bottom: 0,
+            top: 728,
             left: 0,
             right: 0,
             child: CustomBottomNavigationBar(),

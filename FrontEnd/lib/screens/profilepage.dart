@@ -205,11 +205,11 @@ class ProfilePageState extends State<ProfilePage> {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => MyAppo(),
+                          builder: (context) => const MyAppo(),
                         ),
                       );
                     },
-                    child: Row(
+                    child: const Row(
                       children: [
                         SizedBox(
                           width: 50,
@@ -303,7 +303,7 @@ class ProfilePageState extends State<ProfilePage> {
                         onTap: () {
                           _handleLogout(context);
                         },
-                        child: Row(
+                        child: const Row(
                           children: [
                             Image(
                               image: AssetImage('assets/Logout.png'),
@@ -345,7 +345,7 @@ class ProfilePageState extends State<ProfilePage> {
                     ),
                   );
                 },
-                child: Image(
+                child: const Image(
                   image: AssetImage('assets/back.png'),
                 ),
               ),
