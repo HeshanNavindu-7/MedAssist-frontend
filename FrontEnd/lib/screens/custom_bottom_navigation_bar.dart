@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:midassist/screens/doctorRecommendation.dart';
 import 'package:midassist/screens/market.dart';
+import 'package:midassist/screens/pdfuploader.dart';
 import 'package:midassist/screens/profilepage.dart';
 import 'package:midassist/screens/medassistai.dart';
 import 'package:midassist/screens/home.dart';
@@ -47,7 +48,7 @@ class _CustomBottomNavigationBar extends State<CustomBottomNavigationBar> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Market()),
+                MaterialPageRoute(builder: (context) => PdfUploader()),
               );
             },
             child: const Image(image: AssetImage('assets/Market.png')),
