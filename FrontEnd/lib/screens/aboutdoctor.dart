@@ -11,8 +11,6 @@ import 'custom_bottom_navigation_bar.dart';
 class AboutDoctor extends StatelessWidget {
   const AboutDoctor({Key? key});
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +25,7 @@ class AboutDoctor extends StatelessWidget {
           children: [
             //Navigation Bar
             Positioned(
-              bottom: 0,
+              top: 728,
               left: 0,
               right: 0,
               child: CustomBottomNavigationBar(),
