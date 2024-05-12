@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:http/http.dart' as http;
+import 'package:midassist/screens/pdf_result.dart';
 import 'package:path/path.dart';
 import 'dart:convert';
 
@@ -14,6 +15,7 @@ class PdfUploader extends StatefulWidget {
 
 class _PdfUploader extends State<PdfUploader> {
   int? userId;
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -40,6 +42,10 @@ class _PdfUploader extends State<PdfUploader> {
   Future<void> _uploadPdf(BuildContext context) async {
     try {
       if (userId != null) {
+        setState(() {
+          isLoading = true; // Set loading state to true when starting upload
+        });
+
         FilePickerResult? result = await FilePicker.platform.pickFiles(
           type: FileType.custom,
           allowedExtensions: ['pdf'],
@@ -59,15 +65,20 @@ class _PdfUploader extends State<PdfUploader> {
           );
           request.fields['user'] = userId != null ? userId.toString() : '';
 
-          // Print the request details
-          print('Request URL: ${request.url}');
-          print('Request Headers: ${request.headers}');
-          print('Request Body: ${request.fields}');
-
           var response = await request.send();
 
           if (response.statusCode == 201) {
-            print('PDF uploaded successfully');
+            final responseData = await response.stream.bytesToString();
+
+            // Parse JSON response
+            final jsonResponse = jsonDecode(responseData);
+            final serverResponse = jsonResponse['response'];
+
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Pdf_Result(responseData: serverResponse)),
+            );
           } else {
             print('Failed to upload PDF: ${response.statusCode}');
           }
@@ -77,6 +88,10 @@ class _PdfUploader extends State<PdfUploader> {
       }
     } catch (e) {
       print('Error uploading PDF: $e');
+    } finally {
+      setState(() {
+        isLoading = false; // Set loading state to false after finishing upload
+      });
     }
   }
 
@@ -87,10 +102,12 @@ class _PdfUploader extends State<PdfUploader> {
         title: Text('PDF Uploader'),
       ),
       body: Center(
-        child: ElevatedButton(
-          onPressed: () => _uploadPdf(context),
-          child: Text('Upload PDF'),
-        ),
+        child: isLoading
+            ? CircularProgressIndicator() // Show loading indicator if isLoading is true
+            : ElevatedButton(
+                onPressed: () => _uploadPdf(context),
+                child: Text('Upload PDF'),
+              ),
       ),
     );
   }
