@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:midassist/screens/aboutdoctor.dart';
-import 'package:midassist/screens/home.dart';
+import 'package:midassist/screens/myappointments.dart';
 import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
 
 class AppDet extends StatelessWidget {
@@ -17,13 +16,13 @@ class AppDet extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                //back bitton
+                //back button
                 GestureDetector(
                   onTap: () {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Home(),
+                        builder: (context) => const MyAppo(),
                       ),
                     );
                   },
@@ -33,9 +32,9 @@ class AppDet extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(
-                  width: 40,
+                  width: 35,
                 ),
-                //market text
+                //appointment details text
                 const Text(
                   'Appointment Details',
                   style: TextStyle(
@@ -46,15 +45,68 @@ class AppDet extends StatelessWidget {
               ],
             ),
           ),
-          //search bar
-
+          //doctor photo
+          const Positioned(
+            top: 90,
+            left: 25,
+            child: Image(
+              image: AssetImage(
+                'assets/Doctor1.png',
+              ),
+              width: 150,
+              height: 150,
+            ),
+          ),
+          //doctor details
+          const Positioned(
+            top: 100,
+            left: 180,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Dr. Marcus Holmes',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+                Text(
+                  'Viralogist',
+                  style: TextStyle(fontSize: 16),
+                ),
+                Text(
+                  '1km away',
+                  style: TextStyle(fontSize: 16),
+                ),
+                Text(
+                  '+94 70 123 456 7',
+                  style: TextStyle(fontSize: 16),
+                ),
+                Row(
+                  children: [
+                    Image(
+                      image: AssetImage(
+                        'assets/calender.jpg',
+                      ),
+                      width: 35,
+                      height: 35,
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Column(
+                      children: [Text('2024 July 07'), Text('10am-12am')],
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ),
           //Navigation Bar
           Positioned(
-            top: 728,
+            bottom: 0,
             left: 0,
             right: 0,
             child: CustomBottomNavigationBar(),
-          )
+          ),
         ],
       ),
     );
