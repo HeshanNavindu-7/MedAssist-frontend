@@ -135,6 +135,9 @@ flutter:
     - assets/cancelbutton.png
     - assets/changebutton.png
     - assets/profile2.png
+    - assets/height 2.png
+    - assets/weight 1.png
+    - assets/clock 1.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
