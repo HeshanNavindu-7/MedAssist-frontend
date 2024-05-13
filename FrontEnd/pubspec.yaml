@@ -132,6 +132,9 @@ flutter:
     - assets/saveandsubmit.png
     - assets/beauty.png
     - assets/calender.jpg
+    - assets/cancelbutton.png
+    - assets/changebutton.png
+    - assets/profile2.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

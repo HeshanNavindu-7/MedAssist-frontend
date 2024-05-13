@@ -8,7 +8,16 @@ class AppDet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
+        body: Container(
+      //Background
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/profile2.png'),
+          fit: BoxFit.cover,
+        ),
+      ),
+
+      child: Stack(
         children: [
           Positioned(
             top: 25,
@@ -100,6 +109,101 @@ class AppDet extends StatelessWidget {
               ],
             ),
           ),
+          //services
+          const Positioned(
+              top: 270,
+              left: 35,
+              child: Column(
+                children: [
+                  Text(
+                    'Services',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        'Order Examination',
+                        style: TextStyle(fontSize: 15),
+                      ),
+                      SizedBox(
+                        width: 140,
+                      ),
+                      Text('Rs. 1500/h')
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        'Blood Test',
+                        style: TextStyle(fontSize: 15),
+                      ),
+                      SizedBox(
+                        width: 190,
+                      ),
+                      Text('Rs. 800/=')
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        'Pressure Test',
+                        style: TextStyle(fontSize: 15),
+                      ),
+                      SizedBox(
+                        width: 170,
+                      ),
+                      Text('Rs. 300/=')
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        'Kidney Checkup',
+                        style: TextStyle(fontSize: 15),
+                      ),
+                      SizedBox(
+                        width: 165,
+                      ),
+                      Text('Rs. 5300/=')
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        'Heart Checkup',
+                        style: TextStyle(fontSize: 15),
+                      ),
+                      SizedBox(
+                        width: 165,
+                      ),
+                      Text('Rs. 8300/=')
+                    ],
+                  )
+                ],
+              )),
+          const Positioned(
+              top: 550,
+              left: 20,
+              child: Image(image: AssetImage('assets/changebutton.png'))),
+          const Positioned(
+              top: 625,
+              left: 20,
+              child: Image(image: AssetImage('assets/cancelbutton.png'))),
           //Navigation Bar
           Positioned(
             bottom: 0,
@@ -109,6 +213,6 @@ class AppDet extends StatelessWidget {
           ),
         ],
       ),
-    );
+    ));
   }
 }
