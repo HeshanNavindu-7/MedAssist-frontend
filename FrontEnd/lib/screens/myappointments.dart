@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:midassist/screens/appointmentdetails.dart';
-import 'package:midassist/screens/home.dart';
+import 'package:midassist/screens/profilepage.dart';
 import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
 
 class MyAppo extends StatelessWidget {
@@ -23,7 +23,7 @@ class MyAppo extends StatelessWidget {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Home(),
+                        builder: (context) => ProfilePage(),
                       ),
                     );
                   },
@@ -33,11 +33,11 @@ class MyAppo extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(
-                  width: 100,
+                  width: 60,
                 ),
                 //market text
                 const Text(
-                  'Market',
+                  'Appointments',
                   style: TextStyle(
                     fontSize: 25,
                   ),
@@ -65,7 +65,7 @@ class MyAppo extends StatelessWidget {
               ),
               child: TextField(
                 decoration: InputDecoration(
-                  hintText: 'Search for items...',
+                  hintText: 'Search for appointments...',
                   prefixIcon: const Icon(Icons.search),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
@@ -102,14 +102,14 @@ class MyAppo extends StatelessWidget {
                     child: const Column(
                       children: [
                         Image(
-                          image: AssetImage('assets/beauty.png'),
+                          image: AssetImage('assets/Doctor1.png'),
                           height: 120,
                           width: 130,
                         ),
                         Padding(
                           padding: EdgeInsets.all(8.0),
                           child: Text(
-                            'Boston Round Pack',
+                            'Dr. Marcus Holmes',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -120,7 +120,7 @@ class MyAppo extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.only(top: 0, bottom: 5),
                           child: Text(
-                            'Cream and Body Lotion',
+                            'Viralogist',
                             style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.normal,
@@ -139,7 +139,7 @@ class MyAppo extends StatelessWidget {
                               width: 10,
                             ),
                             Text(
-                              'Rs. 5625/=',
+                              '2024/07/07',
                               style: TextStyle(
                                 fontSize: 10,
                               ),
