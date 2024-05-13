@@ -299,65 +299,65 @@ class _SignUpPageState extends State<SignUp_Page> {
                       ),
                       ElevatedButton(
                         //uncomment following comment when testing with backend
-                        onPressed: () {
-                          if (firstNameController.text.isEmpty ||
-                              ageController.text.isEmpty ||
-                              emailController.text.isEmpty ||
-                              phoneNumberController.text.isEmpty ||
-                              passwordController.text.isEmpty) {
-                            // Show error message if any required field is empty
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: const Text('Error'),
-                                  content: const Text(
-                                      'Please fill in all required fields.'),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: const Text('OK'),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                          } else if (phoneNumberErrorText.isNotEmpty) {
-                            // Show error message if phone number is invalid
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: const Text('Error'),
-                                  content: Text(phoneNumberErrorText),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: const Text('OK'),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                          } else {
-                            // All fields are filled and phone number is valid, proceed with sign-up
-                            signUp();
-                          }
-                        },
+                        // onPressed: () {
+                        //   if (firstNameController.text.isEmpty ||
+                        //       ageController.text.isEmpty ||
+                        //       emailController.text.isEmpty ||
+                        //       phoneNumberController.text.isEmpty ||
+                        //       passwordController.text.isEmpty) {
+                        //     // Show error message if any required field is empty
+                        //     showDialog(
+                        //       context: context,
+                        //       builder: (BuildContext context) {
+                        //         return AlertDialog(
+                        //           title: const Text('Error'),
+                        //           content: const Text(
+                        //               'Please fill in all required fields.'),
+                        //           actions: [
+                        //             TextButton(
+                        //               onPressed: () {
+                        //                 Navigator.of(context).pop();
+                        //               },
+                        //               child: const Text('OK'),
+                        //             ),
+                        //           ],
+                        //         );
+                        //       },
+                        //     );
+                        //   } else if (phoneNumberErrorText.isNotEmpty) {
+                        //     // Show error message if phone number is invalid
+                        //     showDialog(
+                        //       context: context,
+                        //       builder: (BuildContext context) {
+                        //         return AlertDialog(
+                        //           title: const Text('Error'),
+                        //           content: Text(phoneNumberErrorText),
+                        //           actions: [
+                        //             TextButton(
+                        //               onPressed: () {
+                        //                 Navigator.of(context).pop();
+                        //               },
+                        //               child: const Text('OK'),
+                        //             ),
+                        //           ],
+                        //         );
+                        //       },
+                        //     );
+                        //   } else {
+                        //     // All fields are filled and phone number is valid, proceed with sign-up
+                        //     signUp();
+                        //   }
+                        // },
 
                         //Only testing purpose (Front end testing)
-                       /* onPressed: () {
+                       onPressed: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
                                     Home()), // Corrected class name
                           );
-                        },*/
+                        },
                         //end of the testing code
 
                         style: ElevatedButton.styleFrom(

@@ -79,7 +79,7 @@ class _HomeState extends State<Home> {
                       child: Text(
                         'Hello, ${userName ?? 'Guest'}',
                         style: const TextStyle(
-                          fontSize: 25,
+                          fontSize: 30,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -88,7 +88,8 @@ class _HomeState extends State<Home> {
                       width: 150,
                       child: Image(
                         image: AssetImage('assets/notification.png'),
-                        height: 50,
+                        height: 70,
+                        
                       ),
                     ),
                   ],
@@ -122,6 +123,7 @@ class _HomeState extends State<Home> {
                 ),
               ),
             ),
+            
             const Positioned(
               top: 130,
               left: 0,
@@ -134,7 +136,7 @@ class _HomeState extends State<Home> {
                       Image(
                         image: AssetImage('assets/Doctor.png'),
                         height: 100,
-                        width: 50,
+                        width: 60,
                       ),
                       Text(
                         'Doctor',
@@ -234,6 +236,7 @@ class _HomeState extends State<Home> {
                 ],
               ),
             ),
+            
             Positioned(
               top: 480,
               left: 25,
