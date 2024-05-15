@@ -237,7 +237,9 @@ class Pay extends StatelessWidget {
             const Positioned(
                 top: 665,
                 left: 15,
-                child: Image(image: AssetImage('assets/select.png'))),
+                child: Image(
+                  image: AssetImage('assets/select.png'),
+                )),
             // Navigation Bar
             Positioned(
               bottom: 0,
