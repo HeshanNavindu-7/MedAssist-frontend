@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:midassist/screens/appointmentdetails.dart';
+import 'package:midassist/screens/aboutdoctor.dart';
 import 'package:midassist/screens/profilepage.dart';
 import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
 
@@ -86,8 +86,7 @@ class MySaved extends StatelessWidget {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          const AppDet(), // Corrected class name
+                      builder: (context) => const AboutDoctor(),
                     ),
                   );
                 },

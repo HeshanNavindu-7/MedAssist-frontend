@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:midassist/screens/appointmentdetails.dart';
 import 'package:midassist/screens/profilepage.dart';
 import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
 
@@ -75,6 +74,37 @@ class Pay extends StatelessWidget {
                         )
                       ],
                     )),
+
+                Positioned(
+                  top: 260,
+                  left: 50,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: 100,
+                        height: 2,
+                        color: Colors.black,
+                      ),
+                      const Text(
+                        '  Pay with  ',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20),
+                      ),
+                      Container(
+                        width: 100,
+                        height: 2,
+                        color: Colors.black,
+                      ),
+                    ],
+                  ),
+                ),
+
+                const Positioned(
+                    top: 300,
+                    left: 20,
+                    child: Text('How would you like to pay?')),
+
                 //Navigation Bar
                 Positioned(
                   bottom: 0,
