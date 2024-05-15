@@ -42,7 +42,7 @@ class Pay extends StatelessWidget {
                   const SizedBox(
                     width: 45,
                   ),
-                  // Market text
+                  // Payment Method text
                   const Text(
                     'Payment Method',
                     style: TextStyle(
@@ -61,7 +61,9 @@ class Pay extends StatelessWidget {
                   Text(
                     'Rs. 16200/=',
                     style: TextStyle(
-                        fontSize: 30, color: Color.fromARGB(255, 255, 50, 43)),
+                      fontSize: 30,
+                      color: Color.fromARGB(255, 255, 50, 43),
+                    ),
                   ),
                   Text(
                     'Goods and Services',
@@ -87,7 +89,10 @@ class Pay extends StatelessWidget {
                   ),
                   const Text(
                     '  Pay with  ',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
                   ),
                   Container(
                     width: 100,
@@ -148,6 +153,11 @@ class Pay extends StatelessWidget {
                       Image(
                         image: AssetImage('assets/bankback.png'),
                       ),
+                      Positioned(
+                        top: 15,
+                        left: 290,
+                        child: Image(image: AssetImage('assets/downarr.png')),
+                      ),
                       Positioned.fill(
                         child: Center(
                           child: Text(
@@ -164,6 +174,70 @@ class Pay extends StatelessWidget {
                 ],
               ),
             ),
+            const Positioned(
+              top: 515,
+              left: 20,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Account Type'),
+                  SizedBox(height: 10),
+                  Stack(
+                    children: [
+                      Image(
+                        image: AssetImage('assets/bankback.png'),
+                      ),
+                      Positioned(
+                        top: 20,
+                        left: 30,
+                        child: Image(image: AssetImage('assets/tick.png')),
+                      ),
+                      Positioned.fill(
+                        child: Center(
+                          child: Text(
+                            'Personal',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Color.fromARGB(255, 0, 0, 0),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            const Positioned(
+              top: 610,
+              left: 20,
+              child: Stack(
+                children: [
+                  Image(image: AssetImage('assets/bankback.png')),
+                  Positioned(
+                    top: 20,
+                    left: 30,
+                    child: Image(image: AssetImage('assets/tick.png')),
+                  ),
+                  Positioned.fill(
+                    child: Center(
+                      child: Text(
+                        'Business',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Color.fromARGB(255, 0, 0, 0),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            const Positioned(
+                top: 665,
+                left: 15,
+                child: Image(image: AssetImage('assets/select.png'))),
             // Navigation Bar
             Positioned(
               bottom: 0,
