@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:midassist/screens/faqs.dart';
 import 'package:midassist/screens/home.dart';
 import 'package:midassist/screens/signUpPage.dart';
 import 'package:midassist/screens/myappointments.dart';
@@ -279,28 +280,38 @@ class ProfilePageState extends State<ProfilePage> {
                     height: 25,
                   ),
                   // FAQs
-                  const Row(
-                    children: [
-                      SizedBox(
-                        width: 50,
-                      ),
-                      Image(
-                        image: AssetImage('assets/Faqs.png'),
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Text(
-                        'FAQs',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        width: 175,
-                      ),
-                      Image(
-                        image: AssetImage('assets/Arrow.png'),
-                      ),
-                    ],
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Faq(),
+                        ),
+                      );
+                    },
+                    child: const Row(
+                      children: [
+                        SizedBox(
+                          width: 50,
+                        ),
+                        Image(
+                          image: AssetImage('assets/Faqs.png'),
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Text(
+                          'FAQs',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          width: 175,
+                        ),
+                        Image(
+                          image: AssetImage('assets/Arrow.png'),
+                        ),
+                      ],
+                    ),
                   ),
                   const SizedBox(
                     height: 25,
