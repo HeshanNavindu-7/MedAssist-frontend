@@ -137,43 +137,40 @@ class _SignUpPageState extends State<SignInPage> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  const Positioned(
-                    top: 230,
-                    child: Row(
-                      children: [
-                        Image(
-                          image: AssetImage('assets/RememberMe.png'),
+                  const Row(
+                    children: [
+                      Image(
+                        image: AssetImage('assets/RememberMe.png'),
+                      ),
+                      SizedBox(width: 5),
+                      Text('Remember Me'),
+                      SizedBox(
+                        width: 130,
+                      ),
+                      Text(
+                        'Forgot Password?',
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 18, 76, 236),
+                          decoration: TextDecoration.underline,
+                          decorationColor: Color.fromARGB(255, 18, 76, 236),
                         ),
-                        SizedBox(width: 5),
-                        Text('Remember Me'),
-                        SizedBox(
-                          width: 130,
-                        ),
-                        Text(
-                          'Forgot Password?',
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 18, 76, 236),
-                            decoration: TextDecoration.underline,
-                            decorationColor: Color.fromARGB(255, 18, 76, 236),
-                          ),
-                        )
-                      ],
-                    ),
+                      )
+                    ],
                   ),
                   const SizedBox(height: 10),
                   ElevatedButton(
                     //uncomment following comment when testing with backend
-                    onPressed: signIn,
+                    // onPressed: signIn,
 
                     //Only testing purpose (Front end testing)
-                    // onPressed: () {
-                    //   Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) =>
-                    //             Home()), // Corrected class name
-                    //   );
-                    // },
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                Home()), // Corrected class name
+                      );
+                    },
                     //end of the testing code
 
                     style: ElevatedButton.styleFrom(
