@@ -154,7 +154,7 @@ class Market extends StatelessWidget {
           ),
           //Navigation Bar
           Positioned(
-            bottom: 0,
+            top: 728,
             left: 0,
             right: 0,
             child: CustomBottomNavigationBar(),
