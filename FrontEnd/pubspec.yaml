@@ -144,6 +144,7 @@ flutter:
     - assets/bankback.png
     - assets/downarr.png
     - assets/select.png
+    - assets/1919.png
     - assets/helpmessage.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
