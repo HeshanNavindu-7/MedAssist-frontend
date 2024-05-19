@@ -51,7 +51,7 @@ class _CustomBottomNavigationBar extends State<CustomBottomNavigationBar> {
                 MaterialPageRoute(builder: (context) => PdfUploader()),
               );
             },
-            child: const Image(image: AssetImage('assets/Market.png')),
+            child: const Image(image: AssetImage('assets/pdf.png')),
           ),
           //camera
           GestureDetector(
