@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 import 'package:midassist/APIs/imageFilePicker.dart';
 import 'package:midassist/screens/aboutdoctor.dart';
 import 'package:midassist/screens/ambulance.dart';
+import 'package:midassist/screens/hospitals.dart';
+import 'package:midassist/screens/market.dart';
 import 'custom_bottom_navigation_bar.dart';
 
 import '../APIs/doctorDetails.dart';
@@ -130,18 +132,28 @@ class _HomeState extends State<Home> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  const Column(
-                    children: [
-                      Image(
-                        image: AssetImage('assets/Doctor.png'),
-                        height: 100,
-                        width: 50,
-                      ),
-                      Text(
-                        'Doctor',
-                        style: TextStyle(fontSize: 12),
-                      ),
-                    ],
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Market(),
+                        ),
+                      );
+                    },
+                    child: const Column(
+                      children: [
+                        Image(
+                          image: AssetImage('assets/Doctor.png'),
+                          height: 100,
+                          width: 50,
+                        ),
+                        Text(
+                          'Market',
+                          style: TextStyle(fontSize: 12),
+                        ),
+                      ],
+                    ),
                   ),
                   const Column(
                     children: [
@@ -156,18 +168,28 @@ class _HomeState extends State<Home> {
                       ),
                     ],
                   ),
-                  const Column(
-                    children: [
-                      Image(
-                        image: AssetImage('assets/Hospital.png'),
-                        height: 100,
-                        width: 50,
-                      ),
-                      Text(
-                        'Hospital',
-                        style: TextStyle(fontSize: 12),
-                      ),
-                    ],
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Hospitals(),
+                        ),
+                      );
+                    },
+                    child: const Column(
+                      children: [
+                        Image(
+                          image: AssetImage('assets/Hospital.png'),
+                          height: 100,
+                          width: 50,
+                        ),
+                        Text(
+                          'Hospital',
+                          style: TextStyle(fontSize: 12),
+                        ),
+                      ],
+                    ),
                   ),
                   GestureDetector(
                     onTap: () {

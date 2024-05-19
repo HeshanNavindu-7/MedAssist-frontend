@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:midassist/screens/profilepage.dart';
+import 'package:midassist/screens/home.dart';
 import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
 
 class Ambulance extends StatelessWidget {
@@ -22,7 +22,7 @@ class Ambulance extends StatelessWidget {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const ProfilePage(),
+                        builder: (context) => Home(),
                       ),
                     );
                   },
