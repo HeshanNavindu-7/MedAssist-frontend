@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:midassist/screens/aboutdoctor.dart';
+import 'package:midassist/screens/salesitem.dart';
 import 'package:midassist/screens/home.dart';
 import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
 
@@ -96,7 +96,7 @@ class Market extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const AboutDoctor(),
+                              builder: (context) => const Item(),
                             ),
                           );
                         },
