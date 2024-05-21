@@ -2,8 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
 import 'package:midassist/screens/market.dart';
 
-class Item extends StatelessWidget {
+class Item extends StatefulWidget {
   const Item({Key? key}) : super(key: key);
+
+  @override
+  _ItemState createState() => _ItemState();
+}
+
+class _ItemState extends State<Item> {
+  int _amount = 0;
+  final double _itemPrice = 5625.0; // Price of a single item
+
+  void _incrementAmount() {
+    setState(() {
+      _amount++;
+    });
+  }
+
+  void _decrementAmount() {
+    setState(() {
+      if (_amount > 0) {
+        _amount--;
+      }
+    });
+  }
+
+  double get _totalPrice => _amount * _itemPrice;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +40,7 @@ class Item extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                //back bitton
+                // Back button
                 GestureDetector(
                   onTap: () {
                     Navigator.pushReplacement(
@@ -34,14 +58,14 @@ class Item extends StatelessWidget {
               ],
             ),
           ),
-          //image
+          // Image and details
           const Column(
             children: [
               Padding(
                 padding: EdgeInsets.only(top: 80),
                 child: Image(image: AssetImage('assets/beauty.png')),
               ),
-              //text
+              // Text
               Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text(
@@ -49,7 +73,6 @@ class Item extends StatelessWidget {
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ),
-
               Row(
                 children: [
                   Padding(
@@ -72,13 +95,53 @@ class Item extends StatelessWidget {
               )
             ],
           ),
-          //Navigation Bar
+          // Increment button, amount display, and total price
+          Positioned(
+            top: 500,
+            left: 40,
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    ElevatedButton(
+                      onPressed: _decrementAmount,
+                      child: Text('Decrease Amount'),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    ElevatedButton(
+                      onPressed: _incrementAmount,
+                      child: Text('Increase Amount'),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 10),
+                Text(
+                  'Amount: $_amount',
+                  style: TextStyle(fontSize: 24),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  'Total Price: Rs. ${_totalPrice.toStringAsFixed(2)}',
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+          // Add to cart image
+          const Positioned(
+            top: 650,
+            left: 70,
+            child: Image(image: AssetImage('assets/addtocart.png')),
+          ),
+          // Navigation Bar
           Positioned(
             top: 728,
             left: 0,
             right: 0,
             child: CustomBottomNavigationBar(),
-          )
+          ),
         ],
       ),
     );
