@@ -6,7 +6,6 @@ import 'package:midassist/screens/ambulance.dart';
 import 'package:midassist/screens/hospitals.dart';
 import 'package:midassist/screens/market.dart';
 import 'custom_bottom_navigation_bar.dart';
-
 import '../APIs/doctorDetails.dart';
 import '../APIs/userDetails.dart';
 import 'doctorRecommendation.dart';
