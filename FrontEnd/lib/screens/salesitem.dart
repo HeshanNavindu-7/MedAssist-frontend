@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
 import 'package:midassist/screens/market.dart';
+import 'package:midassist/screens/cart.dart';
 
 class Item extends StatefulWidget {
   const Item({Key? key}) : super(key: key);
@@ -46,7 +48,7 @@ class _ItemState extends State<Item> {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Market(),
+                        builder: (context) => const Market(),
                       ),
                     );
                   },
@@ -105,36 +107,50 @@ class _ItemState extends State<Item> {
                   children: [
                     ElevatedButton(
                       onPressed: _decrementAmount,
-                      child: Text('Decrease Amount'),
+                      child: const Text('Decrease Amount'),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     ElevatedButton(
                       onPressed: _incrementAmount,
-                      child: Text('Increase Amount'),
+                      child: const Text('Increase Amount'),
                     ),
                   ],
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Text(
                   'Amount: $_amount',
-                  style: TextStyle(fontSize: 24),
+                  style: const TextStyle(fontSize: 24),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Text(
                   'Total Price: Rs. ${_totalPrice.toStringAsFixed(2)}',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 24, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
           ),
           // Add to cart image
-          const Positioned(
+          Positioned(
             top: 650,
             left: 70,
-            child: Image(image: AssetImage('assets/addtocart.png')),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const Cart(),
+                  ),
+                );
+              },
+              child: Image(
+                image: AssetImage('assets/addtocart.png'),
+              ),
+            ),
           ),
+
           // Navigation Bar
           Positioned(
             top: 728,
