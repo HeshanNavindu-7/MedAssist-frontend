@@ -145,7 +145,7 @@ class _ItemState extends State<Item> {
                   ),
                 );
               },
-              child: Image(
+              child: const Image(
                 image: AssetImage('assets/addtocart.png'),
               ),
             ),

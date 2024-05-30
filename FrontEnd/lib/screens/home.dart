@@ -5,6 +5,7 @@ import 'package:midassist/screens/aboutdoctor.dart';
 import 'package:midassist/screens/ambulance.dart';
 import 'package:midassist/screens/hospitals.dart';
 import 'package:midassist/screens/market.dart';
+import 'package:midassist/screens/cart.dart';
 import 'custom_bottom_navigation_bar.dart';
 import '../APIs/doctorDetails.dart';
 import '../APIs/userDetails.dart';
@@ -143,7 +144,7 @@ class _HomeState extends State<Home> {
                     child: const Column(
                       children: [
                         Image(
-                          image: AssetImage('assets/Doctor.png'),
+                          image: AssetImage('assets/market.jpg'),
                           height: 100,
                           width: 50,
                         ),
@@ -154,18 +155,28 @@ class _HomeState extends State<Home> {
                       ],
                     ),
                   ),
-                  const Column(
-                    children: [
-                      Image(
-                        image: AssetImage('assets/Pharmacy.png'),
-                        height: 100,
-                        width: 50,
-                      ),
-                      Text(
-                        'Pharmacy',
-                        style: TextStyle(fontSize: 12),
-                      ),
-                    ],
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Cart(),
+                        ),
+                      );
+                    },
+                    child: const Column(
+                      children: [
+                        Image(
+                          image: AssetImage('assets/cart.jpg'),
+                          height: 100,
+                          width: 50,
+                        ),
+                        Text(
+                          'Cart',
+                          style: TextStyle(fontSize: 12),
+                        ),
+                      ],
+                    ),
                   ),
                   GestureDetector(
                     onTap: () {
@@ -179,7 +190,7 @@ class _HomeState extends State<Home> {
                     child: const Column(
                       children: [
                         Image(
-                          image: AssetImage('assets/Hospital.png'),
+                          image: AssetImage('assets/hospital.jpg'),
                           height: 100,
                           width: 50,
                         ),
@@ -202,7 +213,7 @@ class _HomeState extends State<Home> {
                     child: const Column(
                       children: [
                         Image(
-                          image: AssetImage('assets/Ambulance.png'),
+                          image: AssetImage('assets/ambulance.jpg'),
                           height: 100,
                           width: 50,
                         ),
