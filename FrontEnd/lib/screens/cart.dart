@@ -49,7 +49,7 @@ class Cart extends StatelessWidget {
 
           //product
           Positioned(
-            top: 180,
+            top: 120,
             left: 25,
             right: 150,
             child: Row(

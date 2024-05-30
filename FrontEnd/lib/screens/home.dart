@@ -5,10 +5,11 @@ import 'package:midassist/screens/aboutdoctor.dart';
 import 'package:midassist/screens/ambulance.dart';
 import 'package:midassist/screens/hospitals.dart';
 import 'package:midassist/screens/market.dart';
+import 'package:midassist/screens/notifications.dart';
 import 'package:midassist/screens/cart.dart';
+import 'package:midassist/APIs/doctorDetails.dart';
+import 'package:midassist/APIs/userDetails.dart';
 import 'custom_bottom_navigation_bar.dart';
-import '../APIs/doctorDetails.dart';
-import '../APIs/userDetails.dart';
 import 'doctorRecommendation.dart';
 
 class Home extends StatefulWidget {
@@ -28,44 +29,35 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    _fetchUserDetails();
-    _fetchDoctorDetails();
+    _fetchDetails();
   }
 
-  Future<void> _fetchUserDetails() async {
+  Future<void> _fetchDetails() async {
     try {
-      final Map<String, dynamic> data =
-          await UserDataManager.fetchUserDetails();
+      final results = await Future.wait([
+        UserDataManager.fetchUserDetails(),
+        DoctorDataManager.fetchDoctorDetails(),
+      ]);
+
+      final userDetails = results[0] as Map<String, dynamic>;
+      final doctorDetails = results[1] as List<dynamic>;
+
       setState(() {
-        userName = data['name'];
+        userName = userDetails['name'];
+        if (doctorDetails.isNotEmpty) {
+          doctorName = doctorDetails[0]['name'];
+        }
       });
     } catch (e) {
       print('Error: $e');
-    }
-  }
-
-  Future<void> _fetchDoctorDetails() async {
-    try {
-      final List<dynamic> data = await DoctorDataManager.fetchDoctorDetails();
-      // Handle the list of doctors here
-      // For example, you can extract the name of the first doctor:
-      if (data.isNotEmpty) {
-        setState(() {
-          doctorName = data[0]['name'];
-        });
-      }
-    } catch (e) {
-      print('Error: $e');
+      // Consider showing an error message to the user
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async {
-        // Always return false to prevent going back
-        return Future.value(false);
-      },
+      onWillPop: () async => false,
       child: Scaffold(
         body: Stack(
           children: [
@@ -74,24 +66,31 @@ class _HomeState extends State<Home> {
               left: 0,
               right: 0,
               child: Padding(
-                padding: const EdgeInsets.all(15), // Added 'const'
+                padding: const EdgeInsets.all(15),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(
                       child: Text(
                         'Hello, ${userName ?? 'Guest'}',
-                        style: const TextStyle(
-                          fontSize: 25,
-                        ),
+                        style: const TextStyle(fontSize: 25),
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    const SizedBox(
-                      width: 150,
-                      child: Image(
-                        image: AssetImage('assets/notification.png'),
-                        height: 50,
+                    SizedBox(
+                      width: 50,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Notifications()),
+                          );
+                        },
+                        child: const Image(
+                          image: AssetImage('assets/notification.png'),
+                          height: 50,
+                        ),
                       ),
                     ),
                   ],
@@ -132,96 +131,38 @@ class _HomeState extends State<Home> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const Market(),
-                        ),
-                      );
-                    },
-                    child: const Column(
-                      children: [
-                        Image(
-                          image: AssetImage('assets/market.jpg'),
-                          height: 100,
-                          width: 50,
-                        ),
-                        Text(
-                          'Market',
-                          style: TextStyle(fontSize: 12),
-                        ),
-                      ],
+                  _buildNavigationIcon(
+                    'assets/market.jpg',
+                    'Market',
+                    () => Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Market()),
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const Cart(),
-                        ),
-                      );
-                    },
-                    child: const Column(
-                      children: [
-                        Image(
-                          image: AssetImage('assets/cart.jpg'),
-                          height: 100,
-                          width: 50,
-                        ),
-                        Text(
-                          'Cart',
-                          style: TextStyle(fontSize: 12),
-                        ),
-                      ],
+                  _buildNavigationIcon(
+                    'assets/cart.jpg',
+                    'Cart',
+                    () => Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Cart()),
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const Hospitals(),
-                        ),
-                      );
-                    },
-                    child: const Column(
-                      children: [
-                        Image(
-                          image: AssetImage('assets/hospital.jpg'),
-                          height: 100,
-                          width: 50,
-                        ),
-                        Text(
-                          'Hospital',
-                          style: TextStyle(fontSize: 12),
-                        ),
-                      ],
+                  _buildNavigationIcon(
+                    'assets/hospital.jpg',
+                    'Hospital',
+                    () => Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const Hospitals()),
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const Ambulance(),
-                        ),
-                      );
-                    },
-                    child: const Column(
-                      children: [
-                        Image(
-                          image: AssetImage('assets/ambulance.jpg'),
-                          height: 100,
-                          width: 50,
-                        ),
-                        Text(
-                          'Ambulance',
-                          style: TextStyle(fontSize: 12),
-                        ),
-                      ],
+                  _buildNavigationIcon(
+                    'assets/ambulance.jpg',
+                    'Ambulance',
+                    () => Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const Ambulance()),
                     ),
                   ),
                 ],
@@ -231,38 +172,28 @@ class _HomeState extends State<Home> {
               top: 230,
               left: 0,
               right: 0,
-              child: Column(
-                children: [
-                  Image(
-                    image: AssetImage('assets/Learn_more.png'),
-                    height: 200,
-                  ),
-                ],
+              child: Image(
+                image: AssetImage('assets/Learn_more.png'),
+                height: 200,
               ),
             ),
             Positioned(
               top: 420,
               left: 30,
-              right: 0,
+              right: 30,
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(
                     'Top Doctors',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 180,
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   GestureDetector(
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                const DoctorRecommendation()), // Corrected class name
+                            builder: (context) => const DoctorRecommendation()),
                       );
                     },
                     child: const Text(
@@ -280,85 +211,8 @@ class _HomeState extends State<Home> {
             Positioned(
               top: 480,
               left: 25,
-              right: 150,
-              child: Row(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Column(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const AboutDoctor(),
-                              ),
-                            );
-                          },
-                          child: const Image(
-                            image: AssetImage('assets/Doctor1.png'),
-                            height: 100,
-                            width: 100,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            '$doctorName',
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 5),
-                        const Padding(
-                          padding: EdgeInsets.only(top: 0, bottom: 5),
-                          child: Text(
-                            'Cardiologist',
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
-                        ),
-                        const Row(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Image(
-                                image: AssetImage('assets/Rating.png'),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Image(
-                                image: AssetImage('assets/Location.png'),
-                              ),
-                            ),
-                            Text(
-                              '800m away',
-                              style: TextStyle(
-                                fontSize: 10,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+              right: 25,
+              child: _buildDoctorCard(context),
             ),
             Positioned(
               top: 728,
@@ -368,6 +222,83 @@ class _HomeState extends State<Home> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildNavigationIcon(
+      String imagePath, String label, VoidCallback onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        children: [
+          Image(
+            image: AssetImage(imagePath),
+            height: 100,
+            width: 50,
+          ),
+          Text(
+            label,
+            style: const TextStyle(fontSize: 12),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDoctorCard(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black, width: 1),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(
+        children: [
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AboutDoctor()),
+              );
+            },
+            child: const Image(
+              image: AssetImage('assets/Doctor1.png'),
+              height: 100,
+              width: 100,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              '$doctorName',
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.only(bottom: 5),
+            child: Text(
+              'Cardiologist',
+              style: TextStyle(fontSize: 12),
+            ),
+          ),
+          const Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Image(image: AssetImage('assets/Rating.png')),
+              ),
+              SizedBox(width: 10),
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Image(image: AssetImage('assets/Location.png')),
+              ),
+              Text(
+                '800m away',
+                style: TextStyle(fontSize: 10),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
