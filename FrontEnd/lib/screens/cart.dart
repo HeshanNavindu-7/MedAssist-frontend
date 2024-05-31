@@ -3,8 +3,8 @@ import 'package:midassist/screens/salesitem.dart';
 import 'package:midassist/screens/home.dart';
 import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
 
-class Market extends StatelessWidget {
-  const Market({Key? key}) : super(key: key);
+class Cart extends StatelessWidget {
+  const Cart({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class Market extends StatelessWidget {
                 ),
                 //market text
                 const Text(
-                  'Market',
+                  'My Cart',
                   style: TextStyle(
                     fontSize: 25,
                   ),
@@ -46,37 +46,10 @@ class Market extends StatelessWidget {
               ],
             ),
           ),
-          //search bar
-          Positioned(
-            top: 80,
-            left: 10,
-            right: 10,
-            child: Container(
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: const Color.fromARGB(255, 189, 189, 189)
-                        .withOpacity(0.5),
-                    spreadRadius: 2,
-                    blurRadius: 25,
-                    offset: const Offset(0, 7),
-                  ),
-                ],
-              ),
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: 'Search for items...',
-                  prefixIcon: const Icon(Icons.search), // Removed 'const'
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                ),
-              ),
-            ),
-          ),
+
           //product
           Positioned(
-            top: 180,
+            top: 120,
             left: 25,
             right: 150,
             child: Row(

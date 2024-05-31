@@ -146,6 +146,12 @@ flutter:
     - assets/select.png
     - assets/1919.png
     - assets/helpmessage.png
+    - assets/pdf.png
+    - assets/addtocart.png
+    - assets/market.jpg
+    - assets/cart.jpg
+    - assets/hospital.jpg
+    - assets/ambulance.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

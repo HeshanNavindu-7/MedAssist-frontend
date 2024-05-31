@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:midassist/screens/home.dart';
 import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
 
-class Ambulance extends StatelessWidget {
-  const Ambulance({Key? key}) : super(key: key);
+class Notifications extends StatelessWidget {
+  const Notifications({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class Ambulance extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                //back button
+                //back bitton
                 GestureDetector(
                   onTap: () {
                     Navigator.pushReplacement(
@@ -32,11 +32,11 @@ class Ambulance extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(
-                  width: 65,
+                  width: 70,
                 ),
                 //market text
                 const Text(
-                  'Ambulance',
+                  'Notifications',
                   style: TextStyle(
                     fontSize: 25,
                   ),
@@ -46,24 +46,9 @@ class Ambulance extends StatelessWidget {
             ),
           ),
 
-          const Positioned(
-              top: 200,
-              left: 65,
-              child: Image(image: AssetImage('assets/1919.png'))),
-
-          const Positioned(
-              top: 500,
-              left: 45,
-              child: Text(
-                'Call an emergency service vehicle',
-                style: TextStyle(
-                    fontSize: 20,
-                    color: Color.fromARGB(255, 253, 0, 0),
-                    fontWeight: FontWeight.bold),
-              )),
           //Navigation Bar
           Positioned(
-            bottom: 0,
+            top: 728,
             left: 0,
             right: 0,
             child: CustomBottomNavigationBar(),
