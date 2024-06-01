@@ -3,7 +3,6 @@ import 'package:midassist/screens/doctorRecommendation.dart';
 import 'package:midassist/screens/market.dart';
 import 'package:midassist/screens/pdfuploader.dart';
 import 'package:midassist/screens/profilepage.dart';
-import 'package:midassist/screens/notifications.dart';
 import 'package:midassist/screens/medassistai.dart';
 import 'package:midassist/screens/home.dart';
 import 'package:http/http.dart' as http;
