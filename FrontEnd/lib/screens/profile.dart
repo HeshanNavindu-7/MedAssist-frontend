@@ -53,8 +53,14 @@ class Profile extends StatelessWidget {
                     'Edit Your Profile',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                   ))),
+          Positioned(
+            top: 140,
+            left: 50,
+            child: Image(image: AssetImage('assets/profilegirl.png')),
+          ),
+
           const Positioned(
-              top: 130,
+              top: 240,
               child: Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text(
@@ -63,12 +69,37 @@ class Profile extends StatelessWidget {
                   ))),
 
           Positioned(
-            top: 175,
+            top: 275,
             left: 10,
             right: 10,
             child: TextField(
               decoration: InputDecoration(
                 hintText: 'Enter your name',
+                hintStyle:
+                    const TextStyle(color: Color.fromARGB(255, 173, 170, 170)),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+              ),
+            ),
+          ),
+
+          const Positioned(
+              top: 340,
+              child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    'Your Age',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ))),
+
+          Positioned(
+            top: 375,
+            left: 10,
+            right: 10,
+            child: TextField(
+              decoration: InputDecoration(
+                hintText: 'Enter your age',
                 hintStyle:
                     const TextStyle(color: Color.fromARGB(255, 173, 170, 170)),
                 border: OutlineInputBorder(
