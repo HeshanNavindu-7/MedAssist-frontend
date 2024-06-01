@@ -5,6 +5,7 @@ import 'package:midassist/screens/home.dart';
 import 'package:midassist/screens/signUpPage.dart';
 import 'package:midassist/screens/myappointments.dart';
 import 'package:midassist/screens/mysaved.dart';
+import 'package:midassist/screens/profile.dart';
 import 'package:midassist/screens/paymentmethod.dart';
 import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
 import 'package:http/http.dart' as http;
@@ -102,11 +103,22 @@ class ProfilePageState extends State<ProfilePage> {
               child: CustomBottomNavigationBar(),
             ),
             // Girl photo and name
-            const Positioned(
+            Positioned(
               top: 80,
               left: 150,
-              child: Image(image: AssetImage('assets/profilegirl.png')),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Profile(),
+                    ),
+                  );
+                },
+                child: Image(image: AssetImage('assets/profilegirl.png')),
+              ),
             ),
+
             Positioned(
               top: 170,
               left: 0,
