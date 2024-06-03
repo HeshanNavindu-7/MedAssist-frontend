@@ -37,7 +37,6 @@ dependencies:
   http: ^1.2.0
   file_picker: ^5.3.2
   mime: ^1.0.4
-   image_picker: ^0.8.4+8
 #  google_fonts: ^6.2.1
 
 dev_dependencies:
@@ -153,6 +152,8 @@ flutter:
     - assets/cart.jpg
     - assets/hospital.jpg
     - assets/ambulance.jpg
+    - assets/profilebutton.png
+    - assets/lastprofile.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

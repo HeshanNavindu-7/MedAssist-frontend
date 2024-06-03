@@ -1,9 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:midassist/screens/home.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:midassist/screens/profilepage.dart';
 import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
 
 class Profile extends StatelessWidget {
   const Profile({Key? key}) : super(key: key);
+
+  Future<void> _pickFile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.image,
+    );
+
+    if (result != null) {
+      String? filePath = result.files.single.path;
+      print("File path: $filePath");
+    } else {}
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,13 +28,13 @@ class Profile extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                //back bitton
+                //back button
                 GestureDetector(
                   onTap: () {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Home(),
+                        builder: (context) => ProfilePage(),
                       ),
                     );
                   },
@@ -53,12 +65,21 @@ class Profile extends StatelessWidget {
                     'Edit Your Profile',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                   ))),
-          Positioned(
+          const Positioned(
             top: 140,
             left: 50,
             child: Image(image: AssetImage('assets/profilegirl.png')),
           ),
-
+          Positioned(
+            top: 150,
+            left: 150,
+            child: GestureDetector(
+              onTap: _pickFile,
+              child: const Image(
+                image: AssetImage('assets/lastprofile.png'),
+              ),
+            ),
+          ),
           const Positioned(
               top: 240,
               child: Padding(
@@ -108,6 +129,64 @@ class Profile extends StatelessWidget {
               ),
             ),
           ),
+
+          const Positioned(
+              top: 440,
+              child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    'Your Height',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ))),
+
+          Positioned(
+            top: 475,
+            left: 10,
+            right: 10,
+            child: TextField(
+              decoration: InputDecoration(
+                hintText: 'Enter your height',
+                hintStyle:
+                    const TextStyle(color: Color.fromARGB(255, 173, 170, 170)),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+              ),
+            ),
+          ),
+
+          const Positioned(
+              top: 540,
+              child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    'Your Weight',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ))),
+
+          Positioned(
+            top: 575,
+            left: 10,
+            right: 10,
+            child: TextField(
+              decoration: InputDecoration(
+                hintText: 'Enter your weight',
+                hintStyle:
+                    const TextStyle(color: Color.fromARGB(255, 173, 170, 170)),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+              ),
+            ),
+          ),
+
+          const Positioned(
+              top: 650,
+              left: 40,
+              child: Image(
+                  image: AssetImage(
+                'assets/profilebutton.png',
+              ))),
           //Navigation Bar
           Positioned(
             top: 728,
