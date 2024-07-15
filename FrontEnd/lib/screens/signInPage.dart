@@ -19,7 +19,7 @@ class _SignUpPageState extends State<SignInPage> {
 
   Future<void> signIn() async {
     // Your backend endpoint URL
-    String url = 'http://10.0.2.2:8000/sign-in/';
+    String url = 'http://192.168.8.102:8000/sign-in/';
 
     try {
       final response = await http.post(
@@ -160,17 +160,17 @@ class _SignUpPageState extends State<SignInPage> {
                   const SizedBox(height: 10),
                   ElevatedButton(
                     //uncomment following comment when testing with backend
-                    // onPressed: signIn,
+                    onPressed: signIn,
 
                     //Only testing purpose (Front end testing)
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                Home()), // Corrected class name
-                      );
-                    },
+                    // onPressed: () {
+                    //   Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) =>
+                    //             Home()), // Corrected class name
+                    //   );
+                    // },
                     //end of the testing code
 
                     style: ElevatedButton.styleFrom(
