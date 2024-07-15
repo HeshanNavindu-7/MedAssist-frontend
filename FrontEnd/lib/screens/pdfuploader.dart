@@ -24,7 +24,7 @@ class _PdfUploader extends State<PdfUploader> {
   }
 
   Future<void> _fetchUserId() async {
-    final response = await http.get(Uri.parse('http://10.0.2.2:8000/users/'));
+    final response = await http.get(Uri.parse('http://192.168.8.102:8000/users/'));
 
     if (response.statusCode == 200) {
       // Parse the response JSON
@@ -57,7 +57,7 @@ class _PdfUploader extends State<PdfUploader> {
 
           var request = http.MultipartRequest(
             'POST',
-            Uri.parse('http://10.0.2.2:8000/upload_pdf/'),
+            Uri.parse('http://192.168.8.102:8000/upload_pdf/'),
           );
 
           request.files.add(
