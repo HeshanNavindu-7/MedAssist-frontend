@@ -1,93 +1,78 @@
 import 'package:flutter/material.dart';
-import 'package:midassist/screens/doctorRecommendation.dart';
-import 'package:midassist/screens/market.dart';
-import 'package:midassist/screens/pdfuploader.dart';
-import 'package:midassist/screens/profilepage.dart';
-import 'package:midassist/screens/medassistai.dart';
 import 'package:midassist/screens/home.dart';
+import 'package:midassist/screens/pdfuploader.dart';
+import 'package:midassist/screens/imageUploder.dart';
+import 'package:midassist/screens/medassistai.dart';
+import 'package:midassist/screens/profilepage.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:http/http.dart' as http;
 import 'package:midassist/APIs/imageFilePicker.dart';
-import 'package:midassist/screens/imageUploder.dart';
 
-class CustomBottomNavigationBar extends StatefulWidget {
-  CustomBottomNavigationBar({super.key});
-
-  @override
-  _CustomBottomNavigationBar createState() => _CustomBottomNavigationBar();
-}
-
-class _CustomBottomNavigationBar extends State<CustomBottomNavigationBar> {
-  final ImageFilePicker imageFilePicker = ImageFilePicker();
-  final http.Client client = http.Client();
+class CustomBottomNavigationBar extends StatelessWidget {
+  const CustomBottomNavigationBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      //adjestments
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/Bottom_rectangle.png'),
-          fit: BoxFit.fill,
+    final ImageFilePicker imageFilePicker = ImageFilePicker();
+    final http.Client client = http.Client();
+
+    return CurvedNavigationBar(
+       backgroundColor: Colors.white, // Blue background color
+      color:Color(0xFFADD8E6), // Light blue color
+      height: 60, // Adjusted height within the acceptable range
+      items: <Widget>[
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Home()),
+            );
+          },
+          child: Icon(Icons.home, size: 30, color: Colors.black),
         ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          //Home
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Home()),
-              );
-            },
-            child: const Image(image: AssetImage('assets/Home.png')),
-          ),
-          //market
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => PdfUploader()),
-              );
-            },
-            child: const Image(image: AssetImage('assets/pdf.png')),
-          ),
-          //camera
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ImageUploder(
-                        imageFilePicker: imageFilePicker,
-                        client: client), // Corrected class name
-                  ));
-            },
-            child: const Image(image: AssetImage('assets/Camera.png')),
-          ),
-          //ai
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const MedAssistAi()),
-              );
-            },
-            child: const Image(image: AssetImage('assets/Ai.png')),
-          ),
-          //profile
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const ProfilePage()),
-              );
-            },
-            child: const Image(image: AssetImage('assets/Profile.png')),
-          ),
-        ],
-      ),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => PdfUploader()),
+            );
+          },
+          child: Icon(Icons.picture_as_pdf, size: 30, color: Colors.black),
+        ),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ImageUploder(
+                imageFilePicker: imageFilePicker,
+                client: client,
+              )),
+            );
+          },
+          child: Icon(Icons.camera_alt, size: 30, color: Colors.black),
+        ),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => MedAssistAi()),
+            );
+          },
+          child: Icon(Icons.lightbulb_outline, size: 30, color: Colors.black),
+        ),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ProfilePage()),
+            );
+          },
+          child: Icon(Icons.person, size: 30, color: Colors.black),
+        ),
+      ],
+      onTap: (index) {
+        // Handle navigation index
+      },
     );
   }
 }
