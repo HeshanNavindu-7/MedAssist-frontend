@@ -25,12 +25,20 @@ class _HomeState extends State<Home> {
 
   final ImageFilePicker imageFilePicker = ImageFilePicker();
   final http.Client client = http.Client();
+  final FocusNode _focusNode = FocusNode();
+  bool _isFocused = false;
 
-  @override
   void initState() {
     super.initState();
     _fetchDetails();
+
+    _focusNode.addListener(() {
+      setState(() {
+        _isFocused = _focusNode.hasFocus;
+      });
+    });
   }
+ 
 
   Future<void> _fetchDetails() async {
     try {
@@ -59,76 +67,51 @@ class _HomeState extends State<Home> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-        body: Stack(
-          children: [
-            Positioned(
-              top: 10,
-              left: 0,
-              right: 0,
-              child: Padding(
-                padding: const EdgeInsets.all(15),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        'Hello, ${userName ?? 'Guest'}',
-                        style: const TextStyle(fontSize: 25),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 50,
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Notifications()),
-                          );
-                        },
-                        child: const Image(
-                          image: AssetImage('assets/notification.png'),
-                          height: 50,
-                        ),
-                      ),
-                    ),
-                  ],
+       appBar: AppBar(
+          automaticallyImplyLeading: false, // Remove the back button
+           title: Row(
+            children: [
+              Expanded(
+                child:Padding(padding: const EdgeInsets.symmetric(horizontal:8.0),
+                child: Text(
+                  'Hello, ${userName ?? 'Guest'}',
+                  style: const TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.left,
                 ),
               ),
-            ),
-            Positioned(
-              top: 80,
-              left: 10,
-              right: 10,
-              child: Container(
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color.fromARGB(255, 189, 189, 189)
-                          .withOpacity(0.5),
-                      spreadRadius: 2,
-                      blurRadius: 25,
-                      offset: const Offset(0, 7),
-                    ),
-                  ],
-                ),
+              ),
+              IconButton(
+                icon: const Icon(Icons.notifications),
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Notifications()),
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16),
                 child: TextField(
+                  focusNode: _focusNode,
                   decoration: InputDecoration(
-                    hintText: 'Search doctor, drugs, articles...',
-                    prefixIcon: const Icon(Icons.search),
+                    hintText: _isFocused ? '' : 'Search doctor, drugs, articles...',
+                  prefixIcon: const Icon(Icons.search),
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                 ),
               ),
-            ),
-            Positioned(
-              top: 130,
-              left: 0,
-              right: 0,
-              child: Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   _buildNavigationIcon(
@@ -152,8 +135,7 @@ class _HomeState extends State<Home> {
                     'Hospital',
                     () => Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) => const Hospitals()),
+                      MaterialPageRoute(builder: (context) => const Hospitals()),
                     ),
                   ),
                   _buildNavigationIcon(
@@ -161,67 +143,54 @@ class _HomeState extends State<Home> {
                     'Ambulance',
                     () => Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) => const Ambulance()),
+                      MaterialPageRoute(builder: (context) => const Ambulance()),
                     ),
                   ),
                 ],
               ),
-            ),
-            const Positioned(
-              top: 230,
-              left: 0,
-              right: 0,
-              child: Image(
-                image: AssetImage('assets/Learn_more.png'),
-                height: 200,
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 20),
+                child: Image(
+                  image: AssetImage('assets/Learn_more.png'),
+                  height: 200,
+                ),
               ),
-            ),
-            Positioned(
-              top: 420,
-              left: 30,
-              right: 30,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'Top Doctors',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const DoctorRecommendation()),
-                      );
-                    },
-                    child: const Text(
-                      'See all',
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.normal,
-                        color: Color.fromARGB(255, 24, 184, 149),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Top Doctors',
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const DoctorRecommendation()),
+                        );
+                      },
+                      child: const Text(
+                        'See all',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.normal,
+                          color: Color.fromARGB(255, 24, 184, 149),
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            Positioned(
-              top: 480,
-              left: 25,
-              right: 25,
-              child: _buildDoctorCard(context),
-            ),
-            Positioned(
-              top: 728,
-              left: 0,
-              right: 0,
-              child: CustomBottomNavigationBar(),
-            ),
-          ],
+              Padding(
+                padding: const EdgeInsets.all(25),
+                child: _buildDoctorCard(context),
+              ),
+            ],
+          ),
         ),
+        bottomNavigationBar: CustomBottomNavigationBar(),
       ),
     );
   }
