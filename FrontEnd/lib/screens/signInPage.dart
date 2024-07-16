@@ -1,9 +1,7 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:midassist/screens/signUpPage.dart';
-
 import 'home.dart';
 
 class SignInPage extends StatefulWidget {
@@ -16,6 +14,7 @@ class SignInPage extends StatefulWidget {
 class _SignUpPageState extends State<SignInPage> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  bool isChecked = false; // Define the checkbox state
 
   Future<void> signIn() async {
     // Your backend endpoint URL
@@ -83,7 +82,7 @@ class _SignUpPageState extends State<SignInPage> {
                       ),
                     ),
                   ),
-                  //Username
+                  // Username
                   Align(
                     alignment: const Alignment(0, 0.06),
                     child: Padding(
@@ -109,8 +108,7 @@ class _SignUpPageState extends State<SignInPage> {
                       ),
                     ),
                   ),
-
-                  //Password
+                  // Password
                   Align(
                     alignment: const Alignment(0, 0.06),
                     child: Padding(
@@ -137,42 +135,35 @@ class _SignUpPageState extends State<SignInPage> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  const Row(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Image(
-                        image: AssetImage('assets/RememberMe.png'),
+                      Row(
+                        children: [
+                          Checkbox(
+                            value: isChecked,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                isChecked = value!;
+                              });
+                            },
+                          ),
+                          const Text('Remember Me'),
+                        ],
                       ),
-                      SizedBox(width: 5),
-                      Text('Remember Me'),
-                      SizedBox(
-                        width: 130,
-                      ),
-                      Text(
+                      const Text(
                         'Forgot Password?',
                         style: TextStyle(
                           color: Color.fromARGB(255, 18, 76, 236),
                           decoration: TextDecoration.underline,
                           decorationColor: Color.fromARGB(255, 18, 76, 236),
                         ),
-                      )
+                      ),
                     ],
                   ),
                   const SizedBox(height: 10),
                   ElevatedButton(
-                    //uncomment following comment when testing with backend
-                    // onPressed: signIn,
-
-                    //Only testing purpose (Front end testing)
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                Home()), // Corrected class name
-                      );
-                    },
-                    //end of the testing code
-
+                    onPressed: signIn,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF004080),
                       shape: RoundedRectangleBorder(
@@ -188,48 +179,52 @@ class _SignUpPageState extends State<SignInPage> {
                           TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
                     ),
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  const SizedBox(height: 20),
                   Center(
-                      child: Row(children: [
-                    const SizedBox(
-                      width: 80,
-                    ),
-                    const Text("Don't have an account?"),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const SignUp_Page()), // Corrected class name
-                          );
-                        },
-                        child: const Text(
-                          'SignUp',
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 18, 76, 236),
-                            decoration: TextDecoration.underline,
-                            decorationColor: Color.fromARGB(255, 18, 76, 236),
+                    child: Row(
+                      children: [
+                        const SizedBox(width: 80),
+                        const Text("Don't have an account?"),
+                        const SizedBox(width: 20),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const SignUp_Page(),
+                              ),
+                            );
+                          },
+                          child: const Text(
+                            'SignUp',
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 18, 76, 236),
+                              decoration: TextDecoration.underline,
+                              decorationColor: Color.fromARGB(255, 18, 76, 236),
+                            ),
                           ),
-                        )),
-                  ])),
-                  const Positioned(
-                      child: Column(children: [
-                    Text('or'),
-                    Padding(
-                      padding: EdgeInsets.all(10.0),
-                      child: Image(image: AssetImage('assets/Loginfb.png')),
+                        ),
+                      ],
                     ),
-                    Padding(
-                      padding: EdgeInsets.all(10.0),
-                      child: Image(image: AssetImage('assets/Logingoogle.png')),
-                    ),
-                  ]))
+                  ),
+                  const SizedBox(height: 20),
+                  const Column(
+                    children: [
+                      Text('or'),
+                      Padding(
+                        padding: EdgeInsets.all(10.0),
+                        child: Image(
+                          image: AssetImage('assets/Loginfb.png'),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(10.0),
+                        child: Image(
+                          image: AssetImage('assets/Logingoogle.png'),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
