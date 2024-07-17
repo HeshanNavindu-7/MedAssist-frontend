@@ -88,48 +88,97 @@ class _SignUpPageState extends State<SignInPage> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 30.0, vertical: 20.0),
-                      child: TextField(
-                        controller: usernameController,
-                        decoration: InputDecoration(
-                          prefixIcon: const Icon(Icons.person),
-                          hintText: 'Username',
-                          hintStyle: const TextStyle(
-                              color: Color.fromARGB(113, 255, 255, 255)),
-                          border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            borderSide: BorderSide(
-                              color: Colors.blue, // Border color
-                              width: 2.0, // Border width
-                            ),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15.0),
+                          gradient: LinearGradient(
+                            colors: [
+                              Color(0xFF1e3c72),
+                              Color(0xFF2a5298)
+                            ], // Gradient colors
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
                           ),
-                          filled: true,
-                          fillColor: const Color(0xFF282635).withOpacity(0.5),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.2),
+                              spreadRadius: 2,
+                              blurRadius: 7,
+                              offset:
+                                  Offset(0, 3), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                        child: TextField(
+                          controller: usernameController,
+                          decoration: InputDecoration(
+                            prefixIcon:
+                                const Icon(Icons.person, color: Colors.white),
+                            hintText: 'Username',
+                            hintStyle: const TextStyle(
+                              color: Color.fromARGB(200, 255, 255, 255),
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                              borderSide: BorderSide.none,
+                            ),
+                            filled: true,
+                            fillColor: Colors
+                                .transparent, // Background is now handled by the Container
+                          ),
+                          style: const TextStyle(
+                              color: Colors.white), // Text color
                         ),
                       ),
                     ),
                   ),
+
                   // Password
                   Align(
                     alignment: const Alignment(0, 0.06),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 30.0, vertical: 20.0),
-                      child: TextField(
-                        controller: passwordController,
-                        decoration: InputDecoration(
-                          prefixIcon: const Icon(Icons.lock),
-                          hintText: 'Password',
-                          hintStyle: const TextStyle(
-                              color: Color.fromARGB(113, 255, 255, 255)),
-                          border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            borderSide: BorderSide(
-                              color: Colors.blue, // Border color
-                              width: 2.0, // Border width
-                            ),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15.0),
+                          gradient: LinearGradient(
+                            colors: [
+                              Color(0xFF1e3c72),
+                              Color(0xFF2a5298)
+                            ], // Gradient colors
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
                           ),
-                          filled: true,
-                          fillColor: const Color(0xFF282635).withOpacity(0.5),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.2),
+                              spreadRadius: 2,
+                              blurRadius: 7,
+                              offset:
+                                  Offset(0, 3), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                        child: TextField(
+                          controller: usernameController,
+                          decoration: InputDecoration(
+                            prefixIcon:
+                                const Icon(Icons.lock, color: Colors.white),
+                            hintText: 'Password',
+                            hintStyle: const TextStyle(
+                              color: Color.fromARGB(200, 255, 255, 255),
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                              borderSide: BorderSide.none,
+                            ),
+                            filled: true,
+                            fillColor: Colors
+                                .transparent, // Background is now handled by the Container
+                          ),
+                          style: const TextStyle(
+                              color: Colors.white), // Text color
                         ),
                       ),
                     ),
