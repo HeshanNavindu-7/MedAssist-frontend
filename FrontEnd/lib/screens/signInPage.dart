@@ -212,11 +212,10 @@ class _SignUpPageState extends State<SignInPage> {
                   ),
                   const SizedBox(height: 10),
                   ElevatedButton(
-
                     onPressed: signIn,
 
                     //uncomment following comment when testing with backend
-                    onPressed: signIn,
+                    //onPressed: signIn,
 
                     //Only testing purpose (Front end testing)
                     // onPressed: () {
@@ -278,14 +277,14 @@ class _SignUpPageState extends State<SignInPage> {
               ),
             ),
             Positioned(
-              bottom: 0,
+              bottom: 30,
               left: 0,
               right: 0,
               child: Column(
                 children: [
                   Container(
                     width: 300,
-                    height: 25,
+                    height: 50,
                     color: Colors.white,
                     child: Center(child: Text("White Box 1")),
                   ),
@@ -293,8 +292,8 @@ class _SignUpPageState extends State<SignInPage> {
                     height: 10,
                   ),
                   Container(
-                    width: double.infinity,
-                    height: 25,
+                    width: 300,
+                    height: 50,
                     color: Colors.white,
                     child: Center(child: Text("White Box 2")),
                   ),
