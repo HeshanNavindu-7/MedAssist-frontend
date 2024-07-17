@@ -257,22 +257,30 @@ class _SignUpPageState extends State<SignInPage> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  const Column(
-                    children: [
-                      Text('or'),
-                      Padding(
-                        padding: EdgeInsets.all(10.0),
-                        child: Image(
-                          image: AssetImage('assets/Loginfb.png'),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(10.0),
-                        child: Image(
-                          image: AssetImage('assets/Logingoogle.png'),
-                        ),
-                      ),
-                    ],
+                  Text('or'),
+                ],
+              ),
+            ),
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Column(
+                children: [
+                  Container(
+                    width: 300,
+                    height: 25,
+                    color: Colors.white,
+                    child: Center(child: Text("White Box 1")),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    width: double.infinity,
+                    height: 25,
+                    color: Colors.white,
+                    child: Center(child: Text("White Box 2")),
                   ),
                 ],
               ),
