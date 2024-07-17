@@ -296,7 +296,7 @@ class _SignUpPageState extends State<SignInPage> {
                           height: 20, // Adjust height as needed
                         ),
                         SizedBox(width: 30), // Space between image and text
-                        Text("Log In with Facebook"),
+                        Text("LogIn with Facebook"),
                       ],
                     ),
                   ),
@@ -305,7 +305,19 @@ class _SignUpPageState extends State<SignInPage> {
                     width: 300,
                     height: 50,
                     color: Colors.white,
-                    child: const Center(child: Text("Log In with Facebook")),
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image(
+                          image: AssetImage(
+                              'assets/google.png'), // Replace 'assetName' with your actual asset path
+                          width: 20, // Adjust width as needed
+                          height: 20, // Adjust height as needed
+                        ),
+                        SizedBox(width: 35), // Space between image and text
+                        Text("LogIn with Google"),
+                      ],
+                    ),
                   ),
                 ],
               ),
