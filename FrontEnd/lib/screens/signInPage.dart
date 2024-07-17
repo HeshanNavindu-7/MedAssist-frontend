@@ -91,7 +91,7 @@ class _SignUpPageState extends State<SignInPage> {
                       child: Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15.0),
-                          gradient: LinearGradient(
+                          gradient: const LinearGradient(
                             colors: [
                               Color(0xFF1e3c72),
                               Color(0xFF2a5298)
@@ -104,8 +104,8 @@ class _SignUpPageState extends State<SignInPage> {
                               color: Colors.black.withOpacity(0.2),
                               spreadRadius: 2,
                               blurRadius: 7,
-                              offset:
-                                  Offset(0, 3), // changes position of shadow
+                              offset: const Offset(
+                                  0, 3), // changes position of shadow
                             ),
                           ],
                         ),
@@ -142,7 +142,7 @@ class _SignUpPageState extends State<SignInPage> {
                       child: Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15.0),
-                          gradient: LinearGradient(
+                          gradient: const LinearGradient(
                             colors: [
                               Color(0xFF1e3c72),
                               Color(0xFF2a5298)
@@ -155,8 +155,8 @@ class _SignUpPageState extends State<SignInPage> {
                               color: Colors.black.withOpacity(0.2),
                               spreadRadius: 2,
                               blurRadius: 7,
-                              offset:
-                                  Offset(0, 3), // changes position of shadow
+                              offset: const Offset(
+                                  0, 3), // changes position of shadow
                             ),
                           ],
                         ),
@@ -272,7 +272,7 @@ class _SignUpPageState extends State<SignInPage> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  Text('or'),
+                  const Text('or'),
                 ],
               ),
             ),
@@ -286,16 +286,26 @@ class _SignUpPageState extends State<SignInPage> {
                     width: 300,
                     height: 50,
                     color: Colors.white,
-                    child: Center(child: Text("White Box 1")),
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image(
+                          image: AssetImage(
+                              'assets/fb.png'), // Replace 'assetName' with your actual asset path
+                          width: 20, // Adjust width as needed
+                          height: 20, // Adjust height as needed
+                        ),
+                        SizedBox(width: 30), // Space between image and text
+                        Text("Log In with Facebook"),
+                      ],
+                    ),
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
+                  const SizedBox(height: 10),
                   Container(
                     width: 300,
                     height: 50,
                     color: Colors.white,
-                    child: Center(child: Text("White Box 2")),
+                    child: const Center(child: Text("Log In with Facebook")),
                   ),
                 ],
               ),
