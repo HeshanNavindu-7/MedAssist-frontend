@@ -93,9 +93,9 @@ class _SignUpPageState extends State<SignInPage> {
                           borderRadius: BorderRadius.circular(15.0),
                           gradient: const LinearGradient(
                             colors: [
-                              Color(0xFF1e3c72),
-                              Color(0xFF2a5298)
-                            ], // Gradient colors
+                              Color.fromARGB(255, 0, 7, 81),
+                              Color.fromARGB(255, 75, 117, 190)
+                            ],
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                           ),
@@ -104,8 +104,7 @@ class _SignUpPageState extends State<SignInPage> {
                               color: Colors.black.withOpacity(0.2),
                               spreadRadius: 2,
                               blurRadius: 7,
-                              offset: const Offset(
-                                  0, 3), // changes position of shadow
+                              offset: const Offset(0, 3),
                             ),
                           ],
                         ),
@@ -114,7 +113,7 @@ class _SignUpPageState extends State<SignInPage> {
                           decoration: InputDecoration(
                             prefixIcon:
                                 const Icon(Icons.person, color: Colors.white),
-                            hintText: 'Username',
+                            hintText: 'Usern',
                             hintStyle: const TextStyle(
                               color: Color.fromARGB(200, 255, 255, 255),
                             ),
@@ -122,12 +121,11 @@ class _SignUpPageState extends State<SignInPage> {
                               borderRadius: BorderRadius.circular(15.0),
                               borderSide: BorderSide.none,
                             ),
-                            filled: true,
-                            fillColor: Colors
-                                .transparent, // Background is now handled by the Container
+                            filled: false, // Set to false for transparency
                           ),
                           style: const TextStyle(
-                              color: Colors.white), // Text color
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
@@ -144,8 +142,8 @@ class _SignUpPageState extends State<SignInPage> {
                           borderRadius: BorderRadius.circular(15.0),
                           gradient: const LinearGradient(
                             colors: [
-                              Color(0xFF1e3c72),
-                              Color(0xFF2a5298)
+                              Color.fromARGB(255, 0, 7, 81),
+                              Color.fromARGB(255, 75, 117, 190)
                             ], // Gradient colors
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
@@ -161,7 +159,7 @@ class _SignUpPageState extends State<SignInPage> {
                           ],
                         ),
                         child: TextField(
-                          controller: usernameController,
+                          controller: passwordController,
                           decoration: InputDecoration(
                             prefixIcon:
                                 const Icon(Icons.lock, color: Colors.white),
@@ -173,12 +171,11 @@ class _SignUpPageState extends State<SignInPage> {
                               borderRadius: BorderRadius.circular(15.0),
                               borderSide: BorderSide.none,
                             ),
-                            filled: true,
-                            fillColor: Colors
-                                .transparent, // Background is now handled by the Container
+                            filled: false, // Set to false for transparency
                           ),
                           style: const TextStyle(
                               color: Colors.white), // Text color
+                          obscureText: true, // Hide password text
                         ),
                       ),
                     ),
