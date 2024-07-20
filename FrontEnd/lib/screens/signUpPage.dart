@@ -96,28 +96,47 @@ class _SignUpPageState extends State<SignUp_Page> {
                           alignment: const Alignment(0, 0.06),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 20.0, vertical: 15.0),
-                            child: TextField(
-                              controller: firstNameController,
-                              decoration: InputDecoration(
-                                  prefixIcon: const Icon(Icons.person),
-                                  hintText: 'User Name',
-                                  hintStyle: const TextStyle(
-                                      color:
-                                          Color.fromARGB(255, 212, 207, 207)),
-                                  border: const OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    borderSide: BorderSide(
-                                      color: Colors.blue, // Border color
-                                      width: 2.0, // Border width
-                                    ),
+                                horizontal: 30.0, vertical: 20.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15.0),
+                                gradient: const LinearGradient(
+                                  colors: [
+                                    Color.fromARGB(255, 0, 7, 81),
+                                    Color.fromARGB(255, 75, 117, 190)
+                                  ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.2),
+                                    spreadRadius: 2,
+                                    blurRadius: 7,
+                                    offset: const Offset(0, 3),
                                   ),
-                                  filled: true,
-                                  fillColor:
-                                      const Color(0xFF282635).withOpacity(0.5),
-                                  contentPadding: const EdgeInsets.symmetric(
-                                      horizontal: 5, vertical: 2.5)),
+                                ],
+                              ),
+                              child: TextField(
+                                controller: firstNameController,
+                                decoration: InputDecoration(
+                                  prefixIcon: const Icon(Icons.person,
+                                      color: Colors.white),
+                                  hintText: 'Full Name',
+                                  hintStyle: const TextStyle(
+                                    color: Color.fromARGB(200, 255, 255, 255),
+                                  ),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  filled:
+                                      false, // Set to false for transparency
+                                ),
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -127,28 +146,47 @@ class _SignUpPageState extends State<SignUp_Page> {
                           alignment: const Alignment(0, 0.06),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 20.0, vertical: 15.0),
-                            child: TextField(
-                              controller: ageController,
-                              decoration: InputDecoration(
-                                  prefixIcon: const Icon(Icons.calendar_today),
+                                horizontal: 30.0, vertical: 20.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15.0),
+                                gradient: const LinearGradient(
+                                  colors: [
+                                    Color.fromARGB(255, 0, 7, 81),
+                                    Color.fromARGB(255, 75, 117, 190)
+                                  ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.2),
+                                    spreadRadius: 2,
+                                    blurRadius: 7,
+                                    offset: const Offset(0, 3),
+                                  ),
+                                ],
+                              ),
+                              child: TextField(
+                                controller: ageController,
+                                decoration: InputDecoration(
+                                  prefixIcon: const Icon(Icons.person,
+                                      color: Colors.white),
                                   hintText: 'Age',
                                   hintStyle: const TextStyle(
-                                      color:
-                                          Color.fromARGB(255, 212, 207, 207)),
-                                  border: const OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    borderSide: BorderSide(
-                                      color: Colors.blue, // Border color
-                                      width: 2.0, // Border width
-                                    ),
+                                    color: Color.fromARGB(200, 255, 255, 255),
                                   ),
-                                  filled: true,
-                                  fillColor:
-                                      const Color(0xFF282635).withOpacity(0.5),
-                                  contentPadding: const EdgeInsets.symmetric(
-                                      horizontal: 5, vertical: 2.5)),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  filled:
+                                      false, // Set to false for transparency
+                                ),
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
                           ),
                         ),
