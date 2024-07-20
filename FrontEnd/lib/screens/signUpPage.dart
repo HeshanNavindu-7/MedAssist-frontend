@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:midassist/screens/signInPage.dart';
-
 import 'home.dart';
 
 class SignUp_Page extends StatefulWidget {
@@ -19,6 +18,7 @@ class _SignUpPageState extends State<SignUp_Page> {
   TextEditingController passwordController = TextEditingController();
 
   String phoneNumberErrorText = '';
+  bool rememberMe = false;
 
   Future<void> signUp() async {
     // Your backend endpoint URL
@@ -59,11 +59,14 @@ class _SignUpPageState extends State<SignUp_Page> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
+        width: double.infinity,
+        height: double.infinity,
         decoration: const BoxDecoration(
-            image: DecorationImage(
-          image: AssetImage('assets/Newback.png'),
-          fit: BoxFit.cover,
-        )),
+          image: DecorationImage(
+            image: AssetImage('assets/Newback.png'),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: Stack(
           children: [
             SingleChildScrollView(
@@ -111,11 +114,10 @@ class _SignUpPageState extends State<SignUp_Page> {
                                     ),
                                   ),
                                   filled: true,
-                                  fillColor: const Color(0xFF282635)
-                                      .withOpacity(0.5),
-                                  contentPadding:
-                                      const EdgeInsets.symmetric(
-                                          horizontal: 5, vertical: 2.5)),
+                                  fillColor:
+                                      const Color(0xFF282635).withOpacity(0.5),
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 5, vertical: 2.5)),
                             ),
                           ),
                         ),
@@ -143,11 +145,10 @@ class _SignUpPageState extends State<SignUp_Page> {
                                     ),
                                   ),
                                   filled: true,
-                                  fillColor: const Color(0xFF282635)
-                                      .withOpacity(0.5),
-                                  contentPadding:
-                                      const EdgeInsets.symmetric(
-                                          horizontal: 5, vertical: 2.5)),
+                                  fillColor:
+                                      const Color(0xFF282635).withOpacity(0.5),
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 5, vertical: 2.5)),
                             ),
                           ),
                         ),
@@ -174,11 +175,10 @@ class _SignUpPageState extends State<SignUp_Page> {
                                     ),
                                   ),
                                   filled: true,
-                                  fillColor: const Color(0xFF282635)
-                                      .withOpacity(0.5),
-                                  contentPadding:
-                                      const EdgeInsets.symmetric(
-                                          horizontal: 5, vertical: 2.5)),
+                                  fillColor:
+                                      const Color(0xFF282635).withOpacity(0.5),
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 5, vertical: 2.5)),
                             ),
                           ),
                         ),
@@ -194,8 +194,8 @@ class _SignUpPageState extends State<SignUp_Page> {
                                     prefixIcon: const Icon(Icons.phone),
                                     hintText: 'Phone Number',
                                     hintStyle: const TextStyle(
-                                        color: Color.fromARGB(
-                                            255, 212, 207, 207)),
+                                        color:
+                                            Color.fromARGB(255, 212, 207, 207)),
                                     border: const OutlineInputBorder(
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(10)),
@@ -207,9 +207,8 @@ class _SignUpPageState extends State<SignUp_Page> {
                                     filled: true,
                                     fillColor: const Color(0xFF282635)
                                         .withOpacity(0.5),
-                                    contentPadding:
-                                        const EdgeInsets.symmetric(
-                                            horizontal: 5, vertical: 2.5)),
+                                    contentPadding: const EdgeInsets.symmetric(
+                                        horizontal: 5, vertical: 2.5)),
                                 onChanged: (value) {
                                   if (!RegExp(r'^[0-9]*$').hasMatch(value)) {
                                     setState(() {
@@ -246,11 +245,10 @@ class _SignUpPageState extends State<SignUp_Page> {
                                     ),
                                   ),
                                   filled: true,
-                                  fillColor: const Color(0xFF282635)
-                                      .withOpacity(0.5),
-                                  contentPadding:
-                                      const EdgeInsets.symmetric(
-                                          horizontal: 5, vertical: 2.5)),
+                                  fillColor:
+                                      const Color(0xFF282635).withOpacity(0.5),
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 5, vertical: 2.5)),
                             ),
                           ),
                         ),
@@ -276,28 +274,24 @@ class _SignUpPageState extends State<SignUp_Page> {
                                     ),
                                   ),
                                   filled: true,
-                                  fillColor: const Color(0xFF282635)
-                                      .withOpacity(0.5),
-                                  contentPadding:
-                                      const EdgeInsets.symmetric(
-                                          horizontal: 5, vertical: 2.5)),
+                                  fillColor:
+                                      const Color(0xFF282635).withOpacity(0.5),
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 5, vertical: 2.5)),
                             ),
                           ),
                         ),
-                        const Positioned(
-                          top: 230,
-                          child: Row(
-                            children: [
-                              Image(
-                                image: AssetImage('assets/RememberMe.png'),
-                              ),
-                              SizedBox(width: 5),
-                              Text('Remember Me'),
-                            ],
-                          ),
+                        CheckboxListTile(
+                          title: const Text('Remember Me'),
+                          value: rememberMe,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              rememberMe = value!;
+                            });
+                          },
+                          controlAffinity: ListTileControlAffinity.leading,
                         ),
                         ElevatedButton(
-                          //uncomment following comment when testing with backend
                           onPressed: () {
                             if (firstNameController.text.isEmpty ||
                                 ageController.text.isEmpty ||
@@ -347,18 +341,6 @@ class _SignUpPageState extends State<SignUp_Page> {
                               signUp();
                             }
                           },
-
-                          //Only testing purpose (Front end testing)
-                          /* onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      Home()), // Corrected class name
-                            );
-                          },*/
-                          //end of the testing code
-
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF004080),
                             shape: RoundedRectangleBorder(
