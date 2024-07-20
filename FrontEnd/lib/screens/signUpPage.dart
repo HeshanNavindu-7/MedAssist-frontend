@@ -18,6 +18,7 @@ class _SignUpPageState extends State<SignUp_Page> {
   TextEditingController passwordController = TextEditingController();
 
   String phoneNumberErrorText = '';
+  bool rememberMe = false;
 
   Future<void> signUp() async {
     // Your backend endpoint URL
@@ -280,17 +281,15 @@ class _SignUpPageState extends State<SignUp_Page> {
                             ),
                           ),
                         ),
-                        const Positioned(
-                          top: 230,
-                          child: Row(
-                            children: [
-                              Image(
-                                image: AssetImage('assets/RememberMe.png'),
-                              ),
-                              SizedBox(width: 5),
-                              Text('Remember Me'),
-                            ],
-                          ),
+                        CheckboxListTile(
+                          title: const Text('Remember Me'),
+                          value: rememberMe,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              rememberMe = value!;
+                            });
+                          },
+                          controlAffinity: ListTileControlAffinity.leading,
                         ),
                         ElevatedButton(
                           onPressed: () {
