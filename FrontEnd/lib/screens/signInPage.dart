@@ -113,7 +113,7 @@ class _SignUpPageState extends State<SignInPage> {
                           decoration: InputDecoration(
                             prefixIcon:
                                 const Icon(Icons.person, color: Colors.white),
-                            hintText: 'Usern',
+                            hintText: 'Username',
                             hintStyle: const TextStyle(
                               color: Color.fromARGB(200, 255, 255, 255),
                             ),
@@ -209,24 +209,24 @@ class _SignUpPageState extends State<SignInPage> {
                   ),
                   const SizedBox(height: 10),
                   ElevatedButton(
-                    onPressed: signIn,
+                    // onPressed: signIn,
 
                     //uncomment following comment when testing with backend
                     //onPressed: signIn,
 
                     //Only testing purpose (Front end testing)
-                    // onPressed: () {
-                    //   Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) =>
-                    //             Home()), // Corrected class name
-                    //   );
-                    // },
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                Home()), // Corrected class name
+                      );
+                    },
                     //end of the testing code
 
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF004080),
+                      backgroundColor: Color.fromARGB(255, 30, 71, 255),
                       shape: RoundedRectangleBorder(
                         borderRadius:
                             BorderRadius.circular(10), // Border radius
