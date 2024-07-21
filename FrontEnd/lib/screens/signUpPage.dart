@@ -443,7 +443,7 @@ class _SignUpPageState extends State<SignUp_Page> {
                             }
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF004080),
+                            backgroundColor: Color.fromARGB(255, 30, 71, 255),
                             shape: RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.circular(10), // Border radius
