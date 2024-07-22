@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:midassist/screens/profilepage.dart';
+import 'package:midassist/screens/home.dart';
 import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
 
 class Profile extends StatelessWidget {
@@ -34,7 +34,7 @@ class Profile extends StatelessWidget {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProfilePage(),
+                        builder: (context) => Home(),
                       ),
                     );
                   },

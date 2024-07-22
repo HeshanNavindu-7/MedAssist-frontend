@@ -119,7 +119,7 @@ class _HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     _buildNavigationIcon(
-                      'assets/market.jpg',
+                      'assets/shop.png',
                       'Market',
                       () => Navigator.pushReplacement(
                         context,
