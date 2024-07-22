@@ -212,18 +212,31 @@ class _HomeState extends State<Home> {
       String imagePath, String label, VoidCallback onTap) {
     return GestureDetector(
       onTap: onTap,
-      child: Column(
-        children: [
-          Image(
-            image: AssetImage(imagePath),
-            height: 100,
-            width: 50,
+      child: Card(
+        elevation: 4.0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: Container(
+          width: 80, // Adjust the width as needed
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image(
+                image: AssetImage(imagePath),
+                height: 50, // Adjust the height as needed
+                width: 50, // Adjust the width as needed
+              ),
+              const SizedBox(height: 8.0), // Space between image and text
+              Text(
+                label,
+                style: const TextStyle(fontSize: 12),
+                textAlign: TextAlign.center,
+              ),
+            ],
           ),
-          Text(
-            label,
-            style: const TextStyle(fontSize: 12),
-          ),
-        ],
+        ),
       ),
     );
   }
