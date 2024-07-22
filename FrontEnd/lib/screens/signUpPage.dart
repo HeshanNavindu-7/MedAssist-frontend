@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:midassist/screens/signInPage.dart';
-
 import 'home.dart';
 
 class SignUp_Page extends StatefulWidget {
@@ -19,6 +18,7 @@ class _SignUpPageState extends State<SignUp_Page> {
   TextEditingController passwordController = TextEditingController();
 
   String phoneNumberErrorText = '';
+  bool rememberMe = false;
 
   Future<void> signUp() async {
     // Your backend endpoint URL
@@ -59,11 +59,14 @@ class _SignUpPageState extends State<SignUp_Page> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
+        width: double.infinity,
+        height: double.infinity,
         decoration: const BoxDecoration(
-            image: DecorationImage(
-          image: AssetImage('assets/Newback.png'),
-          fit: BoxFit.cover,
-        )),
+          image: DecorationImage(
+            image: AssetImage('assets/Newback.png'),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: Stack(
           children: [
             SingleChildScrollView(
@@ -93,29 +96,47 @@ class _SignUpPageState extends State<SignUp_Page> {
                           alignment: const Alignment(0, 0.06),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 20.0, vertical: 15.0),
-                            child: TextField(
-                              controller: firstNameController,
-                              decoration: InputDecoration(
-                                  prefixIcon: const Icon(Icons.person),
-                                  hintText: 'User Name',
-                                  hintStyle: const TextStyle(
-                                      color:
-                                          Color.fromARGB(255, 212, 207, 207)),
-                                  border: const OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    borderSide: BorderSide(
-                                      color: Colors.blue, // Border color
-                                      width: 2.0, // Border width
-                                    ),
+                                horizontal: 30.0, vertical: 10.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15.0),
+                                gradient: const LinearGradient(
+                                  colors: [
+                                    Color.fromARGB(255, 0, 7, 81),
+                                    Color.fromARGB(255, 75, 117, 190)
+                                  ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.2),
+                                    spreadRadius: 2,
+                                    blurRadius: 7,
+                                    offset: const Offset(0, 3),
                                   ),
-                                  filled: true,
-                                  fillColor: const Color(0xFF282635)
-                                      .withOpacity(0.5),
-                                  contentPadding:
-                                      const EdgeInsets.symmetric(
-                                          horizontal: 5, vertical: 2.5)),
+                                ],
+                              ),
+                              child: TextField(
+                                controller: firstNameController,
+                                decoration: InputDecoration(
+                                  prefixIcon: const Icon(Icons.person,
+                                      color: Colors.white),
+                                  hintText: 'Full Name',
+                                  hintStyle: const TextStyle(
+                                    color: Color.fromARGB(200, 255, 255, 255),
+                                  ),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  filled:
+                                      false, // Set to false for transparency
+                                ),
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -125,179 +146,253 @@ class _SignUpPageState extends State<SignUp_Page> {
                           alignment: const Alignment(0, 0.06),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 20.0, vertical: 15.0),
-                            child: TextField(
-                              controller: ageController,
-                              decoration: InputDecoration(
-                                  prefixIcon: const Icon(Icons.calendar_today),
+                                horizontal: 30.0, vertical: 10.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15.0),
+                                gradient: const LinearGradient(
+                                  colors: [
+                                    Color.fromARGB(255, 0, 7, 81),
+                                    Color.fromARGB(255, 75, 117, 190)
+                                  ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.2),
+                                    spreadRadius: 2,
+                                    blurRadius: 7,
+                                    offset: const Offset(0, 3),
+                                  ),
+                                ],
+                              ),
+                              child: TextField(
+                                controller: ageController,
+                                decoration: InputDecoration(
+                                  prefixIcon: const Icon(Icons.calendar_month,
+                                      color: Colors.white),
                                   hintText: 'Age',
                                   hintStyle: const TextStyle(
-                                      color:
-                                          Color.fromARGB(255, 212, 207, 207)),
-                                  border: const OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    borderSide: BorderSide(
-                                      color: Colors.blue, // Border color
-                                      width: 2.0, // Border width
-                                    ),
+                                    color: Color.fromARGB(200, 255, 255, 255),
                                   ),
-                                  filled: true,
-                                  fillColor: const Color(0xFF282635)
-                                      .withOpacity(0.5),
-                                  contentPadding:
-                                      const EdgeInsets.symmetric(
-                                          horizontal: 5, vertical: 2.5)),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  filled:
+                                      false, // Set to false for transparency
+                                ),
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
                           ),
                         ),
                         //Email Address
                         Align(
-                          alignment: const Alignment(0, 0.06),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 20.0, vertical: 15.0),
-                            child: TextField(
-                              controller: emailController,
-                              decoration: InputDecoration(
-                                  prefixIcon: const Icon(Icons.email),
-                                  hintText: 'Email',
-                                  hintStyle: const TextStyle(
-                                      color:
-                                          Color.fromARGB(255, 212, 207, 207)),
-                                  border: const OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    borderSide: BorderSide(
-                                      color: Colors.blue, // Border color
-                                      width: 2.0, // Border width
-                                    ),
+                                horizontal: 30.0, vertical: 10.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15.0),
+                                gradient: const LinearGradient(
+                                  colors: [
+                                    Color.fromARGB(255, 0, 7, 81),
+                                    Color.fromARGB(255, 75, 117, 190)
+                                  ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.2),
+                                    spreadRadius: 2,
+                                    blurRadius: 7,
+                                    offset: const Offset(0, 3),
                                   ),
-                                  filled: true,
-                                  fillColor: const Color(0xFF282635)
-                                      .withOpacity(0.5),
-                                  contentPadding:
-                                      const EdgeInsets.symmetric(
-                                          horizontal: 5, vertical: 2.5)),
+                                ],
+                              ),
+                              child: TextField(
+                                controller: emailController,
+                                decoration: InputDecoration(
+                                  prefixIcon: const Icon(Icons.email,
+                                      color: Colors.white),
+                                  hintText: 'E-Mail',
+                                  hintStyle: const TextStyle(
+                                    color: Color.fromARGB(200, 255, 255, 255),
+                                  ),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  filled:
+                                      false, // Set to false for transparency
+                                ),
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
                           ),
                         ),
                         //Phone Number
                         Align(
-                          alignment: const Alignment(0, 0.06),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 20.0, vertical: 15.0),
-                            child: TextField(
-                                controller: phoneNumberController,
+                                horizontal: 30.0, vertical: 10.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15.0),
+                                gradient: const LinearGradient(
+                                  colors: [
+                                    Color.fromARGB(255, 0, 7, 81),
+                                    Color.fromARGB(255, 75, 117, 190)
+                                  ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.2),
+                                    spreadRadius: 2,
+                                    blurRadius: 7,
+                                    offset: const Offset(0, 3),
+                                  ),
+                                ],
+                              ),
+                              child: TextField(
+                                controller: emailController,
                                 decoration: InputDecoration(
-                                    prefixIcon: const Icon(Icons.phone),
-                                    hintText: 'Phone Number',
-                                    hintStyle: const TextStyle(
-                                        color: Color.fromARGB(
-                                            255, 212, 207, 207)),
-                                    border: const OutlineInputBorder(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
-                                      borderSide: BorderSide(
-                                        color: Colors.blue, // Border color
-                                        width: 2.0, // Border width
-                                      ),
-                                    ),
-                                    filled: true,
-                                    fillColor: const Color(0xFF282635)
-                                        .withOpacity(0.5),
-                                    contentPadding:
-                                        const EdgeInsets.symmetric(
-                                            horizontal: 5, vertical: 2.5)),
-                                onChanged: (value) {
-                                  if (!RegExp(r'^[0-9]*$').hasMatch(value)) {
-                                    setState(() {
-                                      phoneNumberErrorText =
-                                          'Please enter a valid phone number';
-                                    });
-                                  } else {
-                                    setState(() {
-                                      phoneNumberErrorText = '';
-                                    });
-                                  }
-                                }),
+                                  prefixIcon: const Icon(Icons.call,
+                                      color: Colors.white),
+                                  hintText: 'Phone Number',
+                                  hintStyle: const TextStyle(
+                                    color: Color.fromARGB(200, 255, 255, 255),
+                                  ),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  filled:
+                                      false, // Set to false for transparency
+                                ),
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
+                        //Password
                         Align(
-                          alignment: const Alignment(0, 0.06),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 20.0, vertical: 15.0),
-                            child: TextField(
-                              controller: passwordController,
-                              decoration: InputDecoration(
-                                  prefixIcon: const Icon(Icons.lock),
+                                horizontal: 30.0, vertical: 10.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15.0),
+                                gradient: const LinearGradient(
+                                  colors: [
+                                    Color.fromARGB(255, 0, 7, 81),
+                                    Color.fromARGB(255, 75, 117, 190)
+                                  ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.2),
+                                    spreadRadius: 2,
+                                    blurRadius: 7,
+                                    offset: const Offset(0, 3),
+                                  ),
+                                ],
+                              ),
+                              child: TextField(
+                                controller: passwordController,
+                                decoration: InputDecoration(
+                                  prefixIcon: const Icon(Icons.lock,
+                                      color: Colors.white),
                                   hintText: 'Password',
                                   hintStyle: const TextStyle(
-                                      color:
-                                          Color.fromARGB(255, 212, 207, 207)),
-                                  border: const OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    borderSide: BorderSide(
-                                      color: Colors.blue, // Border color
-                                      width: 2.0, // Border width
-                                    ),
+                                    color: Color.fromARGB(200, 255, 255, 255),
                                   ),
-                                  filled: true,
-                                  fillColor: const Color(0xFF282635)
-                                      .withOpacity(0.5),
-                                  contentPadding:
-                                      const EdgeInsets.symmetric(
-                                          horizontal: 5, vertical: 2.5)),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  filled:
+                                      false, // Set to false for transparency
+                                ),
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
                           ),
                         ),
                         //Confirm Password
                         Align(
-                          alignment: const Alignment(0, 0.06),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 20.0, vertical: 15.0),
-                            child: TextField(
-                              decoration: InputDecoration(
-                                  prefixIcon: const Icon(Icons.lock),
-                                  hintText: ' Confirm Password',
-                                  hintStyle: const TextStyle(
-                                      color:
-                                          Color.fromARGB(255, 212, 207, 207)),
-                                  border: const OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                    borderSide: BorderSide(
-                                      color: Colors.blue, // Border color
-                                      width: 2.0, // Border width
-                                    ),
+                                horizontal: 30.0, vertical: 10.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15.0),
+                                gradient: const LinearGradient(
+                                  colors: [
+                                    Color.fromARGB(255, 0, 7, 81),
+                                    Color.fromARGB(255, 75, 117, 190)
+                                  ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.2),
+                                    spreadRadius: 2,
+                                    blurRadius: 7,
+                                    offset: const Offset(0, 3),
                                   ),
-                                  filled: true,
-                                  fillColor: const Color(0xFF282635)
-                                      .withOpacity(0.5),
-                                  contentPadding:
-                                      const EdgeInsets.symmetric(
-                                          horizontal: 5, vertical: 2.5)),
+                                ],
+                              ),
+                              child: TextField(
+                                controller: passwordController,
+                                decoration: InputDecoration(
+                                  prefixIcon: const Icon(Icons.lock,
+                                      color: Colors.white),
+                                  hintText: 'Confirm Password',
+                                  hintStyle: const TextStyle(
+                                    color: Color.fromARGB(200, 255, 255, 255),
+                                  ),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  filled:
+                                      false, // Set to false for transparency
+                                ),
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
                           ),
                         ),
-                        const Positioned(
-                          top: 230,
-                          child: Row(
-                            children: [
-                              Image(
-                                image: AssetImage('assets/RememberMe.png'),
-                              ),
-                              SizedBox(width: 5),
-                              Text('Remember Me'),
-                            ],
-                          ),
+                        CheckboxListTile(
+                          title: const Text('Remember Me'),
+                          value: rememberMe,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              rememberMe = value!;
+                            });
+                          },
+                          controlAffinity: ListTileControlAffinity.leading,
                         ),
                         ElevatedButton(
-                          //uncomment following comment when testing with backend
                           onPressed: () {
                             if (firstNameController.text.isEmpty ||
                                 ageController.text.isEmpty ||
@@ -347,20 +442,8 @@ class _SignUpPageState extends State<SignUp_Page> {
                               signUp();
                             }
                           },
-
-                          //Only testing purpose (Front end testing)
-                          /* onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      Home()), // Corrected class name
-                            );
-                          },*/
-                          //end of the testing code
-
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF004080),
+                            backgroundColor: Color.fromARGB(255, 30, 71, 255),
                             shape: RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.circular(10), // Border radius
