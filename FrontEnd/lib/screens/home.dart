@@ -62,6 +62,14 @@ class _HomeState extends State<Home> {
     }
   }
 
+  Widget _buildGreenBox() {
+    return Container(
+      width: 20, // Adjust the width as needed
+      height: 20, // Adjust the height as needed
+      color: Colors.green,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -154,13 +162,7 @@ class _HomeState extends State<Home> {
                     ),
                   ],
                 ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20),
-                  child: Image(
-                    image: AssetImage('assets/Learn_more.png'),
-                    height: 200,
-                  ),
-                ),
+                _buildGreenBox(),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: Row(
