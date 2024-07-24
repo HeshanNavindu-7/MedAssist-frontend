@@ -64,8 +64,8 @@ class _HomeState extends State<Home> {
 
   Widget _buildGreenBox() {
     return Container(
-      width: 20, // Adjust the width as needed
-      height: 20, // Adjust the height as needed
+      width: 300, // Adjust the width as needed
+      height: 50, // Adjust the height as needed
       color: Colors.green,
     );
   }
@@ -199,7 +199,7 @@ class _HomeState extends State<Home> {
                   child: _buildDoctorCard(context),
                 ),
                 SizedBox(
-                  height: 100, // Adding extra space at the bottom
+                  height: 50, // Adding extra space at the bottom
                 ),
               ],
             ),
