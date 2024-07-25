@@ -64,9 +64,19 @@ class _HomeState extends State<Home> {
 
   Widget _buildGreenBox() {
     return Container(
-      width: 300, // Adjust the width as needed
-      height: 50, // Adjust the height as needed
-      color: Colors.green,
+      width: 350, // Adjust the width as needed
+      height: 125, // Adjust the height as needed
+      decoration: BoxDecoration(
+        color: Color.fromARGB(255, 135, 240, 245),
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Text(
+          'Early protection for\nyour family health.',
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+        ),
+      ),
     );
   }
 
