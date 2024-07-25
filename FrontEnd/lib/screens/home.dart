@@ -65,16 +65,32 @@ class _HomeState extends State<Home> {
   Widget _buildGreenBox() {
     return Container(
       width: 350, // Adjust the width as needed
-      height: 125, // Adjust the height as needed
+      height: 132, // Adjust the height as needed to accommodate the button
       decoration: BoxDecoration(
         color: Color.fromARGB(255, 135, 240, 245),
         borderRadius: BorderRadius.circular(15),
       ),
       child: Padding(
         padding: const EdgeInsets.all(10.0),
-        child: Text(
-          'Early protection for\nyour family health.',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Early protection for\nyour family health.',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            ),
+            SizedBox(height: 5),
+            ElevatedButton(
+              onPressed: () {
+                // Button functionality here
+              },
+              child: Text('Learn More',
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 135, 240, 245),
+                  )),
+            ),
+          ],
         ),
       ),
     );
