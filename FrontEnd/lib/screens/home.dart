@@ -162,7 +162,10 @@ class _HomeState extends State<Home> {
                     ),
                   ],
                 ),
-                _buildGreenBox(),
+                Padding(
+                  padding: const EdgeInsets.all(25.0),
+                  child: _buildGreenBox(),
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: Row(
@@ -246,7 +249,7 @@ class _HomeState extends State<Home> {
   Widget _buildDoctorCard(BuildContext context) {
     return SizedBox(
       width: 150, // Set the desired width
-      height: 250, // Set the desired height
+      height: 200, // Set the desired height
       child: Container(
         decoration: BoxDecoration(
           border: Border.all(color: Colors.black, width: 1),
