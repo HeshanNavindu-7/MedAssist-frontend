@@ -22,7 +22,7 @@ class _SignUpPageState extends State<SignUp_Page> {
 
   Future<void> signUp() async {
     // Your backend endpoint URL
-    String url = 'http://192.168.8.102:8000/sign-up/';
+    String url = 'http://10.0.2.2:8000/sign-up/';
 
     try {
       final response = await http.post(

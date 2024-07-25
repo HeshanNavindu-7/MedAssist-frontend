@@ -18,7 +18,7 @@ class _SignUpPageState extends State<SignInPage> {
 
   Future<void> signIn() async {
     // Your backend endpoint URL
-    String url = 'http://192.168.8.102:8000/sign-in/';
+    String url = 'http://10.0.2.2:8000/sign-in/';
 
     try {
       final response = await http.post(
