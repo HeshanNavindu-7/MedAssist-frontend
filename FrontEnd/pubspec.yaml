@@ -162,6 +162,7 @@ flutter:
     - assets/google.png
     - assets/shop.png
     - assets/carts.png
+    - assets/hospitals.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
