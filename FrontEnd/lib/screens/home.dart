@@ -178,7 +178,7 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     _buildNavigationIcon(
-                      'assets/ambulance.jpg',
+                      'assets/ambulances.png',
                       'Ambulance',
                       () => Navigator.pushReplacement(
                         context,
