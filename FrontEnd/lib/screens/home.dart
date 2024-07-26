@@ -161,7 +161,7 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     _buildNavigationIcon(
-                      'assets/cart.jpg',
+                      'assets/carts.png',
                       'Cart',
                       () => Navigator.pushReplacement(
                         context,
