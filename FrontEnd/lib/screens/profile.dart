@@ -88,7 +88,6 @@ class Profile extends StatelessWidget {
                     'Your Name',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ))),
-
           Positioned(
             top: 275,
             left: 10,
@@ -104,7 +103,6 @@ class Profile extends StatelessWidget {
               ),
             ),
           ),
-
           const Positioned(
               top: 340,
               child: Padding(
@@ -113,7 +111,6 @@ class Profile extends StatelessWidget {
                     'Your Age',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ))),
-
           Positioned(
             top: 375,
             left: 10,
@@ -129,7 +126,6 @@ class Profile extends StatelessWidget {
               ),
             ),
           ),
-
           const Positioned(
               top: 440,
               child: Padding(
@@ -138,7 +134,6 @@ class Profile extends StatelessWidget {
                     'Your Height',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ))),
-
           Positioned(
             top: 475,
             left: 10,
@@ -154,7 +149,6 @@ class Profile extends StatelessWidget {
               ),
             ),
           ),
-
           const Positioned(
               top: 540,
               child: Padding(
@@ -163,7 +157,6 @@ class Profile extends StatelessWidget {
                     'Your Weight',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ))),
-
           Positioned(
             top: 575,
             left: 10,
@@ -179,21 +172,13 @@ class Profile extends StatelessWidget {
               ),
             ),
           ),
-
           const Positioned(
-              top: 650,
+              top: 680,
               left: 40,
               child: Image(
                   image: AssetImage(
                 'assets/profilebutton.png',
               ))),
-          //Navigation Bar
-          Positioned(
-            top: 728,
-            left: 0,
-            right: 0,
-            child: CustomBottomNavigationBar(),
-          )
         ],
       ),
     );

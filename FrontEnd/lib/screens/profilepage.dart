@@ -10,7 +10,6 @@ import 'package:midassist/screens/paymentmethod.dart';
 import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
 import 'package:http/http.dart' as http;
 import '../APIs/userDetails.dart';
-import 'medassistai.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
