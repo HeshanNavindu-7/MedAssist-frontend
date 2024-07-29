@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:midassist/screens/salesitem.dart';
 import 'package:midassist/screens/home.dart';
-import 'package:midassist/screens/market.dart'; // Ensure this import is present
+import 'package:midassist/screens/market.dart';
 import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
 
 class Cart extends StatelessWidget {
@@ -82,18 +82,15 @@ class Cart extends StatelessWidget {
           borderRadius: BorderRadius.circular(10.0),
         ),
         child: Container(
-          width: 180,
+          width: 160,
           height: 150, // Adjust the width and height as needed
-          padding: const EdgeInsets.all(8.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image(
                 image: AssetImage(imagePath),
-                height: 100, // Adjust the height as needed
-                width: 100, // Adjust the width as needed
+                height: 125, // Adjust the height as needed
+                width: 125, // Adjust the width as needed
               ),
-              const SizedBox(height: 8.0), // Space between image and text
               Text(
                 label,
                 style: const TextStyle(fontSize: 12),
