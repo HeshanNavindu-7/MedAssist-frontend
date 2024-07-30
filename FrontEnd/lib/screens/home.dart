@@ -28,6 +28,9 @@ class _HomeState extends State<Home> {
   final FocusNode _focusNode = FocusNode();
   bool _isFocused = false;
 
+  static const Color cardBackgroundColor =
+      Color(0xFFF5F5F5); // Define a constant for the card background color
+
   @override
   void initState() {
     super.initState();
@@ -248,6 +251,7 @@ class _HomeState extends State<Home> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
+        color: cardBackgroundColor, // Use the constant color for the icon cards
         child: Container(
           width: 80, // Adjust the width as needed
           padding: const EdgeInsets.all(8.0),
@@ -274,10 +278,12 @@ class _HomeState extends State<Home> {
 
   Widget _buildDoctorCard(BuildContext context) {
     return SizedBox(
-      width: 150, // Set the desired width
-      height: 200, // Set the desired height
+      width: 150,
+      height: 200,
       child: Container(
         decoration: BoxDecoration(
+          color:
+              cardBackgroundColor, // Use the constant color for the doctor card
           border: Border.all(color: Colors.black, width: 1),
           borderRadius: BorderRadius.circular(10),
         ),
