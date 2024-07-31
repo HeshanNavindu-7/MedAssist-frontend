@@ -28,8 +28,9 @@ class _HomeState extends State<Home> {
   final FocusNode _focusNode = FocusNode();
   bool _isFocused = false;
 
-  static const Color cardBackgroundColor =
-      Color(0xFFF5F5F5); // Define a constant for the card background color
+  static const Color cardBackgroundColor = Color(0xFFF5F5F5);
+  static const Color doctorCardBackgroundColor =
+      Color(0xFFE0F7FA); // New color for doctor card background
 
   @override
   void initState() {
@@ -282,8 +283,8 @@ class _HomeState extends State<Home> {
       height: 200,
       child: Container(
         decoration: BoxDecoration(
-          color:
-              cardBackgroundColor, // Use the constant color for the doctor card
+          color: Color.fromARGB(255, 227, 227,
+              227), // Use the new constant color for the doctor card
           border: Border.all(color: Colors.black, width: 1),
           borderRadius: BorderRadius.circular(10),
         ),
@@ -297,7 +298,7 @@ class _HomeState extends State<Home> {
                 );
               },
               child: const Image(
-                image: AssetImage('assets/Doctor1.png'),
+                image: AssetImage('assets/doc.png'),
                 height: 100,
                 width: 100,
               ),
