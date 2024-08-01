@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:midassist/screens/aboutdoctor.dart';
 import 'package:midassist/screens/profilepage.dart';
 import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
+import 'package:midassist/screens/doctor_card.dart';
+import 'package:midassist/screens/appointments.dart';
 
 class MySaved extends StatefulWidget {
   const MySaved({Key? key}) : super(key: key);
@@ -161,16 +163,42 @@ class _MySavedState extends State<MySaved> {
           ),
           // doctor cards
           Positioned(
-            top: 180,
+            top: 170,
             left: 10,
             right: 10,
             child: Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
-                  _buildDoctorCard(context, "Dr. John Doe"),
+                  DoctorCard(
+                    doctorName: "Dr. John Doe",
+                    specialty: "Cardiologist",
+                    distance: "800m away",
+                    imagePath: 'assets/doc.png',
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Appoinments(),
+                        ),
+                      );
+                    },
+                  ),
                   const SizedBox(width: 40),
-                  _buildDoctorCard(context, "Dr. Jane Smith"),
+                  DoctorCard(
+                    doctorName: "Dr. Jane Smith",
+                    specialty: "Cardiologist",
+                    distance: "800m away",
+                    imagePath: 'assets/doc.png',
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Appoinments(),
+                        ),
+                      );
+                    },
+                  ),
                 ],
               ),
             ),
