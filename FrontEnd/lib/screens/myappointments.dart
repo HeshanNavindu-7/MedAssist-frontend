@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:midassist/screens/appointmentdetails.dart';
 import 'package:midassist/screens/appointments.dart';
 import 'package:midassist/screens/profilepage.dart';
 import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
