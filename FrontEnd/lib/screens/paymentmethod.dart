@@ -74,15 +74,11 @@ class _PayState extends State<Pay> {
               child: Column(
                 children: [
                   Text(
-                    'Rs. 16200/=',
+                    'Rs. 15800/=',
                     style: TextStyle(
                       fontSize: 30,
                       color: Color.fromARGB(255, 255, 50, 43),
                     ),
-                  ),
-                  Text(
-                    'Goods and Services',
-                    style: TextStyle(fontSize: 15),
                   ),
                   Text(
                     'Ref.458962155654833541',
@@ -254,9 +250,8 @@ class _PayState extends State<Pay> {
               top: 640,
               left: 15,
               child: Container(
-                width: 350, // Adjust the width as needed
-                height:
-                    50, // Adjust the height as needed to accommodate the button
+                width: 350,
+                height: 50,
                 decoration: BoxDecoration(
                   color: Color.fromARGB(255, 20, 44, 199),
                   borderRadius: BorderRadius.circular(15),
