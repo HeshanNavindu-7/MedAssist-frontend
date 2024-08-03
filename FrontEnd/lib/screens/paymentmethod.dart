@@ -68,25 +68,39 @@ class _PayState extends State<Pay> {
                 ],
               ),
             ),
-            const Positioned(
+            Positioned(
               top: 100,
-              left: 120,
-              child: Column(
-                children: [
-                  Text(
-                    'Rs. 15800/=',
-                    style: TextStyle(
-                      fontSize: 30,
-                      color: Color.fromARGB(255, 255, 50, 43),
-                    ),
+              left: 20,
+              child: Container(
+                width: 350,
+                height: 132,
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Center(
+                        child: Text(
+                          'Rs. 14800/=',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 15),
+                      Center(child: Text('Ref. Number: 4587621569'))
+                    ],
                   ),
-                  Text(
-                    'Ref.458962155654833541',
-                    style: TextStyle(fontSize: 10),
-                  ),
-                ],
+                ),
               ),
             ),
+
             Positioned(
               top: 260,
               left: 50,
