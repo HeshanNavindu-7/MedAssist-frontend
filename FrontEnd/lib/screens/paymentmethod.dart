@@ -238,7 +238,7 @@ class _PayState extends State<Pay> {
                           });
                         },
                       ),
-                      const Text('Savings Account'),
+                      const Text('Saving Account'),
                     ],
                   ),
                   Row(
