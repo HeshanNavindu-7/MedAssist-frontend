@@ -179,7 +179,7 @@ class _MySavedState extends State<MySaved> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const Appoinments(),
+                          builder: (context) => const Appointments(),
                         ),
                       );
                     },
@@ -194,7 +194,7 @@ class _MySavedState extends State<MySaved> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const Appoinments(),
+                          builder: (context) => const Appointments(),
                         ),
                       );
                     },

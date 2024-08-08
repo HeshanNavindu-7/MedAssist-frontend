@@ -1,30 +1,47 @@
 import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
-import 'package:midassist/screens/aboutdoctor.dart';
+import 'package:midassist/screens/appointmentdetails.dart';
 import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
+import 'package:midassist/screens/myappointments.dart';
 
-class Appoinments extends StatelessWidget {
-  const Appoinments({Key? key}) : super(key: key);
+class Appointments extends StatefulWidget {
+  const Appointments({Key? key}) : super(key: key);
 
+  @override
+  _AppointmentsState createState() => _AppointmentsState();
+}
+
+class _AppointmentsState extends State<Appointments> {
+  DateTime _selectedDate = DateTime.now();
+
+  // Function to select a date
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
+      initialDate: _selectedDate,
       firstDate: DateTime(2000),
       lastDate: DateTime(2101),
     );
-    if (picked != null) {
-      // Handle the selected date (optional)
-      print('Selected date: ${picked.toLocal()}');
+    if (picked != null && picked != _selectedDate) {
+      setState(() {
+        _selectedDate = picked;
+      });
     }
+  }
+
+  // Function to get the day string from a date
+  String _getDayString(DateTime date) {
+    return "${date.day} ${date.month}";
   }
 
   @override
   Widget build(BuildContext context) {
+    // Calculate the dates to display
+    DateTime day1 = _selectedDate.subtract(const Duration(days: 1));
+    DateTime day2 = _selectedDate;
+    DateTime day3 = _selectedDate.add(const Duration(days: 1));
+    DateTime day4 = _selectedDate.add(const Duration(days: 2));
+
     return Scaffold(
       body: Container(
         // Background
@@ -57,7 +74,7 @@ class Appoinments extends StatelessWidget {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => AboutDoctor(),
+                            builder: (context) => MyAppo(),
                           ),
                         );
                       },
@@ -80,14 +97,14 @@ class Appoinments extends StatelessWidget {
                 ),
               ),
             ),
-            // Date
+            // Date picker
             Positioned(
               top: 70,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
-                    const Text('July, 2020'),
+                    Text('${_selectedDate.month}, ${_selectedDate.year}'),
                     const SizedBox(width: 10),
                     GestureDetector(
                       onTap: () {
@@ -100,32 +117,20 @@ class Appoinments extends StatelessWidget {
                 ),
               ),
             ),
-            const Positioned(
-                // days images
-                top: 100,
-                left: 15,
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Image(
-                        image: AssetImage('assets/day1.png'),
-                      ),
-                    ),
-                    Image(
-                      image: AssetImage('assets/day2.png'),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Image(
-                        image: AssetImage('assets/day3.png'),
-                      ),
-                    ),
-                    Image(
-                      image: AssetImage('assets/day4.png'),
-                    )
-                  ],
-                )),
+            // Days buttons
+            Positioned(
+              top: 100,
+              left: 15,
+              child: Row(
+                children: [
+                  _buildDayButton(day1, day1 == _selectedDate),
+                  _buildDayButton(day2, day2 == _selectedDate),
+                  _buildDayButton(day3, day3 == _selectedDate),
+                  _buildDayButton(day4, day4 == _selectedDate),
+                ],
+              ),
+            ),
+            // The rest of your UI
             const Positioned(
                 // available time
                 top: 195,
@@ -182,8 +187,8 @@ class Appoinments extends StatelessWidget {
               child: TextField(
                 decoration: InputDecoration(
                   hintText: 'Enter your full name',
-                  hintStyle:
-                      TextStyle(color: Color.fromARGB(255, 173, 170, 170)),
+                  hintStyle: const TextStyle(
+                      color: Color.fromARGB(255, 173, 170, 170)),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
@@ -204,8 +209,8 @@ class Appoinments extends StatelessWidget {
               child: TextField(
                 decoration: InputDecoration(
                   hintText: 'Enter your age',
-                  hintStyle:
-                      TextStyle(color: Color.fromARGB(255, 173, 170, 170)),
+                  hintStyle: const TextStyle(
+                      color: Color.fromARGB(255, 173, 170, 170)),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
@@ -267,6 +272,27 @@ class Appoinments extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  // Build a day button widget
+  Widget _buildDayButton(DateTime date, bool isSelected) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        padding: const EdgeInsets.all(8.0),
+        decoration: BoxDecoration(
+          color: isSelected ? Colors.blueAccent : Colors.white,
+          borderRadius: BorderRadius.circular(8.0),
+          border: Border.all(color: Colors.black12),
+        ),
+        child: Text(
+          _getDayString(date),
+          style: TextStyle(
+            color: isSelected ? Colors.white : Colors.black,
+          ),
         ),
       ),
     );
