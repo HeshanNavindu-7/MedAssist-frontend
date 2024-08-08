@@ -8,13 +8,26 @@ import 'package:midassist/screens/aboutdoctor.dart';
 import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
 
 class Appoinments extends StatelessWidget {
-  const Appoinments({Key? key});
+  const Appoinments({Key? key}) : super(key: key);
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+    );
+    if (picked != null) {
+      // Handle the selected date (optional)
+      print('Selected date: ${picked.toLocal()}');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        //Background
+        // Background
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/appoinmentback.png'),
@@ -23,14 +36,14 @@ class Appoinments extends StatelessWidget {
         ),
         child: Stack(
           children: [
-            //Navigation bar
+            // Navigation bar
             Positioned(
               top: 728,
               left: 0,
               right: 0,
               child: CustomBottomNavigationBar(),
             ),
-            //New appointment
+            // New appointment
             Positioned(
               top: 10,
               right: 100,
@@ -67,23 +80,28 @@ class Appoinments extends StatelessWidget {
                 ),
               ),
             ),
-            //Date
+            // Date
+            Positioned(
+              top: 70,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    const Text('July, 2020'),
+                    const SizedBox(width: 10),
+                    GestureDetector(
+                      onTap: () {
+                        _selectDate(context);
+                      },
+                      child: const Image(
+                          image: AssetImage('assets/downarrow.png')),
+                    ),
+                  ],
+                ),
+              ),
+            ),
             const Positioned(
-                top: 70,
-                child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Text('July, 2020'),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Image(image: AssetImage('assets/downarrow.png'))
-                    ],
-                  ),
-                )),
-            const Positioned(
-                //days images
+                // days images
                 top: 100,
                 left: 15,
                 child: Row(
@@ -109,7 +127,7 @@ class Appoinments extends StatelessWidget {
                   ],
                 )),
             const Positioned(
-                //available time
+                // available time
                 top: 195,
                 child: Padding(
                   padding: EdgeInsets.all(8.0),
@@ -141,7 +159,7 @@ class Appoinments extends StatelessWidget {
                   ],
                 )),
             const Positioned(
-                //patient details
+                // patient details
                 top: 265,
                 child: Padding(
                   padding: EdgeInsets.all(8.0),
@@ -151,13 +169,12 @@ class Appoinments extends StatelessWidget {
                   ),
                 )),
             const Positioned(
-                //full name
+                // full name
                 top: 285,
                 child: Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text('Full Name'),
                 )),
-
             Positioned(
               top: 315,
               left: 10,
@@ -173,14 +190,13 @@ class Appoinments extends StatelessWidget {
                 ),
               ),
             ),
-            //Age
+            // Age
             const Positioned(
                 top: 370,
                 child: Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text('Age'),
                 )),
-
             Positioned(
               top: 400,
               left: 10,
@@ -196,15 +212,13 @@ class Appoinments extends StatelessWidget {
                 ),
               ),
             ),
-
             const Positioned(
-                //gender
+                // gender
                 top: 460,
                 child: Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text('Gender'),
                 )),
-
             const Positioned(
               top: 485,
               left: 75,
@@ -222,15 +236,13 @@ class Appoinments extends StatelessWidget {
                 ],
               ),
             ),
-
             const Positioned(
-                //problem
+                // problem
                 top: 515,
                 child: Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text('Problem'),
                 )),
-
             Positioned(
               top: 545,
               left: 10,
@@ -247,13 +259,13 @@ class Appoinments extends StatelessWidget {
               ),
             ),
             const Positioned(
-              //book appoinment
+              // book appointment
               top: 640,
               left: 15,
               child: Image(
                 image: AssetImage('assets/appointment.png'),
               ),
-            )
+            ),
           ],
         ),
       ),
