@@ -90,9 +90,7 @@ class _HomeState extends State<Home> {
                 // Button functionality here
               },
               child: Text('Learn More',
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 135, 240, 245),
-                  )),
+                  style: TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
             ),
           ],
         ),

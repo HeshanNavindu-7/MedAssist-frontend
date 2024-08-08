@@ -1,8 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:midassist/screens/appointmentdetails.dart';
+import 'package:midassist/screens/aboutdoctor.dart';
 import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
-import 'package:midassist/screens/myappointments.dart';
 
 class Appointments extends StatefulWidget {
   const Appointments({Key? key}) : super(key: key);
@@ -13,6 +12,7 @@ class Appointments extends StatefulWidget {
 
 class _AppointmentsState extends State<Appointments> {
   DateTime _selectedDate = DateTime.now();
+  String _selectedGender = '';
 
   // Function to select a date
   Future<void> _selectDate(BuildContext context) async {
@@ -36,7 +36,6 @@ class _AppointmentsState extends State<Appointments> {
 
   @override
   Widget build(BuildContext context) {
-    // Calculate the dates to display
     DateTime day1 = _selectedDate.subtract(const Duration(days: 1));
     DateTime day2 = _selectedDate;
     DateTime day3 = _selectedDate.add(const Duration(days: 1));
@@ -74,7 +73,7 @@ class _AppointmentsState extends State<Appointments> {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => MyAppo(),
+                            builder: (context) => AboutDoctor(),
                           ),
                         );
                       },
@@ -111,7 +110,8 @@ class _AppointmentsState extends State<Appointments> {
                         _selectDate(context);
                       },
                       child: const Image(
-                          image: AssetImage('assets/downarrow.png')),
+                        image: AssetImage('assets/downarrow.png'),
+                      ),
                     ),
                   ],
                 ),
@@ -123,63 +123,69 @@ class _AppointmentsState extends State<Appointments> {
               left: 15,
               child: Row(
                 children: [
+                  const SizedBox(width: 20),
                   _buildDayButton(day1, day1 == _selectedDate),
+                  const SizedBox(width: 20),
                   _buildDayButton(day2, day2 == _selectedDate),
+                  const SizedBox(width: 20),
                   _buildDayButton(day3, day3 == _selectedDate),
+                  const SizedBox(width: 20),
                   _buildDayButton(day4, day4 == _selectedDate),
                 ],
               ),
             ),
-            // The rest of your UI
+            // Available Time
             const Positioned(
-                // available time
-                top: 195,
-                child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    'Available Time',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                )),
+              top: 195,
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  'Available Time',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
             const Positioned(
-                top: 220,
-                left: 30,
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Image(
-                        image: AssetImage('assets/9am.png'),
-                      ),
+              top: 220,
+              left: 30,
+              child: Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Image(
+                      image: AssetImage('assets/9am.png'),
                     ),
-                    Image(
-                      image: AssetImage('assets/930am.png'),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Image(
-                        image: AssetImage('assets/10am.png'),
-                      ),
-                    )
-                  ],
-                )),
-            const Positioned(
-                // patient details
-                top: 265,
-                child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    'Patient Details',
-                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                )),
+                  Image(
+                    image: AssetImage('assets/930am.png'),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Image(
+                      image: AssetImage('assets/10am.png'),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            // Patient details
             const Positioned(
-                // full name
-                top: 285,
-                child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text('Full Name'),
-                )),
+              top: 265,
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  'Patient Details',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+            const Positioned(
+              top: 285,
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text('Full Name'),
+              ),
+            ),
             Positioned(
               top: 315,
               left: 10,
@@ -188,7 +194,8 @@ class _AppointmentsState extends State<Appointments> {
                 decoration: InputDecoration(
                   hintText: 'Enter your full name',
                   hintStyle: const TextStyle(
-                      color: Color.fromARGB(255, 173, 170, 170)),
+                    color: Color.fromARGB(255, 173, 170, 170),
+                  ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
@@ -197,11 +204,12 @@ class _AppointmentsState extends State<Appointments> {
             ),
             // Age
             const Positioned(
-                top: 370,
-                child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text('Age'),
-                )),
+              top: 370,
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text('Age'),
+              ),
+            ),
             Positioned(
               top: 400,
               left: 10,
@@ -210,44 +218,65 @@ class _AppointmentsState extends State<Appointments> {
                 decoration: InputDecoration(
                   hintText: 'Enter your age',
                   hintStyle: const TextStyle(
-                      color: Color.fromARGB(255, 173, 170, 170)),
+                    color: Color.fromARGB(255, 173, 170, 170),
+                  ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
                 ),
               ),
             ),
+            // Gender
             const Positioned(
-                // gender
-                top: 460,
-                child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text('Gender'),
-                )),
-            const Positioned(
+              top: 460,
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text('Gender'),
+              ),
+            ),
+            Positioned(
               top: 485,
               left: 75,
               child: Row(
                 children: [
-                  Image(
-                    image: AssetImage('assets/male.png'),
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        _selectedGender = 'Male';
+                      });
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: _selectedGender == 'Male'
+                          ? Colors.blueAccent
+                          : const Color.fromARGB(255, 255, 255, 255),
+                    ),
+                    child: const Text('Male'),
                   ),
-                  SizedBox(
-                    width: 40,
-                  ),
-                  Image(
-                    image: AssetImage('assets/female.png'),
+                  const SizedBox(width: 40),
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        _selectedGender = 'Female';
+                      });
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: _selectedGender == 'Female'
+                          ? Colors.blueAccent
+                          : const Color.fromARGB(255, 255, 255, 255),
+                    ),
+                    child: const Text('Female'),
                   ),
                 ],
               ),
             ),
+            // Problem
             const Positioned(
-                // problem
-                top: 515,
-                child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text('Problem'),
-                )),
+              top: 515,
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text('Problem'),
+              ),
+            ),
             Positioned(
               top: 545,
               left: 10,
@@ -256,15 +285,16 @@ class _AppointmentsState extends State<Appointments> {
                 decoration: InputDecoration(
                   hintText: 'Write your problem in detail',
                   hintStyle: const TextStyle(
-                      color: Color.fromARGB(255, 173, 170, 170)),
+                    color: Color.fromARGB(255, 173, 170, 170),
+                  ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
                 ),
               ),
             ),
+            // Book appointment
             const Positioned(
-              // book appointment
               top: 640,
               left: 15,
               child: Image(
@@ -279,19 +309,26 @@ class _AppointmentsState extends State<Appointments> {
 
   // Build a day button widget
   Widget _buildDayButton(DateTime date, bool isSelected) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _selectedDate = date;
+        });
+      },
+      child: Padding(
         padding: const EdgeInsets.all(8.0),
-        decoration: BoxDecoration(
-          color: isSelected ? Colors.blueAccent : Colors.white,
-          borderRadius: BorderRadius.circular(8.0),
-          border: Border.all(color: Colors.black12),
-        ),
-        child: Text(
-          _getDayString(date),
-          style: TextStyle(
-            color: isSelected ? Colors.white : Colors.black,
+        child: Container(
+          padding: const EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+            color: isSelected ? Colors.blueAccent : Colors.white,
+            borderRadius: BorderRadius.circular(8.0),
+            border: Border.all(color: Colors.black12),
+          ),
+          child: Text(
+            _getDayString(date),
+            style: TextStyle(
+              color: isSelected ? Colors.white : Colors.black,
+            ),
           ),
         ),
       ),
