@@ -83,8 +83,7 @@ class _MyAppoState extends State<MyAppo> {
                 child: TextField(
                   focusNode: _focusNode,
                   decoration: InputDecoration(
-                    hintText:
-                        _isFocused ? '' : 'Search doctor, drugs, articles...',
+                    hintText: _isFocused ? '' : 'Search for appointments...',
                     prefixIcon: const Icon(Icons.search),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -112,7 +111,7 @@ class _MyAppoState extends State<MyAppo> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const Appoinments(),
+                          builder: (context) => const Appointments(),
                         ),
                       );
                     },
@@ -127,7 +126,7 @@ class _MyAppoState extends State<MyAppo> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const Appoinments(),
+                          builder: (context) => const Appointments(),
                         ),
                       );
                     },
