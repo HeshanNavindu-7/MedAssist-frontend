@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart'; // Import the intl package
 import 'package:midassist/screens/aboutdoctor.dart';
 import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
 
@@ -29,9 +30,9 @@ class _AppointmentsState extends State<Appointments> {
     }
   }
 
-  // Function to get the day string from a date
+  // Function to get the formatted day string
   String _getDayString(DateTime date) {
-    return "${date.day} ${date.month}";
+    return "${date.day} ${DateFormat('MMM').format(date)}";
   }
 
   @override
@@ -103,7 +104,8 @@ class _AppointmentsState extends State<Appointments> {
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
-                    Text('${_selectedDate.month}, ${_selectedDate.year}'),
+                    Text(
+                        '${DateFormat('MMMM').format(_selectedDate)}, ${_selectedDate.year}'),
                     const SizedBox(width: 10),
                     GestureDetector(
                       onTap: () {
@@ -123,13 +125,13 @@ class _AppointmentsState extends State<Appointments> {
               left: 15,
               child: Row(
                 children: [
-                  const SizedBox(width: 20),
+                  const SizedBox(width: 10),
                   _buildDayButton(day1, day1 == _selectedDate),
-                  const SizedBox(width: 20),
+                  const SizedBox(width: 10),
                   _buildDayButton(day2, day2 == _selectedDate),
-                  const SizedBox(width: 20),
+                  const SizedBox(width: 10),
                   _buildDayButton(day3, day3 == _selectedDate),
-                  const SizedBox(width: 20),
+                  const SizedBox(width: 10),
                   _buildDayButton(day4, day4 == _selectedDate),
                 ],
               ),
