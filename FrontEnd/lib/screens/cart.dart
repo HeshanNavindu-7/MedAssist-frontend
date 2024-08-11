@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:midassist/screens/salesitem.dart';
-import 'package:midassist/screens/home.dart';
 import 'package:midassist/screens/market.dart';
 import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
 
@@ -23,7 +22,7 @@ class Cart extends StatelessWidget {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Home(),
+                        builder: (context) => Item(),
                       ),
                     );
                   },

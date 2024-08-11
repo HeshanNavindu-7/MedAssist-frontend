@@ -262,12 +262,12 @@ class _PayState extends State<Pay> {
             ),
             Positioned(
               top: 640,
-              left: 15,
+              left: 105,
               child: Container(
-                width: 350,
+                width: 200,
                 height: 50,
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 20, 44, 199),
+                  color: Colors.blueAccent,
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: const Padding(
@@ -279,10 +279,7 @@ class _PayState extends State<Pay> {
                       Center(
                         child: Text(
                           'Select',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              color: Colors.white),
+                          style: TextStyle(fontSize: 20, color: Colors.white),
                         ),
                       ),
                     ],

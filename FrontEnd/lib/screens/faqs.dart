@@ -2,21 +2,54 @@ import 'package:flutter/material.dart';
 import 'package:midassist/screens/profilepage.dart';
 import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
 
-class Faq extends StatelessWidget {
+class Faq extends StatefulWidget {
   const Faq({Key? key}) : super(key: key);
+
+  @override
+  _FaqState createState() => _FaqState();
+}
+
+class _FaqState extends State<Faq> {
+  final FocusNode _focusNode = FocusNode();
+  bool _isFocused = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode.addListener(() {
+      setState(() {
+        _isFocused = _focusNode.hasFocus;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
+          // Background image or container
+          Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/background.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          // Back button and title
           Positioned(
             top: 25,
-            left: 10,
+            left: 15,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                //back button
                 GestureDetector(
                   onTap: () {
                     Navigator.pushReplacement(
@@ -31,62 +64,51 @@ class Faq extends StatelessWidget {
                     height: 50,
                   ),
                 ),
-                const SizedBox(
-                  width: 65,
-                ),
-                //market text
+                const SizedBox(width: 65),
                 const Text(
                   'Help Desk',
-                  style: TextStyle(
-                    fontSize: 25,
-                  ),
+                  style: TextStyle(fontSize: 25),
                   textAlign: TextAlign.center,
                 ),
               ],
             ),
           ),
+          // Introduction text
           const Positioned(
-            top: 70,
-            child: Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Text(
-                "We're here to help with anything and \neverything on MedAssist.",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
+            top: 80,
+            left: 16,
+            right: 16,
+            child: Text(
+              "We're here to help with anything and \neverything on MedAssist.",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
             ),
           ),
-          //search bar
+          // Search bar
           Positioned(
-            top: 150,
+            top: 135,
             left: 10,
             right: 10,
-            child: Container(
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: const Color.fromARGB(255, 189, 189, 189)
-                        .withOpacity(0.5),
-                    spreadRadius: 2,
-                    blurRadius: 25,
-                    offset: const Offset(0, 7),
-                  ),
-                ],
-              ),
+            child: Padding(
+              padding: const EdgeInsets.all(16),
               child: TextField(
+                focusNode: _focusNode,
                 decoration: InputDecoration(
-                  hintText: 'Search for help...',
+                  hintText:
+                      _isFocused ? '' : 'Search doctor, drugs, articles...',
                   prefixIcon: const Icon(Icons.search),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                 ),
               ),
             ),
           ),
+          // FAQ Section
           const Positioned(
             top: 230,
-            left: 10,
-            right: 10,
+            left: 16,
+            right: 16,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -95,71 +117,69 @@ class Faq extends StatelessWidget {
                   'better and happier than yesterday. We have got \n'
                   'you covered share your concern or check our \n'
                   'frequently asked questions listed below.\n',
-                  style: TextStyle(
-                    fontSize: 14.0,
-                    height: 1.5,
-                  ),
+                  style: TextStyle(fontSize: 14.0, height: 1.5),
                 ),
                 Text(
                   'FAQ',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
-                SizedBox(
-                  height: 20,
-                ),
+                SizedBox(height: 20),
+                FaqItem(question: 'What is MedAssist?'),
+                SizedBox(height: 15),
                 FaqItem(
-                  question: 'What is MedAssist?',
+                    question: 'How to apply MedAssist to the day-to-day life?'),
+                SizedBox(height: 15),
+                FaqItem(question: 'Is it safe to use MedAssist?'),
+                SizedBox(height: 15),
+                FaqItem(question: 'What is the accuracy of MedAssist?'),
+                SizedBox(height: 15),
+                FaqItem(question: 'How to support MedAssist?'),
+              ],
+            ),
+          ),
+          // Help mail text and button
+          Positioned(
+            bottom: 80,
+            left: 20,
+            right: 20,
+            child: Column(
+              children: [
+                const Text(
+                  'Still stuck? Help is a mail away.',
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                SizedBox(
-                  height: 15,
-                ),
-                FaqItem(
-                  question: 'How to apply MedAssist to the day-to-day life?',
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                FaqItem(
-                  question: 'Is it safe to use MedAssist?',
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                FaqItem(
-                  question: 'What is the accuracy of MedAssist?',
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                FaqItem(
-                  question: 'How to support MedAssist?',
+                const SizedBox(height: 25),
+                GestureDetector(
+                  onTap: () {
+                    // Handle the 'Send a message' action here
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    height: 60,
+                    padding: const EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                      color: Colors.blueAccent,
+                      borderRadius: BorderRadius.circular(8.0),
+                      border: Border.all(color: Colors.black12),
+                    ),
+                    child: const Center(
+                      child: Text(
+                        'Send a message',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
           ),
-
+          // Navigation Bar
           const Positioned(
-              top: 570,
-              left: 20,
-              child: Column(
-                children: [
-                  Text(
-                    'Still stuck? Help is a mail away.',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    height: 25,
-                  ),
-                  Image(image: AssetImage('assets/helpmessage.png'))
-                ],
-              )),
-          //Navigation Bar
-          Positioned(
             bottom: 0,
             left: 0,
             right: 0,
             child: CustomBottomNavigationBar(),
-          )
+          ),
         ],
       ),
     );
@@ -178,9 +198,7 @@ class FaqItem extends StatelessWidget {
         Expanded(
           child: Text(question),
         ),
-        const SizedBox(
-          width: 20,
-        ),
+        const SizedBox(width: 20),
         const Image(
           image: AssetImage('assets/downarr.png'),
           width: 20,
