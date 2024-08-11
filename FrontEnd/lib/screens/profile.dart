@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:midassist/screens/profilepage.dart';
 
-class Profile extends StatelessWidget {
+class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
 
+  @override
+  _ProfileState createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
   Future<void> _pickFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.image,
@@ -13,7 +18,9 @@ class Profile extends StatelessWidget {
     if (result != null) {
       String? filePath = result.files.single.path;
       print("File path: $filePath");
-    } else {}
+    } else {
+      // User canceled the picker
+    }
   }
 
   @override
@@ -33,7 +40,7 @@ class Profile extends StatelessWidget {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProfilePage(),
+                        builder: (context) => const ProfilePage(),
                       ),
                     );
                   },
@@ -74,8 +81,23 @@ class Profile extends StatelessWidget {
             left: 150,
             child: GestureDetector(
               onTap: _pickFile,
-              child: const Image(
-                image: AssetImage('assets/lastprofile.png'),
+              child: Container(
+                width: 200,
+                height: 60,
+                padding: const EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                  color: Colors.blueAccent,
+                  borderRadius: BorderRadius.circular(8.0),
+                  border: Border.all(color: Colors.black12),
+                ),
+                child: const Center(
+                  child: Text(
+                    'Change Profile Photo',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
               ),
             ),
           ),
@@ -171,13 +193,33 @@ class Profile extends StatelessWidget {
               ),
             ),
           ),
-          const Positioned(
-              top: 680,
-              left: 40,
-              child: Image(
-                  image: AssetImage(
-                'assets/profilebutton.png',
-              ))),
+          Positioned(
+            top: 655,
+            left: 70,
+            child: GestureDetector(
+              onTap: () {
+                // Handle the 'Book appointment' action here
+              },
+              child: Container(
+                width: 250,
+                height: 60,
+                padding: const EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                  color: Colors.blueAccent,
+                  borderRadius: BorderRadius.circular(8.0),
+                  border: Border.all(color: Colors.black12),
+                ),
+                child: const Center(
+                  child: Text(
+                    'Edit my profile',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
