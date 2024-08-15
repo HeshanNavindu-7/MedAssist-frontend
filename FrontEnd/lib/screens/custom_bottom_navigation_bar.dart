@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:midassist/screens/ImageUploaderPage.dart';
-import 'package:midassist/screens/doctorRecommendation.dart';
 import 'package:midassist/screens/pdfuploader.dart';
 import 'package:midassist/screens/profilepage.dart';
 import 'package:midassist/screens/medassistai.dart';
@@ -72,7 +71,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(24.0)),
         boxShadow: [
           BoxShadow(
-            color: Colors.red, // Shadow color remains the same (optional)
+            color: Color.fromARGB(255, 135, 240, 245),
             blurRadius: 12.0,
             offset: Offset(0, -2),
           ),
@@ -81,6 +80,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
       child: ClipRRect(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24.0)),
         child: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
@@ -104,12 +104,9 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
             ),
           ],
           currentIndex: _selectedIndex,
-          selectedItemColor:
-              Colors.black, // Color of the selected item text/icon
-          unselectedItemColor:
-              Colors.black, // Color of the unselected items text/icon
-          backgroundColor:
-              Colors.red, // Change this to set the navbar background color
+          selectedItemColor: Colors.black,
+          unselectedItemColor: const Color.fromARGB(221, 67, 67, 67),
+          backgroundColor: Color.fromARGB(255, 135, 240, 245),
           onTap: _onItemTapped,
         ),
       ),
