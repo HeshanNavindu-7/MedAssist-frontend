@@ -1,80 +1,118 @@
 import 'package:flutter/material.dart';
-import 'package:midassist/screens/home.dart';
+import 'package:midassist/screens/ImageUploaderPage.dart';
+import 'package:midassist/screens/doctorRecommendation.dart';
 import 'package:midassist/screens/pdfuploader.dart';
-import 'package:midassist/screens/imageUploder.dart'; // Ensure this path is correct
-import 'package:midassist/screens/medassistai.dart';
 import 'package:midassist/screens/profilepage.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:http/http.dart' as http;
+import 'package:midassist/screens/medassistai.dart';
+import 'package:midassist/screens/home.dart';
 import 'package:midassist/APIs/imageFilePicker.dart';
+import 'package:http/http.dart' as http;
 
-class CustomBottomNavigationBar extends StatelessWidget {
+class CustomBottomNavigationBar extends StatefulWidget {
   const CustomBottomNavigationBar({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final ImageFilePicker imageFilePicker = ImageFilePicker();
-    final http.Client client = http.Client();
+  _CustomBottomNavigationBarState createState() =>
+      _CustomBottomNavigationBarState();
+}
 
-    return CurvedNavigationBar(
-      backgroundColor: Colors.white,
-      color: Color(0xFFADD8E6), // Light blue color
-      height: 60, // Adjusted height within the acceptable range
-      items: <Widget>[
-        GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Home()),
-            );
-          },
-          child: Icon(Icons.home, size: 30, color: Colors.black),
+class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
+  int _selectedIndex = 0;
+  final ImageFilePicker imageFilePicker = ImageFilePicker();
+  final http.Client client = http.Client();
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+
+    switch (index) {
+      case 0:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Home()),
+        );
+        break;
+      case 1:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => PdfUploader()),
+        );
+        break;
+      case 2:
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ImageUploader(
+              imageFilePicker: imageFilePicker,
+              client: client,
+            ),
+          ),
+        );
+        break;
+      case 3:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => MedAssistAi()),
+        );
+        break;
+      case 4:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ProfilePage()),
+        );
+        break;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24.0)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.red, // Shadow color remains the same (optional)
+            blurRadius: 12.0,
+            offset: Offset(0, -2),
+          ),
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24.0)),
+        child: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.picture_as_pdf),
+              label: 'Market',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.camera_alt),
+              label: 'Upload',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.lightbulb_outline),
+              label: 'AI',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'Profile',
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          selectedItemColor:
+              Colors.black, // Color of the selected item text/icon
+          unselectedItemColor:
+              Colors.black, // Color of the unselected items text/icon
+          backgroundColor:
+              Colors.red, // Change this to set the navbar background color
+          onTap: _onItemTapped,
         ),
-        GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => PdfUploader()),
-            );
-          },
-          child: Icon(Icons.picture_as_pdf, size: 30, color: Colors.black),
-        ),
-        GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ImageUploader(
-                  imageFilePicker: imageFilePicker, 
-                  client: client,
-                ),
-              ),
-            );
-          },
-          child: Icon(Icons.camera_alt, size: 30, color: Colors.black),
-        ),
-        GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => MedAssistAi()),
-            );
-          },
-          child: Icon(Icons.lightbulb_outline, size: 30, color: Colors.black),
-        ),
-        GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ProfilePage()),
-            );
-          },
-          child: Icon(Icons.person, size: 20, color: Colors.black),
-        ),
-      ],
-      onTap: (index) {
-        // Handle navigation index if needed
-      },
+      ),
     );
   }
 }

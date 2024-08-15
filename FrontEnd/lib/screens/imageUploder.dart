@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:midassist/APIs/imageFilePicker.dart';
 import 'package:http/http.dart' as http;
-import 'image_result.dart';
+import 'package:midassist/screens/image_result.dart'; // Import the ImageResult class
 
 final buttonKey = UniqueKey();
 final imageKey = UniqueKey();
@@ -54,7 +54,8 @@ class _ImageUploaderState extends State<ImageUploader> {
           builder: (context) => ImageUploaderPage(
             imageFilePicker: widget.imageFilePicker,
             client: widget.client,
-            userId: userId!, // Safe to use `!` here since we're checking for null
+            userId:
+                userId!, // Safe to use `!` here since we're checking for null
             selectedBodyPart: selectedBodyPart!,
           ),
         ),
@@ -63,12 +64,14 @@ class _ImageUploaderState extends State<ImageUploader> {
       if (userId == null) {
         print('User ID is still being fetched. Please wait.');
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('User ID is still being fetched. Please wait.')),
+          const SnackBar(
+              content: Text('User ID is still being fetched. Please wait.')),
         );
       } else if (selectedBodyPart == null) {
         print('No body part selected');
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Please select a body part before proceeding.')),
+          const SnackBar(
+              content: Text('Please select a body part before proceeding.')),
         );
       }
     }
@@ -228,23 +231,23 @@ class _ImageUploaderPageState extends State<ImageUploaderPage> {
       _isUploading = false;
     });
 
-    if (response != null) {
-      int? statusCode = response['statusCode'];
-      if (statusCode == 201) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ImageResult(
-              imageData: response['data'], // Assuming you want to pass the data
-            ),
-          ),
-        );
-      } else {
-        _showErrorDialog(response['data']);
-      }
-    } else {
-      _showErrorDialog("Failed to upload image. Please try again.");
-    }
+    // if (response != null) {
+    //   int? statusCode = response['statusCode'];
+    //   if (statusCode == 201) {
+    //     Navigator.push(
+    //       context,
+    //       MaterialPageRoute(
+    //         builder: (context) => ImageResult(
+    //           imageData: response['data'], // Assuming you want to pass the data
+    //         ),
+    //       ),
+    //     );
+    //   } else {
+    //     _showErrorDialog(response['data']);
+    //   }
+    // } else {
+    //   _showErrorDialog("Failed to upload image. Please try again.");
+    // }
   }
 
   void _showErrorDialog(String message) {

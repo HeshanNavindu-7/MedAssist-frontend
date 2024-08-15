@@ -281,8 +281,6 @@ class _HomeState extends State<Home> {
       height: 200,
       child: Container(
         decoration: BoxDecoration(
-          color: Color.fromARGB(255, 227, 227,
-              227), // Use the new constant color for the doctor card
           border: Border.all(color: Colors.black, width: 1),
           borderRadius: BorderRadius.circular(10),
         ),
