@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:midassist/screens/home.dart';
 import 'package:midassist/screens/pdfuploader.dart';
-import 'package:midassist/screens/imageUploder.dart';
+import 'package:midassist/screens/imageUploder.dart'; // Ensure this path is correct
 import 'package:midassist/screens/medassistai.dart';
 import 'package:midassist/screens/profilepage.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -17,8 +17,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
     final http.Client client = http.Client();
 
     return CurvedNavigationBar(
-       backgroundColor: Colors.white, // Blue background color
-      color:Color(0xFFADD8E6), // Light blue color
+      backgroundColor: Colors.white,
+      color: Color(0xFFADD8E6), // Light blue color
       height: 60, // Adjusted height within the acceptable range
       items: <Widget>[
         GestureDetector(
@@ -43,10 +43,12 @@ class CustomBottomNavigationBar extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ImageUploder(
-                imageFilePicker: imageFilePicker,
-                client: client,
-              )),
+              MaterialPageRoute(
+                builder: (context) => ImageUploader(
+                  imageFilePicker: imageFilePicker, 
+                  client: client,
+                ),
+              ),
             );
           },
           child: Icon(Icons.camera_alt, size: 30, color: Colors.black),
@@ -67,11 +69,11 @@ class CustomBottomNavigationBar extends StatelessWidget {
               MaterialPageRoute(builder: (context) => ProfilePage()),
             );
           },
-          child: Icon(Icons.person, size: 30, color: Colors.black),
+          child: Icon(Icons.person, size: 20, color: Colors.black),
         ),
       ],
       onTap: (index) {
-        // Handle navigation index
+        // Handle navigation index if needed
       },
     );
   }
