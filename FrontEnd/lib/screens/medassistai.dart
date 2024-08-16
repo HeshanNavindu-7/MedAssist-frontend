@@ -93,6 +93,7 @@ class MedAssistAi extends StatelessWidget {
           const Positioned(
             bottom: 0,
             right: 0,
+            left: 0,
             child: Image(
               image: AssetImage('assets/Bottom_rectangle.png'),
             ),
