@@ -42,7 +42,7 @@ class ProfilePageState extends State<ProfilePage> {
 
   Future<void> _handleLogout(BuildContext context) async {
     // Your backend logout URL
-    const String logoutUrl = 'http://192.168.8.102:8000/log-out/';
+    const String logoutUrl = 'http://192.168.8.172:8000/log-out/';
 
     try {
       // Make POST request to logout URL
