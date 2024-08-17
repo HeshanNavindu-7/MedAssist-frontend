@@ -21,7 +21,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   String? userName;
-  String? doctorName;
+  List<Map<String, dynamic>> topDoctors = [];
 
   final ImageFilePicker imageFilePicker = ImageFilePicker();
   final http.Client client = http.Client();
@@ -54,12 +54,21 @@ class _HomeState extends State<Home> {
       final userDetails = results[0] as Map<String, dynamic>;
       final doctorDetails = results[1] as List<dynamic>;
 
-      setState(() {
-        userName = userDetails['name'];
-        if (doctorDetails.isNotEmpty) {
-          doctorName = doctorDetails[0]['name'];
-        }
-      });
+      if (doctorDetails != null && doctorDetails.isNotEmpty) {
+        setState(() {
+          userName = userDetails['name'];
+          topDoctors = doctorDetails
+              .take(2)
+              .map((doctor) => {
+                    'name': doctor['name'], // or doctor.name if it's an object
+                    'specialization': doctor['specialization'],
+                    // Map other fields as needed
+                  })
+              .toList();
+        });
+      } else {
+        print('No doctor details available');
+      }
     } catch (e) {
       print('Error: $e');
       // Consider showing an error message to the user
@@ -227,7 +236,12 @@ class _HomeState extends State<Home> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(25),
-                  child: _buildDoctorCard(context),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: topDoctors.map((doctor) {
+                      return _buildDoctorCard(context, doctor);
+                    }).toList(),
+                  ),
                 ),
                 SizedBox(
                   height: 50, // Adding extra space at the bottom
@@ -275,7 +289,8 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget _buildDoctorCard(BuildContext context) {
+  Widget _buildDoctorCard(
+      BuildContext context, Map<String, dynamic> doctorData) {
     return SizedBox(
       width: 150,
       height: 200,
@@ -302,15 +317,15 @@ class _HomeState extends State<Home> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                '$doctorName',
+                '${doctorData['name']}',
                 style:
                     const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(bottom: 5),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 5),
               child: Text(
-                'Cardiologist',
+                '${doctorData['specialization']}',
                 style: TextStyle(fontSize: 12),
               ),
             ),

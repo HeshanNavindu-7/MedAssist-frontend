@@ -70,11 +70,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24.0)),
         boxShadow: [
-          BoxShadow(
-            color: Color.fromARGB(255, 135, 240, 245),
-            blurRadius: 12.0,
-            offset: Offset(0, -2),
-          ),
+          BoxShadow(),
         ],
       ),
       child: ClipRRect(
