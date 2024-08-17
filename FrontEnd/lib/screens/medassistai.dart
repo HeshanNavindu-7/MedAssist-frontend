@@ -40,6 +40,7 @@ class _MedAssistAiState extends State<MedAssistAi> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 173, 216, 230),
         title: const Text('MedAssist AI'),
         centerTitle: true,
         leading: IconButton(

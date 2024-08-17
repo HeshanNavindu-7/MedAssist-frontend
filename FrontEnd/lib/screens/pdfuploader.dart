@@ -171,7 +171,9 @@ class _PdfUploaderState extends State<PdfUploader> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Camera and PDF Uploader'),
+        backgroundColor: const Color.fromARGB(255, 173, 216, 230),
+        centerTitle: true,
+        title: Text(' PDF Uploader'),
       ),
       body: Center(
         child: isLoading

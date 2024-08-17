@@ -180,29 +180,37 @@ class _SignUpPageState extends State<SignInPage> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 5),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        children: [
-                          Checkbox(
-                            value: isChecked,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                isChecked = value!;
-                              });
-                            },
-                          ),
-                          const Text('Remember Me'),
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 25.0), // Add margin on the left
+                        child: Row(
+                          children: [
+                            Checkbox(
+                              value: isChecked,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  isChecked = value!;
+                                });
+                              },
+                            ),
+                            const Text('Remember Me'),
+                          ],
+                        ),
                       ),
-                      const Text(
-                        'Forgot Password?',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 18, 76, 236),
-                          decoration: TextDecoration.underline,
-                          decorationColor: Color.fromARGB(255, 18, 76, 236),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            right: 30.0), // Add margin on the right
+                        child: const Text(
+                          'Forgot Password?',
+                          style: TextStyle(
+                            color: Color.fromARGB(255, 18, 76, 236),
+                            decoration: TextDecoration.underline,
+                            decorationColor: Color.fromARGB(255, 18, 76, 236),
+                          ),
                         ),
                       ),
                     ],
@@ -226,7 +234,7 @@ class _SignUpPageState extends State<SignInPage> {
                     //end of the testing code
 
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 30, 71, 255),
+                      backgroundColor: Color.fromARGB(255, 0, 7, 81),
                       shape: RoundedRectangleBorder(
                         borderRadius:
                             BorderRadius.circular(10), // Border radius
@@ -246,7 +254,7 @@ class _SignUpPageState extends State<SignInPage> {
                       children: [
                         const SizedBox(width: 80),
                         const Text("Don't have an account?"),
-                        const SizedBox(width: 20),
+                        const SizedBox(width: 10),
                         GestureDetector(
                           onTap: () {
                             Navigator.push(
