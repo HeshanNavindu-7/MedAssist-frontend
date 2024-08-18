@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:midassist/screens/home.dart';
 import 'package:midassist/screens/salesitem.dart';
 import 'package:midassist/screens/cart.dart';
 import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
@@ -33,141 +34,115 @@ class _MarketState extends State<Market> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
+      appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 173, 216, 230),
+        title: const Text("Market"),
+        centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => Home()),
+              (Route<dynamic> route) => false,
+            );
+          },
+        ),
+      ),
+      body: Column(
         children: [
-          Positioned(
-            top: 25,
-            left: 10,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Cart(),
-                      ),
-                    );
-                  },
-                  child: const Image(
-                    image: AssetImage('assets/back.png'),
-                    height: 50,
-                  ),
+          Padding(
+            padding: const EdgeInsets.only(top: 20, left: 25, right: 25),
+            child: TextField(
+              focusNode: _focusNode,
+              decoration: InputDecoration(
+                hintText: _isFocused ? '' : 'Search doctor, drugs, articles...',
+                prefixIcon: const Icon(Icons.search),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
                 ),
-                const SizedBox(width: 100),
-                const Text(
-                  'Market',
-                  style: TextStyle(
-                    fontSize: 25,
+              ),
+            ),
+          ),
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.symmetric(horizontal: 110),
+              children: [
+                const SizedBox(height: 30),
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.black,
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  textAlign: TextAlign.center,
+                  child: Column(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const Item(),
+                            ),
+                          );
+                        },
+                        child: const Image(
+                          image: AssetImage('assets/beauty.png'),
+                          height: 120,
+                          width: 130,
+                        ),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          'Boston Round Pack',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                      const Padding(
+                        padding: EdgeInsets.only(top: 0, bottom: 5),
+                        child: Text(
+                          'Cream and Body Lotion',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                      ),
+                      const Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Image(
+                              image: AssetImage('assets/Rating.png'),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            'Rs. 5625/=',
+                            style: TextStyle(
+                              fontSize: 10,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
           ),
-          Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 80, left: 25, right: 25),
-                child: TextField(
-                  focusNode: _focusNode,
-                  decoration: InputDecoration(
-                    hintText:
-                        _isFocused ? '' : 'Search doctor, drugs, articles...',
-                    prefixIcon: const Icon(Icons.search),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: ListView(
-                  padding: const EdgeInsets.symmetric(horizontal: 110),
-                  children: [
-                    const SizedBox(height: 30),
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.black,
-                          width: 1,
-                        ),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Column(
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const Item(),
-                                ),
-                              );
-                            },
-                            child: const Image(
-                              image: AssetImage('assets/beauty.png'),
-                              height: 120,
-                              width: 130,
-                            ),
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Text(
-                              'Boston Round Pack',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 5),
-                          const Padding(
-                            padding: EdgeInsets.only(top: 0, bottom: 5),
-                            child: Text(
-                              'Cream and Body Lotion',
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.normal,
-                              ),
-                            ),
-                          ),
-                          const Row(
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Image(
-                                  image: AssetImage('assets/Rating.png'),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                'Rs. 5625/=',
-                                style: TextStyle(
-                                  fontSize: 10,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          const Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: CustomBottomNavigationBar(),
-          ),
         ],
       ),
+      bottomNavigationBar: const CustomBottomNavigationBar(),
     );
   }
 }

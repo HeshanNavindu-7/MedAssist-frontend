@@ -8,60 +8,54 @@ class Ambulance extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Ambulance'),
+        centerTitle: true,
+        backgroundColor: Color.fromARGB(
+            255, 173, 216, 230), // You can customize the AppBar color
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Home(),
+              ),
+            );
+          },
+        ),
+      ),
       body: Stack(
         children: [
           Positioned(
-            top: 25,
-            left: 10,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                //back button
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Home(),
-                      ),
-                    );
-                  },
-                  child: const Image(
-                    image: AssetImage('assets/back.png'),
-                    height: 50,
-                  ),
-                ),
-                const SizedBox(
-                  width: 65,
-                ),
-                //market text
-                const Text(
-                  'Ambulance',
-                  style: TextStyle(
-                    fontSize: 25,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
+            top: 200,
+            left: 65,
+            child: Image(image: AssetImage('assets/1919.png')),
+          ),
+          Positioned(
+            top: 500,
+            left: 45,
+            child: Text(
+              'Call an emergency service vehicle',
+              style: TextStyle(
+                  fontSize: 20,
+                  color: Color.fromARGB(255, 253, 0, 0),
+                  fontWeight: FontWeight.bold),
             ),
           ),
-
-          const Positioned(
-              top: 200,
-              left: 65,
-              child: Image(image: AssetImage('assets/1919.png'))),
-
-          const Positioned(
-              top: 500,
-              left: 45,
-              child: Text(
-                'Call an emergency service vehicle',
-                style: TextStyle(
-                    fontSize: 20,
-                    color: Color.fromARGB(255, 253, 0, 0),
-                    fontWeight: FontWeight.bold),
-              )),
-          //Navigation Bar
+          // Add the red circular button
+          Positioned(
+            bottom: 100,
+            right: 30,
+            child: FloatingActionButton(
+              onPressed: () {
+                // Add your emergency call logic here
+              },
+              backgroundColor: Colors.red,
+              child: const Icon(Icons.call, color: Colors.white),
+            ),
+          ),
+          // Navigation Bar
           Positioned(
             bottom: 0,
             left: 0,

@@ -109,7 +109,7 @@ class ProfilePageState extends State<ProfilePage> {
                     userName ?? '',
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 18,
+                      fontSize: 20,
                     ),
                   ),
                 ],

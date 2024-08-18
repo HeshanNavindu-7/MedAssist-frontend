@@ -102,7 +102,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
           currentIndex: _selectedIndex,
           selectedItemColor: Colors.black,
           unselectedItemColor: const Color.fromARGB(221, 67, 67, 67),
-          backgroundColor: Color.fromARGB(255, 135, 240, 245),
+          backgroundColor: Color.fromARGB(255, 173, 216, 230),
           onTap: _onItemTapped,
         ),
       ),
