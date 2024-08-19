@@ -41,25 +41,19 @@ class ProfilePageState extends State<ProfilePage> {
   }
 
   Future<void> _handleLogout(BuildContext context) async {
-    // Your backend logout URL
-    const String logoutUrl = 'http://192.168.8.172:8000/log-out/';
+    const String logoutUrl = 'http://192.168.8.135:8000/log-out/';
 
     try {
-      // Make POST request to logout URL
       final response = await http.post(Uri.parse(logoutUrl));
 
-      // Check if request was successful
       if (response.statusCode == 200) {
-        // Parse the response message
         final responseData = jsonDecode(response.body);
         final message = responseData['success'];
 
-        // Show the response message
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(message),
         ));
 
-        // Navigate back to the sign-up page
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -67,14 +61,12 @@ class ProfilePageState extends State<ProfilePage> {
           ),
         );
       } else {
-        // Show error message if request fails
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text('Failed to logout. Please try again.'),
         ));
       }
     } catch (e) {
       print(e);
-      // Show error message if an exception occurs
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text('An error occurred: $e'),
       ));
@@ -94,92 +86,69 @@ class ProfilePageState extends State<ProfilePage> {
         ),
         child: Stack(
           children: [
-            // Navigation Bar
             Positioned(
               bottom: 0,
               left: 0,
               right: 0,
               child: CustomBottomNavigationBar(),
             ),
-            // Girl photo and name
             Positioned(
               top: 80,
-              left: 150,
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const Profile(),
-                    ),
-                  );
-                },
-                child: Image(image: AssetImage('assets/profilegirl.png')),
-              ),
-            ),
-
-            Positioned(
-              top: 170,
               left: 0,
               right: 0,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  CircleAvatar(
+                    radius: 40,
+                    backgroundImage: AssetImage(
+                        'assets/profilegirl.png'), // Use an icon if you want to remove this image
+                  ),
+                  const SizedBox(height: 10),
                   Text(
                     userName ?? '',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
                   ),
                 ],
               ),
             ),
-            // Icons
             const Positioned(
               top: 200,
               left: 50,
+              right: 50,
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Column(
                     children: [
-                      Padding(
-                        padding: EdgeInsets.only(top: 0),
-                        child: Image(image: AssetImage('assets/clock 1.png')),
-                      ),
-                      Text('    Age\n    24 yrs'),
+                      Icon(Icons.access_time, size: 30),
+                      Text('Age\n24 yrs', textAlign: TextAlign.center),
                     ],
-                  ),
-                  SizedBox(
-                    width: 55,
                   ),
                   Column(
                     children: [
-                      Padding(
-                        padding: EdgeInsets.only(top: 0),
-                        child: Image(image: AssetImage('assets/height 2.png')),
-                      ),
-                      Text('  Height\n  175cm'),
+                      Icon(Icons.height, size: 30),
+                      Text('Height\n175cm', textAlign: TextAlign.center),
                     ],
-                  ),
-                  SizedBox(
-                    width: 60,
                   ),
                   Column(
                     children: [
-                      Padding(
-                        padding: EdgeInsets.only(top: 0),
-                        child: Image(image: AssetImage('assets/weight 1.png')),
-                      ),
-                      Text('Weight\n103lbs'),
+                      Icon(Icons.line_weight, size: 30),
+                      Text('Weight\n103 lbs', textAlign: TextAlign.center),
                     ],
                   ),
                 ],
               ),
             ),
             Positioned(
-              top: 320,
+              top: 330,
+              left: 20,
+              right: 20,
               child: Column(
                 children: [
-                  // My Saved Part
                   GestureDetector(
                     onTap: () {
                       Navigator.pushReplacement(
@@ -189,34 +158,15 @@ class ProfilePageState extends State<ProfilePage> {
                         ),
                       );
                     },
-                    child: const Row(
-                      children: [
-                        SizedBox(
-                          width: 50,
-                        ),
-                        Image(
-                          image: AssetImage('assets/Heart.png'),
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Text(
-                          'My Saved',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(
-                          width: 150,
-                        ),
-                        Image(
-                          image: AssetImage('assets/Arrow.png'),
-                        ),
-                      ],
+                    child: const ListTile(
+                      leading: Icon(Icons.favorite, color: Colors.red),
+                      title: Text(
+                        'My Saved',
+                      ),
+                      trailing: Icon(Icons.arrow_forward_ios),
                     ),
                   ),
-                  const SizedBox(
-                    height: 25,
-                  ),
-                  // Appointment Part
+                  const Divider(),
                   GestureDetector(
                     onTap: () {
                       Navigator.pushReplacement(
@@ -226,34 +176,15 @@ class ProfilePageState extends State<ProfilePage> {
                         ),
                       );
                     },
-                    child: const Row(
-                      children: [
-                        SizedBox(
-                          width: 50,
-                        ),
-                        Image(
-                          image: AssetImage('assets/Appointments.png'),
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Text(
-                          'Appointments',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(
-                          width: 120,
-                        ),
-                        Image(
-                          image: AssetImage('assets/Arrow.png'),
-                        ),
-                      ],
+                    child: const ListTile(
+                      leading: Icon(Icons.calendar_today, color: Colors.blue),
+                      title: Text(
+                        'Appointments',
+                      ),
+                      trailing: Icon(Icons.arrow_forward_ios),
                     ),
                   ),
-                  const SizedBox(
-                    height: 25,
-                  ),
-                  // Payment Method
+                  const Divider(),
                   GestureDetector(
                     onTap: () {
                       Navigator.pushReplacement(
@@ -263,34 +194,15 @@ class ProfilePageState extends State<ProfilePage> {
                         ),
                       );
                     },
-                    child: const Row(
-                      children: [
-                        SizedBox(
-                          width: 50,
-                        ),
-                        Image(
-                          image: AssetImage('assets/Payment.png'),
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Text(
-                          'Payment Method',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(
-                          width: 100,
-                        ),
-                        Image(
-                          image: AssetImage('assets/Arrow.png'),
-                        ),
-                      ],
+                    child: const ListTile(
+                      leading: Icon(Icons.payment, color: Colors.green),
+                      title: Text(
+                        'Payment Method',
+                      ),
+                      trailing: Icon(Icons.arrow_forward_ios),
                     ),
                   ),
-                  const SizedBox(
-                    height: 25,
-                  ),
-                  // FAQs
+                  const Divider(),
                   GestureDetector(
                     onTap: () {
                       Navigator.pushReplacement(
@@ -300,73 +212,33 @@ class ProfilePageState extends State<ProfilePage> {
                         ),
                       );
                     },
-                    child: const Row(
-                      children: [
-                        SizedBox(
-                          width: 50,
-                        ),
-                        Image(
-                          image: AssetImage('assets/Faqs.png'),
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Text(
-                          'FAQs',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(
-                          width: 175,
-                        ),
-                        Image(
-                          image: AssetImage('assets/Arrow.png'),
-                        ),
-                      ],
+                    child: const ListTile(
+                      leading: Icon(Icons.help_outline, color: Colors.grey),
+                      title: Text(
+                        'FAQs',
+                      ),
+                      trailing: Icon(Icons.arrow_forward_ios),
                     ),
                   ),
-                  const SizedBox(
-                    height: 25,
-                  ),
-                  // LogOut
-                  Row(
-                    children: [
-                      const SizedBox(
-                        width: 50,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          _handleLogout(context);
-                        },
-                        child: const Row(
-                          children: [
-                            Image(
-                              image: AssetImage('assets/Logout.png'),
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              'Logout',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 251, 0, 0),
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 165,
-                            ),
-                            Image(
-                              image: AssetImage('assets/Arrow.png'),
-                            ),
-                          ],
+                  const Divider(),
+                  GestureDetector(
+                    onTap: () {
+                      _handleLogout(context);
+                    },
+                    child: const ListTile(
+                      leading: Icon(Icons.logout, color: Colors.red),
+                      title: Text(
+                        'Logout',
+                        style: TextStyle(
+                          color: Colors.red,
                         ),
                       ),
-                    ],
+                      trailing: Icon(Icons.arrow_forward_ios),
+                    ),
                   ),
                 ],
               ),
             ),
-            // Back Button
             Positioned(
               top: 35,
               left: 15,
@@ -379,9 +251,7 @@ class ProfilePageState extends State<ProfilePage> {
                     ),
                   );
                 },
-                child: const Image(
-                  image: AssetImage('assets/back.png'),
-                ),
+                child: const Icon(Icons.arrow_back, size: 30),
               ),
             ),
           ],
