@@ -163,7 +163,7 @@ class AboutDoctor extends StatelessWidget {
               ),
             ),
             const Positioned(
-              top: 450,
+              top: 460,
               child: Row(
                 children: [
                   Padding(
@@ -180,7 +180,7 @@ class AboutDoctor extends StatelessWidget {
               ),
             ),
             const Positioned(
-              top: 505,
+              top: 515,
               child: Row(
                 children: [
                   Padding(
@@ -197,7 +197,7 @@ class AboutDoctor extends StatelessWidget {
               ),
             ),
             const Positioned(
-              top: 560,
+              top: 570,
               child: Row(
                 children: [
                   Padding(
@@ -215,20 +215,28 @@ class AboutDoctor extends StatelessWidget {
             ),
             //Book appointment
             Positioned(
-              top: 615,
+              top: 650,
+              left: 70,
               child: GestureDetector(
                 onTap: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const Appoinments(),
-                    ),
-                  );
+                  // Handle the 'Book appointment' action here
                 },
-                child: const Padding(
-                  padding: EdgeInsets.only(top: 10, left: 20),
-                  child: Image(
-                    image: AssetImage('assets/appointment.png'),
+                child: Container(
+                  width: 250,
+                  height: 60,
+                  padding: const EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                    color: Colors.blueAccent,
+                    borderRadius: BorderRadius.circular(8.0),
+                    border: Border.all(color: Colors.black12),
+                  ),
+                  child: const Center(
+                    child: Text(
+                      'Book Appointment',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
                 ),
               ),

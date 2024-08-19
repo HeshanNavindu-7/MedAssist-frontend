@@ -1,16 +1,13 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:midassist/APIs/imageFilePicker.dart';
 import 'package:midassist/screens/aboutdoctor.dart';
 import 'package:midassist/screens/ambulance.dart';
+import 'package:midassist/screens/cart.dart';
+import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
+import 'package:midassist/screens/doctorRecommendation.dart';
 import 'package:midassist/screens/hospitals.dart';
 import 'package:midassist/screens/market.dart';
 import 'package:midassist/screens/notifications.dart';
-import 'package:midassist/screens/cart.dart';
-import 'package:midassist/APIs/doctorDetails.dart';
-import 'package:midassist/APIs/userDetails.dart';
-import 'custom_bottom_navigation_bar.dart';
-import 'doctorRecommendation.dart';
 
 class Home extends StatefulWidget {
   Home({Key? key}) : super(key: key);
@@ -21,45 +18,16 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   String? userName;
-  String? doctorName;
+  List<Map<String, dynamic>> topDoctors = [];
 
-  final ImageFilePicker imageFilePicker = ImageFilePicker();
-  final http.Client client = http.Client();
-  final FocusNode _focusNode = FocusNode();
-  bool _isFocused = false;
-
+  @override
   void initState() {
     super.initState();
-    _fetchDetails();
-
-    _focusNode.addListener(() {
-      setState(() {
-        _isFocused = _focusNode.hasFocus;
-      });
-    });
+    _fetchDetails(); // Fetch details when the page initializes
   }
- 
 
   Future<void> _fetchDetails() async {
-    try {
-      final results = await Future.wait([
-        UserDataManager.fetchUserDetails(),
-        DoctorDataManager.fetchDoctorDetails(),
-      ]);
-
-      final userDetails = results[0] as Map<String, dynamic>;
-      final doctorDetails = results[1] as List<dynamic>;
-
-      setState(() {
-        userName = userDetails['name'];
-        if (doctorDetails.isNotEmpty) {
-          doctorName = doctorDetails[0]['name'];
-        }
-      });
-    } catch (e) {
-      print('Error: $e');
-      // Consider showing an error message to the user
-    }
+    // Your existing code for fetching user and doctor details
   }
 
   @override
@@ -67,127 +35,136 @@ class _HomeState extends State<Home> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-       appBar: AppBar(
-          automaticallyImplyLeading: false, // Remove the back button
-           title: Row(
+        appBar: AppBar(
+          backgroundColor: Color.fromARGB(255, 173, 216, 230),
+          automaticallyImplyLeading: false,
+          title: Row(
             children: [
               Expanded(
-                child:Padding(padding: const EdgeInsets.symmetric(horizontal:8.0),
-                child: Text(
-                  'Hello, ${userName ?? 'Guest'}',
-                  style: const TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Text(
+                    'Hello, ${userName ?? 'Guest'}',
+                    style: const TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.left,
                   ),
-                  textAlign: TextAlign.left,
                 ),
-              ),
               ),
               IconButton(
                 icon: const Icon(Icons.notifications),
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => const Notifications()),
+                    MaterialPageRoute(
+                        builder: (context) => const Notifications()),
                   );
                 },
               ),
             ],
           ),
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: TextField(
-                  focusNode: _focusNode,
-                  decoration: InputDecoration(
-                    hintText: _isFocused ? '' : 'Search doctor, drugs, articles...',
-                  prefixIcon: const Icon(Icons.search),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintText: 'Search doctor, drugs, articles...',
+                      prefixIcon: const Icon(Icons.search),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  _buildNavigationIcon(
-                    'assets/market.jpg',
-                    'Market',
-                    () => Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Market()),
-                    ),
-                  ),
-                  _buildNavigationIcon(
-                    'assets/cart.jpg',
-                    'Cart',
-                    () => Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Cart()),
-                    ),
-                  ),
-                  _buildNavigationIcon(
-                    'assets/hospital.jpg',
-                    'Hospital',
-                    () => Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Hospitals()),
-                    ),
-                  ),
-                  _buildNavigationIcon(
-                    'assets/ambulance.jpg',
-                    'Ambulance',
-                    () => Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Ambulance()),
-                    ),
-                  ),
-                ],
-              ),
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 20),
-                child: Image(
-                  image: AssetImage('assets/Learn_more.png'),
-                  height: 200,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    const Text(
-                      'Top Doctors',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    _buildNavigationIcon(
+                      'assets/shop.png',
+                      'Market',
+                      () => Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => const Market()),
+                      ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const DoctorRecommendation()),
-                        );
-                      },
-                      child: const Text(
-                        'See all',
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.normal,
-                          color: Color.fromARGB(255, 24, 184, 149),
-                        ),
+                    _buildNavigationIcon(
+                      'assets/carts.png',
+                      'Cart',
+                      () => Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => const Cart()),
+                      ),
+                    ),
+                    _buildNavigationIcon(
+                      'assets/hospitals.png',
+                      'Hospital',
+                      () => Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Hospitals()),
+                      ),
+                    ),
+                    _buildNavigationIcon(
+                      'assets/ambulances.png',
+                      'Ambulance',
+                      () => Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Ambulance()),
                       ),
                     ),
                   ],
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(25),
-                child: _buildDoctorCard(context),
-              ),
-            ],
+                Padding(
+                  padding: const EdgeInsets.all(25.0),
+                  child: _buildImageCarousel(),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Top Doctors',
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const DoctorRecommendation()),
+                          );
+                        },
+                        child: const Text(
+                          'See all',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.normal,
+                            color: Color.fromARGB(255, 24, 184, 149),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(25),
+                  child: _buildDoctorCarousel(),
+                ),
+                SizedBox(
+                  height: 50,
+                ),
+              ],
+            ),
           ),
         ),
         bottomNavigationBar: CustomBottomNavigationBar(),
@@ -195,33 +172,112 @@ class _HomeState extends State<Home> {
     );
   }
 
+  Widget _buildImageCarousel() {
+    return CarouselSlider(
+      options: CarouselOptions(
+        height: 110,
+        enlargeCenterPage: true,
+        autoPlay: true,
+        autoPlayCurve: Curves.fastOutSlowIn,
+        enableInfiniteScroll: true,
+        autoPlayAnimationDuration: Duration(milliseconds: 1000),
+        viewportFraction: 1,
+      ),
+      items: [
+        'assets/CarosalCard/img1.png',
+        'assets/CarosalCard/img2.png',
+        'assets/CarosalCard/img3.png'
+      ].map((imagePath) {
+        return Builder(
+          builder: (BuildContext context) {
+            return Container(
+              margin: EdgeInsets.all(5.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                image: DecorationImage(
+                  image: AssetImage(imagePath),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            );
+          },
+        );
+      }).toList(),
+    );
+  }
+
   Widget _buildNavigationIcon(
       String imagePath, String label, VoidCallback onTap) {
     return GestureDetector(
       onTap: onTap,
-      child: Column(
-        children: [
-          Image(
-            image: AssetImage(imagePath),
-            height: 100,
-            width: 50,
+      child: Card(
+        elevation: 4.0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: Container(
+          width: 80,
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image(
+                image: AssetImage(imagePath),
+                height: 50,
+                width: 50,
+              ),
+              const SizedBox(height: 8.0),
+              Text(
+                label,
+                style: const TextStyle(fontSize: 12),
+                textAlign: TextAlign.center,
+              ),
+            ],
           ),
-          Text(
-            label,
-            style: const TextStyle(fontSize: 12),
-          ),
-        ],
+        ),
       ),
     );
   }
 
-  Widget _buildDoctorCard(BuildContext context) {
+  Widget _buildDoctorCarousel() {
+    return CarouselSlider(
+      options: CarouselOptions(
+        height: 250,
+        enlargeCenterPage: true,
+        autoPlay: true,
+        aspectRatio: 16 / 9,
+        autoPlayCurve: Curves.fastOutSlowIn,
+        enableInfiniteScroll: true,
+        autoPlayAnimationDuration: Duration(milliseconds: 800),
+        viewportFraction: 0.8,
+      ),
+      items: topDoctors.map((doctor) {
+        return Builder(
+          builder: (BuildContext context) {
+            return _buildDoctorCard(context, doctor);
+          },
+        );
+      }).toList(),
+    );
+  }
+
+  Widget _buildDoctorCard(
+      BuildContext context, Map<String, dynamic> doctorData) {
     return Container(
+      margin: EdgeInsets.all(5.0),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.black, width: 1),
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(10.0),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 5,
+            offset: Offset(0, 2),
+          ),
+        ],
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           GestureDetector(
             onTap: () {
@@ -231,41 +287,32 @@ class _HomeState extends State<Home> {
               );
             },
             child: const Image(
-              image: AssetImage('assets/Doctor1.png'),
-              height: 100,
-              width: 100,
+              image: AssetImage('assets/doc.png'),
+              height: 120,
+              width: 120,
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              '$doctorName',
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              doctorData['name'],
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+              textAlign: TextAlign.center,
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.only(bottom: 5),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8.0),
             child: Text(
-              'Cardiologist',
-              style: TextStyle(fontSize: 12),
+              doctorData['specialization'],
+              style: const TextStyle(
+                fontSize: 16,
+                color: Colors.grey,
+              ),
+              textAlign: TextAlign.center,
             ),
-          ),
-          const Row(
-            children: [
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Image(image: AssetImage('assets/Rating.png')),
-              ),
-              SizedBox(width: 10),
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Image(image: AssetImage('assets/Location.png')),
-              ),
-              Text(
-                '800m away',
-                style: TextStyle(fontSize: 10),
-              ),
-            ],
           ),
         ],
       ),

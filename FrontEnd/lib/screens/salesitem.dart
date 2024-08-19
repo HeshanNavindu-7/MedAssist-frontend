@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
-import 'package:midassist/screens/market.dart';
+import 'package:midassist/screens/home.dart';
 import 'package:midassist/screens/cart.dart';
 
 class Item extends StatefulWidget {
@@ -48,7 +48,7 @@ class _ItemState extends State<Item> {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const Market(),
+                        builder: (context) => Home(),
                       ),
                     );
                   },
@@ -134,7 +134,7 @@ class _ItemState extends State<Item> {
           ),
           // Add to cart image
           Positioned(
-            top: 650,
+            top: 655,
             left: 70,
             child: GestureDetector(
               onTap: () {
@@ -145,8 +145,23 @@ class _ItemState extends State<Item> {
                   ),
                 );
               },
-              child: const Image(
-                image: AssetImage('assets/addtocart.png'),
+              child: Container(
+                width: 250,
+                height: 60,
+                padding: const EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                  color: Colors.blueAccent,
+                  borderRadius: BorderRadius.circular(8.0),
+                  border: Border.all(color: Colors.black12),
+                ),
+                child: const Center(
+                  child: Text(
+                    'Add to Cart',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
               ),
             ),
           ),

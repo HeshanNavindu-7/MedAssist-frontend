@@ -28,7 +28,8 @@ class _PdfUploaderState extends State<PdfUploader> {
   }
 
   Future<void> _fetchUserId() async {
-    final response = await http.get(Uri.parse('http://192.168.8.102:8000/users/'));
+    final response =
+        await http.get(Uri.parse('http://192.168.8.135:8000/users/'));
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = jsonDecode(response.body);
@@ -70,7 +71,7 @@ class _PdfUploaderState extends State<PdfUploader> {
 
         var request = http.MultipartRequest(
           'POST',
-          Uri.parse('http://10.0.2.2:8000/upload_photo/'),
+          Uri.parse('http://192.168.8.135:8000/upload_photo/'),
         );
 
         request.files.add(
@@ -123,7 +124,7 @@ class _PdfUploaderState extends State<PdfUploader> {
 
           var request = http.MultipartRequest(
             'POST',
-            Uri.parse('http://192.168.8.102:8000/upload_pdf/'),
+            Uri.parse('http://192.168.8.135:8000/upload_pdf/'),
           );
 
           request.files.add(
@@ -170,7 +171,9 @@ class _PdfUploaderState extends State<PdfUploader> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Camera and PDF Uploader'),
+        backgroundColor: const Color.fromARGB(255, 173, 216, 230),
+        centerTitle: true,
+        title: Text(' PDF Uploader'),
       ),
       body: Center(
         child: isLoading

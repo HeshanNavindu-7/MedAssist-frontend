@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:midassist/screens/secondPage.dart';
 
 class ImageResult extends StatelessWidget {
-  const ImageResult({super.key});
+  final dynamic imageData; // Adjust the type based on your needs
+
+  const ImageResult({Key? key, required this.imageData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/landingPage.png'),
-            fit: BoxFit.cover,
-          ),
+      appBar: AppBar(
+        title: const Text('Image Result'),
+        backgroundColor: const Color.fromARGB(255, 173, 216, 230),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Center(
+          child: Text(
+              'Image Data: $imageData'), // Display or process the image data
         ),
-        child:const Center(
-        child: Text("Result"),
-        ),
-        ),
-      );
+      ),
+    );
   }
 }
