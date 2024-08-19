@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:midassist/screens/salesitem.dart';
-import 'package:midassist/screens/home.dart';
+import 'package:midassist/screens/market.dart';
 import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
 
 class Cart extends StatelessWidget {
@@ -17,13 +17,12 @@ class Cart extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                //back bitton
                 GestureDetector(
                   onTap: () {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Home(),
+                        builder: (context) => Item(),
                       ),
                     );
                   },
@@ -35,7 +34,6 @@ class Cart extends StatelessWidget {
                 const SizedBox(
                   width: 100,
                 ),
-                //market text
                 const Text(
                   'My Cart',
                   style: TextStyle(
@@ -46,93 +44,60 @@ class Cart extends StatelessWidget {
               ],
             ),
           ),
-
-          //product
           Positioned(
             top: 120,
             left: 25,
-            right: 150,
+            right: 25,
             child: Row(
               children: [
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.black,
-                      width: 1,
-                    ),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Column(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const Item(),
-                            ),
-                          );
-                        },
-                        child: const Image(
-                          image: AssetImage('assets/beauty.png'),
-                          height: 120,
-                          width: 130,
-                        ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          'Boston Round Pack',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 5),
-                      const Padding(
-                        padding: EdgeInsets.only(top: 0, bottom: 5),
-                        child: Text(
-                          'Cream and Body Lotion',
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                      ),
-                      const Row(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Image(
-                              image: AssetImage('assets/Rating.png'),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            'Rs. 5625/=',
-                            style: TextStyle(
-                              fontSize: 10,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                _buildNavigation(
+                  'assets/beauty.png',
+                  'Market',
+                  () => Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Market()),
                   ),
                 ),
               ],
             ),
           ),
-          //Navigation Bar
           Positioned(
-            top: 728,
+            bottom: 0,
             left: 0,
             right: 0,
             child: CustomBottomNavigationBar(),
           )
         ],
+      ),
+    );
+  }
+
+  Widget _buildNavigation(String imagePath, String label, VoidCallback onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Card(
+        elevation: 4.0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: Container(
+          width: 160,
+          height: 150, // Adjust the width and height as needed
+          child: Column(
+            children: [
+              Image(
+                image: AssetImage(imagePath),
+                height: 125, // Adjust the height as needed
+                width: 125, // Adjust the width as needed
+              ),
+              Text(
+                label,
+                style: const TextStyle(fontSize: 12),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

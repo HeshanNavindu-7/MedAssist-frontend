@@ -2,8 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:midassist/screens/profilepage.dart';
 import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
 
-class Pay extends StatelessWidget {
+class Pay extends StatefulWidget {
   const Pay({Key? key}) : super(key: key);
+
+  @override
+  _PayState createState() => _PayState();
+}
+
+class _PayState extends State<Pay> {
+  bool rememberMe = false;
+  bool savingsAccount = false;
+  bool currentAccount = false;
+  String? selectedBank = 'Union Bank'; // Initial selected bank
+
+  final List<String> banks = [
+    'Union Bank',
+    'Commercial Bank',
+    'HSBC',
+    'Sampath Bank',
+    'Hatton National Bank'
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +40,6 @@ class Pay extends StatelessWidget {
               top: 25,
               left: 10,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // Back button
                   GestureDetector(
@@ -39,9 +56,7 @@ class Pay extends StatelessWidget {
                       height: 50,
                     ),
                   ),
-                  const SizedBox(
-                    width: 45,
-                  ),
+                  const SizedBox(width: 45),
                   // Payment Method text
                   const Text(
                     'Payment Method',
@@ -53,39 +68,50 @@ class Pay extends StatelessWidget {
                 ],
               ),
             ),
-            const Positioned(
+            Positioned(
               top: 100,
-              left: 120,
-              child: Column(
-                children: [
-                  Text(
-                    'Rs. 16200/=',
-                    style: TextStyle(
-                      fontSize: 30,
-                      color: Color.fromARGB(255, 255, 50, 43),
-                    ),
+              left: 20,
+              child: Container(
+                width: 350,
+                height: 132,
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Center(
+                        child: Text(
+                          'Rs. 14800/=',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 15),
+                      Center(child: Text('Ref. Number: 4587621569'))
+                    ],
                   ),
-                  Text(
-                    'Goods and Services',
-                    style: TextStyle(fontSize: 15),
-                  ),
-                  Text(
-                    'Ref.458962155654833541',
-                    style: TextStyle(fontSize: 10),
-                  ),
-                ],
+                ),
               ),
             ),
+
             Positioned(
               top: 260,
               left: 50,
+              right: 50,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    width: 100,
-                    height: 2,
-                    color: Colors.black,
+                  Expanded(
+                    child: Container(
+                      height: 2,
+                      color: Colors.black,
+                    ),
                   ),
                   const Text(
                     '  Pay with  ',
@@ -94,154 +120,175 @@ class Pay extends StatelessWidget {
                       fontSize: 20,
                     ),
                   ),
-                  Container(
-                    width: 100,
-                    height: 2,
-                    color: Colors.black,
+                  Expanded(
+                    child: Container(
+                      height: 2,
+                      color: Colors.black,
+                    ),
                   ),
                 ],
               ),
             ),
-            const Positioned(
+            Positioned(
               top: 300,
               left: 20,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('How would you like to pay?'),
-                  SizedBox(height: 10),
+                  const Text('How would you like to pay?'),
+                  const SizedBox(height: 10),
                   Row(
                     children: [
-                      Image(image: AssetImage('assets/RememberMe.png')),
-                      SizedBox(width: 10),
-                      Text('  Credit or Debit card'),
-                      SizedBox(width: 10),
-                      Image(
+                      Checkbox(
+                        value: rememberMe,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            rememberMe = value!;
+                          });
+                        },
+                      ),
+                      const Text('Credit or Debit card'),
+                      const SizedBox(width: 10),
+                      const Image(
                         image: AssetImage('assets/visa.png'),
                         width: 50,
                         height: 50,
                       ),
-                      SizedBox(width: 10),
-                      Image(
+                      const SizedBox(width: 10),
+                      const Image(
                         image: AssetImage('assets/master.png'),
                         width: 40,
                         height: 40,
                       ),
                     ],
                   ),
-                  SizedBox(height: 10),
                   Row(
                     children: [
-                      Image(image: AssetImage('assets/RememberMe.png')),
-                      SizedBox(width: 10),
-                      Text('  Pay by Bank'),
+                      Checkbox(
+                        value: rememberMe,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            rememberMe = value!;
+                          });
+                        },
+                      ),
+                      const Text('Pay Online (Mobile Banking)'),
                     ],
                   ),
                 ],
               ),
             ),
-            const Positioned(
+            Positioned(
               top: 425,
               left: 20,
+              right: 20,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Select Bank'),
-                  SizedBox(height: 10),
-                  Stack(
-                    children: [
-                      Image(
-                        image: AssetImage('assets/bankback.png'),
-                      ),
-                      Positioned(
-                        top: 15,
-                        left: 290,
-                        child: Image(image: AssetImage('assets/downarr.png')),
-                      ),
-                      Positioned.fill(
-                        child: Center(
-                          child: Text(
-                            'Union Bank',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Color.fromARGB(255, 0, 0, 0),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            const Positioned(
-              top: 515,
-              left: 20,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Account Type'),
-                  SizedBox(height: 10),
-                  Stack(
-                    children: [
-                      Image(
-                        image: AssetImage('assets/bankback.png'),
-                      ),
-                      Positioned(
-                        top: 20,
-                        left: 30,
-                        child: Image(image: AssetImage('assets/tick.png')),
-                      ),
-                      Positioned.fill(
-                        child: Center(
-                          child: Text(
-                            'Personal',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Color.fromARGB(255, 0, 0, 0),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            const Positioned(
-              top: 610,
-              left: 20,
-              child: Stack(
-                children: [
-                  Image(image: AssetImage('assets/bankback.png')),
-                  Positioned(
-                    top: 20,
-                    left: 30,
-                    child: Image(image: AssetImage('assets/tick.png')),
-                  ),
-                  Positioned.fill(
-                    child: Center(
-                      child: Text(
-                        'Business',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Color.fromARGB(255, 0, 0, 0),
-                        ),
+                  const Text('Select Bank'),
+                  const SizedBox(height: 10),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 12.0, vertical: 5.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5.0),
+                      border: Border.all(color: Colors.black, width: 1),
+                      color: Colors.white,
+                    ),
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton<String>(
+                        isExpanded: true,
+                        value: selectedBank,
+                        items: banks.map((String bank) {
+                          return DropdownMenuItem<String>(
+                            value: bank,
+                            child: Text(bank),
+                          );
+                        }).toList(),
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            selectedBank = newValue!;
+                          });
+                        },
                       ),
                     ),
                   ),
                 ],
               ),
             ),
-
-            const Positioned(
-                top: 665,
-                left: 15,
-                child: Image(
-                  image: AssetImage('assets/select.png'),
-                )),
-            // Navigation Bar
             Positioned(
+              top: 520,
+              left: 20,
+              right: 20,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Account Type'),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: [
+                      Checkbox(
+                        value: savingsAccount,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            savingsAccount = value!;
+                            if (savingsAccount) {
+                              currentAccount = false;
+                            }
+                          });
+                        },
+                      ),
+                      const Text('Saving Account'),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Checkbox(
+                        value: currentAccount,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            currentAccount = value!;
+                            if (currentAccount) {
+                              savingsAccount = false;
+                            }
+                          });
+                        },
+                      ),
+                      const Text('Current Account'),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Positioned(
+              top: 640,
+              left: 105,
+              child: Container(
+                width: 200,
+                height: 50,
+                decoration: BoxDecoration(
+                  color: Colors.blueAccent,
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Center(
+                        child: Text(
+                          'Select',
+                          style: TextStyle(fontSize: 20, color: Colors.white),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            // Navigation Bar
+            const Positioned(
               bottom: 0,
               left: 0,
               right: 0,

@@ -2,180 +2,166 @@ import 'package:flutter/material.dart';
 import 'package:midassist/screens/home.dart';
 import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
 
-class Hospitals extends StatelessWidget {
+class Hospitals extends StatefulWidget {
   const Hospitals({Key? key}) : super(key: key);
+
+  @override
+  _HospitalsState createState() => _HospitalsState();
+}
+
+class _HospitalsState extends State<Hospitals> {
+  final FocusNode _focusNode = FocusNode();
+  bool _isFocused = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode.addListener(() {
+      setState(() {
+        _isFocused = _focusNode.hasFocus;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
+      appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 173, 216, 230),
+        title: const Text("Hospitals"),
+        centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Home(),
+              ),
+            );
+          },
+        ),
+      ),
+      body: Column(
         children: [
-          Positioned(
-            top: 25,
-            left: 10,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                //back button
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Home(),
-                      ),
-                    );
-                  },
-                  child: const Image(
-                    image: AssetImage('assets/back.png'),
-                    height: 50,
-                  ),
+          // Search bar
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: TextField(
+              focusNode: _focusNode,
+              decoration: InputDecoration(
+                hintText: _isFocused ? '' : 'Search for hospitals...',
+                prefixIcon: const Icon(Icons.search),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
                 ),
-                const SizedBox(
-                  width: 65,
+              ),
+            ),
+          ),
+          // Hospitals list
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.all(16),
+              children: const [
+                HospitalItem(
+                  name: 'General Hospital Matale',
+                  contactNumber: '011-1234567',
+                  location: 'Matale, Sri Lanka',
                 ),
-                //market text
-                const Text(
-                  'Hospitals',
-                  style: TextStyle(
-                    fontSize: 25,
-                  ),
-                  textAlign: TextAlign.center,
+                HospitalItem(
+                  name: 'Asiri Hospitals Kandy',
+                  contactNumber: '011-2345678',
+                  location: 'Kandy, Sri Lanka',
+                ),
+                HospitalItem(
+                  name: 'Suwa Sewana Hospitals Kandy',
+                  contactNumber: '011-3456789',
+                  location: 'Kandy, Sri Lanka',
+                ),
+                HospitalItem(
+                  name: 'Kumudu Hospitals Matale',
+                  contactNumber: '011-4567890',
+                  location: 'Matale, Sri Lanka',
+                ),
+                HospitalItem(
+                  name: 'Lanka Hospitals Kandy',
+                  contactNumber: '011-5678901',
+                  location: 'Kandy, Sri Lanka',
                 ),
               ],
             ),
           ),
-          const Positioned(
-            top: 70,
-            child: Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Text(
-                "We're here to help with anything and \neverything on MedAssist.",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-            ),
-          ),
-          //search bar
-          Positioned(
-            top: 150,
-            left: 10,
-            right: 10,
-            child: Container(
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: const Color.fromARGB(255, 189, 189, 189)
-                        .withOpacity(0.5),
-                    spreadRadius: 2,
-                    blurRadius: 25,
-                    offset: const Offset(0, 7),
-                  ),
-                ],
-              ),
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: 'Search for hospitals...',
-                  prefixIcon: const Icon(Icons.search),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          const Positioned(
-            top: 230,
-            left: 10,
-            right: 10,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Hospitals near you',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                FaqItem(
-                  question: 'General Hospital Matale',
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                FaqItem(
-                  question: 'Asiri Hospitals Kandy',
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                FaqItem(
-                  question: 'Suwa Sewana Hospitals Kandy',
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                FaqItem(
-                  question: 'Kumudu Hospitaals Matale',
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                FaqItem(
-                  question: 'Lanka Hospitals Kandy',
-                ),
-              ],
-            ),
-          ),
-
-          const Positioned(
-              top: 570,
-              left: 20,
-              child: Column(
-                children: [
-                  Text(
-                    'Still stuck? Help is a mail away.',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    height: 25,
-                  ),
-                  Image(image: AssetImage('assets/helpmessage.png'))
-                ],
-              )),
-          //Navigation Bar
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: CustomBottomNavigationBar(),
-          )
+          // Navigation Bar
+          const CustomBottomNavigationBar(),
         ],
       ),
     );
   }
 }
 
-class FaqItem extends StatelessWidget {
-  final String question;
+class HospitalItem extends StatefulWidget {
+  final String name;
+  final String contactNumber;
+  final String location;
 
-  const FaqItem({Key? key, required this.question}) : super(key: key);
+  const HospitalItem({
+    Key? key,
+    required this.name,
+    required this.contactNumber,
+    required this.location,
+  }) : super(key: key);
+
+  @override
+  _HospitalItemState createState() => _HospitalItemState();
+}
+
+class _HospitalItemState extends State<HospitalItem> {
+  bool _isExpanded = false;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: Text(question),
-        ),
-        const SizedBox(
-          width: 20,
-        ),
-        const Image(
-          image: AssetImage('assets/downarr.png'),
-          width: 20,
-        ),
-      ],
+    return Card(
+      child: Column(
+        children: [
+          ListTile(
+            title: Text(
+              widget.name,
+              style: const TextStyle(
+                  // Make the hospital name bold
+                  ),
+            ),
+            trailing: IconButton(
+              icon: Icon(
+                _isExpanded ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+              ),
+              onPressed: () {
+                setState(() {
+                  _isExpanded = !_isExpanded;
+                });
+              },
+            ),
+          ),
+          if (_isExpanded)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Contact: ${widget.contactNumber}'),
+                  const SizedBox(height: 5),
+                  Text('Location: ${widget.location}'),
+                  const SizedBox(height: 10),
+                ],
+              ),
+            ),
+        ],
+      ),
     );
   }
 }

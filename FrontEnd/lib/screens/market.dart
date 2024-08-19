@@ -1,86 +1,74 @@
 import 'package:flutter/material.dart';
-import 'package:midassist/screens/salesitem.dart';
 import 'package:midassist/screens/home.dart';
+import 'package:midassist/screens/salesitem.dart';
+import 'package:midassist/screens/cart.dart';
 import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
 
-class Market extends StatelessWidget {
+class Market extends StatefulWidget {
   const Market({Key? key}) : super(key: key);
+
+  @override
+  _MarketState createState() => _MarketState();
+}
+
+class _MarketState extends State<Market> {
+  final FocusNode _focusNode = FocusNode();
+  bool _isFocused = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode.addListener(() {
+      setState(() {
+        _isFocused = _focusNode.hasFocus;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
+      appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 173, 216, 230),
+        title: const Text("Market"),
+        centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => Home()),
+              (Route<dynamic> route) => false,
+            );
+          },
+        ),
+      ),
+      body: Column(
         children: [
-          Positioned(
-            top: 25,
-            left: 10,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                //back bitton
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Home(),
-                      ),
-                    );
-                  },
-                  child: const Image(
-                    image: AssetImage('assets/back.png'),
-                    height: 50,
-                  ),
-                ),
-                const SizedBox(
-                  width: 100,
-                ),
-                //market text
-                const Text(
-                  'Market',
-                  style: TextStyle(
-                    fontSize: 25,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-          ),
-          //search bar
-          Positioned(
-            top: 80,
-            left: 10,
-            right: 10,
-            child: Container(
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: const Color.fromARGB(255, 189, 189, 189)
-                        .withOpacity(0.5),
-                    spreadRadius: 2,
-                    blurRadius: 25,
-                    offset: const Offset(0, 7),
-                  ),
-                ],
-              ),
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: 'Search for items...',
-                  prefixIcon: const Icon(Icons.search), // Removed 'const'
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
+          Padding(
+            padding: const EdgeInsets.only(top: 20, left: 25, right: 25),
+            child: TextField(
+              focusNode: _focusNode,
+              decoration: InputDecoration(
+                hintText: _isFocused ? '' : 'Search doctor, drugs, articles...',
+                prefixIcon: const Icon(Icons.search),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
                 ),
               ),
             ),
           ),
-          //product
-          Positioned(
-            top: 180,
-            left: 25,
-            right: 150,
-            child: Row(
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.symmetric(horizontal: 110),
               children: [
+                const SizedBox(height: 30),
                 Container(
                   decoration: BoxDecoration(
                     border: Border.all(
@@ -152,15 +140,9 @@ class Market extends StatelessWidget {
               ],
             ),
           ),
-          //Navigation Bar
-          Positioned(
-            top: 728,
-            left: 0,
-            right: 0,
-            child: CustomBottomNavigationBar(),
-          )
         ],
       ),
+      bottomNavigationBar: const CustomBottomNavigationBar(),
     );
   }
 }

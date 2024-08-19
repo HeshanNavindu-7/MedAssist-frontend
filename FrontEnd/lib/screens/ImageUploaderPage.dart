@@ -2,10 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:midassist/APIs/imageFilePicker.dart';
 import 'package:http/http.dart' as http;
-import 'package:midassist/screens/image_result.dart'; // Import the ImageResult class
-
-final buttonKey = UniqueKey();
-final imageKey = UniqueKey();
+import 'package:midassist/screens/image_result.dart';
 
 class ImageUploader extends StatefulWidget {
   const ImageUploader({
@@ -33,7 +30,7 @@ class _ImageUploaderState extends State<ImageUploader> {
   }
 
   Future<void> _fetchUserId() async {
-    final response = await http.get(Uri.parse('http://10.0.2.2:8000/users/'));
+    final response = await http.get(Uri.parse('http://192.168.8.135/users/'));
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = jsonDecode(response.body);
@@ -54,8 +51,7 @@ class _ImageUploaderState extends State<ImageUploader> {
           builder: (context) => ImageUploaderPage(
             imageFilePicker: widget.imageFilePicker,
             client: widget.client,
-            userId:
-                userId!, // Safe to use `!` here since we're checking for null
+            userId: userId!,
             selectedBodyPart: selectedBodyPart!,
           ),
         ),
@@ -183,7 +179,7 @@ class _ImageUploaderState extends State<ImageUploader> {
               Padding(
                 padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
                 child: ElevatedButton(
-                  key: buttonKey,
+                  key: UniqueKey(),
                   onPressed: _onNextPressed,
                   child: const Text("Next"),
                 ),
@@ -216,7 +212,7 @@ class ImageUploaderPage extends StatefulWidget {
 class _ImageUploaderPageState extends State<ImageUploaderPage> {
   bool _isUploading = false;
 
-  void _onImagePressed() async {
+  Future<void> _onImagePressed() async {
     setState(() {
       _isUploading = true;
     });
@@ -231,23 +227,23 @@ class _ImageUploaderPageState extends State<ImageUploaderPage> {
       _isUploading = false;
     });
 
-    // if (response != null) {
-    //   int? statusCode = response['statusCode'];
-    //   if (statusCode == 201) {
-    //     Navigator.push(
-    //       context,
-    //       MaterialPageRoute(
-    //         builder: (context) => ImageResult(
-    //           imageData: response['data'], // Assuming you want to pass the data
-    //         ),
-    //       ),
-    //     );
-    //   } else {
-    //     _showErrorDialog(response['data']);
-    //   }
-    // } else {
-    //   _showErrorDialog("Failed to upload image. Please try again.");
-    // }
+    if (response != null) {
+      int? statusCode = response['statusCode'];
+      if (statusCode == 201) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ImageResult(
+              imageData: response['data'], // Pass the image data to ImageResult
+            ),
+          ),
+        );
+      } else {
+        _showErrorDialog(response['data']);
+      }
+    } else {
+      _showErrorDialog("Failed to upload image. Please try again.");
+    }
   }
 
   void _showErrorDialog(String message) {

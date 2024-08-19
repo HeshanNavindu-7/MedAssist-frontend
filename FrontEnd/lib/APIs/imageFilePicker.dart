@@ -7,18 +7,20 @@ import 'package:http/http.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:mime/mime.dart';
 
-const API_URL = 'http://192.168.8.102:8000/upload_image/';
+const API_URL = 'http://192.168.8.135:8000/upload_image/';
 
 // coverage:ignore-start
 /// Image file picker wrapper class
 class ImageFilePicker {
-  Future<FilePickerResult?> pickImage() => FilePicker.platform.pickFiles(type: FileType.image);
+  Future<FilePickerResult?> pickImage() =>
+      FilePicker.platform.pickFiles(type: FileType.image);
 }
 // coverage:ignore-end
 
 /// Opens a dialog [imageFilePicker] and creates  MultipartRequest [request].
 /// In the request, a field 'image' is appended with the chosen image and the public URL of the image is returned in case of success.
-Future<Map<String, dynamic>?> openImagePickerDialog(ImageFilePicker imageFilePicker, http.Client client,int? userId) async {
+Future<Map<String, dynamic>?> openImagePickerDialog(
+    ImageFilePicker imageFilePicker, http.Client client, int? userId) async {
   FilePickerResult? result = await imageFilePicker.pickImage();
   MultipartRequest request = http.MultipartRequest('POST', Uri.parse(API_URL));
 
@@ -29,8 +31,9 @@ Future<Map<String, dynamic>?> openImagePickerDialog(ImageFilePicker imageFilePic
 
     // Read file as bytes and add it to request object
     final bytes = await file.readAsBytes();
-    final httpImage =
-    http.MultipartFile.fromBytes('image', bytes, contentType: MediaType.parse(lookupMimeType(file.path)!), filename: platformFile.name);
+    final httpImage = http.MultipartFile.fromBytes('image', bytes,
+        contentType: MediaType.parse(lookupMimeType(file.path)!),
+        filename: platformFile.name);
     request.files.add(httpImage);
     // Append user ID to the request
     request.fields['user'] = userId != null ? userId.toString() : '';
@@ -44,7 +47,6 @@ Future<Map<String, dynamic>?> openImagePickerDialog(ImageFilePicker imageFilePic
       'data': responseData,
       'statusCode': responseStream.statusCode,
     };
-
   } else {
     // User canceled the picker
     return null;
