@@ -186,7 +186,7 @@ class _SignUpPageState extends State<SignInPage> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(
-                            left: 25.0), // Add margin on the left
+                            left: 20.0), // Add margin on the left
                         child: Row(
                           children: [
                             Checkbox(

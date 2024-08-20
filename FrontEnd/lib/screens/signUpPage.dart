@@ -382,16 +382,31 @@ class _SignUpPageState extends State<SignUp_Page> {
                             ),
                           ),
                         ),
-                        CheckboxListTile(
-                          title: const Text('Remember Me'),
-                          value: rememberMe,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              rememberMe = value!;
-                            });
-                          },
-                          controlAffinity: ListTileControlAffinity.leading,
+// Remember Me Checkbox
+                        Align(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20.0, vertical: 5.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment
+                                  .start, // Aligns the row to the start
+                              crossAxisAlignment: CrossAxisAlignment
+                                  .center, // Centers the items vertically
+                              children: [
+                                Checkbox(
+                                  value: rememberMe,
+                                  onChanged: (bool? value) {
+                                    setState(() {
+                                      rememberMe = value!;
+                                    });
+                                  },
+                                ),
+                                const Text('Remember Me'),
+                              ],
+                            ),
+                          ),
                         ),
+
                         ElevatedButton(
                           onPressed: () {
                             if (firstNameController.text.isEmpty ||
@@ -443,7 +458,7 @@ class _SignUpPageState extends State<SignUp_Page> {
                             }
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color.fromARGB(255, 30, 71, 255),
+                            backgroundColor: Color.fromARGB(255, 0, 7, 81),
                             shape: RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.circular(10), // Border radius
