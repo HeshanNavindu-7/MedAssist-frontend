@@ -20,6 +20,7 @@ class ProfilePage extends StatefulWidget {
 
 class ProfilePageState extends State<ProfilePage> {
   String? userName;
+  String? userAge;
 
   @override
   void initState() {
@@ -33,6 +34,7 @@ class ProfilePageState extends State<ProfilePage> {
           await UserDataManager.fetchUserDetails();
       setState(() {
         userName = data['name'];
+        userAge = data['age']; // Add this line to fetch the age
       });
     } catch (e) {
       // Handle error
@@ -73,6 +75,22 @@ class ProfilePageState extends State<ProfilePage> {
     }
   }
 
+  void _navigateToEditProfile() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => EditProfilePage(
+          currentName: userName ?? '',
+          onUpdate: (newName) {
+            setState(() {
+              userName = newName;
+            });
+          },
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,6 +109,21 @@ class ProfilePageState extends State<ProfilePage> {
               left: 0,
               right: 0,
               child: CustomBottomNavigationBar(),
+            ),
+            Positioned(
+              top: 35,
+              left: 15,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Home(),
+                    ),
+                  );
+                },
+                child: const Icon(Icons.arrow_back, size: 30),
+              ),
             ),
             Positioned(
               top: 80,
@@ -112,10 +145,26 @@ class ProfilePageState extends State<ProfilePage> {
                       fontSize: 20,
                     ),
                   ),
+                  const SizedBox(height: 10),
+                  Text(
+                    userAge != null ? 'Age: $userAge' : 'Age not available',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
                 ],
               ),
             ),
-            const Positioned(
+            Positioned(
+              top: 80,
+              right: 20,
+              child: IconButton(
+                icon: const Icon(Icons.edit, color: Colors.white),
+                onPressed: _navigateToEditProfile,
+              ),
+            ),
+            Positioned(
               top: 200,
               left: 50,
               right: 50,
@@ -125,7 +174,10 @@ class ProfilePageState extends State<ProfilePage> {
                   Column(
                     children: [
                       Icon(Icons.access_time, size: 30),
-                      Text('Age\n24 yrs', textAlign: TextAlign.center),
+                      Text(
+                        userAge != null ? 'Age\n$userAge' : 'Age\nN/A',
+                        textAlign: TextAlign.center,
+                      ),
                     ],
                   ),
                   Column(
@@ -160,9 +212,7 @@ class ProfilePageState extends State<ProfilePage> {
                     },
                     child: const ListTile(
                       leading: Icon(Icons.favorite, color: Colors.red),
-                      title: Text(
-                        'My Saved',
-                      ),
+                      title: Text('My Saved'),
                       trailing: Icon(Icons.arrow_forward_ios),
                     ),
                   ),
@@ -178,9 +228,7 @@ class ProfilePageState extends State<ProfilePage> {
                     },
                     child: const ListTile(
                       leading: Icon(Icons.calendar_today, color: Colors.blue),
-                      title: Text(
-                        'Appointments',
-                      ),
+                      title: Text('Appointments'),
                       trailing: Icon(Icons.arrow_forward_ios),
                     ),
                   ),
@@ -196,9 +244,7 @@ class ProfilePageState extends State<ProfilePage> {
                     },
                     child: const ListTile(
                       leading: Icon(Icons.payment, color: Colors.green),
-                      title: Text(
-                        'Payment Method',
-                      ),
+                      title: Text('Payment Method'),
                       trailing: Icon(Icons.arrow_forward_ios),
                     ),
                   ),
@@ -214,9 +260,7 @@ class ProfilePageState extends State<ProfilePage> {
                     },
                     child: const ListTile(
                       leading: Icon(Icons.help_outline, color: Colors.grey),
-                      title: Text(
-                        'FAQs',
-                      ),
+                      title: Text('FAQs'),
                       trailing: Icon(Icons.arrow_forward_ios),
                     ),
                   ),
@@ -239,21 +283,65 @@ class ProfilePageState extends State<ProfilePage> {
                 ],
               ),
             ),
-            Positioned(
-              top: 35,
-              left: 15,
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Home(),
-                    ),
-                  );
-                },
-                child: const Icon(Icons.arrow_back, size: 30),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class EditProfilePage extends StatefulWidget {
+  final String currentName;
+  final ValueChanged<String> onUpdate;
+
+  const EditProfilePage({
+    Key? key,
+    required this.currentName,
+    required this.onUpdate,
+  }) : super(key: key);
+
+  @override
+  _EditProfilePageState createState() => _EditProfilePageState();
+}
+
+class _EditProfilePageState extends State<EditProfilePage> {
+  final TextEditingController _nameController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _nameController.text = widget.currentName;
+  }
+
+  void _saveChanges() {
+    final newName = _nameController.text;
+    widget.onUpdate(newName);
+    Navigator.pop(context);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Edit Profile'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.save),
+            onPressed: _saveChanges,
+          ),
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            TextField(
+              controller: _nameController,
+              decoration: const InputDecoration(
+                labelText: 'Name',
               ),
             ),
+            // Add more fields here if needed
           ],
         ),
       ),
