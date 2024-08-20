@@ -96,7 +96,60 @@ class _MedAssistAiState extends State<MedAssistAi> {
               },
             ),
           ),
-          // Chat input
+          const Positioned(
+            top: 150,
+            left: 70,
+            child: Column(
+              children: [
+                //skin image
+                Image(image: AssetImage('assets/skin.png')),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    //text
+                    "We've analyzed your unique skin profile \nusing advanced AI algorithms and facial \nrecognition technology. Based on our \nassessment, we're thrilled to present your \npersonalized skincare routine tailored \njust for you!",
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const Positioned(
+            top: 470,
+            left: 140,
+            child: Image(image: AssetImage('assets/morning.png')),
+          ),
+          const Positioned(
+            top: 550,
+            left: 20,
+            child: Text(
+              '1. Gentle Cleanser: Start your day with [Brand Name]s\n hydrating cleanser to cleanse and refresh your skin \n without stripping away natural oils.',
+              textAlign: TextAlign.start,
+            ),
+          ),
+          const Positioned(
+            top: 610,
+            left: 20,
+            child: Text(
+              '2. Vitamin C Serum: Apply a few drops of [Brand Name]s\n Vitamin C serum. It helps brighten your complexion,\n reduce dark spots, and protect your skin from\n environmental stressors.',
+              textAlign: TextAlign.start,
+            ),
+          ),
+          const Positioned(
+            bottom: 0,
+            right: 0,
+            left: 0,
+            child: Image(
+              image: AssetImage('assets/Bottom_rectangle.png'),
+            ),
+          ),
+          //add image
+          const Positioned(
+            bottom: 25,
+            left: 20,
+            child: Image(image: AssetImage('assets/Add.png')),
+          ),
+          //chat box
           Positioned(
             bottom: 10,
             left: 20,

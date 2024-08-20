@@ -93,7 +93,7 @@ class _DoctorRecommendationState extends State<DoctorRecommendation> {
           ),
           //Navigation Bar
           Positioned(
-            top: 728,
+            bottom: 0,
             left: 0,
             right: 0,
             child: CustomBottomNavigationBar(),
