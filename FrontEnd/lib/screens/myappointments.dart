@@ -35,115 +35,86 @@ class _MyAppoState extends State<MyAppo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
+      appBar: AppBar(
+        title: const Text('Appointments'),
+        centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ProfilePage(),
+              ),
+            );
+          },
+        ),
+        backgroundColor: Color.fromARGB(255, 173, 216, 230),
+      ),
+      body: Column(
         children: [
-          Positioned(
-            top: 25,
-            left: 10,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+          // Search bar
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: TextField(
+              focusNode: _focusNode,
+              decoration: InputDecoration(
+                hintText: _isFocused ? '' : 'Search for appointments...',
+                prefixIcon: const Icon(Icons.search),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            ),
+          ),
+          // Appointment cards
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.all(8.0),
               children: [
-                // back button
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const ProfilePage(),
+                Row(
+                  children: [
+                    Expanded(
+                      child: DoctorCard(
+                        doctorName: "Dr. John Doe",
+                        specialty: "Cardiologist",
+                        distance: "800m away",
+                        imagePath: 'assets/doc.png',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const Appointments(),
+                            ),
+                          );
+                        },
                       ),
-                    );
-                  },
-                  child: const Image(
-                    image: AssetImage('assets/back.png'),
-                    height: 50,
-                  ),
-                ),
-                const SizedBox(
-                  width: 60,
-                ),
-                // title text
-                const Text(
-                  'Appointments',
-                  style: TextStyle(
-                    fontSize: 25,
-                  ),
-                  textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: DoctorCard(
+                        doctorName: "Dr. Jane Smith",
+                        specialty: "Cardiologist",
+                        distance: "800m away",
+                        imagePath: 'assets/doc.png',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const Appointments(),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
           ),
-          // search bar
-          Positioned(
-            top: 80,
-            left: 10,
-            right: 10,
-            child: Container(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: TextField(
-                  focusNode: _focusNode,
-                  decoration: InputDecoration(
-                    hintText: _isFocused ? '' : 'Search for appointments...',
-                    prefixIcon: const Icon(Icons.search),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          // appointment cards
-          Positioned(
-            top: 170,
-            left: 10,
-            right: 10,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  DoctorCard(
-                    doctorName: "Dr. John Doe",
-                    specialty: "Cardiologist",
-                    distance: "800m away",
-                    imagePath: 'assets/doc.png',
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const Appointments(),
-                        ),
-                      );
-                    },
-                  ),
-                  const SizedBox(width: 40),
-                  DoctorCard(
-                    doctorName: "Dr. Jane Smith",
-                    specialty: "Cardiologist",
-                    distance: "800m away",
-                    imagePath: 'assets/doc.png',
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const Appointments(),
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ),
-          // Navigation Bar
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: CustomBottomNavigationBar(),
-          ),
         ],
       ),
+      bottomNavigationBar: const CustomBottomNavigationBar(),
     );
   }
 }

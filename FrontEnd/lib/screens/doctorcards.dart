@@ -40,17 +40,17 @@ class _DoctorCardState extends State<DoctorCard> {
       body: doctorData == null
           ? const Center(child: CircularProgressIndicator())
           : GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-        ),
-        itemCount: doctorData!.length,
-        itemBuilder: (context, index) {
-          Map<String, dynamic> doctor = doctorData![index];
-          return buildDoctorCard(doctor);
-        },
-      ),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+              ),
+              itemCount: doctorData!.length,
+              itemBuilder: (context, index) {
+                Map<String, dynamic> doctor = doctorData![index];
+                return buildDoctorCard(doctor);
+              },
+            ),
     );
   }
 
