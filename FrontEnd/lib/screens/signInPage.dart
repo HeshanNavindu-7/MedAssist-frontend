@@ -2,19 +2,21 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:midassist/screens/signUpPage.dart';
+import 'package:midassist/screens/forgotpassword.dart';
+
 import 'home.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
 
   @override
-  _SignUpPageState createState() => _SignUpPageState();
+  _SignInPageState createState() => _SignInPageState();
 }
 
-class _SignUpPageState extends State<SignInPage> {
+class _SignInPageState extends State<SignInPage> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  bool isChecked = false; // Define the checkbox state
+  bool isChecked = false; // Checkbox state
 
   Future<void> signIn() async {
     // Your backend endpoint URL
@@ -33,7 +35,7 @@ class _SignUpPageState extends State<SignInPage> {
         // Request successful
         final responseData = jsonDecode(response.body);
         final userId = responseData['user_id'];
-        print(userId);
+        print('User ID: $userId');
         print('Sign in successful');
         // ignore: use_build_context_synchronously
         Navigator.pushReplacement(
@@ -42,7 +44,7 @@ class _SignUpPageState extends State<SignInPage> {
         );
       } else {
         // Request failed
-        print('Sign up failed with status: ${response.statusCode}');
+        print('Sign in failed with status: ${response.statusCode}');
       }
     } catch (e) {
       // Error occurred
@@ -144,7 +146,7 @@ class _SignUpPageState extends State<SignInPage> {
                             colors: [
                               Color.fromARGB(255, 0, 7, 81),
                               Color.fromARGB(255, 75, 117, 190)
-                            ], // Gradient colors
+                            ],
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                           ),
@@ -153,8 +155,7 @@ class _SignUpPageState extends State<SignInPage> {
                               color: Colors.black.withOpacity(0.2),
                               spreadRadius: 2,
                               blurRadius: 7,
-                              offset: const Offset(
-                                  0, 3), // changes position of shadow
+                              offset: const Offset(0, 3),
                             ),
                           ],
                         ),
@@ -171,7 +172,7 @@ class _SignUpPageState extends State<SignInPage> {
                               borderRadius: BorderRadius.circular(15.0),
                               borderSide: BorderSide.none,
                             ),
-                            filled: false, // Set to false for transparency
+                            filled: false,
                           ),
                           style: const TextStyle(
                               color: Colors.white), // Text color
@@ -185,8 +186,7 @@ class _SignUpPageState extends State<SignInPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(
-                            left: 25.0), // Add margin on the left
+                        padding: const EdgeInsets.only(left: 25.0),
                         child: Row(
                           children: [
                             Checkbox(
@@ -202,14 +202,23 @@ class _SignUpPageState extends State<SignInPage> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(
-                            right: 30.0), // Add margin on the right
-                        child: const Text(
-                          'Forgot Password?',
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 18, 76, 236),
-                            decoration: TextDecoration.underline,
-                            decorationColor: Color.fromARGB(255, 18, 76, 236),
+                        padding: const EdgeInsets.only(right: 30.0),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const Forgot(),
+                              ),
+                            );
+                          },
+                          child: const Text(
+                            'Forgot Password?',
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 18, 76, 236),
+                              decoration: TextDecoration.underline,
+                              decorationColor: Color.fromARGB(255, 18, 76, 236),
+                            ),
                           ),
                         ),
                       ),
@@ -218,41 +227,25 @@ class _SignUpPageState extends State<SignInPage> {
                   const SizedBox(height: 10),
                   ElevatedButton(
                     onPressed: signIn,
-
-                    //uncomment following comment when testing with backend
-                    //onPressed: signIn,
-
-                    //Only testing purpose (Front end testing)
-                    // onPressed: () {
-                    //   Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) =>
-                    //             Home()), // Corrected class name
-                    //   );
-                    // },
-                    //end of the testing code
-
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 0, 7, 81),
+                      backgroundColor: const Color.fromARGB(255, 0, 7, 81),
                       shape: RoundedRectangleBorder(
                         borderRadius:
                             BorderRadius.circular(10), // Border radius
                       ),
                       padding: const EdgeInsets.symmetric(
                           horizontal: 30, vertical: 15), // Padding
-                    ), // Change button color here
+                    ),
                     child: const Text(
                       'Sign In',
-                      style:
-                          TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+                      style: TextStyle(color: Colors.white),
                     ),
                   ),
                   const SizedBox(height: 20),
                   Center(
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const SizedBox(width: 80),
                         const Text("Don't have an account?"),
                         const SizedBox(width: 10),
                         GestureDetector(
@@ -265,7 +258,7 @@ class _SignUpPageState extends State<SignInPage> {
                             );
                           },
                           child: const Text(
-                            'SignUp',
+                            'Sign Up',
                             style: TextStyle(
                               color: Color.fromARGB(255, 18, 76, 236),
                               decoration: TextDecoration.underline,
@@ -295,13 +288,12 @@ class _SignUpPageState extends State<SignInPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image(
-                          image: AssetImage(
-                              'assets/fb.png'), // Replace 'assetName' with your actual asset path
-                          width: 20, // Adjust width as needed
-                          height: 20, // Adjust height as needed
+                          image: AssetImage('assets/fb.png'),
+                          width: 20,
+                          height: 20,
                         ),
-                        SizedBox(width: 30), // Space between image and text
-                        Text("LogIn with Facebook"),
+                        SizedBox(width: 30),
+                        Text("Log in with Facebook"),
                       ],
                     ),
                   ),
@@ -314,13 +306,12 @@ class _SignUpPageState extends State<SignInPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image(
-                          image: AssetImage(
-                              'assets/google.png'), // Replace 'assetName' with your actual asset path
-                          width: 20, // Adjust width as needed
-                          height: 20, // Adjust height as needed
+                          image: AssetImage('assets/google.png'),
+                          width: 20,
+                          height: 20,
                         ),
-                        SizedBox(width: 35), // Space between image and text
-                        Text("LogIn with Google"),
+                        SizedBox(width: 35),
+                        Text("Log in with Google"),
                       ],
                     ),
                   ),
