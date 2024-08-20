@@ -70,11 +70,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24.0)),
         boxShadow: [
-          BoxShadow(
-            color: Color.fromARGB(255, 135, 240, 245),
-            blurRadius: 12.0,
-            offset: Offset(0, -2),
-          ),
+          BoxShadow(),
         ],
       ),
       child: ClipRRect(
@@ -106,7 +102,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
           currentIndex: _selectedIndex,
           selectedItemColor: Colors.black,
           unselectedItemColor: const Color.fromARGB(221, 67, 67, 67),
-          backgroundColor: Color.fromARGB(255, 135, 240, 245),
+          backgroundColor: Color.fromARGB(255, 173, 216, 230),
           onTap: _onItemTapped,
         ),
       ),

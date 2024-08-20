@@ -32,152 +32,136 @@ class _HospitalsState extends State<Hospitals> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
+      appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 173, 216, 230),
+        title: const Text("Hospitals"),
+        centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Home(),
+              ),
+            );
+          },
+        ),
+      ),
+      body: Column(
         children: [
-          Positioned(
-            top: 25,
-            left: 10,
-            child: Row(
-              children: [
-                // Back button
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Home(),
-                      ),
-                    );
-                  },
-                  child: const Image(
-                    image: AssetImage('assets/back.png'),
-                    height: 50,
-                  ),
-                ),
-                const SizedBox(width: 65),
-                // Title text
-                const Text(
-                  'Hospitals',
-                  style: TextStyle(
-                    fontSize: 25,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const Positioned(
-            top: 70,
-            left: 16,
-            right: 16,
-            child: Text(
-              "We're here to help with anything and \neverything on MedAssist.",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),
-          ),
           // Search bar
-          Positioned(
-            top: 130,
-            left: 10,
-            right: 10,
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: TextField(
-                focusNode: _focusNode,
-                decoration: InputDecoration(
-                  hintText: _isFocused ? '' : 'Search for hospitals...',
-                  prefixIcon: const Icon(Icons.search),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: TextField(
+              focusNode: _focusNode,
+              decoration: InputDecoration(
+                hintText: _isFocused ? '' : 'Search for hospitals...',
+                prefixIcon: const Icon(Icons.search),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
                 ),
               ),
             ),
           ),
           // Hospitals list
-          const Positioned(
-            top: 230,
-            left: 10,
-            right: 10,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Hospitals near you',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.all(16),
+              children: const [
+                HospitalItem(
+                  name: 'General Hospital Matale',
+                  contactNumber: '011-1234567',
+                  location: 'Matale, Sri Lanka',
                 ),
-                SizedBox(height: 20),
-                FaqItem(question: 'General Hospital Matale'),
-                SizedBox(height: 15),
-                FaqItem(question: 'Asiri Hospitals Kandy'),
-                SizedBox(height: 15),
-                FaqItem(question: 'Suwa Sewana Hospitals Kandy'),
-                SizedBox(height: 15),
-                FaqItem(question: 'Kumudu Hospitals Matale'),
-                SizedBox(height: 15),
-                FaqItem(question: 'Lanka Hospitals Kandy'),
+                HospitalItem(
+                  name: 'Asiri Hospitals Kandy',
+                  contactNumber: '011-2345678',
+                  location: 'Kandy, Sri Lanka',
+                ),
+                HospitalItem(
+                  name: 'Suwa Sewana Hospitals Kandy',
+                  contactNumber: '011-3456789',
+                  location: 'Kandy, Sri Lanka',
+                ),
+                HospitalItem(
+                  name: 'Kumudu Hospitals Matale',
+                  contactNumber: '011-4567890',
+                  location: 'Matale, Sri Lanka',
+                ),
+                HospitalItem(
+                  name: 'Lanka Hospitals Kandy',
+                  contactNumber: '011-5678901',
+                  location: 'Kandy, Sri Lanka',
+                ),
               ],
             ),
           ),
-          // Send a Message Button
-          Positioned(
-            top: 600,
-            left: 70,
-            right: 70,
-            child: GestureDetector(
-              onTap: () {},
-              child: Container(
-                width: double.infinity,
-                height: 60,
-                decoration: BoxDecoration(
-                  color: Colors.blueAccent,
-                  borderRadius: BorderRadius.circular(8.0),
-                  border: Border.all(color: Colors.black12),
-                ),
-                child: const Center(
-                  child: Text(
-                    'Send a Message',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
           // Navigation Bar
-          const Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: CustomBottomNavigationBar(),
-          ),
+          const CustomBottomNavigationBar(),
         ],
       ),
     );
   }
 }
 
-class FaqItem extends StatelessWidget {
-  final String question;
+class HospitalItem extends StatefulWidget {
+  final String name;
+  final String contactNumber;
+  final String location;
 
-  const FaqItem({Key? key, required this.question}) : super(key: key);
+  const HospitalItem({
+    Key? key,
+    required this.name,
+    required this.contactNumber,
+    required this.location,
+  }) : super(key: key);
+
+  @override
+  _HospitalItemState createState() => _HospitalItemState();
+}
+
+class _HospitalItemState extends State<HospitalItem> {
+  bool _isExpanded = false;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: Text(question),
-        ),
-        const SizedBox(
-          width: 20,
-        ),
-        const Image(
-          image: AssetImage('assets/downarr.png'),
-          width: 20,
-        ),
-      ],
+    return Card(
+      child: Column(
+        children: [
+          ListTile(
+            title: Text(
+              widget.name,
+              style: const TextStyle(
+                  // Make the hospital name bold
+                  ),
+            ),
+            trailing: IconButton(
+              icon: Icon(
+                _isExpanded ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+              ),
+              onPressed: () {
+                setState(() {
+                  _isExpanded = !_isExpanded;
+                });
+              },
+            ),
+          ),
+          if (_isExpanded)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Contact: ${widget.contactNumber}'),
+                  const SizedBox(height: 5),
+                  Text('Location: ${widget.location}'),
+                  const SizedBox(height: 10),
+                ],
+              ),
+            ),
+        ],
+      ),
     );
   }
 }

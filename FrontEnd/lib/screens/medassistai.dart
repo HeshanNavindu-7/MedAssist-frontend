@@ -1,54 +1,99 @@
 import 'package:flutter/material.dart';
 import 'package:midassist/screens/home.dart';
 
-class MedAssistAi extends StatelessWidget {
-  const MedAssistAi({Key? key});
+class MedAssistAi extends StatefulWidget {
+  const MedAssistAi({Key? key}) : super(key: key);
+
+  @override
+  _MedAssistAiState createState() => _MedAssistAiState();
+}
+
+class _MedAssistAiState extends State<MedAssistAi> {
+  final TextEditingController _controller = TextEditingController();
+  final List<Map<String, String>> _messages = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _messages
+        .add({'text': "Hello, I'm Medi. How can I help you?", 'sender': 'bot'});
+  }
+
+  void _sendMessage() {
+    if (_controller.text.isEmpty) return;
+
+    setState(() {
+      _messages.insert(0, {'text': _controller.text, 'sender': 'user'});
+      _controller.clear();
+    });
+
+    // Simulating a response from the chat bot
+    Future.delayed(Duration(seconds: 1), () {
+      setState(() {
+        _messages.insert(
+            0, {'text': 'This is a response from the bot.', 'sender': 'bot'});
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 173, 216, 230),
+        title: const Text('MedAssist AI'),
+        centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Home(),
+              ),
+            );
+          },
+        ),
+      ),
       body: Stack(
         children: [
+          // Chat messages
           Positioned(
-            top: 25,
-            child: Row(
-              children: [
-                //back button
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Home(),
+            top: 0,
+            bottom: 100,
+            left: 20,
+            right: 20,
+            child: ListView.builder(
+              reverse: true,
+              itemCount: _messages.length,
+              itemBuilder: (context, index) {
+                final message = _messages[index];
+                return ListTile(
+                  title: Align(
+                    alignment: message['sender'] == 'user'
+                        ? Alignment.centerRight
+                        : Alignment.centerLeft,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8, horizontal: 12),
+                      decoration: BoxDecoration(
+                        color: message['sender'] == 'user'
+                            ? Colors.blue
+                            : Colors.grey[300],
+                        borderRadius: BorderRadius.circular(8),
                       ),
-                    );
-                  },
-                  child: const Padding(
-                    padding: EdgeInsets.only(top: 30, left: 20),
-                    child: Image(
-                      image: AssetImage('assets/back.png'),
+                      child: Text(
+                        message['text']!,
+                        style: TextStyle(
+                          color: message['sender'] == 'user'
+                              ? Colors.white
+                              : Colors.black,
+                        ),
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  width: 70,
-                ),
-                //medassist ai
-                const Padding(
-                  padding: EdgeInsets.only(top: 30),
-                  child: Text(
-                    'MedAssist AI',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
-                const SizedBox(
-                  width: 100,
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(top: 25),
-                  child: Image(image: AssetImage('assets/threedots.png')),
-                )
-              ],
+                );
+              },
             ),
           ),
           const Positioned(
@@ -107,25 +152,29 @@ class MedAssistAi extends StatelessWidget {
           //chat box
           Positioned(
             bottom: 10,
-            left: 70,
-            right: 40,
+            left: 20,
+            right: 70,
             child: TextField(
+              controller: _controller,
+              onSubmitted: (_) => _sendMessage(),
               decoration: InputDecoration(
                 hintText: 'Start typing here to chat...',
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
+                  borderRadius: BorderRadius.circular(15),
                 ),
               ),
             ),
           ),
-          //send image
-          const Positioned(
-            bottom: 30,
-            left: 300,
-            child: Image(
-              image: AssetImage('assets/Send.png'),
+          // Send button
+          Positioned(
+            bottom: 15,
+            right: 20,
+            child: IconButton(
+              icon: const Icon(Icons.send),
+              color: Colors.blue,
+              onPressed: _sendMessage,
             ),
-          )
+          ),
         ],
       ),
     );
