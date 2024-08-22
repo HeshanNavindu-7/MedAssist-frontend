@@ -5,7 +5,7 @@ import '../APIs/doctorDetails.dart';
 import 'aboutdoctor.dart';
 
 class DoctorCard extends StatefulWidget {
-  const DoctorCard({super.key});
+  const DoctorCard({super.key, required doctor});
 
   @override
   _DoctorCardState createState() => _DoctorCardState();

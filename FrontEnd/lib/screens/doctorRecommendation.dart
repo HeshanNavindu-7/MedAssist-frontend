@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:midassist/APIs/doctorDetails.dart';
 import 'package:midassist/screens/home.dart';
 import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
-import 'package:midassist/screens/doctorcards.dart'; // Import your Test widget
+import 'package:midassist/screens/doctorcards.dart'; // Import your DoctorCard widgetimport 'package:midassist/services/doctor_data_manager.dart'; // Import your DoctorDataManager
 
 class DoctorRecommendation extends StatefulWidget {
   const DoctorRecommendation({Key? key}) : super(key: key);
@@ -11,55 +12,68 @@ class DoctorRecommendation extends StatefulWidget {
 }
 
 class _DoctorRecommendationState extends State<DoctorRecommendation> {
+  List<dynamic> _doctors = [];
+  bool _isLoading = true;
+  String _searchQuery = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchDoctorDetails();
+  }
+
+  Future<void> _fetchDoctorDetails() async {
+    try {
+      final List<dynamic> doctors =
+          await DoctorDataManager.fetchDoctorDetails();
+      setState(() {
+        _doctors = doctors;
+        _isLoading = false;
+      });
+    } catch (e) {
+      print('Error: $e');
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
+  void _onSearchChanged(String query) {
+    setState(() {
+      _searchQuery = query;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final filteredDoctors = _doctors.where((doctor) {
+      final name = doctor['name'].toLowerCase();
+      final query = _searchQuery.toLowerCase();
+      return name.contains(query);
+    }).toList();
+
     return Scaffold(
-      body: Stack(
-        children: [
-          Positioned(
-            top: 10,
-            left: 0,
-            right: 0,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 20, left: 25, right: 85),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  //back button
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Home(),
-                        ),
-                      );
-                    },
-                    child: const Image(
-                      image: AssetImage('assets/back.png'),
-                      height: 50,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 50,
-                  ),
-                  //doctors
-                  const Text(
-                    'Doctors',
-                    style: TextStyle(
-                      fontSize: 25,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text('Doctors'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Home(),
               ),
-            ),
-          ),
-          //search box
-          Positioned(
-            top: 80,
-            left: 10,
-            right: 10,
+            );
+          },
+        ),
+        backgroundColor: const Color.fromARGB(255, 173, 216, 230),
+      ),
+      body: Column(
+        children: [
+          // Search Box
+          Padding(
+            padding: const EdgeInsets.all(10.0),
             child: Container(
               decoration: BoxDecoration(
                 boxShadow: [
@@ -73,33 +87,35 @@ class _DoctorRecommendationState extends State<DoctorRecommendation> {
                 ],
               ),
               child: TextField(
+                onChanged: _onSearchChanged,
                 decoration: InputDecoration(
                   hintText: 'Search for doctors...',
                   prefixIcon: const Icon(Icons.search),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
+                    borderRadius: BorderRadius.circular(15),
                   ),
                 ),
               ),
             ),
           ),
           // Dynamic Doctor Cards
-          const Positioned(
-            top: 180,
-            left: 25,
-            right: 25,
-            bottom: 80,
-            child: DoctorCard(), // Replace static doctors with dynamic cards
+          Expanded(
+            child: _isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : filteredDoctors.isEmpty
+                    ? const Center(child: Text('No doctors available'))
+                    : ListView.builder(
+                        itemCount: filteredDoctors.length,
+                        itemBuilder: (context, index) {
+                          final doctor = filteredDoctors[index];
+                          return DoctorCard(
+                              doctor: doctor); // Pass doctor data to DoctorCard
+                        },
+                      ),
           ),
-          //Navigation Bar
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: CustomBottomNavigationBar(),
-          )
         ],
       ),
+      bottomNavigationBar: const CustomBottomNavigationBar(),
     );
   }
 }
