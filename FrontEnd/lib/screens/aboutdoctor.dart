@@ -106,9 +106,10 @@ class AboutDoctor extends StatelessWidget {
               ),
             ),
             //About Doctor
+
             Positioned(
-              top: 310,
-              left: 0,
+              top: 320,
+              left: 15,
               right: 0,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -208,24 +209,6 @@ class AboutDoctor extends StatelessWidget {
                 onTap: () {
                   // Handle the 'Book appointment' action here
                 },
-                child: Container(
-                  width: 250,
-                  height: 60,
-                  padding: const EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                    color: Colors.blueAccent,
-                    borderRadius: BorderRadius.circular(8.0),
-                    border: Border.all(color: Colors.black12),
-                  ),
-                  child: const Center(
-                    child: Text(
-                      'Book Appointment',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
               ),
             ),
             //Back button
