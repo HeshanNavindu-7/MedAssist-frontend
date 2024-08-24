@@ -43,7 +43,7 @@ class ProfilePageState extends State<ProfilePage> {
   }
 
   Future<void> _handleLogout(BuildContext context) async {
-    const String logoutUrl = 'http://192.168.8.135:8000/log-out/';
+    const String logoutUrl = 'http://192.168.1.2:8000/log-out/';
 
     try {
       final response = await http.post(Uri.parse(logoutUrl));

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:midassist/screens/home.dart';
+import 'package:midassist/APIs/chat_service.dart'; // Import the ChatService
 
 class MedAssistAi extends StatefulWidget {
   const MedAssistAi({Key? key}) : super(key: key);
@@ -19,20 +20,23 @@ class _MedAssistAiState extends State<MedAssistAi> {
         .add({'text': "Hello, I'm Medi. How can I help you?", 'sender': 'bot'});
   }
 
-  void _sendMessage() {
+  void _sendMessage() async {
     if (_controller.text.isEmpty) return;
 
     setState(() {
       _messages.insert(0, {'text': _controller.text, 'sender': 'user'});
-      _controller.clear();
     });
 
-    // Simulating a response from the chat bot
-    Future.delayed(Duration(seconds: 1), () {
-      setState(() {
-        _messages.insert(
-            0, {'text': 'This is a response from the bot.', 'sender': 'bot'});
-      });
+    String botResponse;
+    try {
+      botResponse = await ChatService.sendMessage(_controller.text);
+    } catch (e) {
+      botResponse = 'An error occurred. Please try again later.';
+    }
+
+    setState(() {
+      _controller.clear();
+      _messages.insert(0, {'text': botResponse, 'sender': 'bot'});
     });
   }
 
@@ -97,7 +101,7 @@ class _MedAssistAiState extends State<MedAssistAi> {
             ),
           ),
 
-          //chat box
+          // Chat input box
           Positioned(
             bottom: 10,
             left: 20,
