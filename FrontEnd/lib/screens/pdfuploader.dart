@@ -181,19 +181,19 @@ class _PdfUploaderState extends State<PdfUploader> {
             : Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _cameraController != null &&
-                          _cameraController!.value.isInitialized
-                      ? AspectRatio(
-                          aspectRatio: _cameraController!.value.aspectRatio,
-                          child: CameraPreview(_cameraController!),
-                        )
-                      : CircularProgressIndicator(),
-                  SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () => _captureAndUploadPhoto(context),
-                    child: Text('Capture and Upload Photo'),
-                  ),
-                  SizedBox(height: 20),
+                  // _cameraController != null &&
+                  //         _cameraController!.value.isInitialized
+                  //     ? AspectRatio(
+                  //         aspectRatio: _cameraController!.value.aspectRatio,
+                  //         child: CameraPreview(_cameraController!),
+                  //       )
+                  //     : CircularProgressIndicator(),
+                  // SizedBox(height: 20),
+                  // ElevatedButton(
+                  //   onPressed: () => _captureAndUploadPhoto(context),
+                  //   child: Text('Capture and Upload Photo'),
+                  // ),
+                  // SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () => _uploadPdf(context),
                     child: Text('Upload PDF'),

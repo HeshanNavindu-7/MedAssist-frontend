@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:midassist/APIs/imageFilePicker.dart';
 import 'package:http/http.dart' as http;
+import 'package:midassist/screens/brain_tumor_model_page.dart';
 import 'package:midassist/screens/image_result.dart'; // Import the ImageResult class
 
 final buttonKey = UniqueKey();
@@ -32,7 +33,7 @@ class _ImageUploaderState extends State<ImageUploader> {
     _fetchUserId();
   }
 
-  Future<void> _fetchUserId() async {
+ Future<void> _fetchUserId() async {
     final response = await http.get(Uri.parse('http://10.0.2.2:8000/users/'));
 
     if (response.statusCode == 200) {
@@ -47,37 +48,50 @@ class _ImageUploaderState extends State<ImageUploader> {
   }
 
   void _onNextPressed() {
-    if (userId != null && selectedBodyPart != null) {
+  if (userId != null && selectedBodyPart != null) {
+    if (selectedBodyPart == 'Brain Tumor') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => BrainTumorUploadPage(
+            imageFilePicker: widget.imageFilePicker,
+            client: widget.client,
+            userId: userId!,
+          ),
+        ),
+      );
+    } else {
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => ImageUploaderPage(
             imageFilePicker: widget.imageFilePicker,
             client: widget.client,
-            userId:
-                userId!, // Safe to use `!` here since we're checking for null
+            userId: userId!,
             selectedBodyPart: selectedBodyPart!,
           ),
         ),
       );
-    } else {
-      if (userId == null) {
-        print('User ID is still being fetched. Please wait.');
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-              content: Text('User ID is still being fetched. Please wait.')),
-        );
-      } else if (selectedBodyPart == null) {
-        print('No body part selected');
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-              content: Text('Please select a body part before proceeding.')),
-        );
-      }
+    }
+  } else {
+    if (userId == null) {
+      print('User ID is still being fetched. Please wait.');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content: Text('User ID is still being fetched. Please wait.')),
+      );
+    } else if (selectedBodyPart == null) {
+      print('No body part selected');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content: Text('Please select a body part before proceeding.')),
+      );
     }
   }
+}
 
-  @override
+
+   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
