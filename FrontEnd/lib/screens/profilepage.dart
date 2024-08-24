@@ -146,13 +146,13 @@ class ProfilePageState extends State<ProfilePage> {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  Text(
-                    userAge != null ? 'Age: $userAge' : 'Age not available',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
+                  // Text(
+                  //   userAge != null ? 'Age: $userAge' : 'Age not available',
+                  //   style: const TextStyle(
+                  //     fontWeight: FontWeight.bold,
+                  //     fontSize: 16,
+                  //   ),
+                  // ),
                 ],
               ),
             ),
@@ -174,10 +174,7 @@ class ProfilePageState extends State<ProfilePage> {
                   Column(
                     children: [
                       Icon(Icons.access_time, size: 30),
-                      Text(
-                        userAge != null ? 'Age\n$userAge' : 'Age\nN/A',
-                        textAlign: TextAlign.center,
-                      ),
+                      Text('Age\n24', textAlign: TextAlign.center),
                     ],
                   ),
                   Column(

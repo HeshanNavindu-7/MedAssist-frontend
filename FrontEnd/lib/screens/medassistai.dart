@@ -45,7 +45,7 @@ class _MedAssistAiState extends State<MedAssistAi> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 173, 216, 230),
-        title: const Text('MedAssist AI'),
+        title: const Text('Medi Chat'),
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
