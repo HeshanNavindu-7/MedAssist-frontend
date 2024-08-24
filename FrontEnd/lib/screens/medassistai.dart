@@ -12,12 +12,10 @@ class MedAssistAi extends StatefulWidget {
 class _MedAssistAiState extends State<MedAssistAi> {
   final TextEditingController _controller = TextEditingController();
   final List<Map<String, String>> _messages = [];
-  late ChatService chatService;
 
   @override
   void initState() {
     super.initState();
-    chatService = ChatService();
     _messages
         .add({'text': "Hello, I'm Medi. How can I help you?", 'sender': 'bot'});
   }
