@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:midassist/APIs/chat_service.dart';
 import 'package:midassist/screens/home.dart';
-import 'package:midassist/APIs/chat_service.dart'; // Import the ChatService
 
 class MedAssistAi extends StatefulWidget {
   const MedAssistAi({Key? key}) : super(key: key);
@@ -12,10 +12,12 @@ class MedAssistAi extends StatefulWidget {
 class _MedAssistAiState extends State<MedAssistAi> {
   final TextEditingController _controller = TextEditingController();
   final List<Map<String, String>> _messages = [];
+  late ChatService chatService;
 
   @override
   void initState() {
     super.initState();
+    chatService = ChatService();
     _messages
         .add({'text': "Hello, I'm Medi. How can I help you?", 'sender': 'bot'});
   }
@@ -25,19 +27,19 @@ class _MedAssistAiState extends State<MedAssistAi> {
 
     setState(() {
       _messages.insert(0, {'text': _controller.text, 'sender': 'user'});
-    });
-
-    String botResponse;
-    try {
-      botResponse = await ChatService.sendMessage(_controller.text);
-    } catch (e) {
-      botResponse = 'An error occurred. Please try again later.';
-    }
-
-    setState(() {
       _controller.clear();
-      _messages.insert(0, {'text': botResponse, 'sender': 'bot'});
     });
+
+    try {
+      final botResponse = await ChatService.sendMessage(_messages[0]['text']!);
+      setState(() {
+        _messages.insert(0, {'text': botResponse, 'sender': 'bot'});
+      });
+    } catch (e) {
+      setState(() {
+        _messages.insert(0, {'text': 'Error: $e', 'sender': 'bot'});
+      });
+    }
   }
 
   @override
@@ -61,7 +63,6 @@ class _MedAssistAiState extends State<MedAssistAi> {
       ),
       body: Stack(
         children: [
-          // Chat messages
           Positioned(
             top: 0,
             bottom: 100,
@@ -100,8 +101,6 @@ class _MedAssistAiState extends State<MedAssistAi> {
               },
             ),
           ),
-
-          // Chat input box
           Positioned(
             bottom: 10,
             left: 20,
@@ -117,7 +116,6 @@ class _MedAssistAiState extends State<MedAssistAi> {
               ),
             ),
           ),
-          // Send button
           Positioned(
             bottom: 15,
             right: 20,

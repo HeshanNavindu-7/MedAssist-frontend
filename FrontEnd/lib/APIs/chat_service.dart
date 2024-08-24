@@ -2,22 +2,24 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class ChatService {
-  static const String baseUrl = 'http://192.168.162.192:8000';
+  static const String _baseUrl = 'http://192.168.1.2:8000';
 
-  // Send user message to the backend and receive response
-  static Future<String> sendMessage(String userMessage) async {
+  static Future<String> sendMessage(String message) async {
     final response = await http.post(
-      Uri.parse('$baseUrl/chat/'),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({'message': userMessage}),
+      Uri.parse('$_baseUrl/chat/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'message': message,
+        'user': 'some_username', // Include the user field
+      }),
     );
 
     if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      return data['response'];
+      return jsonDecode(response.body)['response'];
     } else {
-      // Handle error
-      throw Exception('Failed to get response: ${response.statusCode}');
+      throw Exception('Failed to get a response from the server');
     }
   }
 }
