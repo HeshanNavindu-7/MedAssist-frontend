@@ -4,7 +4,8 @@ import 'package:http/http.dart' as http;
 class UserDataManager {
   static Future<Map<String, dynamic>> fetchUserDetails() async {
     final response =
-        await http.get(Uri.parse('http://192.168.1.2:8000/users/'));
+
+        await http.get(Uri.parse('http://192.168.1.7:8000/users/'));
 
     if (response.statusCode == 200) {
       // Parse the response JSON
