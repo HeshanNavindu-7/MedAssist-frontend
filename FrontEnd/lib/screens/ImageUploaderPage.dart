@@ -33,7 +33,8 @@ class _ImageUploaderState extends State<ImageUploader> {
 
   Future<void> _fetchUserId() async {
     try {
-      final response = await http.get(Uri.parse('http://192.168.1.7:8000/users/'));
+      final response =
+          await http.get(Uri.parse('http://192.168.1.2:8000/users/'));
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = jsonDecode(response.body);
@@ -114,7 +115,8 @@ class _ImageUploaderState extends State<ImageUploader> {
               child: Text(
                 'Body Parts',
                 style: TextStyle(
-                  fontSize: 18.0,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
@@ -164,7 +166,7 @@ class _ImageUploaderState extends State<ImageUploader> {
                       ),
                       const SizedBox(height: 8.0),
                       Text(
-                        'This section will display an overview of the analysis once the image is processed.',
+                        'Our advanced detection system can accurately identify and classify brain tumors into categories such as glioma, meningioma, pituitary adenomas, or confirm if there is no tumor present.',
                         style: TextStyle(
                           fontSize: 16.0,
                           color: Colors.grey[600],
@@ -204,7 +206,7 @@ class _ImageUploaderState extends State<ImageUploader> {
                       ),
                       const SizedBox(height: 8.0),
                       Text(
-                        'This section will display an overview of the analysis once the image is processed.',
+                        'Our system can display and analyze chest X-ray samples, clearly distinguishing between NORMAL and PNEUMONIA cases.',
                         style: TextStyle(
                           fontSize: 16.0,
                           color: Colors.grey[600],
