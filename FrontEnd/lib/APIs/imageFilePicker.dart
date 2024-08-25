@@ -7,7 +7,7 @@ import 'package:http/http.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:mime/mime.dart';
 
-const API_URL = 'http://192.168.8.135:8000/upload_image/';
+const API_URL = 'http://192.168.1.7:8000/upload_image/';
 
 // coverage:ignore-start
 /// Image file picker wrapper class

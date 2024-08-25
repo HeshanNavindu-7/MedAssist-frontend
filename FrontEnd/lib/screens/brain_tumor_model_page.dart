@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:midassist/APIs/imageFilePicker.dart';
@@ -36,43 +35,29 @@ class _BrainTumorUploadPageState extends State<BrainTumorUploadPage> {
       widget.userId,
     );
 
-    if (imageData != null) {
-      // Create the request payload
-      var request = http.MultipartRequest(
-        'POST',
-        Uri.parse('http://0.0.0.0:8000/upload_image/'),
-      );
+    if (imageData != null && imageData['statusCode'] == 201) {
+      // Extract the predicted_class directly from the response
+      String? predictedClass = imageData['data']['predicted_class']?.toString();
 
-      request.fields['user'] = widget.userId.toString();
-      request.files.add(await http.MultipartFile.fromPath(
-        'image',
-        imageData['path'],
-      ));
-
-      var response = await request.send();
-      if (response.statusCode == 200) {
-        var responseData = await http.Response.fromStream(response);
-        var jsonResponse = jsonDecode(responseData.body);
-
+      if (predictedClass == null) {
+        _showErrorDialog("Failed to retrieve valid data from the server.");
+      } else {
         setState(() {
-          predictedClass = jsonResponse['predicted_class'];
+          this.predictedClass = predictedClass;
         });
 
-        // Navigate to the ImageResult page
+        // Navigate to the BrainTumorResult page
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => Brain_Tumor_result(
-              imageData: jsonResponse['image'],
-              predictedClass: jsonResponse['predicted_class'],
+              predictedClass: predictedClass,
             ),
           ),
         );
-      } else {
-        _showErrorDialog("Failed to upload image. Please try again.");
       }
     } else {
-      _showErrorDialog("No image selected. Please try again.");
+      _showErrorDialog("Failed to upload image. Please try again.");
     }
 
     setState(() {
@@ -103,21 +88,42 @@ class _BrainTumorUploadPageState extends State<BrainTumorUploadPage> {
         backgroundColor: const Color.fromARGB(255, 173, 216, 230),
         title: const Text("Upload Image - Brain Tumor"),
         centerTitle: true,
+        elevation: 0,
       ),
-      body: Padding(
+      body: Container(
         padding: const EdgeInsets.all(16.0),
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color.fromARGB(255, 173, 216, 230), Color.fromARGB(255, 225, 245, 254)],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton.icon(
               onPressed: _isUploading ? null : _uploadImage,
               icon: const Icon(Icons.camera_alt),
               label: const Text('Upload via Camera'),
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
             ),
             const SizedBox(height: 16.0),
             ElevatedButton.icon(
               onPressed: _isUploading ? null : _uploadImage,
               icon: const Icon(Icons.photo_library),
               label: const Text('Upload via Gallery'),
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
             ),
             if (_isUploading)
               const Padding(
@@ -129,7 +135,11 @@ class _BrainTumorUploadPageState extends State<BrainTumorUploadPage> {
                 padding: const EdgeInsets.only(top: 16.0),
                 child: Text(
                   'Predicted Class: $predictedClass',
-                  style: const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
                 ),
               ),
           ],
