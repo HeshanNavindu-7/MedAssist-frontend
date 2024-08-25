@@ -28,7 +28,6 @@ class _BrainTumorUploadPageState extends State<BrainTumorUploadPage> {
       _isUploading = true;
     });
 
-    // Pick the image using the imageFilePicker
     Map<String, dynamic>? imageData = await openImagePickerDialog(
       widget.imageFilePicker,
       widget.client,
@@ -36,7 +35,6 @@ class _BrainTumorUploadPageState extends State<BrainTumorUploadPage> {
     );
 
     if (imageData != null && imageData['statusCode'] == 201) {
-      // Extract the predicted_class directly from the response
       String? predictedClass = imageData['data']['predicted_class']?.toString();
 
       if (predictedClass == null) {
@@ -46,7 +44,6 @@ class _BrainTumorUploadPageState extends State<BrainTumorUploadPage> {
           this.predictedClass = predictedClass;
         });
 
-        // Navigate to the BrainTumorResult page
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -94,20 +91,25 @@ class _BrainTumorUploadPageState extends State<BrainTumorUploadPage> {
         padding: const EdgeInsets.all(16.0),
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color.fromARGB(255, 173, 216, 230), Color.fromARGB(255, 225, 245, 254)],
+            colors: [
+              Color.fromARGB(255, 173, 216, 230),
+              Color.fromARGB(255, 225, 245, 254),
+            ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             ElevatedButton.icon(
               onPressed: _isUploading ? null : _uploadImage,
               icon: const Icon(Icons.camera_alt),
               label: const Text('Upload via Camera'),
               style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                textStyle: const TextStyle(fontSize: 18),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -119,7 +121,8 @@ class _BrainTumorUploadPageState extends State<BrainTumorUploadPage> {
               icon: const Icon(Icons.photo_library),
               label: const Text('Upload via Gallery'),
               style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                textStyle: const TextStyle(fontSize: 18),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -128,17 +131,40 @@ class _BrainTumorUploadPageState extends State<BrainTumorUploadPage> {
             if (_isUploading)
               const Padding(
                 padding: EdgeInsets.only(top: 16.0),
-                child: CircularProgressIndicator(),
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
               ),
             if (predictedClass != null)
               Padding(
-                padding: const EdgeInsets.only(top: 16.0),
-                child: Text(
-                  'Predicted Class: $predictedClass',
-                  style: const TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
+                padding: const EdgeInsets.only(top: 24.0),
+                child: Card(
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      children: [
+                        const Text(
+                          'Analysis Result',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'Predicted Class: $predictedClass',
+                          style: const TextStyle(
+                            fontSize: 18,
+                            color: Colors.blueAccent,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
