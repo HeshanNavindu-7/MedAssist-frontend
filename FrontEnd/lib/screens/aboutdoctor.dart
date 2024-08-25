@@ -24,8 +24,8 @@ class AboutDoctor extends StatelessWidget {
         child: Stack(
           children: [
             //Navigation Bar
-            Positioned(
-              top: 728,
+            const Positioned(
+              bottom: 0,
               left: 0,
               right: 0,
               child: CustomBottomNavigationBar(),
@@ -106,139 +106,109 @@ class AboutDoctor extends StatelessWidget {
               ),
             ),
             //About Doctor
-            const Positioned(
-              top: 290,
+
+            Positioned(
+              top: 320,
+              left: 15,
+              right: 0,
               child: Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text(
-                  'About Doctor',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // About Doctor
+                    const Text(
+                      'About Doctor',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 8), // Adds space between text blocks
+                    const Padding(
+                      padding: EdgeInsets.only(left: 7.0),
+                      child: Text(
+                        'Dr. Marcus Holmes is a top specialist at London Bridge \nHospital at London. He has achieved several awards and \nrecognition for his contribution in his own field.',
+                      ),
+                    ),
+                    const SizedBox(height: 5),
+                    // Working Time
+                    const Text(
+                      'Working Time',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    const Padding(
+                      padding: EdgeInsets.only(left: 7.0),
+                      child: Text('Mon - Sat (08:30 AM - 09:00 PM)'),
+                    ),
+                    const SizedBox(height: 10),
+                    // Communication
+                    const Text(
+                      'Communication',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 5),
+                    // Messaging
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 45, top: 10),
+                          child: Image.asset('assets/message.png'),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Text('Messaging\nChat me up, share photos.'),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 5),
+                    // Audio Call
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 45, top: 10),
+                          child: Image.asset('assets/call.png'),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Text('Audio Call\nCall your doctor directly.'),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 5),
+                    // Video Call
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 45, top: 10),
+                          child: Image.asset('assets/video.png'),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Text('Video Call\nSee your doctor live.'),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ),
-            const Positioned(
-              top: 310,
-              child: Padding(
-                padding: EdgeInsets.all(15.0),
-                child: Text(
-                    'Dr. Marcus Holmes is a top specialist at London Bridge \nHospital at London. He has achieved several awards and \nrecognition for his contribution in his own field.'),
-              ),
-            ),
-            //Working Time
-            const Positioned(
-              top: 380,
-              child: Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text(
-                  'Working Time',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-            const Positioned(
-              top: 400,
-              child: Padding(
-                padding: EdgeInsets.all(15.0),
-                child: Text('Mon - Sat (08:30 AM - 09:00 PM)'),
-              ),
-            ),
-            //Communication
-            const Positioned(
-              top: 425,
-              child: Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text(
-                  'Communication',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-            const Positioned(
-              top: 460,
-              child: Row(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: 45, top: 10),
-                    child: Image(
-                      image: AssetImage('assets/message.png'),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Text('Messaging\nChat me up, share photos.'),
-                  )
-                ],
-              ),
-            ),
-            const Positioned(
-              top: 515,
-              child: Row(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: 45, top: 10),
-                    child: Image(
-                      image: AssetImage('assets/call.png'),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Text('Audio Call\nCall your doctor directly.'),
-                  )
-                ],
-              ),
-            ),
-            const Positioned(
-              top: 570,
-              child: Row(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: 45, top: 10),
-                    child: Image(
-                      image: AssetImage('assets/video.png'),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Text('Video Call\nSee your doctor live.'),
-                  )
-                ],
-              ),
-            ),
+
             //Book appointment
             Positioned(
-              top: 650,
+              top: 715,
               left: 70,
               child: GestureDetector(
                 onTap: () {
                   // Handle the 'Book appointment' action here
                 },
-                child: Container(
-                  width: 250,
-                  height: 60,
-                  padding: const EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                    color: Colors.blueAccent,
-                    borderRadius: BorderRadius.circular(8.0),
-                    border: Border.all(color: Colors.black12),
-                  ),
-                  child: const Center(
-                    child: Text(
-                      'Book Appointment',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
               ),
             ),
             //Back button
@@ -254,7 +224,7 @@ class AboutDoctor extends StatelessWidget {
                     ),
                   );
                 },
-                child: Image(
+                child: const Image(
                   image: AssetImage('assets/back.png'),
                 ),
               ),
