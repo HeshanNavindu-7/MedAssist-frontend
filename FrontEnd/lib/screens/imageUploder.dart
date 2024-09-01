@@ -33,8 +33,8 @@ class _ImageUploaderState extends State<ImageUploader> {
     _fetchUserId();
   }
 
- Future<void> _fetchUserId() async {
-    final response = await http.get(Uri.parse('http://10.0.2.2:8000/users/'));
+  Future<void> _fetchUserId() async {
+    final response = await http.get(Uri.parse('http://192.168.1.2/users/'));
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = jsonDecode(response.body);
@@ -48,50 +48,49 @@ class _ImageUploaderState extends State<ImageUploader> {
   }
 
   void _onNextPressed() {
-  if (userId != null && selectedBodyPart != null) {
-    if (selectedBodyPart == 'Brain Tumor') {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => BrainTumorUploadPage(
-            imageFilePicker: widget.imageFilePicker,
-            client: widget.client,
-            userId: userId!,
+    if (userId != null && selectedBodyPart != null) {
+      if (selectedBodyPart == 'Brain Tumor') {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => BrainTumorUploadPage(
+              imageFilePicker: widget.imageFilePicker,
+              client: widget.client,
+              userId: userId!,
+            ),
           ),
-        ),
-      );
+        );
+      } else {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ImageUploaderPage(
+              imageFilePicker: widget.imageFilePicker,
+              client: widget.client,
+              userId: userId!,
+              selectedBodyPart: selectedBodyPart!,
+            ),
+          ),
+        );
+      }
     } else {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ImageUploaderPage(
-            imageFilePicker: widget.imageFilePicker,
-            client: widget.client,
-            userId: userId!,
-            selectedBodyPart: selectedBodyPart!,
-          ),
-        ),
-      );
-    }
-  } else {
-    if (userId == null) {
-      print('User ID is still being fetched. Please wait.');
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-            content: Text('User ID is still being fetched. Please wait.')),
-      );
-    } else if (selectedBodyPart == null) {
-      print('No body part selected');
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-            content: Text('Please select a body part before proceeding.')),
-      );
+      if (userId == null) {
+        print('User ID is still being fetched. Please wait.');
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+              content: Text('User ID is still being fetched. Please wait.')),
+        );
+      } else if (selectedBodyPart == null) {
+        print('No body part selected');
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+              content: Text('Please select a body part before proceeding.')),
+        );
+      }
     }
   }
-}
 
-
-   @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

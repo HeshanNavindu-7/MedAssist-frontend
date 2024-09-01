@@ -19,13 +19,13 @@ class Brain_Tumor_result extends StatelessWidget {
       ),
       body: Container(
         width: double.infinity,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.lightBlueAccent, Colors.blueAccent],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
+        // decoration: const BoxDecoration(
+        //   gradient: LinearGradient(
+        //     colors: [Colors.lightBlueAccent, Colors.blueAccent],
+        //     begin: Alignment.topCenter,
+        //     end: Alignment.bottomCenter,
+        //   ),
+        // ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -58,25 +58,6 @@ class Brain_Tumor_result extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    ElevatedButton(
-                      onPressed: () {
-                        // Navigate back or to the next screen
-                      },
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 30,
-                          vertical: 15,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        backgroundColor: Color.fromARGB(255, 173, 216, 230),
-                      ),
-                      child: const Text(
-                        "Continue",
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ),
                   ],
                 ),
               ),
