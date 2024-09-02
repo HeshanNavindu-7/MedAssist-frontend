@@ -44,6 +44,7 @@ dependencies:
   permission_handler: ^11.2.0
   flutter_secure_storage: ^9.2.2
   carousel_slider: ^5.0.0
+  flutter_dotenv: ^5.1.0
 
 #  google_fonts: ^6.2.1
 
@@ -172,6 +173,7 @@ flutter:
     - assets/goldstar1.png
     - assets/CarosalCard/
     - assets/Forgotpw/
+    - lib/.env
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

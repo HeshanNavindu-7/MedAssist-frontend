@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:midassist/screens/faqs.dart';
 import 'package:midassist/screens/home.dart';
 import 'package:midassist/screens/signUpPage.dart';
@@ -43,7 +44,8 @@ class ProfilePageState extends State<ProfilePage> {
   }
 
   Future<void> _handleLogout(BuildContext context) async {
-    const String logoutUrl = 'http://192.168.1.2:8000/log-out/';
+    String baseUrl = dotenv.env['API_URL'] ?? ''; 
+    String logoutUrl = '$baseUrl/log-out/';
 
     try {
       final response = await http.post(Uri.parse(logoutUrl));

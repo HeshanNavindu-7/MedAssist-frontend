@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:midassist/screens/signInPage.dart';
 import 'home.dart';
@@ -24,7 +25,9 @@ class _SignUpPageState extends State<SignUp_Page> {
   bool rememberMe = false;
 
   Future<void> signUp() async {
-    String url = 'http://192.168.1.2:8000/sign-up/';
+
+  String baseUrl = dotenv.env['API_URL'] ?? ''; 
+  String url = '$baseUrl/sign-up/'; 
 
     try {
       final response = await http.post(
