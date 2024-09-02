@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:midassist/screens/firstPage.dart';
-void main() {
+void main()  {
+  dotenv.load(fileName: "lib/.env");
   runApp(const MyApp());
 }
 

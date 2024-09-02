@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:midassist/screens/signUpPage.dart';
 import 'package:midassist/screens/forgotpassword.dart';
@@ -21,8 +22,8 @@ class _SignInPageState extends State<SignInPage> {
 
   Future<void> signIn() async {
     // Your backend endpoint URL
-
-    String url = 'http://192.168.1.2:8000/sign-in/';
+    String baseUrl = dotenv.env['API_URL'] ?? ''; 
+    String url = '$baseUrl/sign-in/';
 
     try {
       final response = await http.post(
