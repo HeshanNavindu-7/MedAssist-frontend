@@ -32,11 +32,10 @@ Welcome to the **MedAssist** Flutter Frontend repository! This project is part o
    ```bash
    flutter pub get
    ```
-3. Set up Firebase by adding your `google-services.json` (for Android) and `GoogleService-Info.plist` (for iOS) files in the respective directories. 📁
 
-4. Configure the Django backend API URLs in the Flutter project. Update the `lib/services/api_service.dart` file with the correct endpoint URLs. 📝
+3. Configure the Django backend API URLs in the Flutter project. Update the `lib/services/api_service.dart` file with the correct endpoint URLs. 📝
 
-5. Run the app:
+4. Run the app:
    ```bash
    flutter run
    ```
