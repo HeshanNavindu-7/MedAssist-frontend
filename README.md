@@ -21,7 +21,6 @@ Welcome to the **MedAssist** Flutter Frontend repository! This project is part o
 ### Prerequisites
 - Flutter SDK installed on your machine. 📦
 - A configured Django backend. 🔧
-- Firebase project set up for authentication. 🔑
 
 ### Installation 🛠️
 1. Clone the repository:
