@@ -105,6 +105,18 @@ class _OTPScreenState extends State<OTP> {
     }
 
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('OTP Verification'),
+        centerTitle: true,
+        backgroundColor: const Color.fromARGB(255, 173, 216, 230),
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ),
       body: Stack(
         children: [
           Center(
@@ -113,7 +125,12 @@ class _OTPScreenState extends State<OTP> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const SizedBox(height: 110),
+                  const SizedBox(height: 20),
+                  Image.asset(
+                    'assets/Forgotpw/otp.jpg', // Add a relevant image here
+                    height: 100,
+                  ),
+                  const SizedBox(height: 20),
                   const Text(
                     'OTP Verification',
                     style: TextStyle(fontSize: 25),
@@ -132,15 +149,26 @@ class _OTPScreenState extends State<OTP> {
                     }),
                   ),
                   const SizedBox(height: 40),
-                  GestureDetector(
-                    onTap: () {
-                      _onOtpEntered();
-                    },
+                  SizedBox(
+                    width: double.infinity,
                     child: ElevatedButton(
-                        onPressed: () {
-                          print('Text');
-                        },
-                        child: Text('Verify Me')),
+                      onPressed: _onOtpEntered,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromARGB(
+                            255, 0, 7, 81), // Updated button color
+                        padding: const EdgeInsets.symmetric(vertical: 15),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: const Text(
+                        'Verify Me',
+                        style: TextStyle(
+                          color: Colors.white, // Set text color to white
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 20),
                   Text(

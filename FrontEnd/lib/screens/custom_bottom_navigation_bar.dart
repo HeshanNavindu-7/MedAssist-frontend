@@ -84,15 +84,15 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.picture_as_pdf),
-              label: 'Market',
+              label: 'Pdf',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.camera_alt),
-              label: 'Upload',
+              icon: Icon(Icons.analytics),
+              label: 'Analyzer',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.lightbulb_outline),
-              label: 'AI',
+              icon: Icon(Icons.chat),
+              label: 'MediChat',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),

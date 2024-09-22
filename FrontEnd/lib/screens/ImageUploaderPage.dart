@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:midassist/APIs/imageFilePicker.dart';
 import 'package:http/http.dart' as http;
+import 'package:midassist/screens/brain_tumor_model_page.dart';
 import 'package:midassist/screens/image_result.dart';
 
 class ImageUploader extends StatefulWidget {
@@ -22,6 +23,7 @@ class _ImageUploaderState extends State<ImageUploader> {
   String? imageURL;
   int? userId;
   String? selectedBodyPart; // Track selected body part
+  bool _isLoading = true; // Loading state
 
   @override
   void initState() {
@@ -30,16 +32,29 @@ class _ImageUploaderState extends State<ImageUploader> {
   }
 
   Future<void> _fetchUserId() async {
-    final response = await http.get(Uri.parse('http://192.168.8.135/users/'));
+    try {
+      final response =
+          await http.get(Uri.parse('http://192.168.1.2:8000/users/'));
 
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> data = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = jsonDecode(response.body);
+        setState(() {
+          userId = data['id'];
+          _isLoading =
+              false; // Set loading to false once the user ID is fetched
+          print(userId);
+        });
+      } else {
+        setState(() {
+          _isLoading = false;
+        });
+        print('Failed to fetch user ID: ${response.statusCode}');
+      }
+    } catch (e) {
       setState(() {
-        userId = data['id'];
-        print(userId);
+        _isLoading = false;
       });
-    } else {
-      print('Failed to fetch user ID: ${response.statusCode}');
+      print('Error fetching user ID: $e');
     }
   }
 
@@ -75,6 +90,15 @@ class _ImageUploaderState extends State<ImageUploader> {
 
   @override
   Widget build(BuildContext context) {
+    if (_isLoading) {
+      // Display a loading indicator while user ID is being fetched
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 173, 216, 230),
@@ -91,15 +115,33 @@ class _ImageUploaderState extends State<ImageUploader> {
               child: Text(
                 'Body Parts',
                 style: TextStyle(
-                  fontSize: 18.0,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
             GestureDetector(
               onTap: () {
-                setState(() {
-                  selectedBodyPart = 'Brain Tumor';
-                });
+                if (userId != null) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BrainTumorUploadPage(
+                        imageFilePicker: widget.imageFilePicker,
+                        client: widget.client,
+                        userId: userId!,
+                      ),
+                    ),
+                  );
+                } else {
+                  print('User ID is still being fetched. Please wait.');
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content:
+                          Text('User ID is still being fetched. Please wait.'),
+                    ),
+                  );
+                }
               },
               child: Card(
                 margin: const EdgeInsets.all(12.0),
@@ -124,7 +166,7 @@ class _ImageUploaderState extends State<ImageUploader> {
                       ),
                       const SizedBox(height: 8.0),
                       Text(
-                        'This section will display an overview of the analysis once the image is processed.',
+                        'Our advanced detection system can accurately identify and classify brain tumors into categories such as glioma, meningioma, pituitary adenomas, or confirm if there is no tumor present.',
                         style: TextStyle(
                           fontSize: 16.0,
                           color: Colors.grey[600],
@@ -164,7 +206,7 @@ class _ImageUploaderState extends State<ImageUploader> {
                       ),
                       const SizedBox(height: 8.0),
                       Text(
-                        'This section will display an overview of the analysis once the image is processed.',
+                        'Our system can display and analyze chest X-ray samples, clearly distinguishing between NORMAL and PNEUMONIA cases.',
                         style: TextStyle(
                           fontSize: 16.0,
                           color: Colors.grey[600],

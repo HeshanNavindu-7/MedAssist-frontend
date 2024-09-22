@@ -1,12 +1,12 @@
+// TODO Implement this library.import 'dart:convert';
 import 'dart:convert';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 import 'package:http/http.dart' as http;
 
 class DoctorDataManager {
   static Future<List<dynamic>> fetchDoctorDetails() async {
-    String baseUrl = dotenv.env['API_URL'] ?? ''; 
     final response =
-        await http.get(Uri.parse('$baseUrl/doctors/'));
+        await http.get(Uri.parse('http://192.168.8.135:8000/doctors/'));
 
     if (response.statusCode == 200) {
       // Parse the response JSON
