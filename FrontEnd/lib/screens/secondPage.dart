@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:midassist/screens/signInPage.dart';
-import 'package:midassist/screens/signUpPage.dart';
+import 'package:midassist/screens/sign_in_page.dart';
+import 'package:midassist/screens/sign_up_page.dart';
 
 class SecondPage extends StatelessWidget {
   const SecondPage({Key? key}) : super(key: key);
