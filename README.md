@@ -1,6 +1,41 @@
-# MidAssist
+# MedAssist - Flutter Frontend 🚀
 
-MedAssist is designed to simplify the complexity of medical reports by leveraging advanced algorithms 
-capable of analyzing and interpreting various medical parameters. Users can effortlessly upload their 
-medical reports to the application, and MedAssist will provide detailed insights into the report, offering 
-understandable explanations of medical jargon and highlighting key information.
+Welcome to the **MedAssist** Flutter Frontend repository! This project is part of the MedAssist mobile application, designed to simplify healthcare information and enhance decision-making for users through features like medical report analysis, personalized doctor recommendations, and interactive AI-based healthcare insights.
+
+## Features 🌟
+- **Medical Report Analysis**: Upload and analyze medical reports with easy-to-understand explanations. 📄🔍
+- **Doctor Recommendations**: Personalized healthcare provider suggestions based on the user’s medical condition. 🏥👨‍⚕️👩‍⚕️
+- **AI Chatbot**: A virtual assistant offering healthcare information and answering user questions. 🤖💬
+- **Image Classification**: Analyze CT, X-ray, MRI, and PET scans to provide preliminary diagnoses. 🩺🖼️
+- **User Feedback Portal**: Users can rate and provide feedback on their healthcare experiences. ⭐📝
+
+## Tech Stack 🛠️
+- **Flutter**: The frontend of the application is built using Flutter for cross-platform mobile app development. 📱
+- **Dart**: Flutter’s primary programming language. 🏷️
+- **Django**: Backend framework for handling APIs, user authentication, and data processing. 🔄
+- **Firebase**: For user authentication and real-time updates. 🔥
+- **REST API**: Integrated with Django backend services for report analysis, doctor recommendations, and chatbot functionality. 🌐
+
+## Getting Started 🚀
+
+### Prerequisites
+- Flutter SDK installed on your machine. 📦
+- A configured Django backend. 🔧
+
+### Installation 🛠️
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/medassist-frontend.git
+   cd medassist-frontend
+   ```
+2. Install dependencies:
+   ```bash
+   flutter pub get
+   ```
+
+3. Configure the Django backend API URLs in the Flutter project. Update the `lib/services/api_service.dart` file with the correct endpoint URLs. 📝
+
+4. Run the app:
+   ```bash
+   flutter run
+   ```
