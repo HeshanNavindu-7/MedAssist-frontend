@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:midassist/APIs/imageFilePicker.dart';
 import 'package:http/http.dart' as http;
 import 'package:midassist/screens/brain_tumor_model_page.dart';
@@ -33,8 +34,9 @@ class _ImageUploaderState extends State<ImageUploader> {
 
   Future<void> _fetchUserId() async {
     try {
+      String baseUrl = dotenv.env['API_URL'] ?? ''; 
       final response =
-          await http.get(Uri.parse('http://192.168.1.2:8000/users/'));
+          await http.get(Uri.parse('$baseUrl/users/'));
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = jsonDecode(response.body);

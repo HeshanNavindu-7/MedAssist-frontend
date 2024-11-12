@@ -1,8 +1,8 @@
-import 'dart:convert';
+// import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
-import 'package:midassist/screens/signUpPage.dart';
+import 'package:midassist/screens/sign_up_page.dart';
 import 'package:midassist/screens/forgotpassword.dart';
 import 'home.dart';
 
@@ -10,6 +10,7 @@ class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _SignInPageState createState() => _SignInPageState();
 }
 
@@ -17,82 +18,95 @@ class _SignInPageState extends State<SignInPage> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  bool isChecked = false; // Checkbox state
-  // String? errorMessage; // Combined error message (outside error handling)
+  bool isChecked = false;
 
-  Future<void> signIn() async {
-    // Your backend endpoint URL
-    String baseUrl = dotenv.env['API_URL'] ?? ''; 
-    String url = '$baseUrl/sign-in/';
+Future<void> signIn() async {
+  String baseUrl = dotenv.env['API_URL'] ?? ''; 
+  String url = '$baseUrl/sign-in/';
 
-    try {
-      final response = await http.post(
-        Uri.parse(url),
-        body: {
-          'email': usernameController.text,
-          'password': passwordController.text,
-        },
-      );
+  try {
+    final response = await http.post(
+      Uri.parse(url),
+      body: {
+        'email': usernameController.text,
+        'password': passwordController.text,
+      },
+    );
 
-      if (response.statusCode == 200) {
-        // Request successful
-        final responseData = jsonDecode(response.body);
-        final userId = responseData['user_id'];
-        print('User ID: $userId');
-        print('Sign in successful');
+    if (response.statusCode == 200) {
+      // final responseData = jsonDecode(response.body);
+      // final userId = responseData['user_id'];
+      // print('User ID: $userId');
+      // print('Sign in successful');
+      Navigator.pushReplacement(
         // ignore: use_build_context_synchronously
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => Home()),
-        );
-      } else {
-        // Request failed
-        print('Sign in failed with status: ${response.statusCode}');
-        setState(() {
-          //  errorMessage = 'Sign in failed. Please check your credentials.'; // Setting error message for request failure (outside error handling)
-        });
-      }
-    } catch (e) {
-      // Error occurred
-      print('Error: $e');
-      setState(() {
-        // errorMessage = 'An error occurred. Please try again.'; // Setting error message for exceptions (outside error handling)
-      });
+        context,
+        MaterialPageRoute(builder: (context) => Home()),
+      );
+    } else {
+      showErrorMessage('Sign in failed. Please check your email and password.');
     }
+  } catch (e) {
+    showErrorMessage('An error occurred. Please try again.');
   }
+}
 
   void validateForm() {
     final form = _formKey.currentState;
     if (form != null && form.validate()) {
-      setState(() {
-        // errorMessage = null; // Clear error message if validation passes (inside error handling)
-      });
       signIn();
     } else {
-      setState(() {
-        // Combine validation error messages (inside error handling)
-        //  errorMessage = [
-        //   validateEmail(usernameController.text),
-        //   validatePassword(passwordController.text),
-        // ].where((msg) => msg != null).join('\n');
-      });
+      String? emailError = validateEmail(usernameController.text);
+      String? passwordError = validatePassword(passwordController.text);
+
+      if (emailError != null) {
+        showErrorMessage(emailError);
+      } else if (passwordError != null) {
+        showErrorMessage(
+            passwordError);
+      } else {
+        showErrorMessage("Please check your email and password.");
+      }
+      return;
     }
   }
 
   String? validateEmail(String value) {
     if (value.isEmpty) {
-      return 'Email is required'; // Error message for empty email (inside error handling)
+      return 'Email is required';
+    } else if (!value.contains('@')) {
+      return 'Email must contain "@"';
+    } else if (!value.contains('.')) {
+      return 'Email must contain a "." after "@"';
     } else if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-      return 'Enter a valid email address'; // Error message for invalid email (inside error handling)
+      return 'Enter a valid email address, e.g., name@example.com';
     }
     return null;
   }
 
   String? validatePassword(String value) {
     if (value.isEmpty) {
-      return 'Password is required'; // Error message for empty password (inside error handling)
+      return 'Password is required';
     }
     return null;
+  }
+
+  void showErrorMessage(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          message,
+          style: const TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.redAccent,
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.0),
+        ),
+        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        duration: const Duration(seconds: 5),
+      ),
+    );
   }
 
   @override
@@ -159,7 +173,7 @@ class _SignInPageState extends State<SignInPage> {
                             controller: usernameController,
                             decoration: InputDecoration(
                               prefixIcon:
-                                  const Icon(Icons.person, color: Colors.white),
+                                  const Icon(Icons.email, color: Colors.white),
                               hintText: 'User Email',
                               hintStyle: const TextStyle(
                                 color: Color.fromARGB(200, 255, 255, 255),
@@ -168,13 +182,11 @@ class _SignInPageState extends State<SignInPage> {
                                 borderRadius: BorderRadius.circular(15.0),
                                 borderSide: BorderSide.none,
                               ),
-                              filled: false, // Set to false for transparency
+                              filled: false,
                             ),
                             style: const TextStyle(
                               color: Colors.white,
                             ),
-                            validator: (value) => validateEmail(
-                                value!), // Error message from validation method (inside error handling)
                           ),
                         ),
                       ),
@@ -220,36 +232,18 @@ class _SignInPageState extends State<SignInPage> {
                               ),
                               filled: false,
                             ),
-                            style: const TextStyle(
-                                color: Colors.white), // Text color
-                            obscureText: true, // Hide password text
-                            validator: (value) => validatePassword(
-                                value!), // Error message from validation method (inside error handling)
+                            style: const TextStyle(color: Colors.white),
+                            obscureText: true,
                           ),
                         ),
                       ),
                     ),
-                    // Combined Error Message
-                    // if (errorMessage !=
-                    // null) // Display combined error message (outside error handling)
-                    // Padding(
-                    //   padding: const EdgeInsets.symmetric(
-                    //       horizontal: 30.0, vertical: 5.0),
-                    //   child: Align(
-                    //     alignment: Alignment.centerLeft,
-                    //     child: Text(
-                    //       errorMessage!,
-                    //       style: const TextStyle(color: Colors.red),
-                    //     ),
-                    //   ),
-                    // ),
                     const SizedBox(height: 5),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(
-                              left: 20.0), // Add margin on the left
+                          padding: const EdgeInsets.only(left: 20.0),
                           child: Row(
                             children: [
                               Checkbox(
@@ -290,8 +284,7 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                     const SizedBox(height: 10),
                     ElevatedButton(
-                      onPressed:
-                          validateForm, // Validate form and handle errors (inside error handling)
+                      onPressed: validateForm,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromARGB(255, 0, 7, 81),
                         shape: RoundedRectangleBorder(

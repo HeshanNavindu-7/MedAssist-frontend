@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
-import 'package:midassist/screens/signInPage.dart';
+import 'package:midassist/screens/sign_in_page.dart';
 import 'home.dart';
 
 class SignUp_Page extends StatefulWidget {

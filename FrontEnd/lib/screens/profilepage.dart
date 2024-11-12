@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:midassist/screens/faqs.dart';
 import 'package:midassist/screens/home.dart';
-import 'package:midassist/screens/signUpPage.dart';
+import 'package:midassist/screens/sign_up_page.dart';
 import 'package:midassist/screens/myappointments.dart';
 import 'package:midassist/screens/mysaved.dart';
 import 'package:midassist/screens/profile.dart';

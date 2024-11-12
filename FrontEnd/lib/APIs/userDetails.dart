@@ -10,7 +10,6 @@ class UserDataManager {
         await http.get(Uri.parse('$baseUrl/users/'));
 
     if (response.statusCode == 200) {
-      // Parse the response JSON
       return jsonDecode(response.body);
     } else {
       // Handle error
