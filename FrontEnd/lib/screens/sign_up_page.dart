@@ -21,13 +21,11 @@ class _SignUpPageState extends State<SignUp_Page> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
 
-  String phoneNumberErrorText = '';
   bool rememberMe = false;
 
   Future<void> signUp() async {
-
-  String baseUrl = dotenv.env['API_URL'] ?? ''; 
-  String url = '$baseUrl/sign-up/'; 
+    String baseUrl = dotenv.env['API_URL'] ?? '';
+    String url = '$baseUrl/sign-up/';
 
     try {
       final response = await http.post(
@@ -40,18 +38,68 @@ class _SignUpPageState extends State<SignUp_Page> {
           'password': passwordController.text,
         },
       );
-
       if (response.statusCode == 201) {
-        print('Sign up successful');
+        // Successful sign-up; navigate to home page
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => Home()),
         );
+      } else if (response.statusCode == 400) {
+        showErrorMessage('Sign up failed. Please check your details.');
       } else {
-        print('Sign up failed with status: ${response.statusCode}');
+        showErrorMessage('Sign up failed. Please try again later.');
       }
     } catch (e) {
-      print('Error: $e');
+      showErrorMessage('An error occurred. Please try again.');
+    }
+  }
+
+  void showErrorMessage(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          message,
+          style: const TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.redAccent,
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.0),
+        ),
+        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        duration: const Duration(seconds: 5),
+      ),
+    );
+  }
+
+  void validateForm() {
+    final form = _formKey.currentState;
+    if (form != null && form.validate()) {
+      signUp();
+    } else {
+      String? emailError = validateEmail(emailController.text);
+      String? passwordError = validatePassword(passwordController.text);
+      String? fullNameError = validateFullName(firstNameController.text);
+      String? ageError = validateAge(ageController.text);
+      String? phoneNumberError = validatePhoneNumber(phoneNumberController.text);
+      String? confirmPasswordError = validateConfirmPassword(confirmPasswordController.text);
+
+      if (fullNameError != null) {
+        showErrorMessage(fullNameError);
+      } else if (ageError != null) {
+        showErrorMessage(ageError);
+      } else if (emailError != null) {
+        showErrorMessage(emailError);
+      } else if (phoneNumberError != null) {
+        showErrorMessage(phoneNumberError);
+      } else if (passwordError != null) {
+        showErrorMessage(passwordError);
+      } else if (confirmPasswordError != null) {
+        showErrorMessage(confirmPasswordError);
+      } else {
+        showErrorMessage("Please check your email and password.");
+      }
+      return;
     }
   }
 
@@ -155,6 +203,7 @@ class _SignUpPageState extends State<SignUp_Page> {
                             hintText: 'Age',
                             icon: Icons.calendar_month,
                             validator: validateAge,
+                            keyboardType: TextInputType.number, 
                           ),
                           // Email Address
                           buildTextField(
@@ -169,6 +218,7 @@ class _SignUpPageState extends State<SignUp_Page> {
                             hintText: 'Phone Number',
                             icon: Icons.call,
                             validator: validatePhoneNumber,
+                            keyboardType: TextInputType.number, 
                           ),
                           // Password
                           buildTextField(
@@ -192,8 +242,6 @@ class _SignUpPageState extends State<SignUp_Page> {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 20.0, vertical: 5.0),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Checkbox(
                                     value: rememberMe,
@@ -211,9 +259,7 @@ class _SignUpPageState extends State<SignUp_Page> {
                           // Sign Up Button
                           ElevatedButton(
                             onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                signUp();
-                              }
+                              validateForm();
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Color.fromARGB(255, 0, 7, 81),
@@ -272,6 +318,7 @@ class _SignUpPageState extends State<SignUp_Page> {
     required IconData icon,
     bool obscureText = false,
     String? Function(String?)? validator,
+    TextInputType keyboardType = TextInputType.text, 
   }) {
     return Align(
       alignment: const Alignment(0, 0.06),
@@ -300,6 +347,7 @@ class _SignUpPageState extends State<SignUp_Page> {
           child: TextFormField(
             controller: controller,
             obscureText: obscureText,
+            keyboardType: keyboardType, 
             decoration: InputDecoration(
               prefixIcon: Icon(icon, color: Colors.white),
               hintText: hintText,
@@ -310,6 +358,8 @@ class _SignUpPageState extends State<SignUp_Page> {
                 borderRadius: BorderRadius.circular(15.0),
                 borderSide: BorderSide.none,
               ),
+              errorStyle:
+                  const TextStyle(height: 0.01, color: Colors.transparent),
               filled: false,
             ),
             style: const TextStyle(color: Colors.white),
