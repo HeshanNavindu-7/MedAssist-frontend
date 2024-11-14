@@ -19,51 +19,63 @@ class _SignInPageState extends State<SignInPage> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool isChecked = false;
+  bool _isEmailValid = true;
+  bool _isPasswordValid = true;
 
-Future<void> signIn() async {
-  String baseUrl = dotenv.env['API_URL'] ?? ''; 
-  String url = '$baseUrl/sign-in/';
+  Future<void> signIn() async {
+    String baseUrl = dotenv.env['API_URL'] ?? '';
+    String url = '$baseUrl/sign-in/';
 
-  try {
-    final response = await http.post(
-      Uri.parse(url),
-      body: {
-        'email': usernameController.text,
-        'password': passwordController.text,
-      },
-    );
-
-    if (response.statusCode == 200) {
-      // final responseData = jsonDecode(response.body);
-      // final userId = responseData['user_id'];
-      // print('User ID: $userId');
-      // print('Sign in successful');
-      Navigator.pushReplacement(
-        // ignore: use_build_context_synchronously
-        context,
-        MaterialPageRoute(builder: (context) => Home()),
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        body: {
+          'email': usernameController.text,
+          'password': passwordController.text,
+        },
       );
-    } else {
-      showErrorMessage('Sign in failed. Please check your email and password.');
+
+      if (response.statusCode == 200) {
+        // final responseData = jsonDecode(response.body);
+        // final userId = responseData['user_id'];
+        // print('User ID: $userId');
+        // print('Sign in successful');
+        Navigator.pushReplacement(
+          // ignore: use_build_context_synchronously
+          context,
+          MaterialPageRoute(builder: (context) => Home()),
+        );
+      } else {
+        showErrorMessage(
+            'Sign in failed. Please check your email and password.');
+      }
+    } catch (e) {
+      showErrorMessage('An error occurred. Please try again.');
     }
-  } catch (e) {
-    showErrorMessage('An error occurred. Please try again.');
   }
-}
 
   void validateForm() {
     final form = _formKey.currentState;
     if (form != null && form.validate()) {
+      setState(() {
+        _isEmailValid = true;
+        _isPasswordValid = true;
+      });
       signIn();
     } else {
       String? emailError = validateEmail(usernameController.text);
       String? passwordError = validatePassword(passwordController.text);
 
       if (emailError != null) {
+        setState(() {
+          _isEmailValid = false;
+        });
         showErrorMessage(emailError);
       } else if (passwordError != null) {
-        showErrorMessage(
-            passwordError);
+        setState(() {
+          _isPasswordValid = false;
+        });
+        showErrorMessage(passwordError);
       } else {
         showErrorMessage("Please check your email and password.");
       }
@@ -180,13 +192,20 @@ Future<void> signIn() async {
                               ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15.0),
-                                borderSide: BorderSide.none,
+                                borderSide: BorderSide(
+                                  color: _isEmailValid
+                                      ? Colors.white
+                                      : Colors
+                                          .red, // Border color based on validation
+                                ),
                               ),
                               filled: false,
+                              errorStyle: const TextStyle(height: 0.01,color: Colors.transparent),
                             ),
                             style: const TextStyle(
                               color: Colors.white,
                             ),
+                            validator: (value) => validateEmail(value!),
                           ),
                         ),
                       ),
@@ -228,11 +247,18 @@ Future<void> signIn() async {
                               ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15.0),
-                                borderSide: BorderSide.none,
+                                borderSide: BorderSide(
+                                  color: _isPasswordValid
+                                      ? Colors.white
+                                      : Colors
+                                          .red, // Border color based on validation
+                                ),
                               ),
                               filled: false,
+                              errorStyle: const TextStyle(height: 0.01,color: Colors.transparent),
                             ),
                             style: const TextStyle(color: Colors.white),
+                            validator: (value) => validatePassword(value!),
                             obscureText: true,
                           ),
                         ),
