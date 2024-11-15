@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:midassist/screens/secondPage.dart';
+import 'package:midassist/screens/onboarding/welcome_screen.dart';
 
-class FirstPage extends StatelessWidget {
-  const FirstPage({super.key});
+class SplashScreen extends StatelessWidget {
+  const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class FirstPage extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                    const SecondPage()), // Corrected class name
+                    const WelcomeScreen()), // Corrected class name
               );
             },
             style: ElevatedButton.styleFrom(

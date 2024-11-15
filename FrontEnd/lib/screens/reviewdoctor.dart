@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:midassist/screens/aboutdoctor.dart';
-import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
+import 'package:midassist/widgets/custom_bottom_navigation_bar.dart';
 
 class Review extends StatefulWidget {
   const Review({Key? key}) : super(key: key);

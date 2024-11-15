@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-
 class UserDataManager {
   static Future<Map<String, dynamic>> fetchUserDetails() async {
     String baseUrl = dotenv.env['API_URL'] ?? ''; 
@@ -12,7 +11,6 @@ class UserDataManager {
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
     } else {
-      // Handle error
       throw Exception('Failed to fetch user details: ${response.statusCode}');
     }
   }

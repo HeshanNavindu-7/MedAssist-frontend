@@ -2,9 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
-import 'package:midassist/screens/sign_up_page.dart';
+import 'package:midassist/screens/auth/sign_up_page.dart';
 import 'package:midassist/screens/forgotpassword.dart';
-import 'home.dart';
+import '../home.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -36,10 +36,6 @@ class _SignInPageState extends State<SignInPage> {
       );
 
       if (response.statusCode == 200) {
-        // final responseData = jsonDecode(response.body);
-        // final userId = responseData['user_id'];
-        // print('User ID: $userId');
-        // print('Sign in successful');
         Navigator.pushReplacement(
           // ignore: use_build_context_synchronously
           context,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:midassist/APIs/chat_service.dart';
+import 'package:midassist/services/chat_service.dart';
 import 'package:midassist/screens/home.dart';
 
 class MedAssistAi extends StatefulWidget {

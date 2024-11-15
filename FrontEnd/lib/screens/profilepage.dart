@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:midassist/screens/faqs.dart';
 import 'package:midassist/screens/home.dart';
-import 'package:midassist/screens/sign_up_page.dart';
+import 'package:midassist/screens/auth/sign_up_page.dart';
 import 'package:midassist/screens/myappointments.dart';
 import 'package:midassist/screens/mysaved.dart';
 import 'package:midassist/screens/profile.dart';
 import 'package:midassist/screens/paymentmethod.dart';
-import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
+import 'package:midassist/widgets/custom_bottom_navigation_bar.dart';
 import 'package:http/http.dart' as http;
-import '../APIs/userDetails.dart';
+import '../services/user_details_service.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -106,7 +106,7 @@ class ProfilePageState extends State<ProfilePage> {
         ),
         child: Stack(
           children: [
-            Positioned(
+            const Positioned(
               bottom: 0,
               left: 0,
               right: 0,
@@ -166,7 +166,7 @@ class ProfilePageState extends State<ProfilePage> {
                 onPressed: _navigateToEditProfile,
               ),
             ),
-            Positioned(
+            const Positioned(
               top: 200,
               left: 50,
               right: 50,
