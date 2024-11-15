@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:midassist/APIs/imageFilePicker.dart';
+import 'package:midassist/utils/imageFilePicker.dart';
 import 'package:midassist/screens/brain_tumor_result.dart';
 
 class BrainTumorUploadPage extends StatefulWidget {

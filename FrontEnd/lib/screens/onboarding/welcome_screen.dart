@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:midassist/screens/sign_in_page.dart';
-import 'package:midassist/screens/sign_up_page.dart';
+import 'package:midassist/screens/auth/sign_in_page.dart';
+import 'package:midassist/screens/auth/sign_up_page.dart';
 
-class SecondPage extends StatelessWidget {
-  const SecondPage({Key? key}) : super(key: key);
+class WelcomeScreen extends StatelessWidget {
+  const WelcomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +72,7 @@ class SecondPage extends StatelessWidget {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color.fromRGBO(255, 255, 255, 1),
+                        backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),

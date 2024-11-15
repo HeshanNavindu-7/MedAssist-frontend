@@ -1,12 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:midassist/APIs/imageFilePicker.dart';
-import 'package:midassist/APIs/doctorDetails.dart';
-import 'package:midassist/APIs/userDetails.dart';
+import 'package:midassist/utils/imageFilePicker.dart';
+import 'package:midassist/services/doctor_details_service.dart';
+import 'package:midassist/services/user_details_service.dart';
 import 'package:midassist/screens/aboutdoctor.dart';
 import 'package:midassist/screens/ambulance.dart';
 import 'package:midassist/screens/cart.dart';
-import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
+import 'package:midassist/widgets/custom_bottom_navigation_bar.dart';
 import 'package:midassist/screens/doctorRecommendation.dart';
 import 'package:midassist/screens/hospitals.dart';
 import 'package:midassist/screens/market.dart';
@@ -14,9 +14,10 @@ import 'package:midassist/screens/notifications.dart';
 import 'package:http/http.dart' as http;
 
 class Home extends StatefulWidget {
-  Home({Key? key}) : super(key: key);
+  const Home({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _HomeState createState() => _HomeState();
 }
 
@@ -60,11 +61,12 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: deprecated_member_use
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 173, 216, 230),
+          backgroundColor: const Color.fromARGB(255, 173, 216, 230),
           automaticallyImplyLeading: false,
           title: Row(
             children: [
@@ -188,15 +190,11 @@ class _HomeState extends State<Home> {
                   padding: const EdgeInsets.all(25),
                   child: _buildDoctorCard(),
                 ),
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(vertical: 20.0),
-                //   child: _buildFeaturedServices(),
-                // ),
               ],
             ),
           ),
         ),
-        bottomNavigationBar: CustomBottomNavigationBar(),
+        bottomNavigationBar: const CustomBottomNavigationBar(),
       ),
     );
   }
@@ -242,7 +240,7 @@ class _HomeState extends State<Home> {
         autoPlay: true,
         autoPlayCurve: Curves.fastOutSlowIn,
         enableInfiniteScroll: true,
-        autoPlayAnimationDuration: Duration(milliseconds: 1000),
+        autoPlayAnimationDuration: const Duration(milliseconds: 1000),
         viewportFraction: 1,
       ),
       items: [
@@ -253,7 +251,7 @@ class _HomeState extends State<Home> {
         return Builder(
           builder: (BuildContext context) {
             return Container(
-              margin: EdgeInsets.all(5.0),
+              margin: const EdgeInsets.all(5.0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
                 image: DecorationImage(
@@ -274,7 +272,7 @@ class _HomeState extends State<Home> {
       child: Card(
         elevation: 5, // Adds shadow to the card
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12), // Rounded corners
+          borderRadius: BorderRadius.circular(12),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -311,7 +309,7 @@ class _HomeState extends State<Home> {
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
-                    textAlign: TextAlign.center, // Center text alignment
+                    textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 2),
                   const Text(
@@ -323,29 +321,29 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  Row(
+                  const Row(
                     children: [
-                      const Icon(
+                      Icon(
                         Icons.star,
                         color: Colors.amber,
                         size: 18,
                       ),
-                      const SizedBox(width: 4),
-                      const Text(
-                        '4.5', // Placeholder for rating
+                      SizedBox(width: 4),
+                      Text(
+                        '4.5',
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      const Spacer(),
-                      const Icon(
+                      Spacer(),
+                      Icon(
                         Icons.location_on,
                         color: Colors.grey,
                         size: 14,
                       ),
-                      const SizedBox(width: 4),
-                      const Text(
+                      SizedBox(width: 4),
+                      Text(
                         '800m away',
                         style: TextStyle(
                           fontSize: 12,
@@ -363,69 +361,4 @@ class _HomeState extends State<Home> {
       ),
     );
   }
-
-  // Widget _buildFeaturedServices() {
-  //   return SizedBox(
-  //     height: 150,
-  //     child: ListView(
-  //       scrollDirection: Axis.horizontal,
-  //       children: [
-  //         _buildServiceCard(
-  //           'assets/service1.png',
-  //           'Service 1',
-  //           'Description for Service 1',
-  //         ),
-  //         _buildServiceCard(
-  //           'assets/service2.png',
-  //           'Service 2',
-  //           'Description for Service 2',
-  //         ),
-  //         _buildServiceCard(
-  //           'assets/service3.png',
-  //           'Service 3',
-  //           'Description for Service 3',
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
-  // Widget _buildServiceCard(String imagePath, String title, String description) {
-  //   return Container(
-  //     margin: EdgeInsets.symmetric(horizontal: 8.0),
-  //     width: 120,
-  //     decoration: BoxDecoration(
-  //       border: Border.all(color: Colors.black, width: 1),
-  //       borderRadius: BorderRadius.circular(10),
-  //     ),
-  //     child: Column(
-  //       crossAxisAlignment: CrossAxisAlignment.start,
-  //       children: [
-  //         ClipRRect(
-  //           borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
-  //           child: Image.asset(
-  //             imagePath,
-  //             height: 80,
-  //             width: double.infinity,
-  //             fit: BoxFit.cover,
-  //           ),
-  //         ),
-  //         Padding(
-  //           padding: const EdgeInsets.all(8.0),
-  //           child: Text(
-  //             title,
-  //             style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-  //           ),
-  //         ),
-  //         Padding(
-  //           padding: const EdgeInsets.symmetric(horizontal: 8.0),
-  //           child: Text(
-  //             description,
-  //             style: TextStyle(fontSize: 12),
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
 }

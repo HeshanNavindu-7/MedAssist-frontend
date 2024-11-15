@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:midassist/screens/profilepage.dart';
-import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
+import 'package:midassist/widgets/custom_bottom_navigation_bar.dart';
 
 class Pay extends StatefulWidget {
   const Pay({Key? key}) : super(key: key);

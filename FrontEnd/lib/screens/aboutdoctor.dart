@@ -1,12 +1,7 @@
-import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:midassist/screens/appointments.dart';
 import 'package:midassist/screens/home.dart';
 import 'package:midassist/screens/reviewdoctor.dart';
-
-import 'custom_bottom_navigation_bar.dart';
+import 'package:midassist/widgets/custom_bottom_navigation_bar.dart';
 
 class AboutDoctor extends StatelessWidget {
   const AboutDoctor({Key? key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:midassist/APIs/doctorDetails.dart';
+import 'package:midassist/services/doctor_details_service.dart';
 import 'package:midassist/screens/home.dart';
-import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
+import 'package:midassist/widgets/custom_bottom_navigation_bar.dart';
 import 'package:midassist/screens/doctorcards.dart'; // Import your DoctorCard widgetimport 'package:midassist/services/doctor_data_manager.dart'; // Import your DoctorDataManager
 
 class DoctorRecommendation extends StatefulWidget {

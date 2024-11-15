@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:midassist/screens/firstPage.dart';
+import 'package:midassist/screens/onboarding/splash_screen.dart';
 void main()  {
   dotenv.load(fileName: "lib/.env");
   runApp(const MyApp());
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:const FirstPage(),
+      home:const SplashScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

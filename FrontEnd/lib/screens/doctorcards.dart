@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../APIs/doctorDetails.dart';
+import '../services/doctor_details_service.dart';
 import 'aboutdoctor.dart';
 
 class DoctorCard extends StatefulWidget {
