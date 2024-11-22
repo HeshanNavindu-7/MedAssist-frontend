@@ -41,8 +41,9 @@ class _SignUpPageState extends State<SignUp_Page> {
       if (response.statusCode == 201) {
         // Successful sign-up; navigate to home page
         Navigator.pushReplacement(
+          // ignore: use_build_context_synchronously
           context,
-          MaterialPageRoute(builder: (context) => Home()),
+          MaterialPageRoute(builder: (context) => const Home()),
         );
       } else if (response.statusCode == 400) {
         showErrorMessage('Sign up failed. Please check your details.');
@@ -262,7 +263,7 @@ class _SignUpPageState extends State<SignUp_Page> {
                               validateForm();
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Color.fromARGB(255, 0, 7, 81),
+                              backgroundColor: const Color.fromARGB(255, 0, 7, 81),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),

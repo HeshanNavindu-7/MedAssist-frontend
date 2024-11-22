@@ -1,9 +1,14 @@
 // import 'dart:convert';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:midassist/screens/auth/sign_up_page.dart';
 import 'package:midassist/screens/forgotpassword.dart';
+import 'package:midassist/utils/user_session.dart';
+import 'package:midassist/utils/validation_helper.dart';
+import 'package:midassist/widgets/custom_snackbar.dart';
 import '../home.dart';
 
 class SignInPage extends StatefulWidget {
@@ -22,33 +27,42 @@ class _SignInPageState extends State<SignInPage> {
   bool _isEmailValid = true;
   bool _isPasswordValid = true;
 
-  Future<void> signIn() async {
-    String baseUrl = dotenv.env['API_URL'] ?? '';
-    String url = '$baseUrl/sign-in/';
+ Future<void> signIn() async {
+  String baseUrl = dotenv.env['API_URL'] ?? '';
+  String url = '$baseUrl/sign-in/';
 
-    try {
-      final response = await http.post(
-        Uri.parse(url),
-        body: {
-          'email': usernameController.text,
-          'password': passwordController.text,
-        },
+  try {
+    final response = await http.post(
+      Uri.parse(url),
+      body: {
+        'email': usernameController.text,
+        'password': passwordController.text,
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> responseBody = jsonDecode(response.body);
+
+      UserSession userSession = UserSession();
+      userSession.accessToken = responseBody['access'];
+      userSession.refreshToken = responseBody['refresh'];
+      userSession.userDetails = responseBody['user'];
+
+      Navigator.pushReplacement(
+        // ignore: use_build_context_synchronously
+        context,
+        MaterialPageRoute(builder: (context) => Home()),
       );
-
-      if (response.statusCode == 200) {
-        Navigator.pushReplacement(
+    } else {
+      showCustomSnackbar(
           // ignore: use_build_context_synchronously
-          context,
-          MaterialPageRoute(builder: (context) => Home()),
-        );
-      } else {
-        showErrorMessage(
-            'Sign in failed. Please check your email and password.');
-      }
-    } catch (e) {
-      showErrorMessage('An error occurred. Please try again.');
+          context, 'Sign in failed. Please check your email and password.');
     }
+  } catch (e) {
+    // ignore: use_build_context_synchronously
+    showCustomSnackbar(context, 'An error occurred. Please try again.');
   }
+}
 
   void validateForm() {
     final form = _formKey.currentState;
@@ -59,62 +73,26 @@ class _SignInPageState extends State<SignInPage> {
       });
       signIn();
     } else {
-      String? emailError = validateEmail(usernameController.text);
-      String? passwordError = validatePassword(passwordController.text);
+      String? emailError =
+          ValidationHelper.validateEmail(usernameController.text);
+      String? passwordError =
+          ValidationHelper.validatePassword(passwordController.text);
 
       if (emailError != null) {
         setState(() {
           _isEmailValid = false;
         });
-        showErrorMessage(emailError);
+        showCustomSnackbar(context, emailError);
       } else if (passwordError != null) {
         setState(() {
           _isPasswordValid = false;
         });
-        showErrorMessage(passwordError);
+        showCustomSnackbar(context, passwordError);
       } else {
-        showErrorMessage("Please check your email and password.");
+        showCustomSnackbar(context, "Please check your email and password.");
       }
       return;
     }
-  }
-
-  String? validateEmail(String value) {
-    if (value.isEmpty) {
-      return 'Email is required';
-    } else if (!value.contains('@')) {
-      return 'Email must contain "@"';
-    } else if (!value.contains('.')) {
-      return 'Email must contain a "." after "@"';
-    } else if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-      return 'Enter a valid email address, e.g., name@example.com';
-    }
-    return null;
-  }
-
-  String? validatePassword(String value) {
-    if (value.isEmpty) {
-      return 'Password is required';
-    }
-    return null;
-  }
-
-  void showErrorMessage(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          message,
-          style: const TextStyle(color: Colors.white),
-        ),
-        backgroundColor: Colors.redAccent,
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.0),
-        ),
-        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        duration: const Duration(seconds: 5),
-      ),
-    );
   }
 
   @override
@@ -196,12 +174,14 @@ class _SignInPageState extends State<SignInPage> {
                                 ),
                               ),
                               filled: false,
-                              errorStyle: const TextStyle(height: 0.01,color: Colors.transparent),
+                              errorStyle: const TextStyle(
+                                  height: 0.01, color: Colors.transparent),
                             ),
                             style: const TextStyle(
                               color: Colors.white,
                             ),
-                            validator: (value) => validateEmail(value!),
+                            validator: (value) =>
+                                ValidationHelper.validateEmail(value!),
                           ),
                         ),
                       ),
@@ -251,10 +231,12 @@ class _SignInPageState extends State<SignInPage> {
                                 ),
                               ),
                               filled: false,
-                              errorStyle: const TextStyle(height: 0.01,color: Colors.transparent),
+                              errorStyle: const TextStyle(
+                                  height: 0.01, color: Colors.transparent),
                             ),
                             style: const TextStyle(color: Colors.white),
-                            validator: (value) => validatePassword(value!),
+                            validator: (value) =>
+                                ValidationHelper.validatePassword(value!),
                             obscureText: true,
                           ),
                         ),
