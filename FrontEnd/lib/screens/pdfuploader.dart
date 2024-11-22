@@ -6,6 +6,8 @@ import 'package:http/http.dart' as http;
 import 'package:midassist/screens/pdf_result.dart';
 import 'dart:convert';
 
+import 'package:midassist/utils/user_session.dart';
+
 class PdfUploader extends StatefulWidget {
   const PdfUploader({Key? key}) : super(key: key);
 
@@ -24,18 +26,16 @@ class _PdfUploaderState extends State<PdfUploader> {
   }
 
   Future<void> _fetchUserId() async {
-    String baseUrl = dotenv.env['API_URL'] ?? ''; 
-    final response =
-        await http.get(Uri.parse('$baseUrl/users/'));
+    UserSession userSession = UserSession();
 
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> data = jsonDecode(response.body);
-      setState(() {
-        userId = data['id'];
-      });
-    } else {
-      print('Failed to fetch user ID: ${response.statusCode}');
-    }
+    // Access tokens
+    String? token = userSession.accessToken;
+
+    // Access user details
+    Map<String, dynamic>? userDetails = userSession.userDetails;
+    userId = userDetails?['id'];
+    print('User ID: ${userDetails?['id']}');
+    // print('Username: ${userDetails?['name']}');
   }
 
   Future<void> _uploadPdf(BuildContext context) async {
@@ -51,7 +51,7 @@ class _PdfUploaderState extends State<PdfUploader> {
         );
 
         if (result != null) {
-          String baseUrl = dotenv.env['API_URL'] ?? ''; 
+          String baseUrl = dotenv.env['API_URL'] ?? '';
           File file = File(result.files.single.path!);
 
           var request = http.MultipartRequest(

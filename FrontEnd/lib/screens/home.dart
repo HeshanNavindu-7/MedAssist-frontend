@@ -6,6 +6,7 @@ import 'package:midassist/services/user_details_service.dart';
 import 'package:midassist/screens/aboutdoctor.dart';
 import 'package:midassist/screens/ambulance.dart';
 import 'package:midassist/screens/cart.dart';
+import 'package:midassist/utils/user_session.dart';
 import 'package:midassist/widgets/custom_bottom_navigation_bar.dart';
 import 'package:midassist/screens/doctorRecommendation.dart';
 import 'package:midassist/screens/hospitals.dart';
@@ -35,15 +36,16 @@ class _HomeState extends State<Home> {
   }
 
   Future<void> _fetchUserDetails() async {
-    try {
-      final Map<String, dynamic> data =
-          await UserDataManager.fetchUserDetails();
-      setState(() {
-        userName = data['name'];
-      });
-    } catch (e) {
-      print('Error: $e');
-    }
+    UserSession userSession = UserSession();
+
+    // Access tokens
+    String? token = userSession.accessToken;
+
+    // Access user details
+    Map<String, dynamic>? userDetails = userSession.userDetails;
+    userName = userDetails?['name'];
+    // print('User ID: ${userDetails?['id']}');
+    // print('Username: ${userDetails?['name']}');
   }
 
   Future<void> _fetchDoctorDetails() async {
