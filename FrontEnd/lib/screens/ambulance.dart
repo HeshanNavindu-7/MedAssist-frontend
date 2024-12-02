@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:midassist/screens/home.dart';
-import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
+import 'package:midassist/widgets/custom_bottom_navigation_bar.dart';
 
 class Ambulance extends StatelessWidget {
-  const Ambulance({Key? key}) : super(key: key);
+  const Ambulance({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +11,7 @@ class Ambulance extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Ambulance'),
         centerTitle: true,
-        backgroundColor: Color.fromARGB(
+        backgroundColor: const Color.fromARGB(
             255, 173, 216, 230), // You can customize the AppBar color
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
@@ -27,12 +27,12 @@ class Ambulance extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          Positioned(
+          const Positioned(
             top: 200,
             left: 65,
             child: Image(image: AssetImage('assets/1919.png')),
           ),
-          Positioned(
+          const Positioned(
             top: 500,
             left: 45,
             child: Text(
@@ -56,7 +56,7 @@ class Ambulance extends StatelessWidget {
             ),
           ),
           // Navigation Bar
-          Positioned(
+          const Positioned(
             bottom: 0,
             left: 0,
             right: 0,

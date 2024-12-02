@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:midassist/screens/salesitem.dart';
 import 'package:midassist/screens/market.dart';
-import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
+import 'package:midassist/widgets/custom_bottom_navigation_bar.dart';
 
 class Cart extends StatelessWidget {
   const Cart({Key? key}) : super(key: key);

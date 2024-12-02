@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:midassist/APIs/imageFilePicker.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:midassist/utils/imageFilePicker.dart';
 import 'package:http/http.dart' as http;
 import 'package:midassist/screens/brain_tumor_model_page.dart';
 import 'package:midassist/screens/image_result.dart';
+import 'package:midassist/utils/user_session.dart';
 
 class ImageUploader extends StatefulWidget {
   const ImageUploader({
@@ -33,23 +35,19 @@ class _ImageUploaderState extends State<ImageUploader> {
 
   Future<void> _fetchUserId() async {
     try {
-      final response =
-          await http.get(Uri.parse('http://192.168.1.2:8000/users/'));
+      UserSession userSession = UserSession();
 
-      if (response.statusCode == 200) {
-        final Map<String, dynamic> data = jsonDecode(response.body);
-        setState(() {
-          userId = data['id'];
-          _isLoading =
-              false; // Set loading to false once the user ID is fetched
-          print(userId);
-        });
-      } else {
-        setState(() {
-          _isLoading = false;
-        });
-        print('Failed to fetch user ID: ${response.statusCode}');
-      }
+      // Access tokens
+      String? token = userSession.accessToken;
+
+      // Access user details
+      Map<String, dynamic>? userDetails = userSession.userDetails;
+      userId = userDetails?['id'];
+       setState(() {
+        _isLoading = false;
+      });
+      print('User ID: ${userDetails?['id']}');
+      // print('Username: ${userDetails?['name']}');
     } catch (e) {
       setState(() {
         _isLoading = false;

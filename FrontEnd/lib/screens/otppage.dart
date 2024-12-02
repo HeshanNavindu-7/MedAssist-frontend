@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:midassist/screens/firstPage.dart';
+import 'package:midassist/screens/onboarding/splash_screen.dart';
 import 'package:midassist/screens/forgotpassword.dart';
 
 class OTP extends StatefulWidget {
@@ -54,7 +54,7 @@ class _OTPScreenState extends State<OTP> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => const FirstPage(),
+        builder: (context) => const SplashScreen(),
       ),
     );
   }

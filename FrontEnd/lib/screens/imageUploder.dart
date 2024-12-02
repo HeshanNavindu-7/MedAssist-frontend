@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:midassist/APIs/imageFilePicker.dart';
+import 'package:midassist/utils/imageFilePicker.dart';
 import 'package:http/http.dart' as http;
 import 'package:midassist/screens/brain_tumor_model_page.dart';
 import 'package:midassist/screens/image_result.dart'; // Import the ImageResult class
