@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:midassist/screens/changepassword.dart';
 import 'package:midassist/screens/onboarding/splash_screen.dart';
 import 'package:midassist/screens/forgotpassword.dart';
 
@@ -48,28 +47,16 @@ class _OTPScreenState extends State<OTP> {
     });
   }
 
-  void _verifyOtp() {
+  void _onOtpEntered() {
     String otpCode = _controllers.map((controller) => controller.text).join();
     print("Entered OTP: $otpCode");
 
-    // Replace "1234" with your actual OTP validation logic
-    if (otpCode == "1234") {
-      // Navigate to the success page if OTP is correct
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const Change(),
-        ),
-      );
-    } else {
-      // Navigate to the failure page if OTP is incorrect
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const Forgot(),
-        ),
-      );
-    }
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const SplashScreen(),
+      ),
+    );
   }
 
   Widget _buildOtpBox(int index) {
@@ -92,7 +79,7 @@ class _OTPScreenState extends State<OTP> {
               FocusScope.of(context).requestFocus(_focusNodes[index + 1]);
             } else {
               _focusNodes[index].unfocus();
-              _verifyOtp();
+              _onOtpEntered();
             }
           } else if (value.isEmpty && index > 0) {
             FocusScope.of(context).requestFocus(_focusNodes[index - 1]);
@@ -165,7 +152,7 @@ class _OTPScreenState extends State<OTP> {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: _verifyOtp,
+                      onPressed: _onOtpEntered,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromARGB(
                             255, 0, 7, 81), // Updated button color

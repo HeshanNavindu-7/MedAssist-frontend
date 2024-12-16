@@ -134,7 +134,7 @@ class _ItemState extends State<Item> {
           ),
           // Add to cart image
           Positioned(
-            top: 675,
+            top: 655,
             left: 70,
             child: GestureDetector(
               onTap: () {
@@ -167,8 +167,8 @@ class _ItemState extends State<Item> {
           ),
 
           // Navigation Bar
-          const Positioned(
-            bottom: 0,
+          Positioned(
+            top: 728,
             left: 0,
             right: 0,
             child: CustomBottomNavigationBar(),
