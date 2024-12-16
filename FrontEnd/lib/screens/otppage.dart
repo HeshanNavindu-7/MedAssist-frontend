@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:midassist/screens/changepassword.dart';
 import 'package:midassist/screens/firstPage.dart';
-import 'package:midassist/screens/forgotpassword.dart';
 
 class OTP extends StatefulWidget {
   const OTP({Key? key}) : super(key: key);
@@ -47,16 +47,28 @@ class _OTPScreenState extends State<OTP> {
     });
   }
 
-  void _onOtpEntered() {
+  void _verifyOtp() {
     String otpCode = _controllers.map((controller) => controller.text).join();
     print("Entered OTP: $otpCode");
 
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const FirstPage(),
-      ),
-    );
+    // Replace "1234" with your actual OTP validation logic
+    if (otpCode == "1234") {
+      // Navigate to the success page if OTP is correct
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const Change(),
+        ),
+      );
+    } else {
+      // Navigate to the failure page if OTP is incorrect
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const FirstPage(),
+        ),
+      );
+    }
   }
 
   Widget _buildOtpBox(int index) {
@@ -79,7 +91,7 @@ class _OTPScreenState extends State<OTP> {
               FocusScope.of(context).requestFocus(_focusNodes[index + 1]);
             } else {
               _focusNodes[index].unfocus();
-              _onOtpEntered();
+              _verifyOtp();
             }
           } else if (value.isEmpty && index > 0) {
             FocusScope.of(context).requestFocus(_focusNodes[index - 1]);
@@ -132,15 +144,9 @@ class _OTPScreenState extends State<OTP> {
                     }),
                   ),
                   const SizedBox(height: 40),
-                  GestureDetector(
-                    onTap: () {
-                      _onOtpEntered();
-                    },
-                    child: ElevatedButton(
-                        onPressed: () {
-                          print('Text');
-                        },
-                        child: Text('Verify Me')),
+                  ElevatedButton(
+                    onPressed: _verifyOtp,
+                    child: const Text('Verify Me'),
                   ),
                   const SizedBox(height: 20),
                   Text(
