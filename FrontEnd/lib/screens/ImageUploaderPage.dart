@@ -45,6 +45,7 @@ class _ImageUploaderState extends State<ImageUploader> {
        setState(() {
         _isLoading = false;
       });
+      
       print('User ID: ${userDetails?['id']}');
       // print('Username: ${userDetails?['name']}');
     } catch (e) {
