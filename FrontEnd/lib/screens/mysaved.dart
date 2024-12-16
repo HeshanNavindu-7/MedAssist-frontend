@@ -140,8 +140,9 @@ class _MySavedState extends State<MySaved> {
       ),
       body: Column(
         children: [
+          SizedBox(height: 30),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: TextField(
               focusNode: _focusNode,
               decoration: InputDecoration(
@@ -153,16 +154,24 @@ class _MySavedState extends State<MySaved> {
               ),
             ),
           ),
+          const SizedBox(height: 16), // Add spacing for better layout
+          Padding(
+            padding: const EdgeInsets.all(8.0), // Adjust top padding as needed
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _buildDoctorCard(context, "Dr. John Doe", true),
+                const SizedBox(width: 20),
+                _buildDoctorCard(context, "Dr. Jane Smith", false),
+              ],
+            ),
+          ),
+
           Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _buildDoctorCard(context, "Dr. John Doe", true),
-                  const SizedBox(width: 40),
-                  _buildDoctorCard(context, "Dr. Jane Smith", false),
-                ],
+            child: Center(
+              child: const Text(
+                'No additional doctors found.', // Placeholder content for the remaining area
+                style: TextStyle(fontSize: 16),
               ),
             ),
           ),
