@@ -1,42 +1,74 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:midassist/utils/imageFilePicker.dart';
+import 'package:midassist/services/doctor_details_service.dart';
+import 'package:midassist/services/user_details_service.dart';
 import 'package:midassist/screens/aboutdoctor.dart';
 import 'package:midassist/screens/ambulance.dart';
 import 'package:midassist/screens/cart.dart';
-import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
+import 'package:midassist/utils/user_session.dart';
+import 'package:midassist/widgets/custom_bottom_navigation_bar.dart';
 import 'package:midassist/screens/doctorRecommendation.dart';
 import 'package:midassist/screens/hospitals.dart';
 import 'package:midassist/screens/market.dart';
 import 'package:midassist/screens/notifications.dart';
+import 'package:http/http.dart' as http;
 
 class Home extends StatefulWidget {
-  Home({Key? key}) : super(key: key);
+  const Home({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
   String? userName;
-  List<Map<String, dynamic>> topDoctors = [];
+  String? doctorName;
+  final ImageFilePicker imageFilePicker = ImageFilePicker();
+  final http.Client client = http.Client();
 
   @override
   void initState() {
     super.initState();
-    _fetchDetails(); // Fetch details when the page initializes
+    _fetchUserDetails();
+    _fetchDoctorDetails();
   }
 
-  Future<void> _fetchDetails() async {
-    // Your existing code for fetching user and doctor details
+  Future<void> _fetchUserDetails() async {
+    UserSession userSession = UserSession();
+
+    // Access tokens
+    String? token = userSession.accessToken;
+
+    // Access user details
+    Map<String, dynamic>? userDetails = userSession.userDetails;
+    userName = userDetails?['name'];
+    // print('User ID: ${userDetails?['id']}');
+    // print('Username: ${userDetails?['name']}');
+  }
+
+  Future<void> _fetchDoctorDetails() async {
+    try {
+      final List<dynamic> data = await DoctorDataManager.fetchDoctorDetails();
+      if (data.isNotEmpty) {
+        setState(() {
+          doctorName = data[0]['name'];
+        });
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    // ignore: deprecated_member_use
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 173, 216, 230),
+          backgroundColor: const Color.fromARGB(255, 173, 216, 230),
           automaticallyImplyLeading: false,
           title: Row(
             children: [
@@ -158,51 +190,14 @@ class _HomeState extends State<Home> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(25),
-                  child: _buildDoctorCarousel(),
-                ),
-                SizedBox(
-                  height: 50,
+                  child: _buildDoctorCard(),
                 ),
               ],
             ),
           ),
         ),
-        bottomNavigationBar: CustomBottomNavigationBar(),
+        bottomNavigationBar: const CustomBottomNavigationBar(),
       ),
-    );
-  }
-
-  Widget _buildImageCarousel() {
-    return CarouselSlider(
-      options: CarouselOptions(
-        height: 110,
-        enlargeCenterPage: true,
-        autoPlay: true,
-        autoPlayCurve: Curves.fastOutSlowIn,
-        enableInfiniteScroll: true,
-        autoPlayAnimationDuration: Duration(milliseconds: 1000),
-        viewportFraction: 1,
-      ),
-      items: [
-        'assets/CarosalCard/img1.png',
-        'assets/CarosalCard/img2.png',
-        'assets/CarosalCard/img3.png'
-      ].map((imagePath) {
-        return Builder(
-          builder: (BuildContext context) {
-            return Container(
-              margin: EdgeInsets.all(5.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
-                image: DecorationImage(
-                  image: AssetImage(imagePath),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            );
-          },
-        );
-      }).toList(),
     );
   }
 
@@ -211,7 +206,7 @@ class _HomeState extends State<Home> {
     return GestureDetector(
       onTap: onTap,
       child: Card(
-        elevation: 4.0,
+        elevation: 3.0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
@@ -223,8 +218,8 @@ class _HomeState extends State<Home> {
             children: [
               Image(
                 image: AssetImage(imagePath),
-                height: 50,
-                width: 50,
+                height: 40,
+                width: 40,
               ),
               const SizedBox(height: 8.0),
               Text(
@@ -239,82 +234,132 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget _buildDoctorCarousel() {
+  Widget _buildImageCarousel() {
     return CarouselSlider(
       options: CarouselOptions(
-        height: 250,
+        height: 110,
         enlargeCenterPage: true,
         autoPlay: true,
-        aspectRatio: 16 / 9,
         autoPlayCurve: Curves.fastOutSlowIn,
         enableInfiniteScroll: true,
-        autoPlayAnimationDuration: Duration(milliseconds: 800),
-        viewportFraction: 0.8,
+        autoPlayAnimationDuration: const Duration(milliseconds: 1000),
+        viewportFraction: 1,
       ),
-      items: topDoctors.map((doctor) {
+      items: [
+        'assets/CarosalCard/img1.png',
+        'assets/CarosalCard/img2.png',
+        'assets/CarosalCard/img3.png'
+      ].map((imagePath) {
         return Builder(
           builder: (BuildContext context) {
-            return _buildDoctorCard(context, doctor);
+            return Container(
+              margin: const EdgeInsets.all(5.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                image: DecorationImage(
+                  image: AssetImage(imagePath),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            );
           },
         );
       }).toList(),
     );
   }
 
-  Widget _buildDoctorCard(
-      BuildContext context, Map<String, dynamic> doctorData) {
-    return Container(
-      margin: EdgeInsets.all(5.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.0),
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black26,
-            blurRadius: 5,
-            offset: Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const AboutDoctor()),
-              );
-            },
-            child: const Image(
-              image: AssetImage('assets/doc.png'),
-              height: 120,
-              width: 120,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              doctorData['name'],
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
+  Widget _buildDoctorCard() {
+    return SizedBox(
+      width: 180, // Increased width for a better appearance
+      child: Card(
+        elevation: 5, // Adds shadow to the card
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const AboutDoctor(),
+                  ),
+                );
+              },
+              child: ClipRRect(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+                child: Image.asset(
+                  'assets/Doctor1.png',
+                  height: 120,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                ),
               ),
-              textAlign: TextAlign.center,
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
-            child: Text(
-              doctorData['specialization'],
-              style: const TextStyle(
-                fontSize: 16,
-                color: Colors.grey,
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment:
+                    CrossAxisAlignment.center, // Center items horizontally
+                children: [
+                  Text(
+                    doctorName ??
+                        'Doctor Name', // Provide a fallback if doctorName is null
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 2),
+                  const Text(
+                    'Cardiologist',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  const Row(
+                    children: [
+                      Icon(
+                        Icons.star,
+                        color: Colors.amber,
+                        size: 18,
+                      ),
+                      SizedBox(width: 4),
+                      Text(
+                        '4.5',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      Spacer(),
+                      Icon(
+                        Icons.location_on,
+                        color: Colors.grey,
+                        size: 14,
+                      ),
+                      SizedBox(width: 4),
+                      Text(
+                        '800m away',
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-              textAlign: TextAlign.center,
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

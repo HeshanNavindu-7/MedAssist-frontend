@@ -7,62 +7,72 @@ class Forgot extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Text(
-                    'Forgot Password',
-                    style: TextStyle(fontSize: 25),
+      appBar: AppBar(
+        title: const Text('Forgot Password'),
+        centerTitle: true,
+        backgroundColor: Color.fromARGB(255, 173, 216, 230),
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(
+                Icons.lock_reset,
+                size: 80,
+                color: Color.fromARGB(255, 173, 216, 230),
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                'Enter your email account to reset your password',
+                style: TextStyle(color: Color.fromARGB(255, 116, 116, 115)),
+              ),
+              const SizedBox(height: 20),
+              const TextField(
+                decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.email),
+                  hintText: 'Email',
+                  hintStyle: TextStyle(color: Color.fromARGB(112, 0, 0, 0)),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
                   ),
-                  const SizedBox(height: 10),
-                  const Text(
-                    'Enter your email account to reset your password',
-                    style: TextStyle(color: Color.fromARGB(255, 116, 116, 115)),
-                  ),
-                  const SizedBox(height: 20),
-                  const TextField(
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.email),
-                      hintText: 'Email',
-                      hintStyle: TextStyle(color: Color.fromARGB(112, 0, 0, 0)),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        borderSide: BorderSide(
-                          color: Colors.blue, // Border color
-                          width: 2.0, // Border width
-                        ),
-                      ),
+                ),
+              ),
+              const SizedBox(height: 25),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    _showResetDialog(context);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor:
+                        const Color.fromARGB(255, 0, 7, 81), // Updated color
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  const SizedBox(
-                    height: 25,
+                  child: const Text(
+                    'Next',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
                   ),
-                  GestureDetector(
-                      onTap: () {
-                        _showResetDialog(context);
-                      },
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const OTP(),
-                            ),
-                          );
-                          print('Next Button');
-                        },
-                        child: Text('Next'),
-                      )),
-                ],
+                ),
               ),
-            ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
@@ -77,11 +87,16 @@ class Forgot extends StatelessWidget {
             children: [
               Image.asset('assets/emailimg.png'),
               const SizedBox(height: 10),
-              const Text('Check your email'),
+              const Text(
+                'Check your email',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
             ],
           ),
           content: const Text(
-              'We have sent password recovery instructions to your email.'),
+            'We have sent password recovery instructions to your email.',
+            textAlign: TextAlign.center,
+          ),
           actions: <Widget>[
             TextButton(
               onPressed: () {

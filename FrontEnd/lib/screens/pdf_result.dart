@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:midassist/widgets/custom_bottom_navigation_bar.dart';
 
 class Pdf_Result extends StatelessWidget {
   final String? responseData;
@@ -9,6 +10,8 @@ class Pdf_Result extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 173, 216, 230),
+        centerTitle: true,
         title: Text('PDF Result'),
       ),
       body: Padding(
@@ -33,6 +36,7 @@ class Pdf_Result extends StatelessWidget {
           ),
         ),
       ),
+      bottomNavigationBar: const CustomBottomNavigationBar(),
     );
   }
 }

@@ -1,7 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:midassist/screens/changepassword.dart';
-import 'package:midassist/screens/firstPage.dart';
+import 'package:midassist/screens/onboarding/splash_screen.dart';
+import 'package:midassist/screens/forgotpassword.dart';
 
 class OTP extends StatefulWidget {
   const OTP({Key? key}) : super(key: key);
@@ -65,7 +66,7 @@ class _OTPScreenState extends State<OTP> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => const FirstPage(),
+          builder: (context) => const Forgot(),
         ),
       );
     }
@@ -117,6 +118,18 @@ class _OTPScreenState extends State<OTP> {
     }
 
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('OTP Verification'),
+        centerTitle: true,
+        backgroundColor: const Color.fromARGB(255, 173, 216, 230),
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ),
       body: Stack(
         children: [
           Center(
@@ -125,7 +138,12 @@ class _OTPScreenState extends State<OTP> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const SizedBox(height: 110),
+                  const SizedBox(height: 20),
+                  Image.asset(
+                    'assets/Forgotpw/otp.jpg', // Add a relevant image here
+                    height: 100,
+                  ),
+                  const SizedBox(height: 20),
                   const Text(
                     'OTP Verification',
                     style: TextStyle(fontSize: 25),
@@ -144,9 +162,26 @@ class _OTPScreenState extends State<OTP> {
                     }),
                   ),
                   const SizedBox(height: 40),
-                  ElevatedButton(
-                    onPressed: _verifyOtp,
-                    child: const Text('Verify Me'),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: _verifyOtp,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromARGB(
+                            255, 0, 7, 81), // Updated button color
+                        padding: const EdgeInsets.symmetric(vertical: 15),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: const Text(
+                        'Verify Me',
+                        style: TextStyle(
+                          color: Colors.white, // Set text color to white
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 20),
                   Text(

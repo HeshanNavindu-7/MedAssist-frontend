@@ -4,7 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart'; // Import the intl package
 import 'package:midassist/screens/aboutdoctor.dart';
-import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
+import 'package:midassist/widgets/custom_bottom_navigation_bar.dart';
 
 class Appointments extends StatefulWidget {
   const Appointments({Key? key}) : super(key: key);

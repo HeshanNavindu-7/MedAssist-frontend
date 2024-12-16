@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../APIs/doctorDetails.dart';
+import '../services/doctor_details_service.dart';
 import 'aboutdoctor.dart';
 
 class DoctorCard extends StatefulWidget {
-  const DoctorCard({super.key});
+  const DoctorCard({super.key, required doctor});
 
   @override
   _DoctorCardState createState() => _DoctorCardState();
@@ -40,17 +40,17 @@ class _DoctorCardState extends State<DoctorCard> {
       body: doctorData == null
           ? const Center(child: CircularProgressIndicator())
           : GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-        ),
-        itemCount: doctorData!.length,
-        itemBuilder: (context, index) {
-          Map<String, dynamic> doctor = doctorData![index];
-          return buildDoctorCard(doctor);
-        },
-      ),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+              ),
+              itemCount: doctorData!.length,
+              itemBuilder: (context, index) {
+                Map<String, dynamic> doctor = doctorData![index];
+                return buildDoctorCard(doctor);
+              },
+            ),
     );
   }
 

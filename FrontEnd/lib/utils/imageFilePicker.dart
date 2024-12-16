@@ -2,12 +2,14 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:mime/mime.dart';
 
-const API_URL = 'http://192.168.8.135:8000/upload_image/';
+String baseUrl = dotenv.env['API_URL'] ?? ''; 
+String apiUrl = '$baseUrl/upload_image/';
 
 // coverage:ignore-start
 /// Image file picker wrapper class
@@ -22,7 +24,7 @@ class ImageFilePicker {
 Future<Map<String, dynamic>?> openImagePickerDialog(
     ImageFilePicker imageFilePicker, http.Client client, int? userId) async {
   FilePickerResult? result = await imageFilePicker.pickImage();
-  MultipartRequest request = http.MultipartRequest('POST', Uri.parse(API_URL));
+  MultipartRequest request = http.MultipartRequest('POST', Uri.parse(apiUrl));
 
   if (result != null) {
     // Get file and make request

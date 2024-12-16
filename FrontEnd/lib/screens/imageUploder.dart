@@ -1,7 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:midassist/APIs/imageFilePicker.dart';
+import 'package:midassist/utils/imageFilePicker.dart';
 import 'package:http/http.dart' as http;
+import 'package:midassist/screens/brain_tumor_model_page.dart';
 import 'package:midassist/screens/image_result.dart'; // Import the ImageResult class
 
 final buttonKey = UniqueKey();
@@ -33,7 +34,7 @@ class _ImageUploaderState extends State<ImageUploader> {
   }
 
   Future<void> _fetchUserId() async {
-    final response = await http.get(Uri.parse('http://10.0.2.2:8000/users/'));
+    final response = await http.get(Uri.parse('http://192.168.1.2/users/'));
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = jsonDecode(response.body);
@@ -48,18 +49,30 @@ class _ImageUploaderState extends State<ImageUploader> {
 
   void _onNextPressed() {
     if (userId != null && selectedBodyPart != null) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ImageUploaderPage(
-            imageFilePicker: widget.imageFilePicker,
-            client: widget.client,
-            userId:
-                userId!, // Safe to use `!` here since we're checking for null
-            selectedBodyPart: selectedBodyPart!,
+      if (selectedBodyPart == 'Brain Tumor') {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => BrainTumorUploadPage(
+              imageFilePicker: widget.imageFilePicker,
+              client: widget.client,
+              userId: userId!,
+            ),
           ),
-        ),
-      );
+        );
+      } else {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ImageUploaderPage(
+              imageFilePicker: widget.imageFilePicker,
+              client: widget.client,
+              userId: userId!,
+              selectedBodyPart: selectedBodyPart!,
+            ),
+          ),
+        );
+      }
     } else {
       if (userId == null) {
         print('User ID is still being fetched. Please wait.');

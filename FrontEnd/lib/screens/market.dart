@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:midassist/screens/home.dart';
 import 'package:midassist/screens/salesitem.dart';
 import 'package:midassist/screens/cart.dart';
-import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
+import 'package:midassist/widgets/custom_bottom_navigation_bar.dart';
 
 class Market extends StatefulWidget {
   const Market({Key? key}) : super(key: key);

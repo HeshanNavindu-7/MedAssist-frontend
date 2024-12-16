@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:midassist/services/chat_service.dart';
 import 'package:midassist/screens/home.dart';
 
 class MedAssistAi extends StatefulWidget {
@@ -19,7 +20,7 @@ class _MedAssistAiState extends State<MedAssistAi> {
         .add({'text': "Hello, I'm Medi. How can I help you?", 'sender': 'bot'});
   }
 
-  void _sendMessage() {
+  void _sendMessage() async {
     if (_controller.text.isEmpty) return;
 
     setState(() {
@@ -27,13 +28,16 @@ class _MedAssistAiState extends State<MedAssistAi> {
       _controller.clear();
     });
 
-    // Simulating a response from the chat bot
-    Future.delayed(Duration(seconds: 1), () {
+    try {
+      final botResponse = await ChatService.sendMessage(_messages[0]['text']!);
       setState(() {
-        _messages.insert(
-            0, {'text': 'This is a response from the bot.', 'sender': 'bot'});
+        _messages.insert(0, {'text': botResponse, 'sender': 'bot'});
       });
-    });
+    } catch (e) {
+      setState(() {
+        _messages.insert(0, {'text': 'Error: $e', 'sender': 'bot'});
+      });
+    }
   }
 
   @override
@@ -41,7 +45,7 @@ class _MedAssistAiState extends State<MedAssistAi> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 173, 216, 230),
-        title: const Text('MedAssist AI'),
+        title: const Text('Medi Chat'),
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
@@ -57,7 +61,6 @@ class _MedAssistAiState extends State<MedAssistAi> {
       ),
       body: Stack(
         children: [
-          // Chat messages
           Positioned(
             top: 0,
             bottom: 100,
@@ -96,60 +99,6 @@ class _MedAssistAiState extends State<MedAssistAi> {
               },
             ),
           ),
-          const Positioned(
-            top: 150,
-            left: 70,
-            child: Column(
-              children: [
-                //skin image
-                Image(image: AssetImage('assets/skin.png')),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    //text
-                    "We've analyzed your unique skin profile \nusing advanced AI algorithms and facial \nrecognition technology. Based on our \nassessment, we're thrilled to present your \npersonalized skincare routine tailored \njust for you!",
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const Positioned(
-            top: 470,
-            left: 140,
-            child: Image(image: AssetImage('assets/morning.png')),
-          ),
-          const Positioned(
-            top: 550,
-            left: 20,
-            child: Text(
-              '1. Gentle Cleanser: Start your day with [Brand Name]s\n hydrating cleanser to cleanse and refresh your skin \n without stripping away natural oils.',
-              textAlign: TextAlign.start,
-            ),
-          ),
-          const Positioned(
-            top: 610,
-            left: 20,
-            child: Text(
-              '2. Vitamin C Serum: Apply a few drops of [Brand Name]s\n Vitamin C serum. It helps brighten your complexion,\n reduce dark spots, and protect your skin from\n environmental stressors.',
-              textAlign: TextAlign.start,
-            ),
-          ),
-          const Positioned(
-            bottom: 0,
-            right: 0,
-            left: 0,
-            child: Image(
-              image: AssetImage('assets/Bottom_rectangle.png'),
-            ),
-          ),
-          //add image
-          const Positioned(
-            bottom: 25,
-            left: 20,
-            child: Image(image: AssetImage('assets/Add.png')),
-          ),
-          //chat box
           Positioned(
             bottom: 10,
             left: 20,
@@ -165,7 +114,6 @@ class _MedAssistAiState extends State<MedAssistAi> {
               ),
             ),
           ),
-          // Send button
           Positioned(
             bottom: 15,
             right: 20,

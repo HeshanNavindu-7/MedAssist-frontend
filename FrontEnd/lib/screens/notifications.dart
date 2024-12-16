@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:midassist/screens/home.dart';
-import 'package:midassist/screens/custom_bottom_navigation_bar.dart';
+import 'package:midassist/widgets/custom_bottom_navigation_bar.dart';
 
 class Notifications extends StatelessWidget {
   const Notifications({Key? key}) : super(key: key);
@@ -8,47 +8,27 @@ class Notifications extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 173, 216, 230),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Home(),
+              ),
+            );
+          },
+        ),
+        title: const Text('Notifications'),
+        centerTitle: true,
+      ),
       body: Stack(
         children: [
-          Positioned(
-            top: 25,
-            left: 10,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                //back button
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Home(),
-                      ),
-                    );
-                  },
-                  child: const Image(
-                    image: AssetImage('assets/back.png'),
-                    height: 50,
-                  ),
-                ),
-                const SizedBox(
-                  width: 70,
-                ),
-                //notifications text
-                const Text(
-                  'Notifications',
-                  style: TextStyle(
-                    fontSize: 25,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-          ),
-
           // Notification List
           Positioned(
-            top: 60,
+            top: 0, // No need to set top since AppBar handles the top space
             left: 0,
             right: 0,
             bottom: 80, // Leave space for the navigation bar
