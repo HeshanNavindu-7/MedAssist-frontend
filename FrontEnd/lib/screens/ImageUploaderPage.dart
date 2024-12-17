@@ -43,10 +43,10 @@ class _ImageUploaderState extends State<ImageUploader> {
       // Access user details
       Map<String, dynamic>? userDetails = userSession.userDetails;
       userId = userDetails?['id'];
-       setState(() {
+      setState(() {
         _isLoading = false;
       });
-      
+
       print('User ID: ${userDetails?['id']}');
       // print('Username: ${userDetails?['name']}');
     } catch (e) {
@@ -311,24 +311,44 @@ class _ImageUploaderPageState extends State<ImageUploaderPage> {
         title: Text("Upload Image (${widget.selectedBodyPart})"),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      body: Center(
+        // Center aligns all content
         child: Column(
+          mainAxisAlignment:
+              MainAxisAlignment.center, // Vertically centers children
+          crossAxisAlignment:
+              CrossAxisAlignment.center, // Horizontally centers children
           children: [
             ElevatedButton.icon(
               onPressed: _isUploading ? null : _onImagePressed,
-              icon: const Icon(Icons.camera_alt),
-              label: const Text('Upload via Camera'),
+              icon: const Icon(Icons.camera_alt, size: 40), // Larger icon
+              label: const Text(
+                'Upload via Camera',
+                style: TextStyle(fontSize: 20), // Larger text
+              ),
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size(250, 70), // Bigger button
+                padding:
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+              ),
             ),
-            const SizedBox(height: 16.0),
+            const SizedBox(height: 24.0), // Increased spacing
             ElevatedButton.icon(
               onPressed: _isUploading ? null : _onImagePressed,
-              icon: const Icon(Icons.photo_library),
-              label: const Text('Upload via Gallery'),
+              icon: const Icon(Icons.photo_library, size: 40), // Larger icon
+              label: const Text(
+                'Upload via Gallery',
+                style: TextStyle(fontSize: 20), // Larger text
+              ),
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size(250, 70), // Bigger button
+                padding:
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+              ),
             ),
             if (_isUploading)
               const Padding(
-                padding: EdgeInsets.only(top: 16.0),
+                padding: EdgeInsets.only(top: 30.0), // Spacing for the loader
                 child: CircularProgressIndicator(),
               ),
           ],

@@ -168,7 +168,7 @@ class _ItemState extends State<Item> {
 
           // Navigation Bar
           Positioned(
-            top: 728,
+            bottom: 0,
             left: 0,
             right: 0,
             child: CustomBottomNavigationBar(),
