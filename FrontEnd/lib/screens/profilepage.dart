@@ -44,7 +44,7 @@ class ProfilePageState extends State<ProfilePage> {
   }
 
   Future<void> _handleLogout(BuildContext context) async {
-    String baseUrl = dotenv.env['API_URL'] ?? ''; 
+    String baseUrl = dotenv.env['API_URL'] ?? '';
     String logoutUrl = '$baseUrl/log-out/';
 
     try {
@@ -77,22 +77,6 @@ class ProfilePageState extends State<ProfilePage> {
         content: Text('An error occurred: $e'),
       ));
     }
-  }
-
-  void _navigateToEditProfile() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => EditProfilePage(
-          currentName: userName ?? '',
-          onUpdate: (newName) {
-            setState(() {
-              userName = newName;
-            });
-          },
-        ),
-      ),
-    );
   }
 
   @override
@@ -165,7 +149,16 @@ class ProfilePageState extends State<ProfilePage> {
               right: 20,
               child: IconButton(
                 icon: const Icon(Icons.edit, color: Colors.white),
-                onPressed: _navigateToEditProfile,
+                onPressed: () {
+                  // Corrected from onTap to onPressed
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          const Profile(), // Navigate to ProfilePage
+                    ),
+                  );
+                },
               ),
             ),
             const Positioned(
@@ -284,65 +277,6 @@ class ProfilePageState extends State<ProfilePage> {
                 ],
               ),
             ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class EditProfilePage extends StatefulWidget {
-  final String currentName;
-  final ValueChanged<String> onUpdate;
-
-  const EditProfilePage({
-    Key? key,
-    required this.currentName,
-    required this.onUpdate,
-  }) : super(key: key);
-
-  @override
-  _EditProfilePageState createState() => _EditProfilePageState();
-}
-
-class _EditProfilePageState extends State<EditProfilePage> {
-  final TextEditingController _nameController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    _nameController.text = widget.currentName;
-  }
-
-  void _saveChanges() {
-    final newName = _nameController.text;
-    widget.onUpdate(newName);
-    Navigator.pop(context);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Edit Profile'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.save),
-            onPressed: _saveChanges,
-          ),
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextField(
-              controller: _nameController,
-              decoration: const InputDecoration(
-                labelText: 'Name',
-              ),
-            ),
-            // Add more fields here if needed
           ],
         ),
       ),
