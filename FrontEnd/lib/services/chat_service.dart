@@ -1,8 +1,9 @@
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 class ChatService {
-  static const String _baseUrl = 'http://192.168.1.2:8000';
+  static  String _baseUrl = dotenv.env['API_URL'] ?? '';
   static const int _userId =3; 
 
   static Future<String> sendMessage(String message) async {
