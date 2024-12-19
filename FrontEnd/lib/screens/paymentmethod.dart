@@ -102,7 +102,7 @@ class _PayState extends State<Pay> {
             ),
 
             Positioned(
-              top: 260,
+              top: 2510,
               left: 50,
               right: 50,
               child: Row(

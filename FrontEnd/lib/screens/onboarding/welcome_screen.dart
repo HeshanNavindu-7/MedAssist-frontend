@@ -41,7 +41,7 @@ class WelcomeScreen extends StatelessWidget {
                         height: 40,
                       ),
                       Text(
-                        'MedAssist, unlocking the secrets to glowing skin, one personalized recommendation at a time.',
+                        'MedAssist, your personal health companion who always look for your health and well-being.',
                         style: TextStyle(
                           fontSize: 18,
                           color: Colors.black,
