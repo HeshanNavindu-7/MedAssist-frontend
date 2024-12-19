@@ -27,42 +27,43 @@ class _SignInPageState extends State<SignInPage> {
   bool _isEmailValid = true;
   bool _isPasswordValid = true;
 
- Future<void> signIn() async {
-  String baseUrl = dotenv.env['API_URL'] ?? '';
-  String url = '$baseUrl/sign-in/';
+  Future<void> signIn() async {
+    String baseUrl = dotenv.env['API_URL'] ?? '';
+    String url = '$baseUrl/sign-in/';
 
-  try {
-    final response = await http.post(
-      Uri.parse(url),
-      body: {
-        'email': usernameController.text,
-        'password': passwordController.text,
-      },
-    );
-
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> responseBody = jsonDecode(response.body);
-
-      UserSession userSession = UserSession();
-      userSession.accessToken = responseBody['access'];
-      userSession.refreshToken = responseBody['refresh'];
-      userSession.userDetails = responseBody['user'];
-
-      Navigator.pushReplacement(
-        // ignore: use_build_context_synchronously
-        context,
-        MaterialPageRoute(builder: (context) => Home()),
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        body: {
+          'email': usernameController.text,
+          'password': passwordController.text,
+        },
       );
-    } else {
-      showCustomSnackbar(
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> responseBody = jsonDecode(response.body);
+
+        UserSession userSession = UserSession();
+        userSession.accessToken = responseBody['access'];
+        userSession.refreshToken = responseBody['refresh'];
+        userSession.userDetails = responseBody['user'];
+
+        Navigator.pushReplacement(
           // ignore: use_build_context_synchronously
-          context, 'Sign in failed. Please check your email and password.');
+          context,
+          MaterialPageRoute(builder: (context) => Home()),
+        );
+      } else {
+        showCustomSnackbar(
+            // ignore: use_build_context_synchronously
+            context,
+            'Sign in failed. Please check your email and password.');
+      }
+    } catch (e) {
+      // ignore: use_build_context_synchronously
+      showCustomSnackbar(context, 'An error occurred. Please try again.');
     }
-  } catch (e) {
-    // ignore: use_build_context_synchronously
-    showCustomSnackbar(context, 'An error occurred. Please try again.');
   }
-}
 
   void validateForm() {
     final form = _formKey.currentState;
@@ -115,20 +116,33 @@ class _SignInPageState extends State<SignInPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Align(
+                    Align(
                       alignment: Alignment(-1, -0.5),
                       child: Padding(
                         padding: EdgeInsets.only(left: 30.0),
-                        child: Text(
-                          'Sign In',
-                          style: TextStyle(
-                            fontSize: 40,
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 58, 57, 57),
+                        child: Container(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.7),
+                            border: Border.all(
+                              color: Colors.white,
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Text(
+                            'Sign In',
+                            style: TextStyle(
+                              fontSize: 40,
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(255, 255, 255, 255),
+                            ),
                           ),
                         ),
                       ),
                     ),
+
                     // Username
                     Align(
                       alignment: const Alignment(0, 0.06),
